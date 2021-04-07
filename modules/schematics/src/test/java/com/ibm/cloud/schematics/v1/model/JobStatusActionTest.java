@@ -37,8 +37,8 @@ public class JobStatusActionTest {
       .statusMessage("testString")
       .bastionStatusCode("none")
       .bastionStatusMessage("testString")
-      .targetsStatusCode("none")
-      .targetsStatusMessage("testString")
+      .inventoryStatusCode("none")
+      .inventoryStatusMessage("testString")
       .updatedAt(TestUtilities.createMockDateTime("2019-01-01T12:00:00"))
       .build();
     assertEquals(jobStatusActionModel.actionName(), "testString");
@@ -46,8 +46,8 @@ public class JobStatusActionTest {
     assertEquals(jobStatusActionModel.statusMessage(), "testString");
     assertEquals(jobStatusActionModel.bastionStatusCode(), "none");
     assertEquals(jobStatusActionModel.bastionStatusMessage(), "testString");
-    assertEquals(jobStatusActionModel.targetsStatusCode(), "none");
-    assertEquals(jobStatusActionModel.targetsStatusMessage(), "testString");
+    assertEquals(jobStatusActionModel.inventoryStatusCode(), "none");
+    assertEquals(jobStatusActionModel.inventoryStatusMessage(), "testString");
     assertEquals(jobStatusActionModel.updatedAt(), TestUtilities.createMockDateTime("2019-01-01T12:00:00"));
 
     String json = TestUtilities.serialize(jobStatusActionModel);
@@ -59,8 +59,8 @@ public class JobStatusActionTest {
     assertEquals(jobStatusActionModelNew.statusMessage(), "testString");
     assertEquals(jobStatusActionModelNew.bastionStatusCode(), "none");
     assertEquals(jobStatusActionModelNew.bastionStatusMessage(), "testString");
-    assertEquals(jobStatusActionModelNew.targetsStatusCode(), "none");
-    assertEquals(jobStatusActionModelNew.targetsStatusMessage(), "testString");
+    assertEquals(jobStatusActionModelNew.inventoryStatusCode(), "none");
+    assertEquals(jobStatusActionModelNew.inventoryStatusMessage(), "testString");
     assertEquals(jobStatusActionModelNew.updatedAt(), TestUtilities.createMockDateTime("2019-01-01T12:00:00"));
   }
 }

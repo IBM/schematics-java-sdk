@@ -14,11 +14,11 @@
 package com.ibm.cloud.schematics.v1.model;
 
 import com.ibm.cloud.schematics.v1.model.ActionState;
+import com.ibm.cloud.schematics.v1.model.BastionResourceDefinition;
 import com.ibm.cloud.schematics.v1.model.CreateActionOptions;
 import com.ibm.cloud.schematics.v1.model.ExternalSource;
 import com.ibm.cloud.schematics.v1.model.ExternalSourceGit;
 import com.ibm.cloud.schematics.v1.model.SystemLock;
-import com.ibm.cloud.schematics.v1.model.TargetResourceset;
 import com.ibm.cloud.schematics.v1.model.UserState;
 import com.ibm.cloud.schematics.v1.model.VariableData;
 import com.ibm.cloud.schematics.v1.model.VariableMetadata;
@@ -70,29 +70,12 @@ public class CreateActionOptionsTest {
     assertEquals(externalSourceModel.sourceType(), "local");
     assertEquals(externalSourceModel.git(), externalSourceGitModel);
 
-    SystemLock systemLockModel = new SystemLock.Builder()
-      .sysLocked(true)
-      .sysLockedBy("testString")
-      .sysLockedAt(TestUtilities.createMockDateTime("2019-01-01T12:00:00"))
-      .build();
-    assertEquals(systemLockModel.sysLocked(), Boolean.valueOf(true));
-    assertEquals(systemLockModel.sysLockedBy(), "testString");
-    assertEquals(systemLockModel.sysLockedAt(), TestUtilities.createMockDateTime("2019-01-01T12:00:00"));
-
-    TargetResourceset targetResourcesetModel = new TargetResourceset.Builder()
+    BastionResourceDefinition bastionResourceDefinitionModel = new BastionResourceDefinition.Builder()
       .name("testString")
-      .type("testString")
-      .description("testString")
-      .resourceQuery("testString")
-      .credentialRef("testString")
-      .sysLock(systemLockModel)
+      .host("testString")
       .build();
-    assertEquals(targetResourcesetModel.name(), "testString");
-    assertEquals(targetResourcesetModel.type(), "testString");
-    assertEquals(targetResourcesetModel.description(), "testString");
-    assertEquals(targetResourcesetModel.resourceQuery(), "testString");
-    assertEquals(targetResourcesetModel.credentialRef(), "testString");
-    assertEquals(targetResourcesetModel.sysLock(), systemLockModel);
+    assertEquals(bastionResourceDefinitionModel.name(), "testString");
+    assertEquals(bastionResourceDefinitionModel.host(), "testString");
 
     VariableMetadata variableMetadataModel = new VariableMetadata.Builder()
       .type("boolean")
@@ -147,10 +130,19 @@ public class CreateActionOptionsTest {
     assertEquals(actionStateModel.statusJobId(), "testString");
     assertEquals(actionStateModel.statusMessage(), "testString");
 
+    SystemLock systemLockModel = new SystemLock.Builder()
+      .sysLocked(true)
+      .sysLockedBy("testString")
+      .sysLockedAt(TestUtilities.createMockDateTime("2019-01-01T12:00:00"))
+      .build();
+    assertEquals(systemLockModel.sysLocked(), Boolean.valueOf(true));
+    assertEquals(systemLockModel.sysLockedBy(), "testString");
+    assertEquals(systemLockModel.sysLockedAt(), TestUtilities.createMockDateTime("2019-01-01T12:00:00"));
+
     CreateActionOptions createActionOptionsModel = new CreateActionOptions.Builder()
       .name("Stop Action")
-      .description("This Action can be used to Stop the targets")
-      .location("us_south")
+      .description("This Action can be used to Stop the VSIs")
+      .location("us-south")
       .resourceGroup("testString")
       .tags(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
       .userState(userStateModel)
@@ -158,20 +150,20 @@ public class CreateActionOptionsTest {
       .source(externalSourceModel)
       .sourceType("local")
       .commandParameter("testString")
-      .bastion(targetResourcesetModel)
-      .targetsIni("testString")
+      .bastion(bastionResourceDefinitionModel)
+      .inventory("testString")
+      .bastionCredential(variableDataModel)
       .credentials(new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)))
       .inputs(new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)))
       .outputs(new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)))
       .settings(new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)))
-      .triggerRecordId("testString")
       .state(actionStateModel)
       .sysLock(systemLockModel)
       .xGithubToken("testString")
       .build();
     assertEquals(createActionOptionsModel.name(), "Stop Action");
-    assertEquals(createActionOptionsModel.description(), "This Action can be used to Stop the targets");
-    assertEquals(createActionOptionsModel.location(), "us_south");
+    assertEquals(createActionOptionsModel.description(), "This Action can be used to Stop the VSIs");
+    assertEquals(createActionOptionsModel.location(), "us-south");
     assertEquals(createActionOptionsModel.resourceGroup(), "testString");
     assertEquals(createActionOptionsModel.tags(), new java.util.ArrayList<String>(java.util.Arrays.asList("testString")));
     assertEquals(createActionOptionsModel.userState(), userStateModel);
@@ -179,13 +171,13 @@ public class CreateActionOptionsTest {
     assertEquals(createActionOptionsModel.source(), externalSourceModel);
     assertEquals(createActionOptionsModel.sourceType(), "local");
     assertEquals(createActionOptionsModel.commandParameter(), "testString");
-    assertEquals(createActionOptionsModel.bastion(), targetResourcesetModel);
-    assertEquals(createActionOptionsModel.targetsIni(), "testString");
+    assertEquals(createActionOptionsModel.bastion(), bastionResourceDefinitionModel);
+    assertEquals(createActionOptionsModel.inventory(), "testString");
+    assertEquals(createActionOptionsModel.bastionCredential(), variableDataModel);
     assertEquals(createActionOptionsModel.credentials(), new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)));
     assertEquals(createActionOptionsModel.inputs(), new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)));
     assertEquals(createActionOptionsModel.outputs(), new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)));
     assertEquals(createActionOptionsModel.settings(), new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)));
-    assertEquals(createActionOptionsModel.triggerRecordId(), "testString");
     assertEquals(createActionOptionsModel.state(), actionStateModel);
     assertEquals(createActionOptionsModel.sysLock(), systemLockModel);
     assertEquals(createActionOptionsModel.xGithubToken(), "testString");

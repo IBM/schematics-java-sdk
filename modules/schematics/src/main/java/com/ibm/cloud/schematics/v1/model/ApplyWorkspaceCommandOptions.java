@@ -142,7 +142,7 @@ public class ApplyWorkspaceCommandOptions extends GenericModel {
   /**
    * Gets the actionOptions.
    *
-   * Action Options Template ...
+   * Workspace Activity Options Template.
    *
    * @return the actionOptions
    */

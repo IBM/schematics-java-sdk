@@ -17,6 +17,7 @@ import com.ibm.cloud.schematics.v1.model.JobLogSummary;
 import com.ibm.cloud.schematics.v1.model.JobLogSummaryActionJob;
 import com.ibm.cloud.schematics.v1.model.JobLogSummaryActionJobRecap;
 import com.ibm.cloud.schematics.v1.model.JobLogSummaryRepoDownloadJob;
+import com.ibm.cloud.schematics.v1.model.JobLogSummarySystemJob;
 import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -40,14 +41,14 @@ public class JobLogSummaryTest {
       .build();
 
     JobLogSummaryActionJobRecap jobLogSummaryActionJobRecapModel = new JobLogSummaryActionJobRecap.Builder()
-      .target(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
+      .hosts(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
       .ok(Double.valueOf("72.5"))
       .changed(Double.valueOf("72.5"))
       .failed(Double.valueOf("72.5"))
       .skipped(Double.valueOf("72.5"))
       .unreachable(Double.valueOf("72.5"))
       .build();
-    assertEquals(jobLogSummaryActionJobRecapModel.target(), new java.util.ArrayList<String>(java.util.Arrays.asList("testString")));
+    assertEquals(jobLogSummaryActionJobRecapModel.hosts(), new java.util.ArrayList<String>(java.util.Arrays.asList("testString")));
     assertEquals(jobLogSummaryActionJobRecapModel.ok(), Double.valueOf("72.5"));
     assertEquals(jobLogSummaryActionJobRecapModel.changed(), Double.valueOf("72.5"));
     assertEquals(jobLogSummaryActionJobRecapModel.failed(), Double.valueOf("72.5"));
@@ -59,14 +60,23 @@ public class JobLogSummaryTest {
       .build();
     assertEquals(jobLogSummaryActionJobModel.recap(), jobLogSummaryActionJobRecapModel);
 
+    JobLogSummarySystemJob jobLogSummarySystemJobModel = new JobLogSummarySystemJob.Builder()
+      .success(Double.valueOf("72.5"))
+      .failed(Double.valueOf("72.5"))
+      .build();
+    assertEquals(jobLogSummarySystemJobModel.success(), Double.valueOf("72.5"));
+    assertEquals(jobLogSummarySystemJobModel.failed(), Double.valueOf("72.5"));
+
     JobLogSummary jobLogSummaryModel = new JobLogSummary.Builder()
       .jobType("repo_download_job")
       .repoDownloadJob(jobLogSummaryRepoDownloadJobModel)
       .actionJob(jobLogSummaryActionJobModel)
+      .systemJob(jobLogSummarySystemJobModel)
       .build();
     assertEquals(jobLogSummaryModel.jobType(), "repo_download_job");
     assertEquals(jobLogSummaryModel.repoDownloadJob(), jobLogSummaryRepoDownloadJobModel);
     assertEquals(jobLogSummaryModel.actionJob(), jobLogSummaryActionJobModel);
+    assertEquals(jobLogSummaryModel.systemJob(), jobLogSummarySystemJobModel);
 
     String json = TestUtilities.serialize(jobLogSummaryModel);
 
@@ -75,5 +85,6 @@ public class JobLogSummaryTest {
     assertEquals(jobLogSummaryModelNew.jobType(), "repo_download_job");
     assertEquals(jobLogSummaryModelNew.repoDownloadJob().toString(), jobLogSummaryRepoDownloadJobModel.toString());
     assertEquals(jobLogSummaryModelNew.actionJob().toString(), jobLogSummaryActionJobModel.toString());
+    assertEquals(jobLogSummaryModelNew.systemJob().toString(), jobLogSummarySystemJobModel.toString());
   }
 }

@@ -12,37 +12,40 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.17.0-8d569e8f-20201030-142059
+ * IBM OpenAPI SDK Code Generator Version: 3.12.2-b734cb71-20200916-142547
  */
 
 package com.ibm.cloud.schematics.v1;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.gson.JsonObject;
-import com.ibm.cloud.schematics.common.SdkCommon;
+import com.ibm.cloud.common.SdkCommon;
 import com.ibm.cloud.schematics.v1.model.Action;
 import com.ibm.cloud.schematics.v1.model.ActionList;
 import com.ibm.cloud.schematics.v1.model.ApplyWorkspaceCommandOptions;
 import com.ibm.cloud.schematics.v1.model.CreateActionOptions;
+import com.ibm.cloud.schematics.v1.model.CreateInventoryOptions;
 import com.ibm.cloud.schematics.v1.model.CreateJobOptions;
+import com.ibm.cloud.schematics.v1.model.CreateResourceQueryOptions;
 import com.ibm.cloud.schematics.v1.model.CreateSharedDatasetOptions;
 import com.ibm.cloud.schematics.v1.model.CreateWorkspaceDeletionJobOptions;
 import com.ibm.cloud.schematics.v1.model.CreateWorkspaceOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteActionOptions;
+import com.ibm.cloud.schematics.v1.model.DeleteInventoryOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteJobOptions;
+import com.ibm.cloud.schematics.v1.model.DeleteResourcesQueryOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteSharedDatasetOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteWorkspaceActivityOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteWorkspaceOptions;
 import com.ibm.cloud.schematics.v1.model.DestroyWorkspaceCommandOptions;
+import com.ibm.cloud.schematics.v1.model.ExecuteResourceQueryOptions;
 import com.ibm.cloud.schematics.v1.model.GetActionOptions;
 import com.ibm.cloud.schematics.v1.model.GetAllWorkspaceInputsOptions;
 import com.ibm.cloud.schematics.v1.model.GetDiscoveredKmsInstancesOptions;
+import com.ibm.cloud.schematics.v1.model.GetInventoryOptions;
+import com.ibm.cloud.schematics.v1.model.GetInventoryValueOptions;
 import com.ibm.cloud.schematics.v1.model.GetJobOptions;
 import com.ibm.cloud.schematics.v1.model.GetKmsSettingsOptions;
+import com.ibm.cloud.schematics.v1.model.GetResourcesQueryOptions;
 import com.ibm.cloud.schematics.v1.model.GetSchematicsVersionOptions;
 import com.ibm.cloud.schematics.v1.model.GetSharedDatasetOptions;
 import com.ibm.cloud.schematics.v1.model.GetTemplateActivityLogOptions;
@@ -59,17 +62,20 @@ import com.ibm.cloud.schematics.v1.model.GetWorkspaceReadmeOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceResourcesOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceStateOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceTemplateStateOptions;
+import com.ibm.cloud.schematics.v1.model.InventoryResourceRecord;
+import com.ibm.cloud.schematics.v1.model.InventoryResourceRecordList;
 import com.ibm.cloud.schematics.v1.model.Job;
 import com.ibm.cloud.schematics.v1.model.JobList;
 import com.ibm.cloud.schematics.v1.model.JobLog;
-import com.ibm.cloud.schematics.v1.model.JobStateData;
 import com.ibm.cloud.schematics.v1.model.KMSDiscovery;
 import com.ibm.cloud.schematics.v1.model.KMSSettings;
 import com.ibm.cloud.schematics.v1.model.ListActionsOptions;
+import com.ibm.cloud.schematics.v1.model.ListInventoriesOptions;
+import com.ibm.cloud.schematics.v1.model.ListInventoryValuesOptions;
 import com.ibm.cloud.schematics.v1.model.ListJobLogsOptions;
-import com.ibm.cloud.schematics.v1.model.ListJobStatesOptions;
 import com.ibm.cloud.schematics.v1.model.ListJobsOptions;
 import com.ibm.cloud.schematics.v1.model.ListResourceGroupOptions;
+import com.ibm.cloud.schematics.v1.model.ListResourceQueryOptions;
 import com.ibm.cloud.schematics.v1.model.ListSchematicsLocationOptions;
 import com.ibm.cloud.schematics.v1.model.ListSharedDatasetsOptions;
 import com.ibm.cloud.schematics.v1.model.ListWorkspaceActivitiesOptions;
@@ -78,12 +84,17 @@ import com.ibm.cloud.schematics.v1.model.LogStoreResponseList;
 import com.ibm.cloud.schematics.v1.model.OutputValuesItem;
 import com.ibm.cloud.schematics.v1.model.PlanWorkspaceCommandOptions;
 import com.ibm.cloud.schematics.v1.model.RefreshWorkspaceCommandOptions;
+import com.ibm.cloud.schematics.v1.model.ReplaceInventoryOptions;
 import com.ibm.cloud.schematics.v1.model.ReplaceJobOptions;
 import com.ibm.cloud.schematics.v1.model.ReplaceKmsSettingsOptions;
+import com.ibm.cloud.schematics.v1.model.ReplaceResourcesQueryOptions;
 import com.ibm.cloud.schematics.v1.model.ReplaceSharedDatasetOptions;
 import com.ibm.cloud.schematics.v1.model.ReplaceWorkspaceInputsOptions;
 import com.ibm.cloud.schematics.v1.model.ReplaceWorkspaceOptions;
 import com.ibm.cloud.schematics.v1.model.ResourceGroupResponse;
+import com.ibm.cloud.schematics.v1.model.ResourceQueryRecord;
+import com.ibm.cloud.schematics.v1.model.ResourceQueryRecordList;
+import com.ibm.cloud.schematics.v1.model.ResourceQueryResponseRecord;
 import com.ibm.cloud.schematics.v1.model.RunWorkspaceCommandsOptions;
 import com.ibm.cloud.schematics.v1.model.SchematicsLocations;
 import com.ibm.cloud.schematics.v1.model.SharedDatasetResponse;
@@ -95,7 +106,9 @@ import com.ibm.cloud.schematics.v1.model.TemplateResources;
 import com.ibm.cloud.schematics.v1.model.TemplateStateStore;
 import com.ibm.cloud.schematics.v1.model.TemplateValues;
 import com.ibm.cloud.schematics.v1.model.UpdateActionOptions;
+import com.ibm.cloud.schematics.v1.model.UpdateInventoryOptions;
 import com.ibm.cloud.schematics.v1.model.UpdateWorkspaceOptions;
+import com.ibm.cloud.schematics.v1.model.UploadTemplateTarActionOptions;
 import com.ibm.cloud.schematics.v1.model.UploadTemplateTarOptions;
 import com.ibm.cloud.schematics.v1.model.UserValues;
 import com.ibm.cloud.schematics.v1.model.VersionResponse;
@@ -120,7 +133,10 @@ import com.ibm.cloud.sdk.core.security.ConfigBasedAuthenticatorFactory;
 import com.ibm.cloud.sdk.core.service.BaseService;
 import com.ibm.cloud.sdk.core.util.RequestUtils;
 import com.ibm.cloud.sdk.core.util.ResponseConverterUtils;
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import okhttp3.MultipartBody;
 
 /**
@@ -487,7 +503,8 @@ public class Schematics extends BaseService {
     if (deleteWorkspaceOptions.destroyResources() != null) {
       builder.query("destroy_resources", String.valueOf(deleteWorkspaceOptions.destroyResources()));
     }
-    ResponseConverter<String> responseConverter = ResponseConverterUtils.getString();
+    ResponseConverter<String> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<String>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -1126,7 +1143,8 @@ public class Schematics extends BaseService {
     if (getTemplateLogsOptions.logTfAnsible() != null) {
       builder.query("log_tf_ansible", String.valueOf(getTemplateLogsOptions.logTfAnsible()));
     }
-    ResponseConverter<String> responseConverter = ResponseConverterUtils.getString();
+    ResponseConverter<String> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<String>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -1164,7 +1182,8 @@ public class Schematics extends BaseService {
     if (getTemplateActivityLogOptions.logTfAnsible() != null) {
       builder.query("log_tf_ansible", String.valueOf(getTemplateActivityLogOptions.logTfAnsible()));
     }
-    ResponseConverter<String> responseConverter = ResponseConverterUtils.getString();
+    ResponseConverter<String> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<String>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -1290,8 +1309,11 @@ public class Schematics extends BaseService {
     if (createActionOptions.bastion() != null) {
       contentJson.add("bastion", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createActionOptions.bastion()));
     }
-    if (createActionOptions.targetsIni() != null) {
-      contentJson.addProperty("targets_ini", createActionOptions.targetsIni());
+    if (createActionOptions.inventory() != null) {
+      contentJson.addProperty("inventory", createActionOptions.inventory());
+    }
+    if (createActionOptions.bastionCredential() != null) {
+      contentJson.add("bastion_credential", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createActionOptions.bastionCredential()));
     }
     if (createActionOptions.credentials() != null) {
       contentJson.add("credentials", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createActionOptions.credentials()));
@@ -1304,9 +1326,6 @@ public class Schematics extends BaseService {
     }
     if (createActionOptions.settings() != null) {
       contentJson.add("settings", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createActionOptions.settings()));
-    }
-    if (createActionOptions.triggerRecordId() != null) {
-      contentJson.addProperty("trigger_record_id", createActionOptions.triggerRecordId());
     }
     if (createActionOptions.state() != null) {
       contentJson.add("state", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createActionOptions.state()));
@@ -1488,8 +1507,11 @@ public class Schematics extends BaseService {
     if (updateActionOptions.bastion() != null) {
       contentJson.add("bastion", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateActionOptions.bastion()));
     }
-    if (updateActionOptions.targetsIni() != null) {
-      contentJson.addProperty("targets_ini", updateActionOptions.targetsIni());
+    if (updateActionOptions.inventory() != null) {
+      contentJson.addProperty("inventory", updateActionOptions.inventory());
+    }
+    if (updateActionOptions.bastionCredential() != null) {
+      contentJson.add("bastion_credential", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateActionOptions.bastionCredential()));
     }
     if (updateActionOptions.credentials() != null) {
       contentJson.add("credentials", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateActionOptions.credentials()));
@@ -1503,9 +1525,6 @@ public class Schematics extends BaseService {
     if (updateActionOptions.settings() != null) {
       contentJson.add("settings", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateActionOptions.settings()));
     }
-    if (updateActionOptions.triggerRecordId() != null) {
-      contentJson.addProperty("trigger_record_id", updateActionOptions.triggerRecordId());
-    }
     if (updateActionOptions.state() != null) {
       contentJson.add("state", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateActionOptions.state()));
     }
@@ -1515,6 +1534,38 @@ public class Schematics extends BaseService {
     builder.bodyJson(contentJson);
     ResponseConverter<Action> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Action>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Upload template tar file for the action.
+   *
+   * Upload template tar file for the action.
+   *
+   * @param uploadTemplateTarActionOptions the {@link UploadTemplateTarActionOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link TemplateRepoTarUploadResponse}
+   */
+  public ServiceCall<TemplateRepoTarUploadResponse> uploadTemplateTarAction(UploadTemplateTarActionOptions uploadTemplateTarActionOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(uploadTemplateTarActionOptions,
+      "uploadTemplateTarActionOptions cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.isTrue((uploadTemplateTarActionOptions.file() != null), "At least one of  or file must be supplied.");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("action_id", uploadTemplateTarActionOptions.actionId());
+    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/actions/{action_id}/template_repo_upload", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "uploadTemplateTarAction");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    MultipartBody.Builder multipartBuilder = new MultipartBody.Builder();
+    multipartBuilder.setType(MultipartBody.FORM);
+    if (uploadTemplateTarActionOptions.file() != null) {
+      okhttp3.RequestBody fileBody = RequestUtils.inputStreamBody(uploadTemplateTarActionOptions.file(), uploadTemplateTarActionOptions.fileContentType());
+      multipartBuilder.addFormDataPart("file", "filename", fileBody);
+    }
+    builder.body(multipartBuilder.build());
+    ResponseConverter<TemplateRepoTarUploadResponse> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<TemplateRepoTarUploadResponse>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -1780,30 +1831,6 @@ public class Schematics extends BaseService {
     builder.header("Accept", "application/json");
     ResponseConverter<JobLog> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<JobLog>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Get state-data from the Job record.
-   *
-   * Get state-data from the Job record.
-   *
-   * @param listJobStatesOptions the {@link ListJobStatesOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link JobStateData}
-   */
-  public ServiceCall<JobStateData> listJobStates(ListJobStatesOptions listJobStatesOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(listJobStatesOptions,
-      "listJobStatesOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("job_id", listJobStatesOptions.jobId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/jobs/{job_id}/states", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "listJobStates");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    ResponseConverter<JobStateData> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<JobStateData>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -2110,6 +2137,495 @@ public class Schematics extends BaseService {
     }
     ResponseConverter<KMSDiscovery> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<KMSDiscovery>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Create a resource inventory definition, used to target Actions or Controls.
+   *
+   * Create a resource inventory definition.
+   *
+   * @param createInventoryOptions the {@link CreateInventoryOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecord}
+   */
+  public ServiceCall<InventoryResourceRecord> createInventory(CreateInventoryOptions createInventoryOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(createInventoryOptions,
+      "createInventoryOptions cannot be null");
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/inventories"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "createInventory");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    final JsonObject contentJson = new JsonObject();
+    if (createInventoryOptions.name() != null) {
+      contentJson.addProperty("name", createInventoryOptions.name());
+    }
+    if (createInventoryOptions.description() != null) {
+      contentJson.addProperty("description", createInventoryOptions.description());
+    }
+    if (createInventoryOptions.location() != null) {
+      contentJson.addProperty("location", createInventoryOptions.location());
+    }
+    if (createInventoryOptions.resourceGroup() != null) {
+      contentJson.addProperty("resource_group", createInventoryOptions.resourceGroup());
+    }
+    if (createInventoryOptions.inventoriesIni() != null) {
+      contentJson.addProperty("inventories_ini", createInventoryOptions.inventoriesIni());
+    }
+    if (createInventoryOptions.resourceQueries() != null) {
+      contentJson.add("resource_queries", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createInventoryOptions.resourceQueries()));
+    }
+    builder.bodyJson(contentJson);
+    ResponseConverter<InventoryResourceRecord> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<InventoryResourceRecord>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Create a resource inventory definition, used to target Actions or Controls.
+   *
+   * Create a resource inventory definition.
+   *
+   * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecord}
+   */
+  public ServiceCall<InventoryResourceRecord> createInventory() {
+    return createInventory(null);
+  }
+
+  /**
+   * Get all resource inventory definitions.
+   *
+   * Get all resource inventory definition.
+   *
+   * @param listInventoriesOptions the {@link ListInventoriesOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecordList}
+   */
+  public ServiceCall<InventoryResourceRecordList> listInventories(ListInventoriesOptions listInventoriesOptions) {
+    if (listInventoriesOptions == null) {
+      listInventoriesOptions = new ListInventoriesOptions.Builder().build();
+    }
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/inventories"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "listInventories");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (listInventoriesOptions.offset() != null) {
+      builder.query("offset", String.valueOf(listInventoriesOptions.offset()));
+    }
+    if (listInventoriesOptions.limit() != null) {
+      builder.query("limit", String.valueOf(listInventoriesOptions.limit()));
+    }
+    if (listInventoriesOptions.sort() != null) {
+      builder.query("sort", String.valueOf(listInventoriesOptions.sort()));
+    }
+    if (listInventoriesOptions.profile() != null) {
+      builder.query("profile", String.valueOf(listInventoriesOptions.profile()));
+    }
+    ResponseConverter<InventoryResourceRecordList> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<InventoryResourceRecordList>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get all resource inventory definitions.
+   *
+   * Get all resource inventory definition.
+   *
+   * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecordList}
+   */
+  public ServiceCall<InventoryResourceRecordList> listInventories() {
+    return listInventories(null);
+  }
+
+  /**
+   * Replace the resource inventory definition, used to target Actions or Controls.
+   *
+   * Replace the resource inventory definition.
+   *
+   * @param replaceInventoryOptions the {@link ReplaceInventoryOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecord}
+   */
+  public ServiceCall<InventoryResourceRecord> replaceInventory(ReplaceInventoryOptions replaceInventoryOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(replaceInventoryOptions,
+      "replaceInventoryOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("inventory_id", replaceInventoryOptions.inventoryId());
+    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/inventories/{inventory_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "replaceInventory");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    final JsonObject contentJson = new JsonObject();
+    if (replaceInventoryOptions.name() != null) {
+      contentJson.addProperty("name", replaceInventoryOptions.name());
+    }
+    if (replaceInventoryOptions.description() != null) {
+      contentJson.addProperty("description", replaceInventoryOptions.description());
+    }
+    if (replaceInventoryOptions.location() != null) {
+      contentJson.addProperty("location", replaceInventoryOptions.location());
+    }
+    if (replaceInventoryOptions.resourceGroup() != null) {
+      contentJson.addProperty("resource_group", replaceInventoryOptions.resourceGroup());
+    }
+    if (replaceInventoryOptions.inventoriesIni() != null) {
+      contentJson.addProperty("inventories_ini", replaceInventoryOptions.inventoriesIni());
+    }
+    if (replaceInventoryOptions.resourceQueries() != null) {
+      contentJson.add("resource_queries", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceInventoryOptions.resourceQueries()));
+    }
+    builder.bodyJson(contentJson);
+    ResponseConverter<InventoryResourceRecord> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<InventoryResourceRecord>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Update the resource inventory definition, used to target Actions or Controls.
+   *
+   * Update the resource inventory definition.
+   *
+   * @param updateInventoryOptions the {@link UpdateInventoryOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecord}
+   */
+  public ServiceCall<InventoryResourceRecord> updateInventory(UpdateInventoryOptions updateInventoryOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(updateInventoryOptions,
+      "updateInventoryOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("inventory_id", updateInventoryOptions.inventoryId());
+    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/inventories/{inventory_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "updateInventory");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    final JsonObject contentJson = new JsonObject();
+    if (updateInventoryOptions.name() != null) {
+      contentJson.addProperty("name", updateInventoryOptions.name());
+    }
+    if (updateInventoryOptions.description() != null) {
+      contentJson.addProperty("description", updateInventoryOptions.description());
+    }
+    if (updateInventoryOptions.location() != null) {
+      contentJson.addProperty("location", updateInventoryOptions.location());
+    }
+    if (updateInventoryOptions.resourceGroup() != null) {
+      contentJson.addProperty("resource_group", updateInventoryOptions.resourceGroup());
+    }
+    if (updateInventoryOptions.inventoriesIni() != null) {
+      contentJson.addProperty("inventories_ini", updateInventoryOptions.inventoriesIni());
+    }
+    if (updateInventoryOptions.resourceQueries() != null) {
+      contentJson.add("resource_queries", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateInventoryOptions.resourceQueries()));
+    }
+    builder.bodyJson(contentJson);
+    ResponseConverter<InventoryResourceRecord> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<InventoryResourceRecord>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Delete the resource inventory definition.
+   *
+   * Delete the resource inventory definition.
+   *
+   * @param deleteInventoryOptions the {@link DeleteInventoryOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a void result
+   */
+  public ServiceCall<Void> deleteInventory(DeleteInventoryOptions deleteInventoryOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(deleteInventoryOptions,
+      "deleteInventoryOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("inventory_id", deleteInventoryOptions.inventoryId());
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/inventories/{inventory_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "deleteInventory");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    if (deleteInventoryOptions.force() != null) {
+      builder.header("force", deleteInventoryOptions.force());
+    }
+    if (deleteInventoryOptions.propagate() != null) {
+      builder.header("propagate", deleteInventoryOptions.propagate());
+    }
+    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get the resource inventory definition, used to target Actions or Controls.
+   *
+   * Get the resource inventory definition.
+   *
+   * @param getInventoryOptions the {@link GetInventoryOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecord}
+   */
+  public ServiceCall<InventoryResourceRecord> getInventory(GetInventoryOptions getInventoryOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getInventoryOptions,
+      "getInventoryOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("inventory_id", getInventoryOptions.inventoryId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/inventories/{inventory_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "getInventory");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    ResponseConverter<InventoryResourceRecord> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<InventoryResourceRecord>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get all the resource inventory values.
+   *
+   * Get all the resource inventory values.
+   *
+   * @param listInventoryValuesOptions the {@link ListInventoryValuesOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecordList}
+   */
+  public ServiceCall<InventoryResourceRecordList> listInventoryValues(ListInventoryValuesOptions listInventoryValuesOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(listInventoryValuesOptions,
+      "listInventoryValuesOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("inventory_id", listInventoryValuesOptions.inventoryId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/inventories/{inventory_id}/variables", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "listInventoryValues");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    ResponseConverter<InventoryResourceRecordList> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<InventoryResourceRecordList>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get the resource inventory value.
+   *
+   * Get the resource inventory value.
+   *
+   * @param getInventoryValueOptions the {@link GetInventoryValueOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecord}
+   */
+  public ServiceCall<InventoryResourceRecord> getInventoryValue(GetInventoryValueOptions getInventoryValueOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getInventoryValueOptions,
+      "getInventoryValueOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("inventory_id", getInventoryValueOptions.inventoryId());
+    pathParamsMap.put("var_name", getInventoryValueOptions.varName());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/inventories/{inventory_id}/variables/{var_name}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "getInventoryValue");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    ResponseConverter<InventoryResourceRecord> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<InventoryResourceRecord>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Create a resource query definition.
+   *
+   * Create a resource query definition.
+   *
+   * @param createResourceQueryOptions the {@link CreateResourceQueryOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link ResourceQueryRecord}
+   */
+  public ServiceCall<ResourceQueryRecord> createResourceQuery(CreateResourceQueryOptions createResourceQueryOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(createResourceQueryOptions,
+      "createResourceQueryOptions cannot be null");
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/resources_query"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "createResourceQuery");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    final JsonObject contentJson = new JsonObject();
+    if (createResourceQueryOptions.type() != null) {
+      contentJson.addProperty("type", createResourceQueryOptions.type());
+    }
+    if (createResourceQueryOptions.name() != null) {
+      contentJson.addProperty("name", createResourceQueryOptions.name());
+    }
+    if (createResourceQueryOptions.queries() != null) {
+      contentJson.add("queries", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createResourceQueryOptions.queries()));
+    }
+    builder.bodyJson(contentJson);
+    ResponseConverter<ResourceQueryRecord> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ResourceQueryRecord>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Create a resource query definition.
+   *
+   * Create a resource query definition.
+   *
+   * @return a {@link ServiceCall} with a result of type {@link ResourceQueryRecord}
+   */
+  public ServiceCall<ResourceQueryRecord> createResourceQuery() {
+    return createResourceQuery(null);
+  }
+
+  /**
+   * Get all resource query definitions.
+   *
+   * Get all resource query definition.
+   *
+   * @param listResourceQueryOptions the {@link ListResourceQueryOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link ResourceQueryRecordList}
+   */
+  public ServiceCall<ResourceQueryRecordList> listResourceQuery(ListResourceQueryOptions listResourceQueryOptions) {
+    if (listResourceQueryOptions == null) {
+      listResourceQueryOptions = new ListResourceQueryOptions.Builder().build();
+    }
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/resources_query"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "listResourceQuery");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (listResourceQueryOptions.offset() != null) {
+      builder.query("offset", String.valueOf(listResourceQueryOptions.offset()));
+    }
+    if (listResourceQueryOptions.limit() != null) {
+      builder.query("limit", String.valueOf(listResourceQueryOptions.limit()));
+    }
+    if (listResourceQueryOptions.sort() != null) {
+      builder.query("sort", String.valueOf(listResourceQueryOptions.sort()));
+    }
+    if (listResourceQueryOptions.profile() != null) {
+      builder.query("profile", String.valueOf(listResourceQueryOptions.profile()));
+    }
+    ResponseConverter<ResourceQueryRecordList> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ResourceQueryRecordList>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get all resource query definitions.
+   *
+   * Get all resource query definition.
+   *
+   * @return a {@link ServiceCall} with a result of type {@link ResourceQueryRecordList}
+   */
+  public ServiceCall<ResourceQueryRecordList> listResourceQuery() {
+    return listResourceQuery(null);
+  }
+
+  /**
+   * Run the resource query.
+   *
+   * Execute a resource query definition.
+   *
+   * @param executeResourceQueryOptions the {@link ExecuteResourceQueryOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link ResourceQueryResponseRecord}
+   */
+  public ServiceCall<ResourceQueryResponseRecord> executeResourceQuery(ExecuteResourceQueryOptions executeResourceQueryOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(executeResourceQueryOptions,
+      "executeResourceQueryOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("query_id", executeResourceQueryOptions.queryId());
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/resources_query/{query_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "executeResourceQuery");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    ResponseConverter<ResourceQueryResponseRecord> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ResourceQueryResponseRecord>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Replace the resources query definition.
+   *
+   * Replace the resources query definition.
+   *
+   * @param replaceResourcesQueryOptions the {@link ReplaceResourcesQueryOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link ResourceQueryRecord}
+   */
+  public ServiceCall<ResourceQueryRecord> replaceResourcesQuery(ReplaceResourcesQueryOptions replaceResourcesQueryOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(replaceResourcesQueryOptions,
+      "replaceResourcesQueryOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("query_id", replaceResourcesQueryOptions.queryId());
+    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/resources_query/{query_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "replaceResourcesQuery");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    final JsonObject contentJson = new JsonObject();
+    if (replaceResourcesQueryOptions.type() != null) {
+      contentJson.addProperty("type", replaceResourcesQueryOptions.type());
+    }
+    if (replaceResourcesQueryOptions.name() != null) {
+      contentJson.addProperty("name", replaceResourcesQueryOptions.name());
+    }
+    if (replaceResourcesQueryOptions.queries() != null) {
+      contentJson.add("queries", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceResourcesQueryOptions.queries()));
+    }
+    builder.bodyJson(contentJson);
+    ResponseConverter<ResourceQueryRecord> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ResourceQueryRecord>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Delete the resources query definition.
+   *
+   * Delete the resources query definition.
+   *
+   * @param deleteResourcesQueryOptions the {@link DeleteResourcesQueryOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a void result
+   */
+  public ServiceCall<Void> deleteResourcesQuery(DeleteResourcesQueryOptions deleteResourcesQueryOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(deleteResourcesQueryOptions,
+      "deleteResourcesQueryOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("query_id", deleteResourcesQueryOptions.queryId());
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/resources_query/{query_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "deleteResourcesQuery");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    if (deleteResourcesQueryOptions.force() != null) {
+      builder.header("force", deleteResourcesQueryOptions.force());
+    }
+    if (deleteResourcesQueryOptions.propagate() != null) {
+      builder.header("propagate", deleteResourcesQueryOptions.propagate());
+    }
+    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get the resources query definition.
+   *
+   * Get the resources query definition.
+   *
+   * @param getResourcesQueryOptions the {@link GetResourcesQueryOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link ResourceQueryRecord}
+   */
+  public ServiceCall<ResourceQueryRecord> getResourcesQuery(GetResourcesQueryOptions getResourcesQueryOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getResourcesQueryOptions,
+      "getResourcesQueryOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("query_id", getResourcesQueryOptions.queryId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/resources_query/{query_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "getResourcesQuery");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    ResponseConverter<ResourceQueryRecord> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ResourceQueryRecord>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 

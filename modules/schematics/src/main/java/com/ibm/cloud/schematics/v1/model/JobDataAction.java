@@ -31,6 +31,10 @@ public class JobDataAction extends GenericModel {
   protected List<VariableData> settings;
   @SerializedName("updated_at")
   protected Date updatedAt;
+  @SerializedName("inventory_record")
+  protected InventoryResourceRecord inventoryRecord;
+  @SerializedName("materialized_inventory")
+  protected String materializedInventory;
 
   /**
    * Builder.
@@ -41,6 +45,8 @@ public class JobDataAction extends GenericModel {
     private List<VariableData> outputs;
     private List<VariableData> settings;
     private Date updatedAt;
+    private InventoryResourceRecord inventoryRecord;
+    private String materializedInventory;
 
     private Builder(JobDataAction jobDataAction) {
       this.actionName = jobDataAction.actionName;
@@ -48,6 +54,8 @@ public class JobDataAction extends GenericModel {
       this.outputs = jobDataAction.outputs;
       this.settings = jobDataAction.settings;
       this.updatedAt = jobDataAction.updatedAt;
+      this.inventoryRecord = jobDataAction.inventoryRecord;
+      this.materializedInventory = jobDataAction.materializedInventory;
     }
 
     /**
@@ -170,6 +178,28 @@ public class JobDataAction extends GenericModel {
       this.updatedAt = updatedAt;
       return this;
     }
+
+    /**
+     * Set the inventoryRecord.
+     *
+     * @param inventoryRecord the inventoryRecord
+     * @return the JobDataAction builder
+     */
+    public Builder inventoryRecord(InventoryResourceRecord inventoryRecord) {
+      this.inventoryRecord = inventoryRecord;
+      return this;
+    }
+
+    /**
+     * Set the materializedInventory.
+     *
+     * @param materializedInventory the materializedInventory
+     * @return the JobDataAction builder
+     */
+    public Builder materializedInventory(String materializedInventory) {
+      this.materializedInventory = materializedInventory;
+      return this;
+    }
   }
 
   protected JobDataAction(Builder builder) {
@@ -178,6 +208,8 @@ public class JobDataAction extends GenericModel {
     outputs = builder.outputs;
     settings = builder.settings;
     updatedAt = builder.updatedAt;
+    inventoryRecord = builder.inventoryRecord;
+    materializedInventory = builder.materializedInventory;
   }
 
   /**
@@ -242,6 +274,28 @@ public class JobDataAction extends GenericModel {
    */
   public Date updatedAt() {
     return updatedAt;
+  }
+
+  /**
+   * Gets the inventoryRecord.
+   *
+   * Complete inventory resource details with user inputs and system generated data.
+   *
+   * @return the inventoryRecord
+   */
+  public InventoryResourceRecord inventoryRecord() {
+    return inventoryRecord;
+  }
+
+  /**
+   * Gets the materializedInventory.
+   *
+   * Materialized inventory details used by the Action Job, in .ini format.
+   *
+   * @return the materializedInventory
+   */
+  public String materializedInventory() {
+    return materializedInventory;
   }
 }
 

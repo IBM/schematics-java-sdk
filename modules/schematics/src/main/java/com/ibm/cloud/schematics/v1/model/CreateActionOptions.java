@@ -27,14 +27,14 @@ public class CreateActionOptions extends GenericModel {
    * the resources provisioned using Schematics.
    */
   public interface Location {
-    /** us_south. */
-    String US_SOUTH = "us_south";
-    /** us_east. */
-    String US_EAST = "us_east";
-    /** eu_gb. */
-    String EU_GB = "eu_gb";
-    /** eu_de. */
-    String EU_DE = "eu_de";
+    /** us-south. */
+    String US_SOUTH = "us-south";
+    /** us-east. */
+    String US_EAST = "us-east";
+    /** eu-gb. */
+    String EU_GB = "eu-gb";
+    /** eu-de. */
+    String EU_DE = "eu-de";
   }
 
   /**
@@ -67,13 +67,13 @@ public class CreateActionOptions extends GenericModel {
   protected ExternalSource source;
   protected String sourceType;
   protected String commandParameter;
-  protected TargetResourceset bastion;
-  protected String targetsIni;
+  protected BastionResourceDefinition bastion;
+  protected String inventory;
+  protected VariableData bastionCredential;
   protected List<VariableData> credentials;
   protected List<VariableData> inputs;
   protected List<VariableData> outputs;
   protected List<VariableData> settings;
-  protected String triggerRecordId;
   protected ActionState state;
   protected SystemLock sysLock;
   protected String xGithubToken;
@@ -92,13 +92,13 @@ public class CreateActionOptions extends GenericModel {
     private ExternalSource source;
     private String sourceType;
     private String commandParameter;
-    private TargetResourceset bastion;
-    private String targetsIni;
+    private BastionResourceDefinition bastion;
+    private String inventory;
+    private VariableData bastionCredential;
     private List<VariableData> credentials;
     private List<VariableData> inputs;
     private List<VariableData> outputs;
     private List<VariableData> settings;
-    private String triggerRecordId;
     private ActionState state;
     private SystemLock sysLock;
     private String xGithubToken;
@@ -115,12 +115,12 @@ public class CreateActionOptions extends GenericModel {
       this.sourceType = createActionOptions.sourceType;
       this.commandParameter = createActionOptions.commandParameter;
       this.bastion = createActionOptions.bastion;
-      this.targetsIni = createActionOptions.targetsIni;
+      this.inventory = createActionOptions.inventory;
+      this.bastionCredential = createActionOptions.bastionCredential;
       this.credentials = createActionOptions.credentials;
       this.inputs = createActionOptions.inputs;
       this.outputs = createActionOptions.outputs;
       this.settings = createActionOptions.settings;
-      this.triggerRecordId = createActionOptions.triggerRecordId;
       this.state = createActionOptions.state;
       this.sysLock = createActionOptions.sysLock;
       this.xGithubToken = createActionOptions.xGithubToken;
@@ -338,19 +338,30 @@ public class CreateActionOptions extends GenericModel {
      * @param bastion the bastion
      * @return the CreateActionOptions builder
      */
-    public Builder bastion(TargetResourceset bastion) {
+    public Builder bastion(BastionResourceDefinition bastion) {
       this.bastion = bastion;
       return this;
     }
 
     /**
-     * Set the targetsIni.
+     * Set the inventory.
      *
-     * @param targetsIni the targetsIni
+     * @param inventory the inventory
      * @return the CreateActionOptions builder
      */
-    public Builder targetsIni(String targetsIni) {
-      this.targetsIni = targetsIni;
+    public Builder inventory(String inventory) {
+      this.inventory = inventory;
+      return this;
+    }
+
+    /**
+     * Set the bastionCredential.
+     *
+     * @param bastionCredential the bastionCredential
+     * @return the CreateActionOptions builder
+     */
+    public Builder bastionCredential(VariableData bastionCredential) {
+      this.bastionCredential = bastionCredential;
       return this;
     }
 
@@ -399,17 +410,6 @@ public class CreateActionOptions extends GenericModel {
      */
     public Builder settings(List<VariableData> settings) {
       this.settings = settings;
-      return this;
-    }
-
-    /**
-     * Set the triggerRecordId.
-     *
-     * @param triggerRecordId the triggerRecordId
-     * @return the CreateActionOptions builder
-     */
-    public Builder triggerRecordId(String triggerRecordId) {
-      this.triggerRecordId = triggerRecordId;
       return this;
     }
 
@@ -464,12 +464,12 @@ public class CreateActionOptions extends GenericModel {
       this.sourceType = action.sourceType();
       this.commandParameter = action.commandParameter();
       this.bastion = action.bastion();
-      this.targetsIni = action.targetsIni();
+      this.inventory = action.inventory();
+      this.bastionCredential = action.bastionCredential();
       this.credentials = action.credentials();
       this.inputs = action.inputs();
       this.outputs = action.outputs();
       this.settings = action.settings();
-      this.triggerRecordId = action.triggerRecordId();
       this.state = action.state();
       this.sysLock = action.sysLock();
       return this;
@@ -488,12 +488,12 @@ public class CreateActionOptions extends GenericModel {
     sourceType = builder.sourceType;
     commandParameter = builder.commandParameter;
     bastion = builder.bastion;
-    targetsIni = builder.targetsIni;
+    inventory = builder.inventory;
+    bastionCredential = builder.bastionCredential;
     credentials = builder.credentials;
     inputs = builder.inputs;
     outputs = builder.outputs;
     settings = builder.settings;
-    triggerRecordId = builder.triggerRecordId;
     state = builder.state;
     sysLock = builder.sysLock;
     xGithubToken = builder.xGithubToken;
@@ -611,7 +611,7 @@ public class CreateActionOptions extends GenericModel {
   /**
    * Gets the commandParameter.
    *
-   * Schematics job command parameter (playbook-name, capsule-name or flow-name).
+   * Schematics job command parameter (playbook-name).
    *
    * @return the commandParameter
    */
@@ -622,23 +622,34 @@ public class CreateActionOptions extends GenericModel {
   /**
    * Gets the bastion.
    *
-   * Complete Target details with user inputs and system generated data.
+   * Describes a bastion resource.
    *
    * @return the bastion
    */
-  public TargetResourceset bastion() {
+  public BastionResourceDefinition bastion() {
     return bastion;
   }
 
   /**
-   * Gets the targetsIni.
+   * Gets the inventory.
    *
-   * Inventory of host and host group for the playbook, in .ini file format.
+   * Inventory ID.
    *
-   * @return the targetsIni
+   * @return the inventory
    */
-  public String targetsIni() {
-    return targetsIni;
+  public String inventory() {
+    return inventory;
+  }
+
+  /**
+   * Gets the bastionCredential.
+   *
+   * User editable variable data &amp; system generated reference to value.
+   *
+   * @return the bastionCredential
+   */
+  public VariableData bastionCredential() {
+    return bastionCredential;
   }
 
   /**
@@ -683,17 +694,6 @@ public class CreateActionOptions extends GenericModel {
    */
   public List<VariableData> settings() {
     return settings;
-  }
-
-  /**
-   * Gets the triggerRecordId.
-   *
-   * Id to the Trigger.
-   *
-   * @return the triggerRecordId
-   */
-  public String triggerRecordId() {
-    return triggerRecordId;
   }
 
   /**

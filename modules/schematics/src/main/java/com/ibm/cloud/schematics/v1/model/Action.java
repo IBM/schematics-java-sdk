@@ -29,14 +29,14 @@ public class Action extends GenericModel {
    * the resources provisioned using Schematics.
    */
   public interface Location {
-    /** us_south. */
-    String US_SOUTH = "us_south";
-    /** us_east. */
-    String US_EAST = "us_east";
-    /** eu_gb. */
-    String EU_GB = "eu_gb";
-    /** eu_de. */
-    String EU_DE = "eu_de";
+    /** us-south. */
+    String US_SOUTH = "us-south";
+    /** us-east. */
+    String US_EAST = "us-east";
+    /** eu-gb. */
+    String EU_GB = "eu-gb";
+    /** eu-de. */
+    String EU_DE = "eu-de";
   }
 
   /**
@@ -74,15 +74,14 @@ public class Action extends GenericModel {
   protected String sourceType;
   @SerializedName("command_parameter")
   protected String commandParameter;
-  protected TargetResourceset bastion;
-  @SerializedName("targets_ini")
-  protected String targetsIni;
+  protected BastionResourceDefinition bastion;
+  protected String inventory;
+  @SerializedName("bastion_credential")
+  protected VariableData bastionCredential;
   protected List<VariableData> credentials;
   protected List<VariableData> inputs;
   protected List<VariableData> outputs;
   protected List<VariableData> settings;
-  @SerializedName("trigger_record_id")
-  protected String triggerRecordId;
   protected String id;
   protected String crn;
   protected String account;
@@ -102,7 +101,6 @@ public class Action extends GenericModel {
   protected Date updatedAt;
   @SerializedName("updated_by")
   protected String updatedBy;
-  protected String namespace;
   protected ActionState state;
   @SerializedName("playbook_names")
   protected List<String> playbookNames;
@@ -123,13 +121,13 @@ public class Action extends GenericModel {
     private ExternalSource source;
     private String sourceType;
     private String commandParameter;
-    private TargetResourceset bastion;
-    private String targetsIni;
+    private BastionResourceDefinition bastion;
+    private String inventory;
+    private VariableData bastionCredential;
     private List<VariableData> credentials;
     private List<VariableData> inputs;
     private List<VariableData> outputs;
     private List<VariableData> settings;
-    private String triggerRecordId;
     private ActionState state;
     private SystemLock sysLock;
 
@@ -145,12 +143,12 @@ public class Action extends GenericModel {
       this.sourceType = action.sourceType;
       this.commandParameter = action.commandParameter;
       this.bastion = action.bastion;
-      this.targetsIni = action.targetsIni;
+      this.inventory = action.inventory;
+      this.bastionCredential = action.bastionCredential;
       this.credentials = action.credentials;
       this.inputs = action.inputs;
       this.outputs = action.outputs;
       this.settings = action.settings;
-      this.triggerRecordId = action.triggerRecordId;
       this.state = action.state;
       this.sysLock = action.sysLock;
     }
@@ -367,19 +365,30 @@ public class Action extends GenericModel {
      * @param bastion the bastion
      * @return the Action builder
      */
-    public Builder bastion(TargetResourceset bastion) {
+    public Builder bastion(BastionResourceDefinition bastion) {
       this.bastion = bastion;
       return this;
     }
 
     /**
-     * Set the targetsIni.
+     * Set the inventory.
      *
-     * @param targetsIni the targetsIni
+     * @param inventory the inventory
      * @return the Action builder
      */
-    public Builder targetsIni(String targetsIni) {
-      this.targetsIni = targetsIni;
+    public Builder inventory(String inventory) {
+      this.inventory = inventory;
+      return this;
+    }
+
+    /**
+     * Set the bastionCredential.
+     *
+     * @param bastionCredential the bastionCredential
+     * @return the Action builder
+     */
+    public Builder bastionCredential(VariableData bastionCredential) {
+      this.bastionCredential = bastionCredential;
       return this;
     }
 
@@ -432,17 +441,6 @@ public class Action extends GenericModel {
     }
 
     /**
-     * Set the triggerRecordId.
-     *
-     * @param triggerRecordId the triggerRecordId
-     * @return the Action builder
-     */
-    public Builder triggerRecordId(String triggerRecordId) {
-      this.triggerRecordId = triggerRecordId;
-      return this;
-    }
-
-    /**
      * Set the state.
      *
      * @param state the state
@@ -477,12 +475,12 @@ public class Action extends GenericModel {
     sourceType = builder.sourceType;
     commandParameter = builder.commandParameter;
     bastion = builder.bastion;
-    targetsIni = builder.targetsIni;
+    inventory = builder.inventory;
+    bastionCredential = builder.bastionCredential;
     credentials = builder.credentials;
     inputs = builder.inputs;
     outputs = builder.outputs;
     settings = builder.settings;
-    triggerRecordId = builder.triggerRecordId;
     state = builder.state;
     sysLock = builder.sysLock;
   }
@@ -599,7 +597,7 @@ public class Action extends GenericModel {
   /**
    * Gets the commandParameter.
    *
-   * Schematics job command parameter (playbook-name, capsule-name or flow-name).
+   * Schematics job command parameter (playbook-name).
    *
    * @return the commandParameter
    */
@@ -610,23 +608,34 @@ public class Action extends GenericModel {
   /**
    * Gets the bastion.
    *
-   * Complete Target details with user inputs and system generated data.
+   * Describes a bastion resource.
    *
    * @return the bastion
    */
-  public TargetResourceset bastion() {
+  public BastionResourceDefinition bastion() {
     return bastion;
   }
 
   /**
-   * Gets the targetsIni.
+   * Gets the inventory.
    *
-   * Inventory of host and host group for the playbook, in .ini file format.
+   * Inventory ID.
    *
-   * @return the targetsIni
+   * @return the inventory
    */
-  public String targetsIni() {
-    return targetsIni;
+  public String inventory() {
+    return inventory;
+  }
+
+  /**
+   * Gets the bastionCredential.
+   *
+   * User editable variable data &amp; system generated reference to value.
+   *
+   * @return the bastionCredential
+   */
+  public VariableData bastionCredential() {
+    return bastionCredential;
   }
 
   /**
@@ -671,17 +680,6 @@ public class Action extends GenericModel {
    */
   public List<VariableData> settings() {
     return settings;
-  }
-
-  /**
-   * Gets the triggerRecordId.
-   *
-   * Id to the Trigger.
-   *
-   * @return the triggerRecordId
-   */
-  public String triggerRecordId() {
-    return triggerRecordId;
   }
 
   /**
@@ -803,17 +801,6 @@ public class Action extends GenericModel {
    */
   public String updatedBy() {
     return updatedBy;
-  }
-
-  /**
-   * Gets the namespace.
-   *
-   * name of the namespace.
-   *
-   * @return the namespace
-   */
-  public String namespace() {
-    return namespace;
   }
 
   /**

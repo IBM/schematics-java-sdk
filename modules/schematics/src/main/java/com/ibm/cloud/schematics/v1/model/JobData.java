@@ -28,12 +28,16 @@ public class JobData extends GenericModel {
     String REPO_DOWNLOAD_JOB = "repo_download_job";
     /** action_job. */
     String ACTION_JOB = "action_job";
+    /** system_job. */
+    String SYSTEM_JOB = "system_job";
   }
 
   @SerializedName("job_type")
   protected String jobType;
   @SerializedName("action_job_data")
   protected JobDataAction actionJobData;
+  @SerializedName("system_job_data")
+  protected JobDataSystem systemJobData;
 
   /**
    * Builder.
@@ -41,10 +45,12 @@ public class JobData extends GenericModel {
   public static class Builder {
     private String jobType;
     private JobDataAction actionJobData;
+    private JobDataSystem systemJobData;
 
     private Builder(JobData jobData) {
       this.jobType = jobData.jobType;
       this.actionJobData = jobData.actionJobData;
+      this.systemJobData = jobData.systemJobData;
     }
 
     /**
@@ -92,6 +98,17 @@ public class JobData extends GenericModel {
       this.actionJobData = actionJobData;
       return this;
     }
+
+    /**
+     * Set the systemJobData.
+     *
+     * @param systemJobData the systemJobData
+     * @return the JobData builder
+     */
+    public Builder systemJobData(JobDataSystem systemJobData) {
+      this.systemJobData = systemJobData;
+      return this;
+    }
   }
 
   protected JobData(Builder builder) {
@@ -99,6 +116,7 @@ public class JobData extends GenericModel {
       "jobType cannot be null");
     jobType = builder.jobType;
     actionJobData = builder.actionJobData;
+    systemJobData = builder.systemJobData;
   }
 
   /**
@@ -130,6 +148,17 @@ public class JobData extends GenericModel {
    */
   public JobDataAction actionJobData() {
     return actionJobData;
+  }
+
+  /**
+   * Gets the systemJobData.
+   *
+   * Controls Job data.
+   *
+   * @return the systemJobData
+   */
+  public JobDataSystem systemJobData() {
+    return systemJobData;
   }
 }
 

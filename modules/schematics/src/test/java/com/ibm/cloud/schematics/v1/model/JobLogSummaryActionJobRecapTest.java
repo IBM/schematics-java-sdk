@@ -34,14 +34,14 @@ public class JobLogSummaryActionJobRecapTest {
   @Test
   public void testJobLogSummaryActionJobRecap() throws Throwable {
     JobLogSummaryActionJobRecap jobLogSummaryActionJobRecapModel = new JobLogSummaryActionJobRecap.Builder()
-      .target(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
+      .hosts(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
       .ok(Double.valueOf("72.5"))
       .changed(Double.valueOf("72.5"))
       .failed(Double.valueOf("72.5"))
       .skipped(Double.valueOf("72.5"))
       .unreachable(Double.valueOf("72.5"))
       .build();
-    assertEquals(jobLogSummaryActionJobRecapModel.target(), new java.util.ArrayList<String>(java.util.Arrays.asList("testString")));
+    assertEquals(jobLogSummaryActionJobRecapModel.hosts(), new java.util.ArrayList<String>(java.util.Arrays.asList("testString")));
     assertEquals(jobLogSummaryActionJobRecapModel.ok(), Double.valueOf("72.5"));
     assertEquals(jobLogSummaryActionJobRecapModel.changed(), Double.valueOf("72.5"));
     assertEquals(jobLogSummaryActionJobRecapModel.failed(), Double.valueOf("72.5"));

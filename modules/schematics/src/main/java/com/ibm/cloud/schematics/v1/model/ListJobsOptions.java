@@ -33,12 +33,10 @@ public class ListJobsOptions extends GenericModel {
    * Name of the resource (workspace, actions or controls).
    */
   public interface Resource {
-    /** workspaces. */
-    String WORKSPACES = "workspaces";
-    /** actions. */
-    String ACTIONS = "actions";
-    /** controls. */
-    String CONTROLS = "controls";
+    /** workspace. */
+    String WORKSPACE = "workspace";
+    /** action. */
+    String ACTION = "action";
   }
 
   /**

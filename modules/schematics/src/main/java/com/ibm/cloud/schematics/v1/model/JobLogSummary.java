@@ -12,6 +12,7 @@
  */
 package com.ibm.cloud.schematics.v1.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,10 +34,8 @@ public class JobLogSummary extends GenericModel {
     String WORKSPACE_JOB = "workspace_job";
     /** action_job. */
     String ACTION_JOB = "action_job";
-    /** controls_job. */
-    String CONTROLS_JOB = "controls_job";
-    /** capsule_job. */
-    String CAPSULE_JOB = "capsule_job";
+    /** system_job. */
+    String SYSTEM_JOB = "system_job";
   }
 
   @SerializedName("job_id")
@@ -55,6 +54,8 @@ public class JobLogSummary extends GenericModel {
   protected JobLogSummaryRepoDownloadJob repoDownloadJob;
   @SerializedName("action_job")
   protected JobLogSummaryActionJob actionJob;
+  @SerializedName("system_job")
+  protected JobLogSummarySystemJob systemJob;
 
   /**
    * Builder.
@@ -63,11 +64,13 @@ public class JobLogSummary extends GenericModel {
     private String jobType;
     private JobLogSummaryRepoDownloadJob repoDownloadJob;
     private JobLogSummaryActionJob actionJob;
+    private JobLogSummarySystemJob systemJob;
 
     private Builder(JobLogSummary jobLogSummary) {
       this.jobType = jobLogSummary.jobType;
       this.repoDownloadJob = jobLogSummary.repoDownloadJob;
       this.actionJob = jobLogSummary.actionJob;
+      this.systemJob = jobLogSummary.systemJob;
     }
 
     /**
@@ -117,12 +120,24 @@ public class JobLogSummary extends GenericModel {
       this.actionJob = actionJob;
       return this;
     }
+
+    /**
+     * Set the systemJob.
+     *
+     * @param systemJob the systemJob
+     * @return the JobLogSummary builder
+     */
+    public Builder systemJob(JobLogSummarySystemJob systemJob) {
+      this.systemJob = systemJob;
+      return this;
+    }
   }
 
   protected JobLogSummary(Builder builder) {
     jobType = builder.jobType;
     repoDownloadJob = builder.repoDownloadJob;
     actionJob = builder.actionJob;
+    systemJob = builder.systemJob;
   }
 
   /**
@@ -214,12 +229,23 @@ public class JobLogSummary extends GenericModel {
   /**
    * Gets the actionJob.
    *
-   * Flow Job log summary.
+   * Action Job.
    *
    * @return the actionJob
    */
   public JobLogSummaryActionJob actionJob() {
     return actionJob;
+  }
+
+  /**
+   * Gets the systemJob.
+   *
+   * System Job log summary.
+   *
+   * @return the systemJob
+   */
+  public JobLogSummarySystemJob systemJob() {
+    return systemJob;
   }
 }
 

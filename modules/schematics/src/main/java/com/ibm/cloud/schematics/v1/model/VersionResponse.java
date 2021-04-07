@@ -12,7 +12,7 @@
  */
 package com.ibm.cloud.schematics.v1.model;
 
-import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -30,7 +30,7 @@ public class VersionResponse extends GenericModel {
   @SerializedName("helm_version")
   protected String helmVersion;
   @SerializedName("supported_template_types")
-  protected List<Object> supportedTemplateTypes;
+  protected Map<String, Object> supportedTemplateTypes;
   @SerializedName("terraform_provider_version")
   protected String terraformProviderVersion;
   @SerializedName("terraform_version")
@@ -98,7 +98,7 @@ public class VersionResponse extends GenericModel {
    *
    * @return the supportedTemplateTypes
    */
-  public List<Object> getSupportedTemplateTypes() {
+  public Map<String, Object> getSupportedTemplateTypes() {
     return supportedTemplateTypes;
   }
 

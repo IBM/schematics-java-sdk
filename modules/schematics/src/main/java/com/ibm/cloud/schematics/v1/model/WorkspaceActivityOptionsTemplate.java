@@ -19,7 +19,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Action Options Template ...
+ * Workspace Activity Options Template.
  */
 public class WorkspaceActivityOptionsTemplate extends GenericModel {
 
@@ -128,7 +128,7 @@ public class WorkspaceActivityOptionsTemplate extends GenericModel {
   /**
    * Gets the target.
    *
-   * Action targets.
+   * Workspace Activity targets.
    *
    * @return the target
    */
@@ -139,7 +139,7 @@ public class WorkspaceActivityOptionsTemplate extends GenericModel {
   /**
    * Gets the tfVars.
    *
-   * Action tfvars.
+   * Workspace Activity tfvars.
    *
    * @return the tfVars
    */

@@ -22,15 +22,19 @@ public class JobStatus extends GenericModel {
 
   @SerializedName("action_job_status")
   protected JobStatusAction actionJobStatus;
+  @SerializedName("system_job_status")
+  protected JobStatusSystem systemJobStatus;
 
   /**
    * Builder.
    */
   public static class Builder {
     private JobStatusAction actionJobStatus;
+    private JobStatusSystem systemJobStatus;
 
     private Builder(JobStatus jobStatus) {
       this.actionJobStatus = jobStatus.actionJobStatus;
+      this.systemJobStatus = jobStatus.systemJobStatus;
     }
 
     /**
@@ -58,10 +62,22 @@ public class JobStatus extends GenericModel {
       this.actionJobStatus = actionJobStatus;
       return this;
     }
+
+    /**
+     * Set the systemJobStatus.
+     *
+     * @param systemJobStatus the systemJobStatus
+     * @return the JobStatus builder
+     */
+    public Builder systemJobStatus(JobStatusSystem systemJobStatus) {
+      this.systemJobStatus = systemJobStatus;
+      return this;
+    }
   }
 
   protected JobStatus(Builder builder) {
     actionJobStatus = builder.actionJobStatus;
+    systemJobStatus = builder.systemJobStatus;
   }
 
   /**
@@ -82,6 +98,17 @@ public class JobStatus extends GenericModel {
    */
   public JobStatusAction actionJobStatus() {
     return actionJobStatus;
+  }
+
+  /**
+   * Gets the systemJobStatus.
+   *
+   * System Job Status.
+   *
+   * @return the systemJobStatus
+   */
+  public JobStatusSystem systemJobStatus() {
+    return systemJobStatus;
   }
 }
 

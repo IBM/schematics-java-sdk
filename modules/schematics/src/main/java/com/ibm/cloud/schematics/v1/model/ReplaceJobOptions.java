@@ -30,52 +30,28 @@ public class ReplaceJobOptions extends GenericModel {
     String WORKSPACE = "workspace";
     /** action. */
     String ACTION = "action";
+    /** system. */
+    String SYSTEM = "system";
   }
 
   /**
    * Schematics job command name.
    */
   public interface CommandName {
-    /** workspace_init_flow. */
-    String WORKSPACE_INIT_FLOW = "workspace_init_flow";
-    /** workspace_plan_flow. */
-    String WORKSPACE_PLAN_FLOW = "workspace_plan_flow";
-    /** workspace_apply_flow. */
-    String WORKSPACE_APPLY_FLOW = "workspace_apply_flow";
-    /** workspace_destroy_flow. */
-    String WORKSPACE_DESTROY_FLOW = "workspace_destroy_flow";
-    /** workspace_refresh_flow. */
-    String WORKSPACE_REFRESH_FLOW = "workspace_refresh_flow";
-    /** workspace_show_flow. */
-    String WORKSPACE_SHOW_FLOW = "workspace_show_flow";
-    /** workspace_custom_flow. */
-    String WORKSPACE_CUSTOM_FLOW = "workspace_custom_flow";
-    /** terraform_init. */
-    String TERRAFORM_INIT = "terraform_init";
-    /** terrform_plan. */
-    String TERRFORM_PLAN = "terrform_plan";
-    /** terrform_apply. */
-    String TERRFORM_APPLY = "terrform_apply";
-    /** terrform_destroy. */
-    String TERRFORM_DESTROY = "terrform_destroy";
-    /** terrform_refresh. */
-    String TERRFORM_REFRESH = "terrform_refresh";
-    /** terrform_taint. */
-    String TERRFORM_TAINT = "terrform_taint";
-    /** terrform_show. */
-    String TERRFORM_SHOW = "terrform_show";
-    /** helm_install. */
-    String HELM_INSTALL = "helm_install";
-    /** helm_list. */
-    String HELM_LIST = "helm_list";
-    /** helm_show. */
-    String HELM_SHOW = "helm_show";
     /** ansible_playbook_run. */
     String ANSIBLE_PLAYBOOK_RUN = "ansible_playbook_run";
     /** ansible_playbook_check. */
     String ANSIBLE_PLAYBOOK_CHECK = "ansible_playbook_check";
-    /** opa_evaluate. */
-    String OPA_EVALUATE = "opa_evaluate";
+    /** system_key_enable. */
+    String SYSTEM_KEY_ENABLE = "system_key_enable";
+    /** sytem_key_delete. */
+    String SYTEM_KEY_DELETE = "sytem_key_delete";
+    /** system_key_disable. */
+    String SYSTEM_KEY_DISABLE = "system_key_disable";
+    /** system_key_rotate. */
+    String SYSTEM_KEY_ROTATE = "system_key_rotate";
+    /** system_key_restore. */
+    String SYSTEM_KEY_RESTORE = "system_key_restore";
   }
 
   /**
@@ -83,14 +59,14 @@ public class ReplaceJobOptions extends GenericModel {
    * the resources provisioned using Schematics.
    */
   public interface Location {
-    /** us_south. */
-    String US_SOUTH = "us_south";
-    /** us_east. */
-    String US_EAST = "us_east";
-    /** eu_gb. */
-    String EU_GB = "eu_gb";
-    /** eu_de. */
-    String EU_DE = "eu_de";
+    /** us-south. */
+    String US_SOUTH = "us-south";
+    /** us-east. */
+    String US_EAST = "us-east";
+    /** eu-gb. */
+    String EU_GB = "eu-gb";
+    /** eu-de. */
+    String EU_DE = "eu-de";
   }
 
   protected String jobId;
@@ -106,7 +82,7 @@ public class ReplaceJobOptions extends GenericModel {
   protected String location;
   protected JobStatus status;
   protected JobData data;
-  protected TargetResourceset bastion;
+  protected BastionResourceDefinition bastion;
   protected JobLogSummary logSummary;
 
   /**
@@ -126,7 +102,7 @@ public class ReplaceJobOptions extends GenericModel {
     private String location;
     private JobStatus status;
     private JobData data;
-    private TargetResourceset bastion;
+    private BastionResourceDefinition bastion;
     private JobLogSummary logSummary;
 
     private Builder(ReplaceJobOptions replaceJobOptions) {
@@ -390,7 +366,7 @@ public class ReplaceJobOptions extends GenericModel {
      * @param bastion the bastion
      * @return the ReplaceJobOptions builder
      */
-    public Builder bastion(TargetResourceset bastion) {
+    public Builder bastion(BastionResourceDefinition bastion) {
       this.bastion = bastion;
       return this;
     }
@@ -497,7 +473,7 @@ public class ReplaceJobOptions extends GenericModel {
   /**
    * Gets the commandObjectId.
    *
-   * Job command object id (workspace-id, action-id or control-id).
+   * Job command object id (workspace-id, action-id).
    *
    * @return the commandObjectId
    */
@@ -608,11 +584,11 @@ public class ReplaceJobOptions extends GenericModel {
   /**
    * Gets the bastion.
    *
-   * Complete Target details with user inputs and system generated data.
+   * Describes a bastion resource.
    *
    * @return the bastion
    */
-  public TargetResourceset bastion() {
+  public BastionResourceDefinition bastion() {
     return bastion;
   }
 

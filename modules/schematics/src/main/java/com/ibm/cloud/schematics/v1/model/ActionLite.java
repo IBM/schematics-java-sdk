@@ -28,14 +28,14 @@ public class ActionLite extends GenericModel {
    * the resources provisioned using Schematics.
    */
   public interface Location {
-    /** us_south. */
-    String US_SOUTH = "us_south";
-    /** us_east. */
-    String US_EAST = "us_east";
-    /** eu_gb. */
-    String EU_GB = "eu_gb";
-    /** eu_de. */
-    String EU_DE = "eu_de";
+    /** us-south. */
+    String US_SOUTH = "us-south";
+    /** us-east. */
+    String US_EAST = "us-east";
+    /** eu-gb. */
+    String EU_GB = "eu-gb";
+    /** eu-de. */
+    String EU_DE = "eu-de";
   }
 
   protected String name;
