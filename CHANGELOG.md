@@ -1,3 +1,10 @@
+# [1.1.0-beta.1](https://github.com/IBM/schematics-java-sdk/compare/1.0.2...1.1.0-beta.1) (2021-09-12)
+
+
+### Features
+
+* **sdk:** regenerate SDK with latest OpenAPI spec ([e09b4fa](https://github.com/IBM/schematics-java-sdk/commit/e09b4fa28fa37fb1ee0d48c08b1b4922948899a2))
+
 ## [1.0.1](https://github.com/IBM/schematics-java-sdk/compare/1.0.0...1.0.1) (2021-04-12)
 
 
