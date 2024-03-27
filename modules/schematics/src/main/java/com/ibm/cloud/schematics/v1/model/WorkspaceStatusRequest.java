@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -44,6 +44,11 @@ public class WorkspaceStatusRequest extends GenericModel {
     private String lockedBy;
     private Date lockedTime;
 
+    /**
+     * Instantiates a new Builder from an existing WorkspaceStatusRequest instance.
+     *
+     * @param workspaceStatusRequest the instance to initialize the Builder with
+     */
     private Builder(WorkspaceStatusRequest workspaceStatusRequest) {
       this.frozen = workspaceStatusRequest.frozen;
       this.frozenAt = workspaceStatusRequest.frozenAt;
@@ -134,6 +139,8 @@ public class WorkspaceStatusRequest extends GenericModel {
       return this;
     }
   }
+
+  protected WorkspaceStatusRequest() { }
 
   protected WorkspaceStatusRequest(Builder builder) {
     frozen = builder.frozen;

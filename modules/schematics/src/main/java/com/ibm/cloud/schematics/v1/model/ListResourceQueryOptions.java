@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -43,6 +43,11 @@ public class ListResourceQueryOptions extends GenericModel {
     private String sort;
     private String profile;
 
+    /**
+     * Instantiates a new Builder from an existing ListResourceQueryOptions instance.
+     *
+     * @param listResourceQueryOptions the instance to initialize the Builder with
+     */
     private Builder(ListResourceQueryOptions listResourceQueryOptions) {
       this.offset = listResourceQueryOptions.offset;
       this.limit = listResourceQueryOptions.limit;
@@ -110,6 +115,8 @@ public class ListResourceQueryOptions extends GenericModel {
     }
   }
 
+  protected ListResourceQueryOptions() { }
+
   protected ListResourceQueryOptions(Builder builder) {
     offset = builder.offset;
     limit = builder.limit;
@@ -131,7 +138,7 @@ public class ListResourceQueryOptions extends GenericModel {
    *
    * The starting position of the item in the list of items. For example, if you have three workspaces in your account,
    * the first workspace is assigned position number 0, the second workspace is assigned position number 1, and so
-   * forth. If you have 6 workspaces and you want to list the details for workspaces 2-6, enter 1. To limit the number
+   * forth. If you have 6 workspaces and you want to list the details for workspaces `2-6`, enter 1. To limit the number
    * of workspaces that is returned, use the `limit` option in addition to the `offset` option. Negative numbers are not
    * supported and are ignored.
    *

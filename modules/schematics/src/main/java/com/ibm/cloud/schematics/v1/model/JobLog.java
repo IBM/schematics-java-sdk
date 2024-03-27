@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -46,6 +46,8 @@ public class JobLog extends GenericModel {
   protected byte[] details;
   @SerializedName("updated_at")
   protected Date updatedAt;
+
+  protected JobLog() { }
 
   /**
    * Gets the jobId.

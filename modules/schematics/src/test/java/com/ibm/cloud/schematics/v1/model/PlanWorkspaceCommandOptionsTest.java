@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,6 +14,7 @@
 package com.ibm.cloud.schematics.v1.model;
 
 import com.ibm.cloud.schematics.v1.model.PlanWorkspaceCommandOptions;
+import com.ibm.cloud.schematics.v1.model.WorkspaceActivityOptionsTemplate;
 import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -31,13 +32,22 @@ public class PlanWorkspaceCommandOptionsTest {
 
   @Test
   public void testPlanWorkspaceCommandOptions() throws Throwable {
+    WorkspaceActivityOptionsTemplate workspaceActivityOptionsTemplateModel = new WorkspaceActivityOptionsTemplate.Builder()
+      .target(java.util.Arrays.asList("testString"))
+      .tfVars(java.util.Arrays.asList("testString"))
+      .build();
+    assertEquals(workspaceActivityOptionsTemplateModel.target(), java.util.Arrays.asList("testString"));
+    assertEquals(workspaceActivityOptionsTemplateModel.tfVars(), java.util.Arrays.asList("testString"));
+
     PlanWorkspaceCommandOptions planWorkspaceCommandOptionsModel = new PlanWorkspaceCommandOptions.Builder()
       .wId("testString")
       .refreshToken("testString")
+      .actionOptions(workspaceActivityOptionsTemplateModel)
       .delegatedToken("testString")
       .build();
     assertEquals(planWorkspaceCommandOptionsModel.wId(), "testString");
     assertEquals(planWorkspaceCommandOptionsModel.refreshToken(), "testString");
+    assertEquals(planWorkspaceCommandOptionsModel.actionOptions(), workspaceActivityOptionsTemplateModel);
     assertEquals(planWorkspaceCommandOptionsModel.delegatedToken(), "testString");
   }
 

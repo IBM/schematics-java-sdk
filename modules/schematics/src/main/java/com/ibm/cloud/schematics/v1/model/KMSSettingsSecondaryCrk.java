@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -16,7 +16,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Secondary CRK details.
+ * The secondary kms instance details.
  */
 public class KMSSettingsSecondaryCrk extends GenericModel {
 
@@ -35,6 +35,11 @@ public class KMSSettingsSecondaryCrk extends GenericModel {
     private String kmsPrivateEndpoint;
     private String keyCrn;
 
+    /**
+     * Instantiates a new Builder from an existing KMSSettingsSecondaryCrk instance.
+     *
+     * @param kmsSettingsSecondaryCrk the instance to initialize the Builder with
+     */
     private Builder(KMSSettingsSecondaryCrk kmsSettingsSecondaryCrk) {
       this.kmsName = kmsSettingsSecondaryCrk.kmsName;
       this.kmsPrivateEndpoint = kmsSettingsSecondaryCrk.kmsPrivateEndpoint;
@@ -90,6 +95,8 @@ public class KMSSettingsSecondaryCrk extends GenericModel {
     }
   }
 
+  protected KMSSettingsSecondaryCrk() { }
+
   protected KMSSettingsSecondaryCrk(Builder builder) {
     kmsName = builder.kmsName;
     kmsPrivateEndpoint = builder.kmsPrivateEndpoint;
@@ -108,7 +115,7 @@ public class KMSSettingsSecondaryCrk extends GenericModel {
   /**
    * Gets the kmsName.
    *
-   * Secondary KMS name.
+   * The secondary kms instance name.
    *
    * @return the kmsName
    */
@@ -119,7 +126,7 @@ public class KMSSettingsSecondaryCrk extends GenericModel {
   /**
    * Gets the kmsPrivateEndpoint.
    *
-   * Secondary KMS endpoint.
+   * The secondary kms instance private endpoint.
    *
    * @return the kmsPrivateEndpoint
    */
@@ -130,7 +137,7 @@ public class KMSSettingsSecondaryCrk extends GenericModel {
   /**
    * Gets the keyCrn.
    *
-   * CRN of the Secondary Key.
+   * The CRN of the secondary key.
    *
    * @return the keyCrn
    */

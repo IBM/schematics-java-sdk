@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -48,6 +48,11 @@ public class JobDataTemplate extends GenericModel {
     private List<VariableData> settings;
     private Date updatedAt;
 
+    /**
+     * Instantiates a new Builder from an existing JobDataTemplate instance.
+     *
+     * @param jobDataTemplate the instance to initialize the Builder with
+     */
     private Builder(JobDataTemplate jobDataTemplate) {
       this.templateId = jobDataTemplate.templateId;
       this.templateName = jobDataTemplate.templateName;
@@ -74,9 +79,9 @@ public class JobDataTemplate extends GenericModel {
     }
 
     /**
-     * Adds an inputs to inputs.
+     * Adds a new element to inputs.
      *
-     * @param inputs the new inputs
+     * @param inputs the new element to be added
      * @return the JobDataTemplate builder
      */
     public Builder addInputs(VariableData inputs) {
@@ -90,9 +95,9 @@ public class JobDataTemplate extends GenericModel {
     }
 
     /**
-     * Adds an outputs to outputs.
+     * Adds a new element to outputs.
      *
-     * @param outputs the new outputs
+     * @param outputs the new element to be added
      * @return the JobDataTemplate builder
      */
     public Builder addOutputs(VariableData outputs) {
@@ -106,9 +111,9 @@ public class JobDataTemplate extends GenericModel {
     }
 
     /**
-     * Adds an settings to settings.
+     * Adds a new element to settings.
      *
-     * @param settings the new settings
+     * @param settings the new element to be added
      * @return the JobDataTemplate builder
      */
     public Builder addSettings(VariableData settings) {
@@ -201,6 +206,8 @@ public class JobDataTemplate extends GenericModel {
       return this;
     }
   }
+
+  protected JobDataTemplate() { }
 
   protected JobDataTemplate(Builder builder) {
     templateId = builder.templateId;

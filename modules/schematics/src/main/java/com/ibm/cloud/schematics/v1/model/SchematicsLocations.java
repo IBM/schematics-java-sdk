@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -35,6 +35,10 @@ public class SchematicsLocations extends GenericModel {
   @SerializedName("paired_region")
   protected List<String> pairedRegion;
   protected Boolean restricted;
+  @SerializedName("agent_metadata")
+  protected List<AgentMetadataInfo> agentMetadata;
+
+  protected SchematicsLocations() { }
 
   /**
    * Gets the name.
@@ -127,7 +131,7 @@ public class SchematicsLocations extends GenericModel {
   /**
    * Gets the pairedRegion.
    *
-   * List of paired regions used by Schematics.
+   * The list of paired regions used by Schematics.
    *
    * @return the pairedRegion
    */
@@ -138,12 +142,23 @@ public class SchematicsLocations extends GenericModel {
   /**
    * Gets the restricted.
    *
-   * Restricted Region.
+   * The restricted region.
    *
    * @return the restricted
    */
   public Boolean isRestricted() {
     return restricted;
+  }
+
+  /**
+   * Gets the agentMetadata.
+   *
+   * The metadata of an agent.
+   *
+   * @return the agentMetadata
+   */
+  public List<AgentMetadataInfo> getAgentMetadata() {
+    return agentMetadata;
   }
 }
 

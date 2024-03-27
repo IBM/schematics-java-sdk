@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -31,6 +31,11 @@ public class ListWorkspaceActivitiesOptions extends GenericModel {
     private Long offset;
     private Long limit;
 
+    /**
+     * Instantiates a new Builder from an existing ListWorkspaceActivitiesOptions instance.
+     *
+     * @param listWorkspaceActivitiesOptions the instance to initialize the Builder with
+     */
     private Builder(ListWorkspaceActivitiesOptions listWorkspaceActivitiesOptions) {
       this.wId = listWorkspaceActivitiesOptions.wId;
       this.offset = listWorkspaceActivitiesOptions.offset;
@@ -95,6 +100,8 @@ public class ListWorkspaceActivitiesOptions extends GenericModel {
     }
   }
 
+  protected ListWorkspaceActivitiesOptions() { }
+
   protected ListWorkspaceActivitiesOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.wId,
       "wId cannot be empty");
@@ -128,7 +135,7 @@ public class ListWorkspaceActivitiesOptions extends GenericModel {
    *
    * The starting position of the item in the list of items. For example, if you have three workspaces in your account,
    * the first workspace is assigned position number 0, the second workspace is assigned position number 1, and so
-   * forth. If you have 6 workspaces and you want to list the details for workspaces 2-6, enter 1. To limit the number
+   * forth. If you have 6 workspaces and you want to list the details for workspaces `2-6`, enter 1. To limit the number
    * of workspaces that is returned, use the `limit` option in addition to the `offset` option. Negative numbers are not
    * supported and are ignored.
    *

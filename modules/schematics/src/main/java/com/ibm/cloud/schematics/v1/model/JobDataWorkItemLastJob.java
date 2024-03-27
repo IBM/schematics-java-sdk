@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -78,20 +78,10 @@ public class JobDataWorkItemLastJob extends GenericModel {
     String DELETE_WORKSPACE = "delete_workspace";
     /** create_cart. */
     String CREATE_CART = "create_cart";
-    /** create_environment. */
-    String CREATE_ENVIRONMENT = "create_environment";
-    /** put_environment. */
-    String PUT_ENVIRONMENT = "put_environment";
-    /** delete_environment. */
-    String DELETE_ENVIRONMENT = "delete_environment";
-    /** environment_init. */
-    String ENVIRONMENT_INIT = "environment_init";
-    /** environment_install. */
-    String ENVIRONMENT_INSTALL = "environment_install";
-    /** environment_uninstall. */
-    String ENVIRONMENT_UNINSTALL = "environment_uninstall";
     /** repository_process. */
     String REPOSITORY_PROCESS = "repository_process";
+    /** terraform_commands. */
+    String TERRAFORM_COMMANDS = "terraform_commands";
   }
 
   /**
@@ -108,6 +98,12 @@ public class JobDataWorkItemLastJob extends GenericModel {
     String JOB_FAILED = "job_failed";
     /** job_cancelled. */
     String JOB_CANCELLED = "job_cancelled";
+    /** job_stopped. */
+    String JOB_STOPPED = "job_stopped";
+    /** job_stop_in_progress. */
+    String JOB_STOP_IN_PROGRESS = "job_stop_in_progress";
+    /** job_ready_to_execute. */
+    String JOB_READY_TO_EXECUTE = "job_ready_to_execute";
   }
 
   @SerializedName("command_object")
@@ -134,6 +130,11 @@ public class JobDataWorkItemLastJob extends GenericModel {
     private String jobId;
     private String jobStatus;
 
+    /**
+     * Instantiates a new Builder from an existing JobDataWorkItemLastJob instance.
+     *
+     * @param jobDataWorkItemLastJob the instance to initialize the Builder with
+     */
     private Builder(JobDataWorkItemLastJob jobDataWorkItemLastJob) {
       this.commandObject = jobDataWorkItemLastJob.commandObject;
       this.commandObjectName = jobDataWorkItemLastJob.commandObjectName;
@@ -224,6 +225,8 @@ public class JobDataWorkItemLastJob extends GenericModel {
       return this;
     }
   }
+
+  protected JobDataWorkItemLastJob() { }
 
   protected JobDataWorkItemLastJob(Builder builder) {
     commandObject = builder.commandObject;

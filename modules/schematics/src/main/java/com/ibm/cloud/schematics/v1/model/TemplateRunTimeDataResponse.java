@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,6 +13,7 @@
 package com.ibm.cloud.schematics.v1.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -32,10 +33,12 @@ public class TemplateRunTimeDataResponse extends GenericModel {
   @SerializedName("log_store_url")
   protected String logStoreUrl;
   @SerializedName("output_values")
-  protected List<Object> outputValues;
-  protected List<List<Object>> resources;
+  protected List<Map<String, Object>> outputValues;
+  protected List<List<Map<String, Object>>> resources;
   @SerializedName("state_store_url")
   protected String stateStoreUrl;
+
+  protected TemplateRunTimeDataResponse() { }
 
   /**
    * Gets the engineCmd.
@@ -99,7 +102,7 @@ public class TemplateRunTimeDataResponse extends GenericModel {
    *
    * @return the outputValues
    */
-  public List<Object> getOutputValues() {
+  public List<Map<String, Object>> getOutputValues() {
     return outputValues;
   }
 
@@ -110,7 +113,7 @@ public class TemplateRunTimeDataResponse extends GenericModel {
    *
    * @return the resources
    */
-  public List<List<Object>> getResources() {
+  public List<List<Map<String, Object>>> getResources() {
     return resources;
   }
 

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -46,6 +46,11 @@ public class TerraformCommand extends GenericModel {
     private String commandDependsOn;
     private String commandStatus;
 
+    /**
+     * Instantiates a new Builder from an existing TerraformCommand instance.
+     *
+     * @param terraformCommand the instance to initialize the Builder with
+     */
     private Builder(TerraformCommand terraformCommand) {
       this.command = terraformCommand.command;
       this.commandParams = terraformCommand.commandParams;
@@ -149,6 +154,8 @@ public class TerraformCommand extends GenericModel {
     }
   }
 
+  protected TerraformCommand() { }
+
   protected TerraformCommand(Builder builder) {
     command = builder.command;
     commandParams = builder.commandParams;
@@ -172,7 +179,7 @@ public class TerraformCommand extends GenericModel {
    * Gets the command.
    *
    * You must provide the command to execute. Supported commands are `show`,`taint`, `untaint`, `state`, `import`,
-   * `output`.
+   * `output`, `drift`.
    *
    * @return the command
    */

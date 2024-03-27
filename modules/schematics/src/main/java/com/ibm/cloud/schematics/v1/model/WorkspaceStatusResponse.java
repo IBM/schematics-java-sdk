@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,6 +32,8 @@ public class WorkspaceStatusResponse extends GenericModel {
   protected String lockedBy;
   @SerializedName("locked_time")
   protected Date lockedTime;
+
+  protected WorkspaceStatusResponse() { }
 
   /**
    * Gets the frozen.

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -16,7 +16,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Primary CRK details.
+ * The primary kms instance details.
  */
 public class KMSSettingsPrimaryCrk extends GenericModel {
 
@@ -35,6 +35,11 @@ public class KMSSettingsPrimaryCrk extends GenericModel {
     private String kmsPrivateEndpoint;
     private String keyCrn;
 
+    /**
+     * Instantiates a new Builder from an existing KMSSettingsPrimaryCrk instance.
+     *
+     * @param kmsSettingsPrimaryCrk the instance to initialize the Builder with
+     */
     private Builder(KMSSettingsPrimaryCrk kmsSettingsPrimaryCrk) {
       this.kmsName = kmsSettingsPrimaryCrk.kmsName;
       this.kmsPrivateEndpoint = kmsSettingsPrimaryCrk.kmsPrivateEndpoint;
@@ -90,6 +95,8 @@ public class KMSSettingsPrimaryCrk extends GenericModel {
     }
   }
 
+  protected KMSSettingsPrimaryCrk() { }
+
   protected KMSSettingsPrimaryCrk(Builder builder) {
     kmsName = builder.kmsName;
     kmsPrivateEndpoint = builder.kmsPrivateEndpoint;
@@ -108,7 +115,7 @@ public class KMSSettingsPrimaryCrk extends GenericModel {
   /**
    * Gets the kmsName.
    *
-   * Primary KMS name.
+   * The primary kms instance name.
    *
    * @return the kmsName
    */
@@ -119,7 +126,7 @@ public class KMSSettingsPrimaryCrk extends GenericModel {
   /**
    * Gets the kmsPrivateEndpoint.
    *
-   * Primary KMS endpoint.
+   * The primary kms instance private endpoint.
    *
    * @return the kmsPrivateEndpoint
    */
@@ -130,7 +137,7 @@ public class KMSSettingsPrimaryCrk extends GenericModel {
   /**
    * Gets the keyCrn.
    *
-   * CRN of the Primary Key.
+   * The CRN of the primary root key.
    *
    * @return the keyCrn
    */

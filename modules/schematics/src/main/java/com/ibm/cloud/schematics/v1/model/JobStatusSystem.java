@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -38,6 +38,12 @@ public class JobStatusSystem extends GenericModel {
     String JOB_FAILED = "job_failed";
     /** job_cancelled. */
     String JOB_CANCELLED = "job_cancelled";
+    /** job_stopped. */
+    String JOB_STOPPED = "job_stopped";
+    /** job_stop_in_progress. */
+    String JOB_STOP_IN_PROGRESS = "job_stop_in_progress";
+    /** job_ready_to_execute. */
+    String JOB_READY_TO_EXECUTE = "job_ready_to_execute";
   }
 
   @SerializedName("system_status_message")
@@ -58,6 +64,11 @@ public class JobStatusSystem extends GenericModel {
     private List<JobStatusSchematicsResources> schematicsResourceStatus;
     private Date updatedAt;
 
+    /**
+     * Instantiates a new Builder from an existing JobStatusSystem instance.
+     *
+     * @param jobStatusSystem the instance to initialize the Builder with
+     */
     private Builder(JobStatusSystem jobStatusSystem) {
       this.systemStatusMessage = jobStatusSystem.systemStatusMessage;
       this.systemStatusCode = jobStatusSystem.systemStatusCode;
@@ -81,9 +92,9 @@ public class JobStatusSystem extends GenericModel {
     }
 
     /**
-     * Adds an schematicsResourceStatus to schematicsResourceStatus.
+     * Adds a new element to schematicsResourceStatus.
      *
-     * @param schematicsResourceStatus the new schematicsResourceStatus
+     * @param schematicsResourceStatus the new element to be added
      * @return the JobStatusSystem builder
      */
     public Builder addSchematicsResourceStatus(JobStatusSchematicsResources schematicsResourceStatus) {
@@ -141,6 +152,8 @@ public class JobStatusSystem extends GenericModel {
       return this;
     }
   }
+
+  protected JobStatusSystem() { }
 
   protected JobStatusSystem(Builder builder) {
     systemStatusMessage = builder.systemStatusMessage;

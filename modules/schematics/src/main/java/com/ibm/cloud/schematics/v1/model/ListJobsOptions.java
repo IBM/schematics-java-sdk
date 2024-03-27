@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -30,13 +30,17 @@ public class ListJobsOptions extends GenericModel {
   }
 
   /**
-   * Name of the resource (workspace, actions or controls).
+   * Name of the resource (workspaces, actions, environment or controls).
    */
   public interface Resource {
-    /** workspace. */
-    String WORKSPACE = "workspace";
+    /** workspaces. */
+    String WORKSPACES = "workspaces";
     /** action. */
     String ACTION = "action";
+    /** actions. */
+    String ACTIONS = "actions";
+    /** environment. */
+    String ENVIRONMENT = "environment";
   }
 
   /**
@@ -54,6 +58,7 @@ public class ListJobsOptions extends GenericModel {
   protected String resource;
   protected String resourceId;
   protected String actionId;
+  protected String workspaceId;
   protected String list;
 
   /**
@@ -67,8 +72,14 @@ public class ListJobsOptions extends GenericModel {
     private String resource;
     private String resourceId;
     private String actionId;
+    private String workspaceId;
     private String list;
 
+    /**
+     * Instantiates a new Builder from an existing ListJobsOptions instance.
+     *
+     * @param listJobsOptions the instance to initialize the Builder with
+     */
     private Builder(ListJobsOptions listJobsOptions) {
       this.offset = listJobsOptions.offset;
       this.limit = listJobsOptions.limit;
@@ -77,6 +88,7 @@ public class ListJobsOptions extends GenericModel {
       this.resource = listJobsOptions.resource;
       this.resourceId = listJobsOptions.resourceId;
       this.actionId = listJobsOptions.actionId;
+      this.workspaceId = listJobsOptions.workspaceId;
       this.list = listJobsOptions.list;
     }
 
@@ -173,6 +185,17 @@ public class ListJobsOptions extends GenericModel {
     }
 
     /**
+     * Set the workspaceId.
+     *
+     * @param workspaceId the workspaceId
+     * @return the ListJobsOptions builder
+     */
+    public Builder workspaceId(String workspaceId) {
+      this.workspaceId = workspaceId;
+      return this;
+    }
+
+    /**
      * Set the list.
      *
      * @param list the list
@@ -184,6 +207,8 @@ public class ListJobsOptions extends GenericModel {
     }
   }
 
+  protected ListJobsOptions() { }
+
   protected ListJobsOptions(Builder builder) {
     offset = builder.offset;
     limit = builder.limit;
@@ -192,6 +217,7 @@ public class ListJobsOptions extends GenericModel {
     resource = builder.resource;
     resourceId = builder.resourceId;
     actionId = builder.actionId;
+    workspaceId = builder.workspaceId;
     list = builder.list;
   }
 
@@ -209,7 +235,7 @@ public class ListJobsOptions extends GenericModel {
    *
    * The starting position of the item in the list of items. For example, if you have three workspaces in your account,
    * the first workspace is assigned position number 0, the second workspace is assigned position number 1, and so
-   * forth. If you have 6 workspaces and you want to list the details for workspaces 2-6, enter 1. To limit the number
+   * forth. If you have 6 workspaces and you want to list the details for workspaces `2-6`, enter 1. To limit the number
    * of workspaces that is returned, use the `limit` option in addition to the `offset` option. Negative numbers are not
    * supported and are ignored.
    *
@@ -258,7 +284,7 @@ public class ListJobsOptions extends GenericModel {
   /**
    * Gets the resource.
    *
-   * Name of the resource (workspace, actions or controls).
+   * Name of the resource (workspaces, actions, environment or controls).
    *
    * @return the resource
    */
@@ -286,6 +312,17 @@ public class ListJobsOptions extends GenericModel {
    */
   public String actionId() {
     return actionId;
+  }
+
+  /**
+   * Gets the workspaceId.
+   *
+   * Workspace Id.
+   *
+   * @return the workspaceId
+   */
+  public String workspaceId() {
+    return workspaceId;
   }
 
   /**

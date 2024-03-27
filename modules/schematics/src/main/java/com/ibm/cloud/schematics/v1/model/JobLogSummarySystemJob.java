@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,6 +32,11 @@ public class JobLogSummarySystemJob extends GenericModel {
     private Double success;
     private Double failed;
 
+    /**
+     * Instantiates a new Builder from an existing JobLogSummarySystemJob instance.
+     *
+     * @param jobLogSummarySystemJob the instance to initialize the Builder with
+     */
     private Builder(JobLogSummarySystemJob jobLogSummarySystemJob) {
       this.success = jobLogSummarySystemJob.success;
       this.failed = jobLogSummarySystemJob.failed;
@@ -74,6 +79,8 @@ public class JobLogSummarySystemJob extends GenericModel {
       return this;
     }
   }
+
+  protected JobLogSummarySystemJob() { }
 
   protected JobLogSummarySystemJob(Builder builder) {
     success = builder.success;

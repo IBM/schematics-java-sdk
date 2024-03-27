@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -17,16 +17,18 @@ import java.util.List;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * List of Locations details.
+ * The list of locations details.
  */
 public class SchematicsLocationsList extends GenericModel {
 
   protected List<SchematicsLocationsLite> locations;
 
+  protected SchematicsLocationsList() { }
+
   /**
    * Gets the locations.
    *
-   * List of Locations.
+   * The list of locations.
    *
    * @return the locations
    */

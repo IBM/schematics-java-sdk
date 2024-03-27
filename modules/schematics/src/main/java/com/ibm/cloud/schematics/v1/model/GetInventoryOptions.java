@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -19,16 +19,36 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class GetInventoryOptions extends GenericModel {
 
+  /**
+   * Level of details returned by the get method.
+   */
+  public interface Profile {
+    /** summary. */
+    String SUMMARY = "summary";
+    /** detailed. */
+    String DETAILED = "detailed";
+    /** ids. */
+    String IDS = "ids";
+  }
+
   protected String inventoryId;
+  protected String profile;
 
   /**
    * Builder.
    */
   public static class Builder {
     private String inventoryId;
+    private String profile;
 
+    /**
+     * Instantiates a new Builder from an existing GetInventoryOptions instance.
+     *
+     * @param getInventoryOptions the instance to initialize the Builder with
+     */
     private Builder(GetInventoryOptions getInventoryOptions) {
       this.inventoryId = getInventoryOptions.inventoryId;
+      this.profile = getInventoryOptions.profile;
     }
 
     /**
@@ -65,12 +85,26 @@ public class GetInventoryOptions extends GenericModel {
       this.inventoryId = inventoryId;
       return this;
     }
+
+    /**
+     * Set the profile.
+     *
+     * @param profile the profile
+     * @return the GetInventoryOptions builder
+     */
+    public Builder profile(String profile) {
+      this.profile = profile;
+      return this;
+    }
   }
+
+  protected GetInventoryOptions() { }
 
   protected GetInventoryOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.inventoryId,
       "inventoryId cannot be empty");
     inventoryId = builder.inventoryId;
+    profile = builder.profile;
   }
 
   /**
@@ -92,6 +126,17 @@ public class GetInventoryOptions extends GenericModel {
    */
   public String inventoryId() {
     return inventoryId;
+  }
+
+  /**
+   * Gets the profile.
+   *
+   * Level of details returned by the get method.
+   *
+   * @return the profile
+   */
+  public String profile() {
+    return profile;
   }
 }
 

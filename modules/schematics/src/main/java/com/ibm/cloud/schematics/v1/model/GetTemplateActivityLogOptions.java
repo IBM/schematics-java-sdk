@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -39,6 +39,11 @@ public class GetTemplateActivityLogOptions extends GenericModel {
     private Boolean logTfNullResource;
     private Boolean logTfAnsible;
 
+    /**
+     * Instantiates a new Builder from an existing GetTemplateActivityLogOptions instance.
+     *
+     * @param getTemplateActivityLogOptions the instance to initialize the Builder with
+     */
     private Builder(GetTemplateActivityLogOptions getTemplateActivityLogOptions) {
       this.wId = getTemplateActivityLogOptions.wId;
       this.tId = getTemplateActivityLogOptions.tId;
@@ -154,6 +159,8 @@ public class GetTemplateActivityLogOptions extends GenericModel {
       return this;
     }
   }
+
+  protected GetTemplateActivityLogOptions() { }
 
   protected GetTemplateActivityLogOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.wId,

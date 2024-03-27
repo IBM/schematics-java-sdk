@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,6 +32,11 @@ public class WorkspaceStatusMessage extends GenericModel {
     private String statusCode;
     private String statusMsg;
 
+    /**
+     * Instantiates a new Builder from an existing WorkspaceStatusMessage instance.
+     *
+     * @param workspaceStatusMessage the instance to initialize the Builder with
+     */
     private Builder(WorkspaceStatusMessage workspaceStatusMessage) {
       this.statusCode = workspaceStatusMessage.statusCode;
       this.statusMsg = workspaceStatusMessage.statusMsg;
@@ -74,6 +79,8 @@ public class WorkspaceStatusMessage extends GenericModel {
       return this;
     }
   }
+
+  protected WorkspaceStatusMessage() { }
 
   protected WorkspaceStatusMessage(Builder builder) {
     statusCode = builder.statusCode;

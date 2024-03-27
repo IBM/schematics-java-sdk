@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -17,8 +17,6 @@ import com.ibm.cloud.schematics.v1.model.ReplaceInventoryOptions;
 import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -40,7 +38,7 @@ public class ReplaceInventoryOptionsTest {
       .location("us-south")
       .resourceGroup("testString")
       .inventoriesIni("testString")
-      .resourceQueries(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
+      .resourceQueries(java.util.Arrays.asList("testString"))
       .build();
     assertEquals(replaceInventoryOptionsModel.inventoryId(), "testString");
     assertEquals(replaceInventoryOptionsModel.name(), "testString");
@@ -48,7 +46,7 @@ public class ReplaceInventoryOptionsTest {
     assertEquals(replaceInventoryOptionsModel.location(), "us-south");
     assertEquals(replaceInventoryOptionsModel.resourceGroup(), "testString");
     assertEquals(replaceInventoryOptionsModel.inventoriesIni(), "testString");
-    assertEquals(replaceInventoryOptionsModel.resourceQueries(), new java.util.ArrayList<String>(java.util.Arrays.asList("testString")));
+    assertEquals(replaceInventoryOptionsModel.resourceQueries(), java.util.Arrays.asList("testString"));
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

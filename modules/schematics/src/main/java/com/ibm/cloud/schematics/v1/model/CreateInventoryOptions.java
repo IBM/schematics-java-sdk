@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -56,6 +56,11 @@ public class CreateInventoryOptions extends GenericModel {
     private String inventoriesIni;
     private List<String> resourceQueries;
 
+    /**
+     * Instantiates a new Builder from an existing CreateInventoryOptions instance.
+     *
+     * @param createInventoryOptions the instance to initialize the Builder with
+     */
     private Builder(CreateInventoryOptions createInventoryOptions) {
       this.name = createInventoryOptions.name;
       this.description = createInventoryOptions.description;
@@ -81,9 +86,9 @@ public class CreateInventoryOptions extends GenericModel {
     }
 
     /**
-     * Adds an resourceQueries to resourceQueries.
+     * Adds a new element to resourceQueries.
      *
-     * @param resourceQueries the new resourceQueries
+     * @param resourceQueries the new element to be added
      * @return the CreateInventoryOptions builder
      */
     public Builder addResourceQueries(String resourceQueries) {
@@ -163,6 +168,8 @@ public class CreateInventoryOptions extends GenericModel {
       return this;
     }
   }
+
+  protected CreateInventoryOptions() { }
 
   protected CreateInventoryOptions(Builder builder) {
     name = builder.name;

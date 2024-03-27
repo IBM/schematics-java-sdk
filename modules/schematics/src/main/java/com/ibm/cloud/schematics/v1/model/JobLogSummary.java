@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -73,6 +73,11 @@ public class JobLogSummary extends GenericModel {
     private JobLogSummaryActionJob actionJob;
     private JobLogSummarySystemJob systemJob;
 
+    /**
+     * Instantiates a new Builder from an existing JobLogSummary instance.
+     *
+     * @param jobLogSummary the instance to initialize the Builder with
+     */
     private Builder(JobLogSummary jobLogSummary) {
       this.jobType = jobLogSummary.jobType;
       this.repoDownloadJob = jobLogSummary.repoDownloadJob;
@@ -163,6 +168,8 @@ public class JobLogSummary extends GenericModel {
       return this;
     }
   }
+
+  protected JobLogSummary() { }
 
   protected JobLogSummary(Builder builder) {
     jobType = builder.jobType;

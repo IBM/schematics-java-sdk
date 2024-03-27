@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -20,6 +20,10 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class JobStatus extends GenericModel {
 
+  @SerializedName("position_in_queue")
+  protected Double positionInQueue;
+  @SerializedName("total_in_queue")
+  protected Double totalInQueue;
   @SerializedName("workspace_job_status")
   protected JobStatusWorkspace workspaceJobStatus;
   @SerializedName("action_job_status")
@@ -33,12 +37,21 @@ public class JobStatus extends GenericModel {
    * Builder.
    */
   public static class Builder {
+    private Double positionInQueue;
+    private Double totalInQueue;
     private JobStatusWorkspace workspaceJobStatus;
     private JobStatusAction actionJobStatus;
     private JobStatusSystem systemJobStatus;
     private JobStatusFlow flowJobStatus;
 
+    /**
+     * Instantiates a new Builder from an existing JobStatus instance.
+     *
+     * @param jobStatus the instance to initialize the Builder with
+     */
     private Builder(JobStatus jobStatus) {
+      this.positionInQueue = jobStatus.positionInQueue;
+      this.totalInQueue = jobStatus.totalInQueue;
       this.workspaceJobStatus = jobStatus.workspaceJobStatus;
       this.actionJobStatus = jobStatus.actionJobStatus;
       this.systemJobStatus = jobStatus.systemJobStatus;
@@ -58,6 +71,28 @@ public class JobStatus extends GenericModel {
      */
     public JobStatus build() {
       return new JobStatus(this);
+    }
+
+    /**
+     * Set the positionInQueue.
+     *
+     * @param positionInQueue the positionInQueue
+     * @return the JobStatus builder
+     */
+    public Builder positionInQueue(Double positionInQueue) {
+      this.positionInQueue = positionInQueue;
+      return this;
+    }
+
+    /**
+     * Set the totalInQueue.
+     *
+     * @param totalInQueue the totalInQueue
+     * @return the JobStatus builder
+     */
+    public Builder totalInQueue(Double totalInQueue) {
+      this.totalInQueue = totalInQueue;
+      return this;
     }
 
     /**
@@ -105,7 +140,11 @@ public class JobStatus extends GenericModel {
     }
   }
 
+  protected JobStatus() { }
+
   protected JobStatus(Builder builder) {
+    positionInQueue = builder.positionInQueue;
+    totalInQueue = builder.totalInQueue;
     workspaceJobStatus = builder.workspaceJobStatus;
     actionJobStatus = builder.actionJobStatus;
     systemJobStatus = builder.systemJobStatus;
@@ -119,6 +158,28 @@ public class JobStatus extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
+  }
+
+  /**
+   * Gets the positionInQueue.
+   *
+   * Position of job in pending queue.
+   *
+   * @return the positionInQueue
+   */
+  public Double positionInQueue() {
+    return positionInQueue;
+  }
+
+  /**
+   * Gets the totalInQueue.
+   *
+   * Total no. of jobs in pending queue.
+   *
+   * @return the totalInQueue
+   */
+  public Double totalInQueue() {
+    return totalInQueue;
   }
 
   /**

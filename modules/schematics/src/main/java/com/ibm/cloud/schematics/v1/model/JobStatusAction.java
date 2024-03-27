@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -36,6 +36,12 @@ public class JobStatusAction extends GenericModel {
     String JOB_FAILED = "job_failed";
     /** job_cancelled. */
     String JOB_CANCELLED = "job_cancelled";
+    /** job_stopped. */
+    String JOB_STOPPED = "job_stopped";
+    /** job_stop_in_progress. */
+    String JOB_STOP_IN_PROGRESS = "job_stop_in_progress";
+    /** job_ready_to_execute. */
+    String JOB_READY_TO_EXECUTE = "job_ready_to_execute";
   }
 
   /**
@@ -96,6 +102,11 @@ public class JobStatusAction extends GenericModel {
     private String targetsStatusMessage;
     private Date updatedAt;
 
+    /**
+     * Instantiates a new Builder from an existing JobStatusAction instance.
+     *
+     * @param jobStatusAction the instance to initialize the Builder with
+     */
     private Builder(JobStatusAction jobStatusAction) {
       this.actionName = jobStatusAction.actionName;
       this.statusCode = jobStatusAction.statusCode;
@@ -210,6 +221,8 @@ public class JobStatusAction extends GenericModel {
       return this;
     }
   }
+
+  protected JobStatusAction() { }
 
   protected JobStatusAction(Builder builder) {
     actionName = builder.actionName;

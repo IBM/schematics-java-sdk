@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,6 +14,7 @@ package com.ibm.cloud.schematics.v1.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -33,7 +34,7 @@ public class SharedTargetData extends GenericModel {
   @SerializedName("cluster_type")
   protected String clusterType;
   @SerializedName("entitlement_keys")
-  protected List<Object> entitlementKeys;
+  protected List<Map<String, Object>> entitlementKeys;
   protected String namespace;
   protected String region;
   @SerializedName("resource_group_id")
@@ -51,13 +52,18 @@ public class SharedTargetData extends GenericModel {
     private String clusterId;
     private String clusterName;
     private String clusterType;
-    private List<Object> entitlementKeys;
+    private List<Map<String, Object>> entitlementKeys;
     private String namespace;
     private String region;
     private String resourceGroupId;
     private Long workerCount;
     private String workerMachineType;
 
+    /**
+     * Instantiates a new Builder from an existing SharedTargetData instance.
+     *
+     * @param sharedTargetData the instance to initialize the Builder with
+     */
     private Builder(SharedTargetData sharedTargetData) {
       this.clusterCreatedOn = sharedTargetData.clusterCreatedOn;
       this.clusterId = sharedTargetData.clusterId;
@@ -87,16 +93,16 @@ public class SharedTargetData extends GenericModel {
     }
 
     /**
-     * Adds an entitlementKeys to entitlementKeys.
+     * Adds a new element to entitlementKeys.
      *
-     * @param entitlementKeys the new entitlementKeys
+     * @param entitlementKeys the new element to be added
      * @return the SharedTargetData builder
      */
-    public Builder addEntitlementKeys(Object entitlementKeys) {
+    public Builder addEntitlementKeys(Map<String, Object> entitlementKeys) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(entitlementKeys,
         "entitlementKeys cannot be null");
       if (this.entitlementKeys == null) {
-        this.entitlementKeys = new ArrayList<Object>();
+        this.entitlementKeys = new ArrayList<Map<String, Object>>();
       }
       this.entitlementKeys.add(entitlementKeys);
       return this;
@@ -153,7 +159,7 @@ public class SharedTargetData extends GenericModel {
      * @param entitlementKeys the entitlementKeys
      * @return the SharedTargetData builder
      */
-    public Builder entitlementKeys(List<Object> entitlementKeys) {
+    public Builder entitlementKeys(List<Map<String, Object>> entitlementKeys) {
       this.entitlementKeys = entitlementKeys;
       return this;
     }
@@ -213,6 +219,8 @@ public class SharedTargetData extends GenericModel {
       return this;
     }
   }
+
+  protected SharedTargetData() { }
 
   protected SharedTargetData(Builder builder) {
     clusterCreatedOn = builder.clusterCreatedOn;
@@ -288,7 +296,7 @@ public class SharedTargetData extends GenericModel {
    *
    * @return the entitlementKeys
    */
-  public List<Object> entitlementKeys() {
+  public List<Map<String, Object>> entitlementKeys() {
     return entitlementKeys;
   }
 

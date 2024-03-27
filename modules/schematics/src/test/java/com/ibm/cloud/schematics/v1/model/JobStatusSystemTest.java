@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -19,8 +19,6 @@ import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.sdk.core.util.DateUtils;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -49,12 +47,12 @@ public class JobStatusSystemTest {
     JobStatusSystem jobStatusSystemModel = new JobStatusSystem.Builder()
       .systemStatusMessage("testString")
       .systemStatusCode("job_pending")
-      .schematicsResourceStatus(new java.util.ArrayList<JobStatusSchematicsResources>(java.util.Arrays.asList(jobStatusSchematicsResourcesModel)))
+      .schematicsResourceStatus(java.util.Arrays.asList(jobStatusSchematicsResourcesModel))
       .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .build();
     assertEquals(jobStatusSystemModel.systemStatusMessage(), "testString");
     assertEquals(jobStatusSystemModel.systemStatusCode(), "job_pending");
-    assertEquals(jobStatusSystemModel.schematicsResourceStatus(), new java.util.ArrayList<JobStatusSchematicsResources>(java.util.Arrays.asList(jobStatusSchematicsResourcesModel)));
+    assertEquals(jobStatusSystemModel.schematicsResourceStatus(), java.util.Arrays.asList(jobStatusSchematicsResourcesModel));
     assertEquals(jobStatusSystemModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
 
     String json = TestUtilities.serialize(jobStatusSystemModel);

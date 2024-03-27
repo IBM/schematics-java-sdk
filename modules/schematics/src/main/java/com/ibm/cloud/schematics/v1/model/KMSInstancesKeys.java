@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -23,10 +23,12 @@ public class KMSInstancesKeys extends GenericModel {
   protected String crn;
   protected String error;
 
+  protected KMSInstancesKeys() { }
+
   /**
    * Gets the name.
    *
-   * Key name.
+   * The name of the root key.
    *
    * @return the name
    */
@@ -37,7 +39,7 @@ public class KMSInstancesKeys extends GenericModel {
   /**
    * Gets the crn.
    *
-   * CRN of the Key.
+   * The kms CRN of the root key.
    *
    * @return the crn
    */
@@ -48,7 +50,7 @@ public class KMSInstancesKeys extends GenericModel {
   /**
    * Gets the error.
    *
-   * Error message.
+   * The error message details.
    *
    * @return the error
    */

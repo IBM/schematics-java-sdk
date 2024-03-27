@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -16,7 +16,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Response after successfully initiating the bulk job to delete multiple workspaces.
+ * The response after successfully initiating the bulk job to delete multiple workspaces.
  */
 public class WorkspaceBulkDeleteResponse extends GenericModel {
 
@@ -24,10 +24,12 @@ public class WorkspaceBulkDeleteResponse extends GenericModel {
   @SerializedName("job_id")
   protected String jobId;
 
+  protected WorkspaceBulkDeleteResponse() { }
+
   /**
    * Gets the job.
    *
-   * Workspace deletion job name.
+   * The workspace deletion job name.
    *
    * @return the job
    */
@@ -38,7 +40,7 @@ public class WorkspaceBulkDeleteResponse extends GenericModel {
   /**
    * Gets the jobId.
    *
-   * Workspace deletion job id.
+   * The workspace deletion job id.
    *
    * @return the jobId
    */

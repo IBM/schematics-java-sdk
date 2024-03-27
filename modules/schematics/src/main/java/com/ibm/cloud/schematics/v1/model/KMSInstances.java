@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -18,7 +18,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * KMS Instances.
+ * User defined kms instances.
  */
 public class KMSInstances extends GenericModel {
 
@@ -37,10 +37,12 @@ public class KMSInstances extends GenericModel {
   protected String kmsPublicEndpoint;
   protected List<KMSInstancesKeys> keys;
 
+  protected KMSInstances() { }
+
   /**
    * Gets the location.
    *
-   * Location.
+   * The location to integrate kms instance. For example, location can be `US` and `EU`.
    *
    * @return the location
    */
@@ -51,7 +53,7 @@ public class KMSInstances extends GenericModel {
   /**
    * Gets the encryptionScheme.
    *
-   * Encryption schema.
+   * The encryption scheme values. **Allowable values** [`byok`,`kyok`].
    *
    * @return the encryptionScheme
    */
@@ -62,7 +64,7 @@ public class KMSInstances extends GenericModel {
   /**
    * Gets the resourceGroup.
    *
-   * Resource groups.
+   * The kms instance resource group to integrate.
    *
    * @return the resourceGroup
    */
@@ -73,7 +75,7 @@ public class KMSInstances extends GenericModel {
   /**
    * Gets the kmsCrn.
    *
-   * KMS CRN.
+   * The primary kms CRN information.
    *
    * @return the kmsCrn
    */
@@ -84,7 +86,7 @@ public class KMSInstances extends GenericModel {
   /**
    * Gets the kmsName.
    *
-   * KMS Name.
+   * The kms instance name.
    *
    * @return the kmsName
    */
@@ -95,7 +97,7 @@ public class KMSInstances extends GenericModel {
   /**
    * Gets the kmsPrivateEndpoint.
    *
-   * KMS private endpoint.
+   * The kms instance private endpoints.
    *
    * @return the kmsPrivateEndpoint
    */
@@ -106,7 +108,7 @@ public class KMSInstances extends GenericModel {
   /**
    * Gets the kmsPublicEndpoint.
    *
-   * KMS public endpoint.
+   * The kms instance public endpoints.
    *
    * @return the kmsPublicEndpoint
    */
@@ -117,7 +119,7 @@ public class KMSInstances extends GenericModel {
   /**
    * Gets the keys.
    *
-   * List of keys.
+   * Detailed list of keys.
    *
    * @return the keys
    */

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,6 +13,7 @@
 package com.ibm.cloud.schematics.v1.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -25,9 +26,11 @@ public class OutputValuesInner extends GenericModel {
   protected String folder;
   protected String id;
   @SerializedName("output_values")
-  protected List<Object> outputValues;
+  protected List<Map<String, Object>> outputValues;
   @SerializedName("value_type")
   protected String valueType;
+
+  protected OutputValuesInner() { }
 
   /**
    * Gets the folder.
@@ -59,7 +62,7 @@ public class OutputValuesInner extends GenericModel {
    *
    * @return the outputValues
    */
-  public List<Object> getOutputValues() {
+  public List<Map<String, Object>> getOutputValues() {
     return outputValues;
   }
 

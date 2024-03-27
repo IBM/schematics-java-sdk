@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,12 +33,12 @@ public class ListInventoriesOptionsTest {
   public void testListInventoriesOptions() throws Throwable {
     ListInventoriesOptions listInventoriesOptionsModel = new ListInventoriesOptions.Builder()
       .offset(Long.valueOf("0"))
-      .limit(Long.valueOf("1"))
+      .limit(Long.valueOf("100"))
       .sort("testString")
       .profile("ids")
       .build();
     assertEquals(listInventoriesOptionsModel.offset(), Long.valueOf("0"));
-    assertEquals(listInventoriesOptionsModel.limit(), Long.valueOf("1"));
+    assertEquals(listInventoriesOptionsModel.limit(), Long.valueOf("100"));
     assertEquals(listInventoriesOptionsModel.sort(), "testString");
     assertEquals(listInventoriesOptionsModel.profile(), "ids");
   }

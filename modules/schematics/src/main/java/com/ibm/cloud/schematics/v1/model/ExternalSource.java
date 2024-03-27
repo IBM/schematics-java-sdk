@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -36,33 +36,30 @@ public class ExternalSource extends GenericModel {
     String IBM_GIT_LAB = "ibm_git_lab";
     /** ibm_cloud_catalog. */
     String IBM_CLOUD_CATALOG = "ibm_cloud_catalog";
-    /** external_scm. */
-    String EXTERNAL_SCM = "external_scm";
-    /** cos_bucket. */
-    String COS_BUCKET = "cos_bucket";
   }
 
   @SerializedName("source_type")
   protected String sourceType;
-  protected ExternalSourceGit git;
-  protected ExternalSourceCatalog catalog;
-  @SerializedName("cos_bucket")
-  protected ExternalSourceCosBucket cosBucket;
+  protected GitSource git;
+  protected CatalogSource catalog;
 
   /**
    * Builder.
    */
   public static class Builder {
     private String sourceType;
-    private ExternalSourceGit git;
-    private ExternalSourceCatalog catalog;
-    private ExternalSourceCosBucket cosBucket;
+    private GitSource git;
+    private CatalogSource catalog;
 
+    /**
+     * Instantiates a new Builder from an existing ExternalSource instance.
+     *
+     * @param externalSource the instance to initialize the Builder with
+     */
     private Builder(ExternalSource externalSource) {
       this.sourceType = externalSource.sourceType;
       this.git = externalSource.git;
       this.catalog = externalSource.catalog;
-      this.cosBucket = externalSource.cosBucket;
     }
 
     /**
@@ -106,7 +103,7 @@ public class ExternalSource extends GenericModel {
      * @param git the git
      * @return the ExternalSource builder
      */
-    public Builder git(ExternalSourceGit git) {
+    public Builder git(GitSource git) {
       this.git = git;
       return this;
     }
@@ -117,22 +114,13 @@ public class ExternalSource extends GenericModel {
      * @param catalog the catalog
      * @return the ExternalSource builder
      */
-    public Builder catalog(ExternalSourceCatalog catalog) {
+    public Builder catalog(CatalogSource catalog) {
       this.catalog = catalog;
       return this;
     }
-
-    /**
-     * Set the cosBucket.
-     *
-     * @param cosBucket the cosBucket
-     * @return the ExternalSource builder
-     */
-    public Builder cosBucket(ExternalSourceCosBucket cosBucket) {
-      this.cosBucket = cosBucket;
-      return this;
-    }
   }
+
+  protected ExternalSource() { }
 
   protected ExternalSource(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.sourceType,
@@ -140,7 +128,6 @@ public class ExternalSource extends GenericModel {
     sourceType = builder.sourceType;
     git = builder.git;
     catalog = builder.catalog;
-    cosBucket = builder.cosBucket;
   }
 
   /**
@@ -166,34 +153,23 @@ public class ExternalSource extends GenericModel {
   /**
    * Gets the git.
    *
-   * Connection details to Git source.
+   * The connection details to the Git source repository.
    *
    * @return the git
    */
-  public ExternalSourceGit git() {
+  public GitSource git() {
     return git;
   }
 
   /**
    * Gets the catalog.
    *
-   * Connection details to IBM Cloud Catalog source.
+   * The connection details to the IBM Cloud Catalog source.
    *
    * @return the catalog
    */
-  public ExternalSourceCatalog catalog() {
+  public CatalogSource catalog() {
     return catalog;
-  }
-
-  /**
-   * Gets the cosBucket.
-   *
-   * Connection details to a IBM Cloud Object Storage bucket.
-   *
-   * @return the cosBucket
-   */
-  public ExternalSourceCosBucket cosBucket() {
-    return cosBucket;
   }
 }
 

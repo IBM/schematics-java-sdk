@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -58,6 +58,11 @@ public class ReplaceInventoryOptions extends GenericModel {
     private String inventoriesIni;
     private List<String> resourceQueries;
 
+    /**
+     * Instantiates a new Builder from an existing ReplaceInventoryOptions instance.
+     *
+     * @param replaceInventoryOptions the instance to initialize the Builder with
+     */
     private Builder(ReplaceInventoryOptions replaceInventoryOptions) {
       this.inventoryId = replaceInventoryOptions.inventoryId;
       this.name = replaceInventoryOptions.name;
@@ -93,9 +98,9 @@ public class ReplaceInventoryOptions extends GenericModel {
     }
 
     /**
-     * Adds an resourceQueries to resourceQueries.
+     * Adds a new element to resourceQueries.
      *
-     * @param resourceQueries the new resourceQueries
+     * @param resourceQueries the new element to be added
      * @return the ReplaceInventoryOptions builder
      */
     public Builder addResourceQueries(String resourceQueries) {
@@ -186,6 +191,8 @@ public class ReplaceInventoryOptions extends GenericModel {
       return this;
     }
   }
+
+  protected ReplaceInventoryOptions() { }
 
   protected ReplaceInventoryOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.inventoryId,

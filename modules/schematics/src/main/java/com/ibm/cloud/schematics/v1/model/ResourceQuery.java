@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -46,6 +46,11 @@ public class ResourceQuery extends GenericModel {
     private List<ResourceQueryParam> queryCondition;
     private List<String> querySelect;
 
+    /**
+     * Instantiates a new Builder from an existing ResourceQuery instance.
+     *
+     * @param resourceQuery the instance to initialize the Builder with
+     */
     private Builder(ResourceQuery resourceQuery) {
       this.queryType = resourceQuery.queryType;
       this.queryCondition = resourceQuery.queryCondition;
@@ -68,9 +73,9 @@ public class ResourceQuery extends GenericModel {
     }
 
     /**
-     * Adds an queryCondition to queryCondition.
+     * Adds a new element to queryCondition.
      *
-     * @param queryCondition the new queryCondition
+     * @param queryCondition the new element to be added
      * @return the ResourceQuery builder
      */
     public Builder addQueryCondition(ResourceQueryParam queryCondition) {
@@ -84,9 +89,9 @@ public class ResourceQuery extends GenericModel {
     }
 
     /**
-     * Adds an querySelect to querySelect.
+     * Adds a new element to querySelect.
      *
-     * @param querySelect the new querySelect
+     * @param querySelect the new element to be added
      * @return the ResourceQuery builder
      */
     public Builder addQuerySelect(String querySelect) {
@@ -134,6 +139,8 @@ public class ResourceQuery extends GenericModel {
       return this;
     }
   }
+
+  protected ResourceQuery() { }
 
   protected ResourceQuery(Builder builder) {
     queryType = builder.queryType;

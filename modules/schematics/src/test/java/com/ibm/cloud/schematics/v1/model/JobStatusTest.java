@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -25,8 +25,6 @@ import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.sdk.core.util.DateUtils;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -61,14 +59,14 @@ public class JobStatusTest {
       .flowName("testString")
       .statusCode("job_pending")
       .statusMessage("testString")
-      .workitems(new java.util.ArrayList<JobStatusWorkitem>(java.util.Arrays.asList(jobStatusWorkitemModel)))
+      .workitems(java.util.Arrays.asList(jobStatusWorkitemModel))
       .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .build();
     assertEquals(jobStatusFlowModel.flowId(), "testString");
     assertEquals(jobStatusFlowModel.flowName(), "testString");
     assertEquals(jobStatusFlowModel.statusCode(), "job_pending");
     assertEquals(jobStatusFlowModel.statusMessage(), "testString");
-    assertEquals(jobStatusFlowModel.workitems(), new java.util.ArrayList<JobStatusWorkitem>(java.util.Arrays.asList(jobStatusWorkitemModel)));
+    assertEquals(jobStatusFlowModel.workitems(), java.util.Arrays.asList(jobStatusWorkitemModel));
     assertEquals(jobStatusFlowModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
 
     JobStatusTemplate jobStatusTemplateModel = new JobStatusTemplate.Builder()
@@ -91,14 +89,14 @@ public class JobStatusTest {
       .statusCode("job_pending")
       .statusMessage("testString")
       .flowStatus(jobStatusFlowModel)
-      .templateStatus(new java.util.ArrayList<JobStatusTemplate>(java.util.Arrays.asList(jobStatusTemplateModel)))
+      .templateStatus(java.util.Arrays.asList(jobStatusTemplateModel))
       .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .build();
     assertEquals(jobStatusWorkspaceModel.workspaceName(), "testString");
     assertEquals(jobStatusWorkspaceModel.statusCode(), "job_pending");
     assertEquals(jobStatusWorkspaceModel.statusMessage(), "testString");
     assertEquals(jobStatusWorkspaceModel.flowStatus(), jobStatusFlowModel);
-    assertEquals(jobStatusWorkspaceModel.templateStatus(), new java.util.ArrayList<JobStatusTemplate>(java.util.Arrays.asList(jobStatusTemplateModel)));
+    assertEquals(jobStatusWorkspaceModel.templateStatus(), java.util.Arrays.asList(jobStatusTemplateModel));
     assertEquals(jobStatusWorkspaceModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
 
     JobStatusAction jobStatusActionModel = new JobStatusAction.Builder()
@@ -134,20 +132,24 @@ public class JobStatusTest {
     JobStatusSystem jobStatusSystemModel = new JobStatusSystem.Builder()
       .systemStatusMessage("testString")
       .systemStatusCode("job_pending")
-      .schematicsResourceStatus(new java.util.ArrayList<JobStatusSchematicsResources>(java.util.Arrays.asList(jobStatusSchematicsResourcesModel)))
+      .schematicsResourceStatus(java.util.Arrays.asList(jobStatusSchematicsResourcesModel))
       .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .build();
     assertEquals(jobStatusSystemModel.systemStatusMessage(), "testString");
     assertEquals(jobStatusSystemModel.systemStatusCode(), "job_pending");
-    assertEquals(jobStatusSystemModel.schematicsResourceStatus(), new java.util.ArrayList<JobStatusSchematicsResources>(java.util.Arrays.asList(jobStatusSchematicsResourcesModel)));
+    assertEquals(jobStatusSystemModel.schematicsResourceStatus(), java.util.Arrays.asList(jobStatusSchematicsResourcesModel));
     assertEquals(jobStatusSystemModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
 
     JobStatus jobStatusModel = new JobStatus.Builder()
+      .positionInQueue(Double.valueOf("72.5"))
+      .totalInQueue(Double.valueOf("72.5"))
       .workspaceJobStatus(jobStatusWorkspaceModel)
       .actionJobStatus(jobStatusActionModel)
       .systemJobStatus(jobStatusSystemModel)
       .flowJobStatus(jobStatusFlowModel)
       .build();
+    assertEquals(jobStatusModel.positionInQueue(), Double.valueOf("72.5"));
+    assertEquals(jobStatusModel.totalInQueue(), Double.valueOf("72.5"));
     assertEquals(jobStatusModel.workspaceJobStatus(), jobStatusWorkspaceModel);
     assertEquals(jobStatusModel.actionJobStatus(), jobStatusActionModel);
     assertEquals(jobStatusModel.systemJobStatus(), jobStatusSystemModel);
@@ -157,6 +159,8 @@ public class JobStatusTest {
 
     JobStatus jobStatusModelNew = TestUtilities.deserialize(json, JobStatus.class);
     assertTrue(jobStatusModelNew instanceof JobStatus);
+    assertEquals(jobStatusModelNew.positionInQueue(), Double.valueOf("72.5"));
+    assertEquals(jobStatusModelNew.totalInQueue(), Double.valueOf("72.5"));
     assertEquals(jobStatusModelNew.workspaceJobStatus().toString(), jobStatusWorkspaceModel.toString());
     assertEquals(jobStatusModelNew.actionJobStatus().toString(), jobStatusActionModel.toString());
     assertEquals(jobStatusModelNew.systemJobStatus().toString(), jobStatusSystemModel.toString());

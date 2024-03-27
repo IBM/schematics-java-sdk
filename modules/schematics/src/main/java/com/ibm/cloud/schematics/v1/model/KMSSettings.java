@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -16,7 +16,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * User defined KMS Settings details.
+ * User defined kms settings information.
  */
 public class KMSSettings extends GenericModel {
 
@@ -40,6 +40,11 @@ public class KMSSettings extends GenericModel {
     private KMSSettingsPrimaryCrk primaryCrk;
     private KMSSettingsSecondaryCrk secondaryCrk;
 
+    /**
+     * Instantiates a new Builder from an existing KMSSettings instance.
+     *
+     * @param kmsSettings the instance to initialize the Builder with
+     */
     private Builder(KMSSettings kmsSettings) {
       this.location = kmsSettings.location;
       this.encryptionScheme = kmsSettings.encryptionScheme;
@@ -119,6 +124,8 @@ public class KMSSettings extends GenericModel {
     }
   }
 
+  protected KMSSettings() { }
+
   protected KMSSettings(Builder builder) {
     location = builder.location;
     encryptionScheme = builder.encryptionScheme;
@@ -139,7 +146,7 @@ public class KMSSettings extends GenericModel {
   /**
    * Gets the location.
    *
-   * Location.
+   * The location to integrate kms instance. For example, location can be `US` and `EU`.
    *
    * @return the location
    */
@@ -150,7 +157,7 @@ public class KMSSettings extends GenericModel {
   /**
    * Gets the encryptionScheme.
    *
-   * Encryption scheme.
+   * The encryption scheme values. **Allowable values** [`byok`,`kyok`].
    *
    * @return the encryptionScheme
    */
@@ -161,7 +168,7 @@ public class KMSSettings extends GenericModel {
   /**
    * Gets the resourceGroup.
    *
-   * Resource group.
+   * The kms instance resource group to integrate.
    *
    * @return the resourceGroup
    */
@@ -172,7 +179,7 @@ public class KMSSettings extends GenericModel {
   /**
    * Gets the primaryCrk.
    *
-   * Primary CRK details.
+   * The primary kms instance details.
    *
    * @return the primaryCrk
    */
@@ -183,7 +190,7 @@ public class KMSSettings extends GenericModel {
   /**
    * Gets the secondaryCrk.
    *
-   * Secondary CRK details.
+   * The secondary kms instance details.
    *
    * @return the secondaryCrk
    */

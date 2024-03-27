@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -38,6 +38,11 @@ public class RunWorkspaceCommandsOptions extends GenericModel {
     private String operationName;
     private String description;
 
+    /**
+     * Instantiates a new Builder from an existing RunWorkspaceCommandsOptions instance.
+     *
+     * @param runWorkspaceCommandsOptions the instance to initialize the Builder with
+     */
     private Builder(RunWorkspaceCommandsOptions runWorkspaceCommandsOptions) {
       this.wId = runWorkspaceCommandsOptions.wId;
       this.refreshToken = runWorkspaceCommandsOptions.refreshToken;
@@ -73,9 +78,9 @@ public class RunWorkspaceCommandsOptions extends GenericModel {
     }
 
     /**
-     * Adds an commands to commands.
+     * Adds a new element to commands.
      *
-     * @param commands the new commands
+     * @param commands the new element to be added
      * @return the RunWorkspaceCommandsOptions builder
      */
     public Builder addCommands(TerraformCommand commands) {
@@ -144,6 +149,8 @@ public class RunWorkspaceCommandsOptions extends GenericModel {
       return this;
     }
   }
+
+  protected RunWorkspaceCommandsOptions() { }
 
   protected RunWorkspaceCommandsOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.wId,

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -44,6 +44,11 @@ public class ReplaceResourcesQueryOptions extends GenericModel {
     private String name;
     private List<ResourceQuery> queries;
 
+    /**
+     * Instantiates a new Builder from an existing ReplaceResourcesQueryOptions instance.
+     *
+     * @param replaceResourcesQueryOptions the instance to initialize the Builder with
+     */
     private Builder(ReplaceResourcesQueryOptions replaceResourcesQueryOptions) {
       this.queryId = replaceResourcesQueryOptions.queryId;
       this.type = replaceResourcesQueryOptions.type;
@@ -76,9 +81,9 @@ public class ReplaceResourcesQueryOptions extends GenericModel {
     }
 
     /**
-     * Adds an queries to queries.
+     * Adds a new element to queries.
      *
-     * @param queries the new queries
+     * @param queries the new element to be added
      * @return the ReplaceResourcesQueryOptions builder
      */
     public Builder addQueries(ResourceQuery queries) {
@@ -136,6 +141,8 @@ public class ReplaceResourcesQueryOptions extends GenericModel {
       return this;
     }
   }
+
+  protected ReplaceResourcesQueryOptions() { }
 
   protected ReplaceResourcesQueryOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.queryId,

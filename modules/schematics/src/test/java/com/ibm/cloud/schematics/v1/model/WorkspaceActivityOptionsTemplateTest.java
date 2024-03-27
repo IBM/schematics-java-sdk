@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -17,8 +17,6 @@ import com.ibm.cloud.schematics.v1.model.WorkspaceActivityOptionsTemplate;
 import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -34,11 +32,11 @@ public class WorkspaceActivityOptionsTemplateTest {
   @Test
   public void testWorkspaceActivityOptionsTemplate() throws Throwable {
     WorkspaceActivityOptionsTemplate workspaceActivityOptionsTemplateModel = new WorkspaceActivityOptionsTemplate.Builder()
-      .target(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
-      .tfVars(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
+      .target(java.util.Arrays.asList("testString"))
+      .tfVars(java.util.Arrays.asList("testString"))
       .build();
-    assertEquals(workspaceActivityOptionsTemplateModel.target(), new java.util.ArrayList<String>(java.util.Arrays.asList("testString")));
-    assertEquals(workspaceActivityOptionsTemplateModel.tfVars(), new java.util.ArrayList<String>(java.util.Arrays.asList("testString")));
+    assertEquals(workspaceActivityOptionsTemplateModel.target(), java.util.Arrays.asList("testString"));
+    assertEquals(workspaceActivityOptionsTemplateModel.tfVars(), java.util.Arrays.asList("testString"));
 
     String json = TestUtilities.serialize(workspaceActivityOptionsTemplateModel);
 

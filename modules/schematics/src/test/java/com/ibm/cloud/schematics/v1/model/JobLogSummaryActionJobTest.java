@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -18,8 +18,6 @@ import com.ibm.cloud.schematics.v1.model.JobLogSummaryActionJobRecap;
 import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -35,14 +33,14 @@ public class JobLogSummaryActionJobTest {
   @Test
   public void testJobLogSummaryActionJob() throws Throwable {
     JobLogSummaryActionJobRecap jobLogSummaryActionJobRecapModel = new JobLogSummaryActionJobRecap.Builder()
-      .target(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
+      .target(java.util.Arrays.asList("testString"))
       .ok(Double.valueOf("72.5"))
       .changed(Double.valueOf("72.5"))
       .failed(Double.valueOf("72.5"))
       .skipped(Double.valueOf("72.5"))
       .unreachable(Double.valueOf("72.5"))
       .build();
-    assertEquals(jobLogSummaryActionJobRecapModel.target(), new java.util.ArrayList<String>(java.util.Arrays.asList("testString")));
+    assertEquals(jobLogSummaryActionJobRecapModel.target(), java.util.Arrays.asList("testString"));
     assertEquals(jobLogSummaryActionJobRecapModel.ok(), Double.valueOf("72.5"));
     assertEquals(jobLogSummaryActionJobRecapModel.changed(), Double.valueOf("72.5"));
     assertEquals(jobLogSummaryActionJobRecapModel.failed(), Double.valueOf("72.5"));

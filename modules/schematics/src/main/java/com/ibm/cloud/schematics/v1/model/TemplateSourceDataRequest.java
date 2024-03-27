@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,6 +14,7 @@ package com.ibm.cloud.schematics.v1.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -24,38 +25,50 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class TemplateSourceDataRequest extends GenericModel {
 
   @SerializedName("env_values")
-  protected List<Object> envValues;
+  protected List<Map<String, Object>> envValues;
+  @SerializedName("env_values_metadata")
+  protected List<EnvironmentValuesMetadata> envValuesMetadata;
   protected String folder;
   protected Boolean compact;
   @SerializedName("init_state_file")
   protected String initStateFile;
+  protected List<InjectTerraformTemplateInner> injectors;
   protected String type;
   @SerializedName("uninstall_script_name")
   protected String uninstallScriptName;
   protected String values;
   @SerializedName("values_metadata")
-  protected List<Object> valuesMetadata;
+  protected List<Map<String, Object>> valuesMetadata;
   protected List<WorkspaceVariableRequest> variablestore;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private List<Object> envValues;
+    private List<Map<String, Object>> envValues;
+    private List<EnvironmentValuesMetadata> envValuesMetadata;
     private String folder;
     private Boolean compact;
     private String initStateFile;
+    private List<InjectTerraformTemplateInner> injectors;
     private String type;
     private String uninstallScriptName;
     private String values;
-    private List<Object> valuesMetadata;
+    private List<Map<String, Object>> valuesMetadata;
     private List<WorkspaceVariableRequest> variablestore;
 
+    /**
+     * Instantiates a new Builder from an existing TemplateSourceDataRequest instance.
+     *
+     * @param templateSourceDataRequest the instance to initialize the Builder with
+     */
     private Builder(TemplateSourceDataRequest templateSourceDataRequest) {
       this.envValues = templateSourceDataRequest.envValues;
+      this.envValuesMetadata = templateSourceDataRequest.envValuesMetadata;
       this.folder = templateSourceDataRequest.folder;
       this.compact = templateSourceDataRequest.compact;
       this.initStateFile = templateSourceDataRequest.initStateFile;
+      this.injectors = templateSourceDataRequest.injectors;
       this.type = templateSourceDataRequest.type;
       this.uninstallScriptName = templateSourceDataRequest.uninstallScriptName;
       this.values = templateSourceDataRequest.values;
@@ -79,41 +92,73 @@ public class TemplateSourceDataRequest extends GenericModel {
     }
 
     /**
-     * Adds an envValues to envValues.
+     * Adds a new element to envValues.
      *
-     * @param envValues the new envValues
+     * @param envValues the new element to be added
      * @return the TemplateSourceDataRequest builder
      */
-    public Builder addEnvValues(Object envValues) {
+    public Builder addEnvValues(Map<String, Object> envValues) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(envValues,
         "envValues cannot be null");
       if (this.envValues == null) {
-        this.envValues = new ArrayList<Object>();
+        this.envValues = new ArrayList<Map<String, Object>>();
       }
       this.envValues.add(envValues);
       return this;
     }
 
     /**
-     * Adds an valuesMetadata to valuesMetadata.
+     * Adds a new element to envValuesMetadata.
      *
-     * @param valuesMetadata the new valuesMetadata
+     * @param envValuesMetadata the new element to be added
      * @return the TemplateSourceDataRequest builder
      */
-    public Builder addValuesMetadata(Object valuesMetadata) {
+    public Builder addEnvValuesMetadata(EnvironmentValuesMetadata envValuesMetadata) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(envValuesMetadata,
+        "envValuesMetadata cannot be null");
+      if (this.envValuesMetadata == null) {
+        this.envValuesMetadata = new ArrayList<EnvironmentValuesMetadata>();
+      }
+      this.envValuesMetadata.add(envValuesMetadata);
+      return this;
+    }
+
+    /**
+     * Adds a new element to injectors.
+     *
+     * @param injectors the new element to be added
+     * @return the TemplateSourceDataRequest builder
+     */
+    public Builder addInjectors(InjectTerraformTemplateInner injectors) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(injectors,
+        "injectors cannot be null");
+      if (this.injectors == null) {
+        this.injectors = new ArrayList<InjectTerraformTemplateInner>();
+      }
+      this.injectors.add(injectors);
+      return this;
+    }
+
+    /**
+     * Adds a new element to valuesMetadata.
+     *
+     * @param valuesMetadata the new element to be added
+     * @return the TemplateSourceDataRequest builder
+     */
+    public Builder addValuesMetadata(Map<String, Object> valuesMetadata) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(valuesMetadata,
         "valuesMetadata cannot be null");
       if (this.valuesMetadata == null) {
-        this.valuesMetadata = new ArrayList<Object>();
+        this.valuesMetadata = new ArrayList<Map<String, Object>>();
       }
       this.valuesMetadata.add(valuesMetadata);
       return this;
     }
 
     /**
-     * Adds an variablestore to variablestore.
+     * Adds a new element to variablestore.
      *
-     * @param variablestore the new variablestore
+     * @param variablestore the new element to be added
      * @return the TemplateSourceDataRequest builder
      */
     public Builder addVariablestore(WorkspaceVariableRequest variablestore) {
@@ -133,8 +178,20 @@ public class TemplateSourceDataRequest extends GenericModel {
      * @param envValues the envValues
      * @return the TemplateSourceDataRequest builder
      */
-    public Builder envValues(List<Object> envValues) {
+    public Builder envValues(List<Map<String, Object>> envValues) {
       this.envValues = envValues;
+      return this;
+    }
+
+    /**
+     * Set the envValuesMetadata.
+     * Existing envValuesMetadata will be replaced.
+     *
+     * @param envValuesMetadata the envValuesMetadata
+     * @return the TemplateSourceDataRequest builder
+     */
+    public Builder envValuesMetadata(List<EnvironmentValuesMetadata> envValuesMetadata) {
+      this.envValuesMetadata = envValuesMetadata;
       return this;
     }
 
@@ -168,6 +225,18 @@ public class TemplateSourceDataRequest extends GenericModel {
      */
     public Builder initStateFile(String initStateFile) {
       this.initStateFile = initStateFile;
+      return this;
+    }
+
+    /**
+     * Set the injectors.
+     * Existing injectors will be replaced.
+     *
+     * @param injectors the injectors
+     * @return the TemplateSourceDataRequest builder
+     */
+    public Builder injectors(List<InjectTerraformTemplateInner> injectors) {
+      this.injectors = injectors;
       return this;
     }
 
@@ -211,7 +280,7 @@ public class TemplateSourceDataRequest extends GenericModel {
      * @param valuesMetadata the valuesMetadata
      * @return the TemplateSourceDataRequest builder
      */
-    public Builder valuesMetadata(List<Object> valuesMetadata) {
+    public Builder valuesMetadata(List<Map<String, Object>> valuesMetadata) {
       this.valuesMetadata = valuesMetadata;
       return this;
     }
@@ -229,11 +298,15 @@ public class TemplateSourceDataRequest extends GenericModel {
     }
   }
 
+  protected TemplateSourceDataRequest() { }
+
   protected TemplateSourceDataRequest(Builder builder) {
     envValues = builder.envValues;
+    envValuesMetadata = builder.envValuesMetadata;
     folder = builder.folder;
     compact = builder.compact;
     initStateFile = builder.initStateFile;
+    injectors = builder.injectors;
     type = builder.type;
     uninstallScriptName = builder.uninstallScriptName;
     values = builder.values;
@@ -262,8 +335,19 @@ public class TemplateSourceDataRequest extends GenericModel {
    *
    * @return the envValues
    */
-  public List<Object> envValues() {
+  public List<Map<String, Object>> envValues() {
     return envValues;
+  }
+
+  /**
+   * Gets the envValuesMetadata.
+   *
+   * Environment variables metadata.
+   *
+   * @return the envValuesMetadata
+   */
+  public List<EnvironmentValuesMetadata> envValuesMetadata() {
+    return envValuesMetadata;
   }
 
   /**
@@ -281,7 +365,8 @@ public class TemplateSourceDataRequest extends GenericModel {
    * Gets the compact.
    *
    * True, to use the files from the specified folder &amp; subfolder in your GitHub or GitLab repository and ignore the
-   * other folders in the repository.
+   * other folders in the repository. For more information, see [Compact download for Schematics
+   * workspace](https://cloud.ibm.com/docs/schematics?topic=schematics-compact-download&amp;interface=ui).
    *
    * @return the compact
    */
@@ -303,12 +388,24 @@ public class TemplateSourceDataRequest extends GenericModel {
   }
 
   /**
+   * Gets the injectors.
+   *
+   * Array of injectable terraform blocks.
+   *
+   * @return the injectors
+   */
+  public List<InjectTerraformTemplateInner> injectors() {
+    return injectors;
+  }
+
+  /**
    * Gets the type.
    *
-   * The Terraform version that you want to use to run your Terraform code. Enter `terraform_v0.12` to use Terraform
-   * version 0.12, and `terraform_v0.11` to use Terraform version 0.11. The Terraform config files are run with
-   * Terraform version 0.11. This is a required variable. Make sure that your Terraform config files are compatible with
-   * the Terraform version that you select.
+   * The Terraform version that you want to use to run your Terraform code. Enter `terraform_v1.1` to use Terraform
+   * version 1.1, and `terraform_v1.0` to use Terraform version 1.0. This is a required variable. If the Terraform
+   * version is not specified, By default, Schematics selects the version from your template. For more information,
+   * refer to [Terraform
+   * version](https://cloud.ibm.com/docs/schematics?topic=schematics-workspace-setup&amp;interface=ui#create-workspace_ui).
    *
    * @return the type
    */
@@ -348,7 +445,7 @@ public class TemplateSourceDataRequest extends GenericModel {
    *
    * @return the valuesMetadata
    */
-  public List<Object> valuesMetadata() {
+  public List<Map<String, Object>> valuesMetadata() {
     return valuesMetadata;
   }
 

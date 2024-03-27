@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -24,6 +24,7 @@ public class CreateWorkspaceOptions extends GenericModel {
 
   protected List<String> appliedShareddataIds;
   protected CatalogRef catalogRef;
+  protected Dependencies dependencies;
   protected String description;
   protected String location;
   protected String name;
@@ -35,6 +36,7 @@ public class CreateWorkspaceOptions extends GenericModel {
   protected TemplateRepoRequest templateRepo;
   protected List<String> type;
   protected WorkspaceStatusRequest workspaceStatus;
+  protected String agentId;
   protected String xGithubToken;
 
   /**
@@ -43,6 +45,7 @@ public class CreateWorkspaceOptions extends GenericModel {
   public static class Builder {
     private List<String> appliedShareddataIds;
     private CatalogRef catalogRef;
+    private Dependencies dependencies;
     private String description;
     private String location;
     private String name;
@@ -54,11 +57,18 @@ public class CreateWorkspaceOptions extends GenericModel {
     private TemplateRepoRequest templateRepo;
     private List<String> type;
     private WorkspaceStatusRequest workspaceStatus;
+    private String agentId;
     private String xGithubToken;
 
+    /**
+     * Instantiates a new Builder from an existing CreateWorkspaceOptions instance.
+     *
+     * @param createWorkspaceOptions the instance to initialize the Builder with
+     */
     private Builder(CreateWorkspaceOptions createWorkspaceOptions) {
       this.appliedShareddataIds = createWorkspaceOptions.appliedShareddataIds;
       this.catalogRef = createWorkspaceOptions.catalogRef;
+      this.dependencies = createWorkspaceOptions.dependencies;
       this.description = createWorkspaceOptions.description;
       this.location = createWorkspaceOptions.location;
       this.name = createWorkspaceOptions.name;
@@ -70,6 +80,7 @@ public class CreateWorkspaceOptions extends GenericModel {
       this.templateRepo = createWorkspaceOptions.templateRepo;
       this.type = createWorkspaceOptions.type;
       this.workspaceStatus = createWorkspaceOptions.workspaceStatus;
+      this.agentId = createWorkspaceOptions.agentId;
       this.xGithubToken = createWorkspaceOptions.xGithubToken;
     }
 
@@ -89,11 +100,13 @@ public class CreateWorkspaceOptions extends GenericModel {
     }
 
     /**
-     * Adds an appliedShareddataIds to appliedShareddataIds.
+     * Adds a new element to appliedShareddataIds.
      *
-     * @param appliedShareddataIds the new appliedShareddataIds
+     * @param appliedShareddataIds the new element to be added
      * @return the CreateWorkspaceOptions builder
+     * @deprecated this method is deprecated and may be removed in a future release
      */
+    @Deprecated
     public Builder addAppliedShareddataIds(String appliedShareddataIds) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(appliedShareddataIds,
         "appliedShareddataIds cannot be null");
@@ -105,9 +118,9 @@ public class CreateWorkspaceOptions extends GenericModel {
     }
 
     /**
-     * Adds an tags to tags.
+     * Adds a new element to tags.
      *
-     * @param tags the new tags
+     * @param tags the new element to be added
      * @return the CreateWorkspaceOptions builder
      */
     public Builder addTags(String tags) {
@@ -121,9 +134,9 @@ public class CreateWorkspaceOptions extends GenericModel {
     }
 
     /**
-     * Adds an templateData to templateData.
+     * Adds a new element to templateData.
      *
-     * @param templateData the new templateData
+     * @param templateData the new element to be added
      * @return the CreateWorkspaceOptions builder
      */
     public Builder addTemplateData(TemplateSourceDataRequest templateData) {
@@ -137,9 +150,9 @@ public class CreateWorkspaceOptions extends GenericModel {
     }
 
     /**
-     * Adds an type to type.
+     * Adds a new element to type.
      *
-     * @param type the new type
+     * @param type the new element to be added
      * @return the CreateWorkspaceOptions builder
      */
     public Builder addType(String type) {
@@ -158,7 +171,9 @@ public class CreateWorkspaceOptions extends GenericModel {
      *
      * @param appliedShareddataIds the appliedShareddataIds
      * @return the CreateWorkspaceOptions builder
+     * @deprecated this method is deprecated and may be removed in a future release
      */
+    @Deprecated
     public Builder appliedShareddataIds(List<String> appliedShareddataIds) {
       this.appliedShareddataIds = appliedShareddataIds;
       return this;
@@ -172,6 +187,17 @@ public class CreateWorkspaceOptions extends GenericModel {
      */
     public Builder catalogRef(CatalogRef catalogRef) {
       this.catalogRef = catalogRef;
+      return this;
+    }
+
+    /**
+     * Set the dependencies.
+     *
+     * @param dependencies the dependencies
+     * @return the CreateWorkspaceOptions builder
+     */
+    public Builder dependencies(Dependencies dependencies) {
+      this.dependencies = dependencies;
       return this;
     }
 
@@ -300,6 +326,17 @@ public class CreateWorkspaceOptions extends GenericModel {
     }
 
     /**
+     * Set the agentId.
+     *
+     * @param agentId the agentId
+     * @return the CreateWorkspaceOptions builder
+     */
+    public Builder agentId(String agentId) {
+      this.agentId = agentId;
+      return this;
+    }
+
+    /**
      * Set the xGithubToken.
      *
      * @param xGithubToken the xGithubToken
@@ -311,9 +348,12 @@ public class CreateWorkspaceOptions extends GenericModel {
     }
   }
 
+  protected CreateWorkspaceOptions() { }
+
   protected CreateWorkspaceOptions(Builder builder) {
     appliedShareddataIds = builder.appliedShareddataIds;
     catalogRef = builder.catalogRef;
+    dependencies = builder.dependencies;
     description = builder.description;
     location = builder.location;
     name = builder.name;
@@ -325,6 +365,7 @@ public class CreateWorkspaceOptions extends GenericModel {
     templateRepo = builder.templateRepo;
     type = builder.type;
     workspaceStatus = builder.workspaceStatus;
+    agentId = builder.agentId;
     xGithubToken = builder.xGithubToken;
   }
 
@@ -343,7 +384,9 @@ public class CreateWorkspaceOptions extends GenericModel {
    * List of applied shared dataset ID.
    *
    * @return the appliedShareddataIds
+   * @deprecated this method is deprecated and may be removed in a future release
    */
+  @Deprecated
   public List<String> appliedShareddataIds() {
     return appliedShareddataIds;
   }
@@ -358,6 +401,17 @@ public class CreateWorkspaceOptions extends GenericModel {
    */
   public CatalogRef catalogRef() {
     return catalogRef;
+  }
+
+  /**
+   * Gets the dependencies.
+   *
+   * Workspace dependencies.
+   *
+   * @return the dependencies
+   */
+  public Dependencies dependencies() {
+    return dependencies;
   }
 
   /**
@@ -486,6 +540,17 @@ public class CreateWorkspaceOptions extends GenericModel {
    */
   public WorkspaceStatusRequest workspaceStatus() {
     return workspaceStatus;
+  }
+
+  /**
+   * Gets the agentId.
+   *
+   * agent id which is binded to with the workspace.
+   *
+   * @return the agentId
+   */
+  public String agentId() {
+    return agentId;
   }
 
   /**

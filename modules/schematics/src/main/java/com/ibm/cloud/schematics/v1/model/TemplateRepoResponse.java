@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -31,6 +31,8 @@ public class TemplateRepoResponse extends GenericModel {
   @SerializedName("repo_url")
   protected String repoUrl;
   protected String url;
+
+  protected TemplateRepoResponse() { }
 
   /**
    * Gets the branch.
@@ -90,7 +92,8 @@ public class TemplateRepoResponse extends GenericModel {
   /**
    * Gets the repoUrl.
    *
-   * The repository URL.
+   * The repository URL. For more information, about using `.netrc` in `env_values`, see [Usage of private module
+   * template](https://cloud.ibm.com/docs/schematics?topic=schematics-download-modules-pvt-git).
    *
    * @return the repoUrl
    */

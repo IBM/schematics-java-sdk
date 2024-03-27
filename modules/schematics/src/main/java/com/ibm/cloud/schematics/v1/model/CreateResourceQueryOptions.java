@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -42,6 +42,11 @@ public class CreateResourceQueryOptions extends GenericModel {
     private String name;
     private List<ResourceQuery> queries;
 
+    /**
+     * Instantiates a new Builder from an existing CreateResourceQueryOptions instance.
+     *
+     * @param createResourceQueryOptions the instance to initialize the Builder with
+     */
     private Builder(CreateResourceQueryOptions createResourceQueryOptions) {
       this.type = createResourceQueryOptions.type;
       this.name = createResourceQueryOptions.name;
@@ -64,9 +69,9 @@ public class CreateResourceQueryOptions extends GenericModel {
     }
 
     /**
-     * Adds an queries to queries.
+     * Adds a new element to queries.
      *
-     * @param queries the new queries
+     * @param queries the new element to be added
      * @return the CreateResourceQueryOptions builder
      */
     public Builder addQueries(ResourceQuery queries) {
@@ -113,6 +118,8 @@ public class CreateResourceQueryOptions extends GenericModel {
       return this;
     }
   }
+
+  protected CreateResourceQueryOptions() { }
 
   protected CreateResourceQueryOptions(Builder builder) {
     type = builder.type;

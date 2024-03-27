@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -23,33 +23,29 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class CreateWorkspaceDeletionJobOptions extends GenericModel {
 
   protected String refreshToken;
-  protected Boolean newDeleteWorkspaces;
-  protected Boolean newDestroyResources;
-  protected String newJob;
-  protected String newVersion;
-  protected List<String> newWorkspaces;
-  protected String destroyResources;
+  protected String job;
+  protected String version;
+  protected List<String> workspaces;
 
   /**
    * Builder.
    */
   public static class Builder {
     private String refreshToken;
-    private Boolean newDeleteWorkspaces;
-    private Boolean newDestroyResources;
-    private String newJob;
-    private String newVersion;
-    private List<String> newWorkspaces;
-    private String destroyResources;
+    private String job;
+    private String version;
+    private List<String> workspaces;
 
+    /**
+     * Instantiates a new Builder from an existing CreateWorkspaceDeletionJobOptions instance.
+     *
+     * @param createWorkspaceDeletionJobOptions the instance to initialize the Builder with
+     */
     private Builder(CreateWorkspaceDeletionJobOptions createWorkspaceDeletionJobOptions) {
       this.refreshToken = createWorkspaceDeletionJobOptions.refreshToken;
-      this.newDeleteWorkspaces = createWorkspaceDeletionJobOptions.newDeleteWorkspaces;
-      this.newDestroyResources = createWorkspaceDeletionJobOptions.newDestroyResources;
-      this.newJob = createWorkspaceDeletionJobOptions.newJob;
-      this.newVersion = createWorkspaceDeletionJobOptions.newVersion;
-      this.newWorkspaces = createWorkspaceDeletionJobOptions.newWorkspaces;
-      this.destroyResources = createWorkspaceDeletionJobOptions.destroyResources;
+      this.job = createWorkspaceDeletionJobOptions.job;
+      this.version = createWorkspaceDeletionJobOptions.version;
+      this.workspaces = createWorkspaceDeletionJobOptions.workspaces;
     }
 
     /**
@@ -77,18 +73,18 @@ public class CreateWorkspaceDeletionJobOptions extends GenericModel {
     }
 
     /**
-     * Adds an newWorkspaces to newWorkspaces.
+     * Adds a new element to workspaces.
      *
-     * @param newWorkspaces the new newWorkspaces
+     * @param workspaces the new element to be added
      * @return the CreateWorkspaceDeletionJobOptions builder
      */
-    public Builder addNewWorkspaces(String newWorkspaces) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(newWorkspaces,
-        "newWorkspaces cannot be null");
-      if (this.newWorkspaces == null) {
-        this.newWorkspaces = new ArrayList<String>();
+    public Builder addWorkspaces(String workspaces) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(workspaces,
+        "workspaces cannot be null");
+      if (this.workspaces == null) {
+        this.workspaces = new ArrayList<String>();
       }
-      this.newWorkspaces.add(newWorkspaces);
+      this.workspaces.add(workspaces);
       return this;
     }
 
@@ -104,83 +100,49 @@ public class CreateWorkspaceDeletionJobOptions extends GenericModel {
     }
 
     /**
-     * Set the newDeleteWorkspaces.
+     * Set the job.
      *
-     * @param newDeleteWorkspaces the newDeleteWorkspaces
+     * @param job the job
      * @return the CreateWorkspaceDeletionJobOptions builder
      */
-    public Builder newDeleteWorkspaces(Boolean newDeleteWorkspaces) {
-      this.newDeleteWorkspaces = newDeleteWorkspaces;
+    public Builder job(String job) {
+      this.job = job;
       return this;
     }
 
     /**
-     * Set the newDestroyResources.
+     * Set the version.
      *
-     * @param newDestroyResources the newDestroyResources
+     * @param version the version
      * @return the CreateWorkspaceDeletionJobOptions builder
      */
-    public Builder newDestroyResources(Boolean newDestroyResources) {
-      this.newDestroyResources = newDestroyResources;
+    public Builder version(String version) {
+      this.version = version;
       return this;
     }
 
     /**
-     * Set the newJob.
+     * Set the workspaces.
+     * Existing workspaces will be replaced.
      *
-     * @param newJob the newJob
+     * @param workspaces the workspaces
      * @return the CreateWorkspaceDeletionJobOptions builder
      */
-    public Builder newJob(String newJob) {
-      this.newJob = newJob;
-      return this;
-    }
-
-    /**
-     * Set the newVersion.
-     *
-     * @param newVersion the newVersion
-     * @return the CreateWorkspaceDeletionJobOptions builder
-     */
-    public Builder newVersion(String newVersion) {
-      this.newVersion = newVersion;
-      return this;
-    }
-
-    /**
-     * Set the newWorkspaces.
-     * Existing newWorkspaces will be replaced.
-     *
-     * @param newWorkspaces the newWorkspaces
-     * @return the CreateWorkspaceDeletionJobOptions builder
-     */
-    public Builder newWorkspaces(List<String> newWorkspaces) {
-      this.newWorkspaces = newWorkspaces;
-      return this;
-    }
-
-    /**
-     * Set the destroyResources.
-     *
-     * @param destroyResources the destroyResources
-     * @return the CreateWorkspaceDeletionJobOptions builder
-     */
-    public Builder destroyResources(String destroyResources) {
-      this.destroyResources = destroyResources;
+    public Builder workspaces(List<String> workspaces) {
+      this.workspaces = workspaces;
       return this;
     }
   }
+
+  protected CreateWorkspaceDeletionJobOptions() { }
 
   protected CreateWorkspaceDeletionJobOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.refreshToken,
       "refreshToken cannot be null");
     refreshToken = builder.refreshToken;
-    newDeleteWorkspaces = builder.newDeleteWorkspaces;
-    newDestroyResources = builder.newDestroyResources;
-    newJob = builder.newJob;
-    newVersion = builder.newVersion;
-    newWorkspaces = builder.newWorkspaces;
-    destroyResources = builder.destroyResources;
+    job = builder.job;
+    version = builder.version;
+    workspaces = builder.workspaces;
   }
 
   /**
@@ -217,71 +179,36 @@ public class CreateWorkspaceDeletionJobOptions extends GenericModel {
   }
 
   /**
-   * Gets the newDeleteWorkspaces.
+   * Gets the job.
    *
-   * True to delete workspace.
+   * Job type such as delete of a batch operation.
    *
-   * @return the newDeleteWorkspaces
+   * @return the job
    */
-  public Boolean newDeleteWorkspaces() {
-    return newDeleteWorkspaces;
+  public String job() {
+    return job;
   }
 
   /**
-   * Gets the newDestroyResources.
+   * Gets the version.
    *
-   * True to destroy the resources managed by this workspace.
+   * A version of the terraform template.
    *
-   * @return the newDestroyResources
+   * @return the version
    */
-  public Boolean newDestroyResources() {
-    return newDestroyResources;
+  public String version() {
+    return version;
   }
 
   /**
-   * Gets the newJob.
+   * Gets the workspaces.
    *
-   * Workspace deletion job name.
+   * The List of workspaces to be deleted.
    *
-   * @return the newJob
+   * @return the workspaces
    */
-  public String newJob() {
-    return newJob;
-  }
-
-  /**
-   * Gets the newVersion.
-   *
-   * Version of the terraform template.
-   *
-   * @return the newVersion
-   */
-  public String newVersion() {
-    return newVersion;
-  }
-
-  /**
-   * Gets the newWorkspaces.
-   *
-   * List of workspaces to be deleted.
-   *
-   * @return the newWorkspaces
-   */
-  public List<String> newWorkspaces() {
-    return newWorkspaces;
-  }
-
-  /**
-   * Gets the destroyResources.
-   *
-   * If set to `true`, refresh_token header configuration is required to delete all the Terraform resources, and the
-   * Schematics workspace. If set to `false`, you can remove only the workspace. Your Terraform resources are still
-   * available and must be managed with the resource dashboard or CLI.
-   *
-   * @return the destroyResources
-   */
-  public String destroyResources() {
-    return destroyResources;
+  public List<String> workspaces() {
+    return workspaces;
   }
 }
 

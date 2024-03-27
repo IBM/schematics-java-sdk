@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -51,6 +51,11 @@ public class JobDataWorkspace extends GenericModel {
     private List<JobDataTemplate> templateData;
     private Date updatedAt;
 
+    /**
+     * Instantiates a new Builder from an existing JobDataWorkspace instance.
+     *
+     * @param jobDataWorkspace the instance to initialize the Builder with
+     */
     private Builder(JobDataWorkspace jobDataWorkspace) {
       this.workspaceName = jobDataWorkspace.workspaceName;
       this.flowId = jobDataWorkspace.flowId;
@@ -78,9 +83,9 @@ public class JobDataWorkspace extends GenericModel {
     }
 
     /**
-     * Adds an inputs to inputs.
+     * Adds a new element to inputs.
      *
-     * @param inputs the new inputs
+     * @param inputs the new element to be added
      * @return the JobDataWorkspace builder
      */
     public Builder addInputs(VariableData inputs) {
@@ -94,9 +99,9 @@ public class JobDataWorkspace extends GenericModel {
     }
 
     /**
-     * Adds an outputs to outputs.
+     * Adds a new element to outputs.
      *
-     * @param outputs the new outputs
+     * @param outputs the new element to be added
      * @return the JobDataWorkspace builder
      */
     public Builder addOutputs(VariableData outputs) {
@@ -110,9 +115,9 @@ public class JobDataWorkspace extends GenericModel {
     }
 
     /**
-     * Adds an settings to settings.
+     * Adds a new element to settings.
      *
-     * @param settings the new settings
+     * @param settings the new element to be added
      * @return the JobDataWorkspace builder
      */
     public Builder addSettings(VariableData settings) {
@@ -126,9 +131,9 @@ public class JobDataWorkspace extends GenericModel {
     }
 
     /**
-     * Adds an templateData to templateData.
+     * Adds a new element to templateData.
      *
-     * @param templateData the new templateData
+     * @param templateData the new element to be added
      * @return the JobDataWorkspace builder
      */
     public Builder addTemplateData(JobDataTemplate templateData) {
@@ -233,6 +238,8 @@ public class JobDataWorkspace extends GenericModel {
       return this;
     }
   }
+
+  protected JobDataWorkspace() { }
 
   protected JobDataWorkspace(Builder builder) {
     workspaceName = builder.workspaceName;

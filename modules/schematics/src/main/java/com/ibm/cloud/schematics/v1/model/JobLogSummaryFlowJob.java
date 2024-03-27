@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -37,6 +37,11 @@ public class JobLogSummaryFlowJob extends GenericModel {
   public static class Builder {
     private List<JobLogSummaryWorkitems> workitems;
 
+    /**
+     * Instantiates a new Builder from an existing JobLogSummaryFlowJob instance.
+     *
+     * @param jobLogSummaryFlowJob the instance to initialize the Builder with
+     */
     private Builder(JobLogSummaryFlowJob jobLogSummaryFlowJob) {
       this.workitems = jobLogSummaryFlowJob.workitems;
     }
@@ -57,9 +62,9 @@ public class JobLogSummaryFlowJob extends GenericModel {
     }
 
     /**
-     * Adds an workitems to workitems.
+     * Adds a new element to workitems.
      *
-     * @param workitems the new workitems
+     * @param workitems the new element to be added
      * @return the JobLogSummaryFlowJob builder
      */
     public Builder addWorkitems(JobLogSummaryWorkitems workitems) {
@@ -84,6 +89,8 @@ public class JobLogSummaryFlowJob extends GenericModel {
       return this;
     }
   }
+
+  protected JobLogSummaryFlowJob() { }
 
   protected JobLogSummaryFlowJob(Builder builder) {
     workitems = builder.workitems;

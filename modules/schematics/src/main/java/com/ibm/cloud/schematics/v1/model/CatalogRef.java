@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -11,6 +11,9 @@
  * specific language governing permissions and limitations under the License.
  */
 package com.ibm.cloud.schematics.v1.model;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -39,6 +42,8 @@ public class CatalogRef extends GenericModel {
   protected String launchUrl;
   @SerializedName("offering_version")
   protected String offeringVersion;
+  @SerializedName("service_extensions")
+  protected List<ServiceExtensions> serviceExtensions;
 
   /**
    * Builder.
@@ -53,7 +58,13 @@ public class CatalogRef extends GenericModel {
     private String itemUrl;
     private String launchUrl;
     private String offeringVersion;
+    private List<ServiceExtensions> serviceExtensions;
 
+    /**
+     * Instantiates a new Builder from an existing CatalogRef instance.
+     *
+     * @param catalogRef the instance to initialize the Builder with
+     */
     private Builder(CatalogRef catalogRef) {
       this.dryRun = catalogRef.dryRun;
       this.owningAccount = catalogRef.owningAccount;
@@ -64,6 +75,7 @@ public class CatalogRef extends GenericModel {
       this.itemUrl = catalogRef.itemUrl;
       this.launchUrl = catalogRef.launchUrl;
       this.offeringVersion = catalogRef.offeringVersion;
+      this.serviceExtensions = catalogRef.serviceExtensions;
     }
 
     /**
@@ -79,6 +91,22 @@ public class CatalogRef extends GenericModel {
      */
     public CatalogRef build() {
       return new CatalogRef(this);
+    }
+
+    /**
+     * Adds a new element to serviceExtensions.
+     *
+     * @param serviceExtensions the new element to be added
+     * @return the CatalogRef builder
+     */
+    public Builder addServiceExtensions(ServiceExtensions serviceExtensions) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(serviceExtensions,
+        "serviceExtensions cannot be null");
+      if (this.serviceExtensions == null) {
+        this.serviceExtensions = new ArrayList<ServiceExtensions>();
+      }
+      this.serviceExtensions.add(serviceExtensions);
+      return this;
     }
 
     /**
@@ -179,7 +207,21 @@ public class CatalogRef extends GenericModel {
       this.offeringVersion = offeringVersion;
       return this;
     }
+
+    /**
+     * Set the serviceExtensions.
+     * Existing serviceExtensions will be replaced.
+     *
+     * @param serviceExtensions the serviceExtensions
+     * @return the CatalogRef builder
+     */
+    public Builder serviceExtensions(List<ServiceExtensions> serviceExtensions) {
+      this.serviceExtensions = serviceExtensions;
+      return this;
+    }
   }
+
+  protected CatalogRef() { }
 
   protected CatalogRef(Builder builder) {
     dryRun = builder.dryRun;
@@ -191,6 +233,7 @@ public class CatalogRef extends GenericModel {
     itemUrl = builder.itemUrl;
     launchUrl = builder.launchUrl;
     offeringVersion = builder.offeringVersion;
+    serviceExtensions = builder.serviceExtensions;
   }
 
   /**
@@ -300,6 +343,15 @@ public class CatalogRef extends GenericModel {
    */
   public String offeringVersion() {
     return offeringVersion;
+  }
+
+  /**
+   * Gets the serviceExtensions.
+   *
+   * @return the serviceExtensions
+   */
+  public List<ServiceExtensions> serviceExtensions() {
+    return serviceExtensions;
   }
 }
 

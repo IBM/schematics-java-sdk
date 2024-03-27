@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -36,6 +36,12 @@ public class JobStatusSchematicsResources extends GenericModel {
     String JOB_FAILED = "job_failed";
     /** job_cancelled. */
     String JOB_CANCELLED = "job_cancelled";
+    /** job_stopped. */
+    String JOB_STOPPED = "job_stopped";
+    /** job_stop_in_progress. */
+    String JOB_STOP_IN_PROGRESS = "job_stop_in_progress";
+    /** job_ready_to_execute. */
+    String JOB_READY_TO_EXECUTE = "job_ready_to_execute";
   }
 
   @SerializedName("status_code")
@@ -56,6 +62,11 @@ public class JobStatusSchematicsResources extends GenericModel {
     private String schematicsResourceId;
     private Date updatedAt;
 
+    /**
+     * Instantiates a new Builder from an existing JobStatusSchematicsResources instance.
+     *
+     * @param jobStatusSchematicsResources the instance to initialize the Builder with
+     */
     private Builder(JobStatusSchematicsResources jobStatusSchematicsResources) {
       this.statusCode = jobStatusSchematicsResources.statusCode;
       this.statusMessage = jobStatusSchematicsResources.statusMessage;
@@ -122,6 +133,8 @@ public class JobStatusSchematicsResources extends GenericModel {
       return this;
     }
   }
+
+  protected JobStatusSchematicsResources() { }
 
   protected JobStatusSchematicsResources(Builder builder) {
     statusCode = builder.statusCode;

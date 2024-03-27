@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -48,6 +48,11 @@ public class JobDataAction extends GenericModel {
     private InventoryResourceRecord inventoryRecord;
     private String materializedInventory;
 
+    /**
+     * Instantiates a new Builder from an existing JobDataAction instance.
+     *
+     * @param jobDataAction the instance to initialize the Builder with
+     */
     private Builder(JobDataAction jobDataAction) {
       this.actionName = jobDataAction.actionName;
       this.inputs = jobDataAction.inputs;
@@ -74,9 +79,9 @@ public class JobDataAction extends GenericModel {
     }
 
     /**
-     * Adds an inputs to inputs.
+     * Adds a new element to inputs.
      *
-     * @param inputs the new inputs
+     * @param inputs the new element to be added
      * @return the JobDataAction builder
      */
     public Builder addInputs(VariableData inputs) {
@@ -90,9 +95,9 @@ public class JobDataAction extends GenericModel {
     }
 
     /**
-     * Adds an outputs to outputs.
+     * Adds a new element to outputs.
      *
-     * @param outputs the new outputs
+     * @param outputs the new element to be added
      * @return the JobDataAction builder
      */
     public Builder addOutputs(VariableData outputs) {
@@ -106,9 +111,9 @@ public class JobDataAction extends GenericModel {
     }
 
     /**
-     * Adds an settings to settings.
+     * Adds a new element to settings.
      *
-     * @param settings the new settings
+     * @param settings the new element to be added
      * @return the JobDataAction builder
      */
     public Builder addSettings(VariableData settings) {
@@ -202,6 +207,8 @@ public class JobDataAction extends GenericModel {
     }
   }
 
+  protected JobDataAction() { }
+
   protected JobDataAction(Builder builder) {
     actionName = builder.actionName;
     inputs = builder.inputs;
@@ -279,7 +286,7 @@ public class JobDataAction extends GenericModel {
   /**
    * Gets the inventoryRecord.
    *
-   * Complete inventory resource details with user inputs and system generated data.
+   * Complete inventory definition details.
    *
    * @return the inventoryRecord
    */
