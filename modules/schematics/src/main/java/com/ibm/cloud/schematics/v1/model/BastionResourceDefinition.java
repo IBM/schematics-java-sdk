@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -29,6 +29,11 @@ public class BastionResourceDefinition extends GenericModel {
     private String name;
     private String host;
 
+    /**
+     * Instantiates a new Builder from an existing BastionResourceDefinition instance.
+     *
+     * @param bastionResourceDefinition the instance to initialize the Builder with
+     */
     private Builder(BastionResourceDefinition bastionResourceDefinition) {
       this.name = bastionResourceDefinition.name;
       this.host = bastionResourceDefinition.host;
@@ -72,6 +77,8 @@ public class BastionResourceDefinition extends GenericModel {
     }
   }
 
+  protected BastionResourceDefinition() { }
+
   protected BastionResourceDefinition(Builder builder) {
     name = builder.name;
     host = builder.host;
@@ -89,7 +96,7 @@ public class BastionResourceDefinition extends GenericModel {
   /**
    * Gets the name.
    *
-   * Bastion Name(Unique).
+   * Bastion Name; the name must be unique.
    *
    * @return the name
    */

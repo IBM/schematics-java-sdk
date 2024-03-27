@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -27,6 +27,8 @@ public class GetJobOptions extends GenericModel {
     String SUMMARY = "summary";
     /** detailed. */
     String DETAILED = "detailed";
+    /** ids. */
+    String IDS = "ids";
   }
 
   protected String jobId;
@@ -39,6 +41,11 @@ public class GetJobOptions extends GenericModel {
     private String jobId;
     private String profile;
 
+    /**
+     * Instantiates a new Builder from an existing GetJobOptions instance.
+     *
+     * @param getJobOptions the instance to initialize the Builder with
+     */
     private Builder(GetJobOptions getJobOptions) {
       this.jobId = getJobOptions.jobId;
       this.profile = getJobOptions.profile;
@@ -90,6 +97,8 @@ public class GetJobOptions extends GenericModel {
       return this;
     }
   }
+
+  protected GetJobOptions() { }
 
   protected GetJobOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.jobId,

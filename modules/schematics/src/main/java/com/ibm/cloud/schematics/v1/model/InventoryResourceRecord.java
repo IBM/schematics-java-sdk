@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -20,7 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Complete inventory resource details with user inputs and system generated data.
+ * Complete inventory definition details.
  */
 public class InventoryResourceRecord extends GenericModel {
 
@@ -70,6 +70,11 @@ public class InventoryResourceRecord extends GenericModel {
     private String inventoriesIni;
     private List<String> resourceQueries;
 
+    /**
+     * Instantiates a new Builder from an existing InventoryResourceRecord instance.
+     *
+     * @param inventoryResourceRecord the instance to initialize the Builder with
+     */
     private Builder(InventoryResourceRecord inventoryResourceRecord) {
       this.name = inventoryResourceRecord.name;
       this.description = inventoryResourceRecord.description;
@@ -95,9 +100,9 @@ public class InventoryResourceRecord extends GenericModel {
     }
 
     /**
-     * Adds an resourceQueries to resourceQueries.
+     * Adds a new element to resourceQueries.
      *
-     * @param resourceQueries the new resourceQueries
+     * @param resourceQueries the new element to be added
      * @return the InventoryResourceRecord builder
      */
     public Builder addResourceQueries(String resourceQueries) {
@@ -177,6 +182,8 @@ public class InventoryResourceRecord extends GenericModel {
       return this;
     }
   }
+
+  protected InventoryResourceRecord() { }
 
   protected InventoryResourceRecord(Builder builder) {
     name = builder.name;

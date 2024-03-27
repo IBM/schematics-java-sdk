@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,6 +32,7 @@ public class WorkspaceResponse extends GenericModel {
   @SerializedName("created_by")
   protected String createdBy;
   protected String crn;
+  protected Dependencies dependencies;
   protected String description;
   protected String id;
   @SerializedName("last_health_check_at")
@@ -57,10 +58,23 @@ public class WorkspaceResponse extends GenericModel {
   protected Date updatedAt;
   @SerializedName("updated_by")
   protected String updatedBy;
+  @SerializedName("cart_id")
+  protected String cartId;
+  @SerializedName("project_id")
+  protected String projectId;
+  @SerializedName("last_action_name")
+  protected String lastActionName;
+  @SerializedName("last_activity_id")
+  protected String lastActivityId;
+  @SerializedName("last_job")
+  protected LastJob lastJob;
   @SerializedName("workspace_status")
   protected WorkspaceStatusResponse workspaceStatus;
   @SerializedName("workspace_status_msg")
   protected WorkspaceStatusMessage workspaceStatusMsg;
+  protected AgentInfo agent;
+
+  protected WorkspaceResponse() { }
 
   /**
    * Gets the appliedShareddataIds.
@@ -68,7 +82,9 @@ public class WorkspaceResponse extends GenericModel {
    * List of applied shared dataset ID.
    *
    * @return the appliedShareddataIds
+   * @deprecated this method is deprecated and may be removed in a future release
    */
+  @Deprecated
   public List<String> getAppliedShareddataIds() {
     return appliedShareddataIds;
   }
@@ -116,6 +132,17 @@ public class WorkspaceResponse extends GenericModel {
    */
   public String getCrn() {
     return crn;
+  }
+
+  /**
+   * Gets the dependencies.
+   *
+   * Workspace dependencies.
+   *
+   * @return the dependencies
+   */
+  public Dependencies getDependencies() {
+    return dependencies;
   }
 
   /**
@@ -324,6 +351,61 @@ public class WorkspaceResponse extends GenericModel {
   }
 
   /**
+   * Gets the cartId.
+   *
+   * The associate cart order ID.
+   *
+   * @return the cartId
+   */
+  public String getCartId() {
+    return cartId;
+  }
+
+  /**
+   * Gets the projectId.
+   *
+   * The associate project ID.
+   *
+   * @return the projectId
+   */
+  public String getProjectId() {
+    return projectId;
+  }
+
+  /**
+   * Gets the lastActionName.
+   *
+   * Name of the last Action performed on workspace.
+   *
+   * @return the lastActionName
+   */
+  public String getLastActionName() {
+    return lastActionName;
+  }
+
+  /**
+   * Gets the lastActivityId.
+   *
+   * ID of last Activity performed.
+   *
+   * @return the lastActivityId
+   */
+  public String getLastActivityId() {
+    return lastActivityId;
+  }
+
+  /**
+   * Gets the lastJob.
+   *
+   * Last job details.
+   *
+   * @return the lastJob
+   */
+  public LastJob getLastJob() {
+    return lastJob;
+  }
+
+  /**
    * Gets the workspaceStatus.
    *
    * Response that indicate the status of the workspace as either frozen or locked.
@@ -343,6 +425,17 @@ public class WorkspaceResponse extends GenericModel {
    */
   public WorkspaceStatusMessage getWorkspaceStatusMsg() {
     return workspaceStatusMsg;
+  }
+
+  /**
+   * Gets the agent.
+   *
+   * Agent name, Agent id and associated policy ID information.
+   *
+   * @return the agent
+   */
+  public AgentInfo getAgent() {
+    return agent;
   }
 }
 

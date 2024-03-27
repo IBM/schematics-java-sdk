@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -19,7 +19,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * User editable metadata for the variables.
+ * An user editable metadata for the variables.
  */
 public class VariableMetadata extends GenericModel {
 
@@ -43,16 +43,33 @@ public class VariableMetadata extends GenericModel {
     String MAP = "map";
     /** complex. */
     String COMPLEX = "complex";
+    /** link. */
+    String LINK = "link";
+  }
+
+  /**
+   * The status of the link.
+   */
+  public interface LinkStatus {
+    /** normal. */
+    String NORMAL = "normal";
+    /** broken. */
+    String BROKEN = "broken";
   }
 
   protected String type;
   protected List<String> aliases;
   protected String description;
+  @SerializedName("cloud_data_type")
+  protected String cloudDataType;
   @SerializedName("default_value")
   protected String defaultValue;
+  @SerializedName("link_status")
+  protected String linkStatus;
   protected Boolean secure;
   protected Boolean immutable;
   protected Boolean hidden;
+  protected Boolean required;
   protected List<String> options;
   @SerializedName("min_value")
   protected Long minValue;
@@ -75,10 +92,13 @@ public class VariableMetadata extends GenericModel {
     private String type;
     private List<String> aliases;
     private String description;
+    private String cloudDataType;
     private String defaultValue;
+    private String linkStatus;
     private Boolean secure;
     private Boolean immutable;
     private Boolean hidden;
+    private Boolean required;
     private List<String> options;
     private Long minValue;
     private Long maxValue;
@@ -89,14 +109,22 @@ public class VariableMetadata extends GenericModel {
     private String groupBy;
     private String source;
 
+    /**
+     * Instantiates a new Builder from an existing VariableMetadata instance.
+     *
+     * @param variableMetadata the instance to initialize the Builder with
+     */
     private Builder(VariableMetadata variableMetadata) {
       this.type = variableMetadata.type;
       this.aliases = variableMetadata.aliases;
       this.description = variableMetadata.description;
+      this.cloudDataType = variableMetadata.cloudDataType;
       this.defaultValue = variableMetadata.defaultValue;
+      this.linkStatus = variableMetadata.linkStatus;
       this.secure = variableMetadata.secure;
       this.immutable = variableMetadata.immutable;
       this.hidden = variableMetadata.hidden;
+      this.required = variableMetadata.required;
       this.options = variableMetadata.options;
       this.minValue = variableMetadata.minValue;
       this.maxValue = variableMetadata.maxValue;
@@ -124,9 +152,9 @@ public class VariableMetadata extends GenericModel {
     }
 
     /**
-     * Adds an aliases to aliases.
+     * Adds a new element to aliases.
      *
-     * @param aliases the new aliases
+     * @param aliases the new element to be added
      * @return the VariableMetadata builder
      */
     public Builder addAliases(String aliases) {
@@ -140,9 +168,9 @@ public class VariableMetadata extends GenericModel {
     }
 
     /**
-     * Adds an options to options.
+     * Adds a new element to options.
      *
-     * @param options the new options
+     * @param options the new element to be added
      * @return the VariableMetadata builder
      */
     public Builder addOptions(String options) {
@@ -190,6 +218,17 @@ public class VariableMetadata extends GenericModel {
     }
 
     /**
+     * Set the cloudDataType.
+     *
+     * @param cloudDataType the cloudDataType
+     * @return the VariableMetadata builder
+     */
+    public Builder cloudDataType(String cloudDataType) {
+      this.cloudDataType = cloudDataType;
+      return this;
+    }
+
+    /**
      * Set the defaultValue.
      *
      * @param defaultValue the defaultValue
@@ -197,6 +236,17 @@ public class VariableMetadata extends GenericModel {
      */
     public Builder defaultValue(String defaultValue) {
       this.defaultValue = defaultValue;
+      return this;
+    }
+
+    /**
+     * Set the linkStatus.
+     *
+     * @param linkStatus the linkStatus
+     * @return the VariableMetadata builder
+     */
+    public Builder linkStatus(String linkStatus) {
+      this.linkStatus = linkStatus;
       return this;
     }
 
@@ -230,6 +280,17 @@ public class VariableMetadata extends GenericModel {
      */
     public Builder hidden(Boolean hidden) {
       this.hidden = hidden;
+      return this;
+    }
+
+    /**
+     * Set the required.
+     *
+     * @param required the required
+     * @return the VariableMetadata builder
+     */
+    public Builder required(Boolean required) {
+      this.required = required;
       return this;
     }
 
@@ -334,14 +395,19 @@ public class VariableMetadata extends GenericModel {
     }
   }
 
+  protected VariableMetadata() { }
+
   protected VariableMetadata(Builder builder) {
     type = builder.type;
     aliases = builder.aliases;
     description = builder.description;
+    cloudDataType = builder.cloudDataType;
     defaultValue = builder.defaultValue;
+    linkStatus = builder.linkStatus;
     secure = builder.secure;
     immutable = builder.immutable;
     hidden = builder.hidden;
+    required = builder.required;
     options = builder.options;
     minValue = builder.minValue;
     maxValue = builder.maxValue;
@@ -376,7 +442,7 @@ public class VariableMetadata extends GenericModel {
   /**
    * Gets the aliases.
    *
-   * List of aliases for the variable name.
+   * The list of aliases for the variable name.
    *
    * @return the aliases
    */
@@ -387,7 +453,7 @@ public class VariableMetadata extends GenericModel {
   /**
    * Gets the description.
    *
-   * Description of the meta data.
+   * The description of the meta data.
    *
    * @return the description
    */
@@ -396,14 +462,36 @@ public class VariableMetadata extends GenericModel {
   }
 
   /**
+   * Gets the cloudDataType.
+   *
+   * Cloud data type of the variable. eg. resource_group_id, region, vpc_id.
+   *
+   * @return the cloudDataType
+   */
+  public String cloudDataType() {
+    return cloudDataType;
+  }
+
+  /**
    * Gets the defaultValue.
    *
-   * Default value for the variable, if the override value is not specified.
+   * Default value for the variable only if the override value is not specified.
    *
    * @return the defaultValue
    */
   public String defaultValue() {
     return defaultValue;
+  }
+
+  /**
+   * Gets the linkStatus.
+   *
+   * The status of the link.
+   *
+   * @return the linkStatus
+   */
+  public String linkStatus() {
+    return linkStatus;
   }
 
   /**
@@ -431,7 +519,7 @@ public class VariableMetadata extends GenericModel {
   /**
    * Gets the hidden.
    *
-   * If true, the variable will not be displayed on UI or CLI.
+   * If **true**, the variable is not displayed on UI or Command line.
    *
    * @return the hidden
    */
@@ -440,10 +528,21 @@ public class VariableMetadata extends GenericModel {
   }
 
   /**
+   * Gets the required.
+   *
+   * If the variable required?.
+   *
+   * @return the required
+   */
+  public Boolean required() {
+    return required;
+  }
+
+  /**
    * Gets the options.
    *
-   * List of possible values for this variable.  If type is integer or date, then the array of string will be  converted
-   * to array of integers or date during runtime.
+   * The list of possible values for this variable.  If type is **integer** or **date**, then the array of string is
+   * converted to array of integers or date during the runtime.
    *
    * @return the options
    */
@@ -454,7 +553,7 @@ public class VariableMetadata extends GenericModel {
   /**
    * Gets the minValue.
    *
-   * Minimum value of the variable. Applicable for integer type.
+   * The minimum value of the variable. Applicable for the integer type.
    *
    * @return the minValue
    */
@@ -465,7 +564,7 @@ public class VariableMetadata extends GenericModel {
   /**
    * Gets the maxValue.
    *
-   * Maximum value of the variable. Applicable for integer type.
+   * The maximum value of the variable. Applicable for the integer type.
    *
    * @return the maxValue
    */
@@ -476,7 +575,7 @@ public class VariableMetadata extends GenericModel {
   /**
    * Gets the minLength.
    *
-   * Minimum length of the variable value. Applicable for string type.
+   * The minimum length of the variable value. Applicable for the string type.
    *
    * @return the minLength
    */
@@ -487,7 +586,7 @@ public class VariableMetadata extends GenericModel {
   /**
    * Gets the maxLength.
    *
-   * Maximum length of the variable value. Applicable for string type.
+   * The maximum length of the variable value. Applicable for the string type.
    *
    * @return the maxLength
    */
@@ -498,7 +597,7 @@ public class VariableMetadata extends GenericModel {
   /**
    * Gets the matches.
    *
-   * Regex for the variable value.
+   * The regex for the variable value.
    *
    * @return the matches
    */
@@ -509,7 +608,7 @@ public class VariableMetadata extends GenericModel {
   /**
    * Gets the position.
    *
-   * Relative position of this variable in a list.
+   * The relative position of this variable in a list.
    *
    * @return the position
    */
@@ -520,7 +619,7 @@ public class VariableMetadata extends GenericModel {
   /**
    * Gets the groupBy.
    *
-   * Display name of the group this variable belongs to.
+   * The display name of the group this variable belongs to.
    *
    * @return the groupBy
    */
@@ -531,7 +630,7 @@ public class VariableMetadata extends GenericModel {
   /**
    * Gets the source.
    *
-   * Source of this meta-data.
+   * The source of this meta-data.
    *
    * @return the source
    */

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,6 +13,7 @@
 package com.ibm.cloud.schematics.v1.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -23,14 +24,18 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class TemplateValues extends GenericModel {
 
   @SerializedName("values_metadata")
-  protected List<Object> valuesMetadata;
+  protected List<Map<String, Object>> valuesMetadata;
+
+  protected TemplateValues() { }
 
   /**
    * Gets the valuesMetadata.
    *
+   * Information about workspace variable metadata.
+   *
    * @return the valuesMetadata
    */
-  public List<Object> getValuesMetadata() {
+  public List<Map<String, Object>> getValuesMetadata() {
     return valuesMetadata;
   }
 }

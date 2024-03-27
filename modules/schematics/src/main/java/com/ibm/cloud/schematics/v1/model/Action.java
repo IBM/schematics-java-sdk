@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -41,6 +41,26 @@ public class Action extends GenericModel {
   }
 
   /**
+   * Type of connection to be used when connecting to bastion host.  If the `inventory_connection_type=winrm`, then
+   * `bastion_connection_type` is not supported.
+   */
+  public interface BastionConnectionType {
+    /** ssh. */
+    String SSH = "ssh";
+  }
+
+  /**
+   * Type of connection to be used when connecting to remote host.  **Note** Currently, WinRM supports only Windows
+   * system with the public IPs and do not support Bastion host.
+   */
+  public interface InventoryConnectionType {
+    /** ssh. */
+    String SSH = "ssh";
+    /** winrm. */
+    String WINRM = "winrm";
+  }
+
+  /**
    * Type of source for the Template.
    */
   public interface SourceType {
@@ -56,10 +76,6 @@ public class Action extends GenericModel {
     String IBM_GIT_LAB = "ibm_git_lab";
     /** ibm_cloud_catalog. */
     String IBM_CLOUD_CATALOG = "ibm_cloud_catalog";
-    /** external_scm. */
-    String EXTERNAL_SCM = "external_scm";
-    /** cos_bucket. */
-    String COS_BUCKET = "cos_bucket";
   }
 
   protected String name;
@@ -67,6 +83,10 @@ public class Action extends GenericModel {
   protected String location;
   @SerializedName("resource_group")
   protected String resourceGroup;
+  @SerializedName("bastion_connection_type")
+  protected String bastionConnectionType;
+  @SerializedName("inventory_connection_type")
+  protected String inventoryConnectionType;
   protected List<String> tags;
   @SerializedName("user_state")
   protected UserState userState;
@@ -78,10 +98,10 @@ public class Action extends GenericModel {
   @SerializedName("command_parameter")
   protected String commandParameter;
   protected String inventory;
-  protected List<VariableData> credentials;
+  protected List<CredentialVariableData> credentials;
   protected BastionResourceDefinition bastion;
   @SerializedName("bastion_credential")
-  protected VariableData bastionCredential;
+  protected CredentialVariableData bastionCredential;
   @SerializedName("targets_ini")
   protected String targetsIni;
   protected List<VariableData> inputs;
@@ -120,6 +140,8 @@ public class Action extends GenericModel {
     private String description;
     private String location;
     private String resourceGroup;
+    private String bastionConnectionType;
+    private String inventoryConnectionType;
     private List<String> tags;
     private UserState userState;
     private String sourceReadmeUrl;
@@ -127,21 +149,26 @@ public class Action extends GenericModel {
     private String sourceType;
     private String commandParameter;
     private String inventory;
-    private List<VariableData> credentials;
+    private List<CredentialVariableData> credentials;
     private BastionResourceDefinition bastion;
-    private VariableData bastionCredential;
+    private CredentialVariableData bastionCredential;
     private String targetsIni;
     private List<VariableData> inputs;
     private List<VariableData> outputs;
     private List<VariableData> settings;
-    private ActionState state;
-    private SystemLock sysLock;
 
+    /**
+     * Instantiates a new Builder from an existing Action instance.
+     *
+     * @param action the instance to initialize the Builder with
+     */
     private Builder(Action action) {
       this.name = action.name;
       this.description = action.description;
       this.location = action.location;
       this.resourceGroup = action.resourceGroup;
+      this.bastionConnectionType = action.bastionConnectionType;
+      this.inventoryConnectionType = action.inventoryConnectionType;
       this.tags = action.tags;
       this.userState = action.userState;
       this.sourceReadmeUrl = action.sourceReadmeUrl;
@@ -156,8 +183,6 @@ public class Action extends GenericModel {
       this.inputs = action.inputs;
       this.outputs = action.outputs;
       this.settings = action.settings;
-      this.state = action.state;
-      this.sysLock = action.sysLock;
     }
 
     /**
@@ -176,9 +201,9 @@ public class Action extends GenericModel {
     }
 
     /**
-     * Adds an tags to tags.
+     * Adds a new element to tags.
      *
-     * @param tags the new tags
+     * @param tags the new element to be added
      * @return the Action builder
      */
     public Builder addTags(String tags) {
@@ -192,25 +217,25 @@ public class Action extends GenericModel {
     }
 
     /**
-     * Adds an credentials to credentials.
+     * Adds a new element to credentials.
      *
-     * @param credentials the new credentials
+     * @param credentials the new element to be added
      * @return the Action builder
      */
-    public Builder addCredentials(VariableData credentials) {
+    public Builder addCredentials(CredentialVariableData credentials) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(credentials,
         "credentials cannot be null");
       if (this.credentials == null) {
-        this.credentials = new ArrayList<VariableData>();
+        this.credentials = new ArrayList<CredentialVariableData>();
       }
       this.credentials.add(credentials);
       return this;
     }
 
     /**
-     * Adds an inputs to inputs.
+     * Adds a new element to inputs.
      *
-     * @param inputs the new inputs
+     * @param inputs the new element to be added
      * @return the Action builder
      */
     public Builder addInputs(VariableData inputs) {
@@ -224,9 +249,9 @@ public class Action extends GenericModel {
     }
 
     /**
-     * Adds an outputs to outputs.
+     * Adds a new element to outputs.
      *
-     * @param outputs the new outputs
+     * @param outputs the new element to be added
      * @return the Action builder
      */
     public Builder addOutputs(VariableData outputs) {
@@ -240,9 +265,9 @@ public class Action extends GenericModel {
     }
 
     /**
-     * Adds an settings to settings.
+     * Adds a new element to settings.
      *
-     * @param settings the new settings
+     * @param settings the new element to be added
      * @return the Action builder
      */
     public Builder addSettings(VariableData settings) {
@@ -296,6 +321,28 @@ public class Action extends GenericModel {
      */
     public Builder resourceGroup(String resourceGroup) {
       this.resourceGroup = resourceGroup;
+      return this;
+    }
+
+    /**
+     * Set the bastionConnectionType.
+     *
+     * @param bastionConnectionType the bastionConnectionType
+     * @return the Action builder
+     */
+    public Builder bastionConnectionType(String bastionConnectionType) {
+      this.bastionConnectionType = bastionConnectionType;
+      return this;
+    }
+
+    /**
+     * Set the inventoryConnectionType.
+     *
+     * @param inventoryConnectionType the inventoryConnectionType
+     * @return the Action builder
+     */
+    public Builder inventoryConnectionType(String inventoryConnectionType) {
+      this.inventoryConnectionType = inventoryConnectionType;
       return this;
     }
 
@@ -384,7 +431,7 @@ public class Action extends GenericModel {
      * @param credentials the credentials
      * @return the Action builder
      */
-    public Builder credentials(List<VariableData> credentials) {
+    public Builder credentials(List<CredentialVariableData> credentials) {
       this.credentials = credentials;
       return this;
     }
@@ -406,7 +453,7 @@ public class Action extends GenericModel {
      * @param bastionCredential the bastionCredential
      * @return the Action builder
      */
-    public Builder bastionCredential(VariableData bastionCredential) {
+    public Builder bastionCredential(CredentialVariableData bastionCredential) {
       this.bastionCredential = bastionCredential;
       return this;
     }
@@ -457,35 +504,17 @@ public class Action extends GenericModel {
       this.settings = settings;
       return this;
     }
-
-    /**
-     * Set the state.
-     *
-     * @param state the state
-     * @return the Action builder
-     */
-    public Builder state(ActionState state) {
-      this.state = state;
-      return this;
-    }
-
-    /**
-     * Set the sysLock.
-     *
-     * @param sysLock the sysLock
-     * @return the Action builder
-     */
-    public Builder sysLock(SystemLock sysLock) {
-      this.sysLock = sysLock;
-      return this;
-    }
   }
+
+  protected Action() { }
 
   protected Action(Builder builder) {
     name = builder.name;
     description = builder.description;
     location = builder.location;
     resourceGroup = builder.resourceGroup;
+    bastionConnectionType = builder.bastionConnectionType;
+    inventoryConnectionType = builder.inventoryConnectionType;
     tags = builder.tags;
     userState = builder.userState;
     sourceReadmeUrl = builder.sourceReadmeUrl;
@@ -500,8 +529,6 @@ public class Action extends GenericModel {
     inputs = builder.inputs;
     outputs = builder.outputs;
     settings = builder.settings;
-    state = builder.state;
-    sysLock = builder.sysLock;
   }
 
   /**
@@ -552,12 +579,36 @@ public class Action extends GenericModel {
   /**
    * Gets the resourceGroup.
    *
-   * Resource-group name for an action.  By default, action is created in default resource group.
+   * Resource-group name for an action. By default, an action is created in `Default` resource group.
    *
    * @return the resourceGroup
    */
   public String resourceGroup() {
     return resourceGroup;
+  }
+
+  /**
+   * Gets the bastionConnectionType.
+   *
+   * Type of connection to be used when connecting to bastion host.  If the `inventory_connection_type=winrm`, then
+   * `bastion_connection_type` is not supported.
+   *
+   * @return the bastionConnectionType
+   */
+  public String bastionConnectionType() {
+    return bastionConnectionType;
+  }
+
+  /**
+   * Gets the inventoryConnectionType.
+   *
+   * Type of connection to be used when connecting to remote host.  **Note** Currently, WinRM supports only Windows
+   * system with the public IPs and do not support Bastion host.
+   *
+   * @return the inventoryConnectionType
+   */
+  public String inventoryConnectionType() {
+    return inventoryConnectionType;
   }
 
   /**
@@ -644,7 +695,7 @@ public class Action extends GenericModel {
    *
    * @return the credentials
    */
-  public List<VariableData> credentials() {
+  public List<CredentialVariableData> credentials() {
     return credentials;
   }
 
@@ -662,11 +713,11 @@ public class Action extends GenericModel {
   /**
    * Gets the bastionCredential.
    *
-   * User editable variable data &amp; system generated reference to value.
+   * User editable credential variable data and system generated reference to the value.
    *
    * @return the bastionCredential
    */
-  public VariableData bastionCredential() {
+  public CredentialVariableData bastionCredential() {
     return bastionCredential;
   }
 
@@ -854,7 +905,7 @@ public class Action extends GenericModel {
   /**
    * Gets the playbookNames.
    *
-   * Playbook names retrieved from the respository.
+   * Playbook names retrieved from the repository.
    *
    * @return the playbookNames
    */

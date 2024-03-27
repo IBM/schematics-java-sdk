@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -25,6 +25,7 @@ public class UpdateWorkspaceOptions extends GenericModel {
   protected String wId;
   protected CatalogRef catalogRef;
   protected String description;
+  protected Dependencies dependencies;
   protected String name;
   protected SharedTargetData sharedData;
   protected List<String> tags;
@@ -33,6 +34,7 @@ public class UpdateWorkspaceOptions extends GenericModel {
   protected List<String> type;
   protected WorkspaceStatusUpdateRequest workspaceStatus;
   protected WorkspaceStatusMessage workspaceStatusMsg;
+  protected String agentId;
 
   /**
    * Builder.
@@ -41,6 +43,7 @@ public class UpdateWorkspaceOptions extends GenericModel {
     private String wId;
     private CatalogRef catalogRef;
     private String description;
+    private Dependencies dependencies;
     private String name;
     private SharedTargetData sharedData;
     private List<String> tags;
@@ -49,11 +52,18 @@ public class UpdateWorkspaceOptions extends GenericModel {
     private List<String> type;
     private WorkspaceStatusUpdateRequest workspaceStatus;
     private WorkspaceStatusMessage workspaceStatusMsg;
+    private String agentId;
 
+    /**
+     * Instantiates a new Builder from an existing UpdateWorkspaceOptions instance.
+     *
+     * @param updateWorkspaceOptions the instance to initialize the Builder with
+     */
     private Builder(UpdateWorkspaceOptions updateWorkspaceOptions) {
       this.wId = updateWorkspaceOptions.wId;
       this.catalogRef = updateWorkspaceOptions.catalogRef;
       this.description = updateWorkspaceOptions.description;
+      this.dependencies = updateWorkspaceOptions.dependencies;
       this.name = updateWorkspaceOptions.name;
       this.sharedData = updateWorkspaceOptions.sharedData;
       this.tags = updateWorkspaceOptions.tags;
@@ -62,6 +72,7 @@ public class UpdateWorkspaceOptions extends GenericModel {
       this.type = updateWorkspaceOptions.type;
       this.workspaceStatus = updateWorkspaceOptions.workspaceStatus;
       this.workspaceStatusMsg = updateWorkspaceOptions.workspaceStatusMsg;
+      this.agentId = updateWorkspaceOptions.agentId;
     }
 
     /**
@@ -89,9 +100,9 @@ public class UpdateWorkspaceOptions extends GenericModel {
     }
 
     /**
-     * Adds an tags to tags.
+     * Adds a new element to tags.
      *
-     * @param tags the new tags
+     * @param tags the new element to be added
      * @return the UpdateWorkspaceOptions builder
      */
     public Builder addTags(String tags) {
@@ -105,9 +116,9 @@ public class UpdateWorkspaceOptions extends GenericModel {
     }
 
     /**
-     * Adds an templateData to templateData.
+     * Adds a new element to templateData.
      *
-     * @param templateData the new templateData
+     * @param templateData the new element to be added
      * @return the UpdateWorkspaceOptions builder
      */
     public Builder addTemplateData(TemplateSourceDataRequest templateData) {
@@ -121,9 +132,9 @@ public class UpdateWorkspaceOptions extends GenericModel {
     }
 
     /**
-     * Adds an type to type.
+     * Adds a new element to type.
      *
-     * @param type the new type
+     * @param type the new element to be added
      * @return the UpdateWorkspaceOptions builder
      */
     public Builder addType(String type) {
@@ -166,6 +177,17 @@ public class UpdateWorkspaceOptions extends GenericModel {
      */
     public Builder description(String description) {
       this.description = description;
+      return this;
+    }
+
+    /**
+     * Set the dependencies.
+     *
+     * @param dependencies the dependencies
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public Builder dependencies(Dependencies dependencies) {
+      this.dependencies = dependencies;
       return this;
     }
 
@@ -259,7 +281,20 @@ public class UpdateWorkspaceOptions extends GenericModel {
       this.workspaceStatusMsg = workspaceStatusMsg;
       return this;
     }
+
+    /**
+     * Set the agentId.
+     *
+     * @param agentId the agentId
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public Builder agentId(String agentId) {
+      this.agentId = agentId;
+      return this;
+    }
   }
+
+  protected UpdateWorkspaceOptions() { }
 
   protected UpdateWorkspaceOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.wId,
@@ -267,6 +302,7 @@ public class UpdateWorkspaceOptions extends GenericModel {
     wId = builder.wId;
     catalogRef = builder.catalogRef;
     description = builder.description;
+    dependencies = builder.dependencies;
     name = builder.name;
     sharedData = builder.sharedData;
     tags = builder.tags;
@@ -275,6 +311,7 @@ public class UpdateWorkspaceOptions extends GenericModel {
     type = builder.type;
     workspaceStatus = builder.workspaceStatus;
     workspaceStatusMsg = builder.workspaceStatusMsg;
+    agentId = builder.agentId;
   }
 
   /**
@@ -318,6 +355,17 @@ public class UpdateWorkspaceOptions extends GenericModel {
    */
   public String description() {
     return description;
+  }
+
+  /**
+   * Gets the dependencies.
+   *
+   * Workspace dependencies.
+   *
+   * @return the dependencies
+   */
+  public Dependencies dependencies() {
+    return dependencies;
   }
 
   /**
@@ -407,6 +455,17 @@ public class UpdateWorkspaceOptions extends GenericModel {
    */
   public WorkspaceStatusMessage workspaceStatusMsg() {
     return workspaceStatusMsg;
+  }
+
+  /**
+   * Gets the agentId.
+   *
+   * agent id that process workspace jobs.
+   *
+   * @return the agentId
+   */
+  public String agentId() {
+    return agentId;
   }
 }
 

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -40,6 +40,11 @@ public class JobLogSummaryActionJobRecap extends GenericModel {
     private Double skipped;
     private Double unreachable;
 
+    /**
+     * Instantiates a new Builder from an existing JobLogSummaryActionJobRecap instance.
+     *
+     * @param jobLogSummaryActionJobRecap the instance to initialize the Builder with
+     */
     private Builder(JobLogSummaryActionJobRecap jobLogSummaryActionJobRecap) {
       this.target = jobLogSummaryActionJobRecap.target;
       this.ok = jobLogSummaryActionJobRecap.ok;
@@ -65,9 +70,9 @@ public class JobLogSummaryActionJobRecap extends GenericModel {
     }
 
     /**
-     * Adds an target to target.
+     * Adds a new element to target.
      *
-     * @param target the new target
+     * @param target the new element to be added
      * @return the JobLogSummaryActionJobRecap builder
      */
     public Builder addTarget(String target) {
@@ -147,6 +152,8 @@ public class JobLogSummaryActionJobRecap extends GenericModel {
       return this;
     }
   }
+
+  protected JobLogSummaryActionJobRecap() { }
 
   protected JobLogSummaryActionJobRecap(Builder builder) {
     target = builder.target;

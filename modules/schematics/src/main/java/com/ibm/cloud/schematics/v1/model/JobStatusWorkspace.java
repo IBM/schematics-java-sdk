@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -38,6 +38,12 @@ public class JobStatusWorkspace extends GenericModel {
     String JOB_FAILED = "job_failed";
     /** job_cancelled. */
     String JOB_CANCELLED = "job_cancelled";
+    /** job_stopped. */
+    String JOB_STOPPED = "job_stopped";
+    /** job_stop_in_progress. */
+    String JOB_STOP_IN_PROGRESS = "job_stop_in_progress";
+    /** job_ready_to_execute. */
+    String JOB_READY_TO_EXECUTE = "job_ready_to_execute";
   }
 
   @SerializedName("workspace_name")
@@ -52,6 +58,7 @@ public class JobStatusWorkspace extends GenericModel {
   protected List<JobStatusTemplate> templateStatus;
   @SerializedName("updated_at")
   protected Date updatedAt;
+  protected List<CommandsInfo> commands;
 
   /**
    * Builder.
@@ -64,6 +71,11 @@ public class JobStatusWorkspace extends GenericModel {
     private List<JobStatusTemplate> templateStatus;
     private Date updatedAt;
 
+    /**
+     * Instantiates a new Builder from an existing JobStatusWorkspace instance.
+     *
+     * @param jobStatusWorkspace the instance to initialize the Builder with
+     */
     private Builder(JobStatusWorkspace jobStatusWorkspace) {
       this.workspaceName = jobStatusWorkspace.workspaceName;
       this.statusCode = jobStatusWorkspace.statusCode;
@@ -89,9 +101,9 @@ public class JobStatusWorkspace extends GenericModel {
     }
 
     /**
-     * Adds an templateStatus to templateStatus.
+     * Adds a new element to templateStatus.
      *
-     * @param templateStatus the new templateStatus
+     * @param templateStatus the new element to be added
      * @return the JobStatusWorkspace builder
      */
     public Builder addTemplateStatus(JobStatusTemplate templateStatus) {
@@ -171,6 +183,8 @@ public class JobStatusWorkspace extends GenericModel {
       return this;
     }
   }
+
+  protected JobStatusWorkspace() { }
 
   protected JobStatusWorkspace(Builder builder) {
     workspaceName = builder.workspaceName;
@@ -254,6 +268,17 @@ public class JobStatusWorkspace extends GenericModel {
    */
   public Date updatedAt() {
     return updatedAt;
+  }
+
+  /**
+   * Gets the commands.
+   *
+   * List of terraform commands executed and their status.
+   *
+   * @return the commands
+   */
+  public List<CommandsInfo> commands() {
+    return commands;
   }
 }
 

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -37,6 +37,11 @@ public class SystemLock extends GenericModel {
     private String sysLockedBy;
     private Date sysLockedAt;
 
+    /**
+     * Instantiates a new Builder from an existing SystemLock instance.
+     *
+     * @param systemLock the instance to initialize the Builder with
+     */
     private Builder(SystemLock systemLock) {
       this.sysLocked = systemLock.sysLocked;
       this.sysLockedBy = systemLock.sysLockedBy;
@@ -91,6 +96,8 @@ public class SystemLock extends GenericModel {
       return this;
     }
   }
+
+  protected SystemLock() { }
 
   protected SystemLock(Builder builder) {
     sysLocked = builder.sysLocked;

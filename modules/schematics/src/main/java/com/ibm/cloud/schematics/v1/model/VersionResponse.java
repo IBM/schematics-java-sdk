@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -30,11 +30,13 @@ public class VersionResponse extends GenericModel {
   @SerializedName("helm_version")
   protected String helmVersion;
   @SerializedName("supported_template_types")
-  protected Map<String, Object>[] supportedTemplateTypes;
+  protected Map<String, Object> supportedTemplateTypes;
   @SerializedName("terraform_provider_version")
   protected String terraformProviderVersion;
   @SerializedName("terraform_version")
   protected String terraformVersion;
+
+  protected VersionResponse() { }
 
   /**
    * Gets the builddate.
@@ -98,7 +100,7 @@ public class VersionResponse extends GenericModel {
    *
    * @return the supportedTemplateTypes
    */
-  public Map<String, Object>[] getSupportedTemplateTypes() {
+  public Map<String, Object> getSupportedTemplateTypes() {
     return supportedTemplateTypes;
   }
 

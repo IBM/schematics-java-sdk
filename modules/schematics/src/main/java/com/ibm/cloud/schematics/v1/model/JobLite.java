@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -81,20 +81,10 @@ public class JobLite extends GenericModel {
     String DELETE_WORKSPACE = "delete_workspace";
     /** create_cart. */
     String CREATE_CART = "create_cart";
-    /** create_environment. */
-    String CREATE_ENVIRONMENT = "create_environment";
-    /** put_environment. */
-    String PUT_ENVIRONMENT = "put_environment";
-    /** delete_environment. */
-    String DELETE_ENVIRONMENT = "delete_environment";
-    /** environment_init. */
-    String ENVIRONMENT_INIT = "environment_init";
-    /** environment_install. */
-    String ENVIRONMENT_INSTALL = "environment_install";
-    /** environment_uninstall. */
-    String ENVIRONMENT_UNINSTALL = "environment_uninstall";
     /** repository_process. */
     String REPOSITORY_PROCESS = "repository_process";
+    /** terraform_commands. */
+    String TERRAFORM_COMMANDS = "terraform_commands";
   }
 
   /**
@@ -140,6 +130,11 @@ public class JobLite extends GenericModel {
   protected JobLogSummary logSummary;
   @SerializedName("updated_at")
   protected Date updatedAt;
+  @SerializedName("job_runner_id")
+  protected String jobRunnerId;
+  protected AgentInfo agent;
+
+  protected JobLite() { }
 
   /**
    * Gets the id.
@@ -328,6 +323,28 @@ public class JobLite extends GenericModel {
    */
   public Date getUpdatedAt() {
     return updatedAt;
+  }
+
+  /**
+   * Gets the jobRunnerId.
+   *
+   * ID of the Job Runner.
+   *
+   * @return the jobRunnerId
+   */
+  public String getJobRunnerId() {
+    return jobRunnerId;
+  }
+
+  /**
+   * Gets the agent.
+   *
+   * Agent name, Agent id and associated policy ID information.
+   *
+   * @return the agent
+   */
+  public AgentInfo getAgent() {
+    return agent;
   }
 }
 

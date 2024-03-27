@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -36,6 +36,12 @@ public class JobStatusTemplate extends GenericModel {
     String JOB_FAILED = "job_failed";
     /** job_cancelled. */
     String JOB_CANCELLED = "job_cancelled";
+    /** job_stopped. */
+    String JOB_STOPPED = "job_stopped";
+    /** job_stop_in_progress. */
+    String JOB_STOP_IN_PROGRESS = "job_stop_in_progress";
+    /** job_ready_to_execute. */
+    String JOB_READY_TO_EXECUTE = "job_ready_to_execute";
   }
 
   @SerializedName("template_id")
@@ -62,6 +68,11 @@ public class JobStatusTemplate extends GenericModel {
     private String statusMessage;
     private Date updatedAt;
 
+    /**
+     * Instantiates a new Builder from an existing JobStatusTemplate instance.
+     *
+     * @param jobStatusTemplate the instance to initialize the Builder with
+     */
     private Builder(JobStatusTemplate jobStatusTemplate) {
       this.templateId = jobStatusTemplate.templateId;
       this.templateName = jobStatusTemplate.templateName;
@@ -152,6 +163,8 @@ public class JobStatusTemplate extends GenericModel {
       return this;
     }
   }
+
+  protected JobStatusTemplate() { }
 
   protected JobStatusTemplate(Builder builder) {
     templateId = builder.templateId;

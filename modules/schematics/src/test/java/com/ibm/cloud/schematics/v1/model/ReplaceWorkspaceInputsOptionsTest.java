@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -18,8 +18,6 @@ import com.ibm.cloud.schematics.v1.model.WorkspaceVariableRequest;
 import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -52,15 +50,15 @@ public class ReplaceWorkspaceInputsOptionsTest {
     ReplaceWorkspaceInputsOptions replaceWorkspaceInputsOptionsModel = new ReplaceWorkspaceInputsOptions.Builder()
       .wId("testString")
       .tId("testString")
-      .envValues(new java.util.ArrayList<Object>(java.util.Arrays.asList(TestUtilities.createMockMap())))
+      .envValues(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))
       .values("testString")
-      .variablestore(new java.util.ArrayList<WorkspaceVariableRequest>(java.util.Arrays.asList(workspaceVariableRequestModel)))
+      .variablestore(java.util.Arrays.asList(workspaceVariableRequestModel))
       .build();
     assertEquals(replaceWorkspaceInputsOptionsModel.wId(), "testString");
     assertEquals(replaceWorkspaceInputsOptionsModel.tId(), "testString");
-    assertEquals(replaceWorkspaceInputsOptionsModel.envValues(), new java.util.ArrayList<Object>(java.util.Arrays.asList(TestUtilities.createMockMap())));
+    assertEquals(replaceWorkspaceInputsOptionsModel.envValues(), java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")));
     assertEquals(replaceWorkspaceInputsOptionsModel.values(), "testString");
-    assertEquals(replaceWorkspaceInputsOptionsModel.variablestore(), new java.util.ArrayList<WorkspaceVariableRequest>(java.util.Arrays.asList(workspaceVariableRequestModel)));
+    assertEquals(replaceWorkspaceInputsOptionsModel.variablestore(), java.util.Arrays.asList(workspaceVariableRequestModel));
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

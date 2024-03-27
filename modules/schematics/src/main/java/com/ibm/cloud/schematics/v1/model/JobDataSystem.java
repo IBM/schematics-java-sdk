@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -39,6 +39,11 @@ public class JobDataSystem extends GenericModel {
     private List<String> schematicsResourceId;
     private Date updatedAt;
 
+    /**
+     * Instantiates a new Builder from an existing JobDataSystem instance.
+     *
+     * @param jobDataSystem the instance to initialize the Builder with
+     */
     private Builder(JobDataSystem jobDataSystem) {
       this.keyId = jobDataSystem.keyId;
       this.schematicsResourceId = jobDataSystem.schematicsResourceId;
@@ -61,9 +66,9 @@ public class JobDataSystem extends GenericModel {
     }
 
     /**
-     * Adds an schematicsResourceId to schematicsResourceId.
+     * Adds a new element to schematicsResourceId.
      *
-     * @param schematicsResourceId the new schematicsResourceId
+     * @param schematicsResourceId the new element to be added
      * @return the JobDataSystem builder
      */
     public Builder addSchematicsResourceId(String schematicsResourceId) {
@@ -110,6 +115,8 @@ public class JobDataSystem extends GenericModel {
       return this;
     }
   }
+
+  protected JobDataSystem() { }
 
   protected JobDataSystem(Builder builder) {
     keyId = builder.keyId;

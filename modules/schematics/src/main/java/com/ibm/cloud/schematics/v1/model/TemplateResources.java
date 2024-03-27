@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -12,7 +12,9 @@
  */
 package com.ibm.cloud.schematics.v1.model;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -24,15 +26,18 @@ public class TemplateResources extends GenericModel {
 
   protected String folder;
   protected String id;
+  @SerializedName("generated_at")
+  protected Date generatedAt;
   @SerializedName("null_resources")
-  protected List<Object> nullResources;
+  protected List<Map<String, Object>> nullResources;
   @SerializedName("related_resources")
-  protected List<Object> relatedResources;
-  protected List<Object> resources;
+  protected List<Map<String, Object>> relatedResources;
+  protected List<Map<String, Object>> resources;
   @SerializedName("resources_count")
   protected Long resourcesCount;
-  @SerializedName("template_type")
-  protected String templateType;
+  protected String type;
+
+  protected TemplateResources() { }
 
   /**
    * Gets the folder.
@@ -58,13 +63,24 @@ public class TemplateResources extends GenericModel {
   }
 
   /**
+   * Gets the generatedAt.
+   *
+   * Last refreshed timestamp of the terraform resource.
+   *
+   * @return the generatedAt
+   */
+  public Date getGeneratedAt() {
+    return generatedAt;
+  }
+
+  /**
    * Gets the nullResources.
    *
    * List of null resources.
    *
    * @return the nullResources
    */
-  public List<Object> getNullResources() {
+  public List<Map<String, Object>> getNullResources() {
     return nullResources;
   }
 
@@ -75,7 +91,7 @@ public class TemplateResources extends GenericModel {
    *
    * @return the relatedResources
    */
-  public List<Object> getRelatedResources() {
+  public List<Map<String, Object>> getRelatedResources() {
     return relatedResources;
   }
 
@@ -89,7 +105,7 @@ public class TemplateResources extends GenericModel {
    *
    * @return the resources
    */
-  public List<Object> getResources() {
+  public List<Map<String, Object>> getResources() {
     return resources;
   }
 
@@ -105,14 +121,14 @@ public class TemplateResources extends GenericModel {
   }
 
   /**
-   * Gets the templateType.
+   * Gets the type.
    *
    * The Terraform version that was used to apply your template.
    *
-   * @return the templateType
+   * @return the type
    */
-  public String getTemplateType() {
-    return templateType;
+  public String getType() {
+    return type;
   }
 }
 

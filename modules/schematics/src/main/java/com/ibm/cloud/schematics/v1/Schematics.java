@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -12,7 +12,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.37.0-a85661cd-20210802-190136
+ * IBM OpenAPI SDK Code Generator Version: 3.86.1-c3d7bcef-20240308-215042
  */
 
 package com.ibm.cloud.schematics.v1;
@@ -21,26 +21,49 @@ import com.google.gson.JsonObject;
 import com.ibm.cloud.schematics.common.SdkCommon;
 import com.ibm.cloud.schematics.v1.model.Action;
 import com.ibm.cloud.schematics.v1.model.ActionList;
+import com.ibm.cloud.schematics.v1.model.Agent;
+import com.ibm.cloud.schematics.v1.model.AgentData;
+import com.ibm.cloud.schematics.v1.model.AgentDataList;
+import com.ibm.cloud.schematics.v1.model.AgentDeployJob;
+import com.ibm.cloud.schematics.v1.model.AgentHealthJob;
+import com.ibm.cloud.schematics.v1.model.AgentList;
+import com.ibm.cloud.schematics.v1.model.AgentPRSJob;
+import com.ibm.cloud.schematics.v1.model.AgentVersions;
 import com.ibm.cloud.schematics.v1.model.ApplyWorkspaceCommandOptions;
 import com.ibm.cloud.schematics.v1.model.CreateActionOptions;
+import com.ibm.cloud.schematics.v1.model.CreateAgentDataOptions;
 import com.ibm.cloud.schematics.v1.model.CreateInventoryOptions;
 import com.ibm.cloud.schematics.v1.model.CreateJobOptions;
+import com.ibm.cloud.schematics.v1.model.CreatePolicyOptions;
 import com.ibm.cloud.schematics.v1.model.CreateResourceQueryOptions;
 import com.ibm.cloud.schematics.v1.model.CreateWorkspaceDeletionJobOptions;
 import com.ibm.cloud.schematics.v1.model.CreateWorkspaceOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteActionOptions;
+import com.ibm.cloud.schematics.v1.model.DeleteAgentDataOptions;
+import com.ibm.cloud.schematics.v1.model.DeleteAgentOptions;
+import com.ibm.cloud.schematics.v1.model.DeleteAgentResourcesOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteInventoryOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteJobOptions;
+import com.ibm.cloud.schematics.v1.model.DeletePolicyOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteResourcesQueryOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteWorkspaceActivityOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteWorkspaceOptions;
+import com.ibm.cloud.schematics.v1.model.DeployAgentJobOptions;
 import com.ibm.cloud.schematics.v1.model.DestroyWorkspaceCommandOptions;
 import com.ibm.cloud.schematics.v1.model.ExecuteResourceQueryOptions;
 import com.ibm.cloud.schematics.v1.model.GetActionOptions;
+import com.ibm.cloud.schematics.v1.model.GetAgentDataOptions;
+import com.ibm.cloud.schematics.v1.model.GetAgentOptions;
+import com.ibm.cloud.schematics.v1.model.GetAgentVersionsOptions;
 import com.ibm.cloud.schematics.v1.model.GetAllWorkspaceInputsOptions;
+import com.ibm.cloud.schematics.v1.model.GetDeployAgentJobOptions;
+import com.ibm.cloud.schematics.v1.model.GetHealthCheckAgentJobOptions;
 import com.ibm.cloud.schematics.v1.model.GetInventoryOptions;
+import com.ibm.cloud.schematics.v1.model.GetJobFilesOptions;
 import com.ibm.cloud.schematics.v1.model.GetJobOptions;
 import com.ibm.cloud.schematics.v1.model.GetKmsSettingsOptions;
+import com.ibm.cloud.schematics.v1.model.GetPolicyOptions;
+import com.ibm.cloud.schematics.v1.model.GetPrsAgentJobOptions;
 import com.ibm.cloud.schematics.v1.model.GetResourcesQueryOptions;
 import com.ibm.cloud.schematics.v1.model.GetSchematicsVersionOptions;
 import com.ibm.cloud.schematics.v1.model.GetTemplateActivityLogOptions;
@@ -57,19 +80,24 @@ import com.ibm.cloud.schematics.v1.model.GetWorkspaceReadmeOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceResourcesOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceStateOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceTemplateStateOptions;
+import com.ibm.cloud.schematics.v1.model.HealthCheckAgentJobOptions;
 import com.ibm.cloud.schematics.v1.model.InventoryResourceRecord;
 import com.ibm.cloud.schematics.v1.model.InventoryResourceRecordList;
 import com.ibm.cloud.schematics.v1.model.Job;
+import com.ibm.cloud.schematics.v1.model.JobFileData;
 import com.ibm.cloud.schematics.v1.model.JobList;
 import com.ibm.cloud.schematics.v1.model.JobLog;
 import com.ibm.cloud.schematics.v1.model.KMSDiscovery;
 import com.ibm.cloud.schematics.v1.model.KMSSettings;
 import com.ibm.cloud.schematics.v1.model.ListActionsOptions;
+import com.ibm.cloud.schematics.v1.model.ListAgentDataOptions;
+import com.ibm.cloud.schematics.v1.model.ListAgentOptions;
 import com.ibm.cloud.schematics.v1.model.ListInventoriesOptions;
 import com.ibm.cloud.schematics.v1.model.ListJobLogsOptions;
 import com.ibm.cloud.schematics.v1.model.ListJobsOptions;
 import com.ibm.cloud.schematics.v1.model.ListKmsOptions;
 import com.ibm.cloud.schematics.v1.model.ListLocationsOptions;
+import com.ibm.cloud.schematics.v1.model.ListPolicyOptions;
 import com.ibm.cloud.schematics.v1.model.ListResourceGroupOptions;
 import com.ibm.cloud.schematics.v1.model.ListResourceQueryOptions;
 import com.ibm.cloud.schematics.v1.model.ListSchematicsLocationOptions;
@@ -78,8 +106,12 @@ import com.ibm.cloud.schematics.v1.model.ListWorkspacesOptions;
 import com.ibm.cloud.schematics.v1.model.LogStoreResponseList;
 import com.ibm.cloud.schematics.v1.model.OutputValuesInner;
 import com.ibm.cloud.schematics.v1.model.PlanWorkspaceCommandOptions;
+import com.ibm.cloud.schematics.v1.model.Policy;
+import com.ibm.cloud.schematics.v1.model.PolicyList;
 import com.ibm.cloud.schematics.v1.model.ProcessTemplateMetaDataOptions;
+import com.ibm.cloud.schematics.v1.model.PrsAgentJobOptions;
 import com.ibm.cloud.schematics.v1.model.RefreshWorkspaceCommandOptions;
+import com.ibm.cloud.schematics.v1.model.RegisterAgentOptions;
 import com.ibm.cloud.schematics.v1.model.ReplaceInventoryOptions;
 import com.ibm.cloud.schematics.v1.model.ReplaceResourcesQueryOptions;
 import com.ibm.cloud.schematics.v1.model.ReplaceWorkspaceInputsOptions;
@@ -97,11 +129,14 @@ import com.ibm.cloud.schematics.v1.model.TemplateReadme;
 import com.ibm.cloud.schematics.v1.model.TemplateRepoTarUploadResponse;
 import com.ibm.cloud.schematics.v1.model.TemplateRepoUploadOptions;
 import com.ibm.cloud.schematics.v1.model.TemplateResources;
+import com.ibm.cloud.schematics.v1.model.TemplateStateStore;
 import com.ibm.cloud.schematics.v1.model.TemplateValues;
 import com.ibm.cloud.schematics.v1.model.UpdateActionOptions;
-import com.ibm.cloud.schematics.v1.model.UpdateInventoryOptions;
+import com.ibm.cloud.schematics.v1.model.UpdateAgentDataOptions;
+import com.ibm.cloud.schematics.v1.model.UpdateAgentRegistrationOptions;
 import com.ibm.cloud.schematics.v1.model.UpdateJobOptions;
 import com.ibm.cloud.schematics.v1.model.UpdateKmsSettingsOptions;
+import com.ibm.cloud.schematics.v1.model.UpdatePolicyOptions;
 import com.ibm.cloud.schematics.v1.model.UpdateWorkspaceOptions;
 import com.ibm.cloud.schematics.v1.model.UploadTemplateTarActionOptions;
 import com.ibm.cloud.schematics.v1.model.UserValues;
@@ -131,6 +166,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
 import okhttp3.MultipartBody;
 
 /**
@@ -141,13 +177,20 @@ import okhttp3.MultipartBody;
  * information, refer to [Getting started with IBM Cloud Schematics]
  * (https://cloud.ibm.com/docs/schematics?topic=schematics-getting-started).
  *
- * @version v1
+ * API Version: 1.0
  */
 public class Schematics extends BaseService {
+  private static final Logger LOGGER = Logger.getLogger(Schematics.class.getName());
 
+  /**
+   * Default service name used when configuring the `Schematics` client.
+   */
   public static final String DEFAULT_SERVICE_NAME = "schematics";
 
-  public static final String DEFAULT_SERVICE_URL = "https://schematics-dev.containers.appdomain.cloud";
+  /**
+   * Default service endpoint URL.
+   */
+  public static final String DEFAULT_SERVICE_URL = "https://schematics.cloud.ibm.com";
 
  /**
    * Class method which constructs an instance of the `Schematics` client.
@@ -188,7 +231,14 @@ public class Schematics extends BaseService {
   /**
    * List supported schematics locations.
    *
-   * Retrieve a list of IBM Cloud locations where you can create Schematics workspaces.
+   * Retrieve a list of IBM Cloud locations where you can create the Schematics workspace or action. workspaces.
+   *
+   *   &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *   Schematics support generic authorization for its resources.
+   *   For more information, about Schematics access and permissions,
+   *   see [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param listSchematicsLocationOptions the {@link ListSchematicsLocationOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link List}
@@ -208,7 +258,14 @@ public class Schematics extends BaseService {
   /**
    * List supported schematics locations.
    *
-   * Retrieve a list of IBM Cloud locations where you can create Schematics workspaces.
+   * Retrieve a list of IBM Cloud locations where you can create the Schematics workspace or action. workspaces.
+   *
+   *   &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *   Schematics support generic authorization for its resources.
+   *   For more information, about Schematics access and permissions,
+   *   see [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @return a {@link ServiceCall} with a result of type {@link List}
    */
@@ -217,9 +274,16 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * List supported schematics locations.
+   * List supported locations.
    *
-   * Retrieve a list of IBM Cloud locations where you can work with Schematics objects.
+   * Retrieve a list of IBM Cloud locations where you can work with the Schematics objects.
+   *
+   *   &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *   Schematics support generic authorization for its resources.
+   *   For more information, about Schematics access and permissions,
+   *   see [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param listLocationsOptions the {@link ListLocationsOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link SchematicsLocationsList}
@@ -237,9 +301,16 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * List supported schematics locations.
+   * List supported locations.
    *
-   * Retrieve a list of IBM Cloud locations where you can work with Schematics objects.
+   * Retrieve a list of IBM Cloud locations where you can work with the Schematics objects.
+   *
+   *   &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *   Schematics support generic authorization for its resources.
+   *   For more information, about Schematics access and permissions,
+   *   see [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @return a {@link ServiceCall} with a result of type {@link SchematicsLocationsList}
    */
@@ -251,6 +322,13 @@ public class Schematics extends BaseService {
    * List resource groups.
    *
    * Retrieve a list of IBM Cloud resource groups that your account has access to.
+   *
+   *   &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *   Schematics support generic authorization for its resources.
+   *   For more information, about Schematics access and permissions,
+   *   see [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param listResourceGroupOptions the {@link ListResourceGroupOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link List}
@@ -272,6 +350,13 @@ public class Schematics extends BaseService {
    *
    * Retrieve a list of IBM Cloud resource groups that your account has access to.
    *
+   *   &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *   Schematics support generic authorization for its resources.
+   *   For more information, about Schematics access and permissions,
+   *   see [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
    * @return a {@link ServiceCall} with a result of type {@link List}
    */
   public ServiceCall<List<ResourceGroupResponse>> listResourceGroup() {
@@ -283,10 +368,6 @@ public class Schematics extends BaseService {
    *
    * Retrieve detailed information about the IBM Cloud Schematics API version and the version of the provider plug-ins
    * that the API uses.
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to the workspace ID and the resource group. For more information, about Schematics access and permissions,
-   * see [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param getSchematicsVersionOptions the {@link GetSchematicsVersionOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link VersionResponse}
@@ -308,10 +389,6 @@ public class Schematics extends BaseService {
    *
    * Retrieve detailed information about the IBM Cloud Schematics API version and the version of the provider plug-ins
    * that the API uses.
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to the workspace ID and the resource group. For more information, about Schematics access and permissions,
-   * see [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @return a {@link ServiceCall} with a result of type {@link VersionResponse}
    */
@@ -320,9 +397,17 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * Create metadata by  processing the template.
+   * Get variable metadata by parsing the template.
    *
-   * Create a Template metadata definition.
+   * Get the variable metadata from the template. This metadata can be passed in the payload during Schematics workspace
+   * create or update API call.
+   *
+   *  &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param processTemplateMetaDataOptions the {@link ProcessTemplateMetaDataOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link TemplateMetaDataResponse}
@@ -359,11 +444,15 @@ public class Schematics extends BaseService {
    *
    * Retrieve a list of Schematics workspaces from your IBM Cloud account that you have access to. The list of
    * workspaces that is returned depends on the API endpoint that you use. For example, if you use an API endpoint for a
-   * geography, such as North America, only workspaces that are created in `us-south` or `us-east` are returned. For
-   * more information about supported API endpoints, see [API endpoints](/apidocs/schematics#api-endpoints).
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to the workspace ID and the resource group. For more information, about Schematics access and permissions,
-   * see [Schematics service access roles and required
+   * geography, such as North America, only workspaces that are created in `us-south` or `us-east` are returned.
+   *
+   *  For more information about supported API endpoints, see [API endpoints](/apidocs/schematics#api-endpoints).
+   *
+   *   &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *   Schematics support generic authorization for its resources.
+   *   For more information, about Schematics access and permissions,
+   *   see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param listWorkspacesOptions the {@link ListWorkspacesOptions} containing the options for the call
@@ -385,6 +474,12 @@ public class Schematics extends BaseService {
     if (listWorkspacesOptions.limit() != null) {
       builder.query("limit", String.valueOf(listWorkspacesOptions.limit()));
     }
+    if (listWorkspacesOptions.profile() != null) {
+      builder.query("profile", String.valueOf(listWorkspacesOptions.profile()));
+    }
+    if (listWorkspacesOptions.resourceGroup() != null) {
+      builder.query("resource_group", String.valueOf(listWorkspacesOptions.resourceGroup()));
+    }
     ResponseConverter<WorkspaceResponseList> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<WorkspaceResponseList>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -395,11 +490,15 @@ public class Schematics extends BaseService {
    *
    * Retrieve a list of Schematics workspaces from your IBM Cloud account that you have access to. The list of
    * workspaces that is returned depends on the API endpoint that you use. For example, if you use an API endpoint for a
-   * geography, such as North America, only workspaces that are created in `us-south` or `us-east` are returned. For
-   * more information about supported API endpoints, see [API endpoints](/apidocs/schematics#api-endpoints).
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to the workspace ID and the resource group. For more information, about Schematics access and permissions,
-   * see [Schematics service access roles and required
+   * geography, such as North America, only workspaces that are created in `us-south` or `us-east` are returned.
+   *
+   *  For more information about supported API endpoints, see [API endpoints](/apidocs/schematics#api-endpoints).
+   *
+   *   &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *   Schematics support generic authorization for its resources.
+   *   For more information, about Schematics access and permissions,
+   *   see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @return a {@link ServiceCall} with a result of type {@link WorkspaceResponseList}
@@ -442,12 +541,11 @@ public class Schematics extends BaseService {
    * REFRESH_TOKEN=&lt;refresh_token&gt;`.
    *  * You can use the obtained IAM access token in create workspace `curl` command.
    *
-   *  &lt;h3&gt;Authorization&lt;/h3&gt;
+   *   &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or platform access
-   *  to the workspace ID and the resource group.
-   *  For more information, about Schematics access and permissions,
-   *  see [Schematics service access roles and required
+   *   Schematics support generic authorization for its resources.
+   *   For more information, about Schematics access and permissions,
+   *   see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param createWorkspaceOptions the {@link CreateWorkspaceOptions} containing the options for the call
@@ -471,6 +569,9 @@ public class Schematics extends BaseService {
     }
     if (createWorkspaceOptions.catalogRef() != null) {
       contentJson.add("catalog_ref", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createWorkspaceOptions.catalogRef()));
+    }
+    if (createWorkspaceOptions.dependencies() != null) {
+      contentJson.add("dependencies", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createWorkspaceOptions.dependencies()));
     }
     if (createWorkspaceOptions.description() != null) {
       contentJson.addProperty("description", createWorkspaceOptions.description());
@@ -504,6 +605,9 @@ public class Schematics extends BaseService {
     }
     if (createWorkspaceOptions.workspaceStatus() != null) {
       contentJson.add("workspace_status", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createWorkspaceOptions.workspaceStatus()));
+    }
+    if (createWorkspaceOptions.agentId() != null) {
+      contentJson.addProperty("agent_id", createWorkspaceOptions.agentId());
     }
     builder.bodyJson(contentJson);
     ResponseConverter<WorkspaceResponse> responseConverter =
@@ -545,12 +649,11 @@ public class Schematics extends BaseService {
    * REFRESH_TOKEN=&lt;refresh_token&gt;`.
    *  * You can use the obtained IAM access token in create workspace `curl` command.
    *
-   *  &lt;h3&gt;Authorization&lt;/h3&gt;
+   *   &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or platform access
-   *  to the workspace ID and the resource group.
-   *  For more information, about Schematics access and permissions,
-   *  see [Schematics service access roles and required
+   *   Schematics support generic authorization for its resources.
+   *   For more information, about Schematics access and permissions,
+   *   see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @return a {@link ServiceCall} with a result of type {@link WorkspaceResponse}
@@ -566,9 +669,8 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or platform
-   *  access to the workspace ID and the resource group. For more information,
-   *  about Schematics access and permissions, see [Schematics service access
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see [Schematics service access
    *  roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param getWorkspaceOptions the {@link GetWorkspaceOptions} containing the options for the call
@@ -601,8 +703,7 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or
-   *  platform access to the workspace ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions,
    *  see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -621,12 +722,18 @@ public class Schematics extends BaseService {
       builder.header(header.getKey(), header.getValue());
     }
     builder.header("Accept", "application/json");
+    if (replaceWorkspaceOptions.xGithubToken() != null) {
+      builder.header("X-Github-token", replaceWorkspaceOptions.xGithubToken());
+    }
     final JsonObject contentJson = new JsonObject();
     if (replaceWorkspaceOptions.catalogRef() != null) {
       contentJson.add("catalog_ref", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceWorkspaceOptions.catalogRef()));
     }
     if (replaceWorkspaceOptions.description() != null) {
       contentJson.addProperty("description", replaceWorkspaceOptions.description());
+    }
+    if (replaceWorkspaceOptions.dependencies() != null) {
+      contentJson.add("dependencies", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceWorkspaceOptions.dependencies()));
     }
     if (replaceWorkspaceOptions.name() != null) {
       contentJson.addProperty("name", replaceWorkspaceOptions.name());
@@ -652,6 +759,9 @@ public class Schematics extends BaseService {
     if (replaceWorkspaceOptions.workspaceStatusMsg() != null) {
       contentJson.add("workspace_status_msg", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceWorkspaceOptions.workspaceStatusMsg()));
     }
+    if (replaceWorkspaceOptions.agentId() != null) {
+      contentJson.addProperty("agent_id", replaceWorkspaceOptions.agentId());
+    }
     builder.bodyJson(contentJson);
     ResponseConverter<WorkspaceResponse> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<WorkspaceResponse>() { }.getType());
@@ -671,8 +781,7 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or platform access
-   *  to the workspace ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions,
    *  see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -718,8 +827,7 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or
-   *  platform access to the workspace ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions,
    *  see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -745,6 +853,9 @@ public class Schematics extends BaseService {
     if (updateWorkspaceOptions.description() != null) {
       contentJson.addProperty("description", updateWorkspaceOptions.description());
     }
+    if (updateWorkspaceOptions.dependencies() != null) {
+      contentJson.add("dependencies", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateWorkspaceOptions.dependencies()));
+    }
     if (updateWorkspaceOptions.name() != null) {
       contentJson.addProperty("name", updateWorkspaceOptions.name());
     }
@@ -769,6 +880,9 @@ public class Schematics extends BaseService {
     if (updateWorkspaceOptions.workspaceStatusMsg() != null) {
       contentJson.add("workspace_status_msg", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateWorkspaceOptions.workspaceStatusMsg()));
     }
+    if (updateWorkspaceOptions.agentId() != null) {
+      contentJson.addProperty("agent_id", updateWorkspaceOptions.agentId());
+    }
     builder.bodyJson(contentJson);
     ResponseConverter<WorkspaceResponse> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<WorkspaceResponse>() { }.getType());
@@ -782,8 +896,11 @@ public class Schematics extends BaseService {
    *
    * @param getWorkspaceReadmeOptions the {@link GetWorkspaceReadmeOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link TemplateReadme}
+   * @deprecated this method is deprecated and may be removed in a future release
    */
+   @Deprecated
   public ServiceCall<TemplateReadme> getWorkspaceReadme(GetWorkspaceReadmeOptions getWorkspaceReadmeOptions) {
+    LOGGER.warning("A deprecated operation has been invoked: getWorkspaceReadme");
     com.ibm.cloud.sdk.core.util.Validator.notNull(getWorkspaceReadmeOptions,
       "getWorkspaceReadmeOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -813,9 +930,10 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or platform access to the workspace ID and the
-   * resource group. For more information, about Schematics access and permissions, see [Schematics service access roles
-   * and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions,
+   *  see [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param templateRepoUploadOptions the {@link TemplateRepoUploadOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link TemplateRepoTarUploadResponse}
@@ -823,7 +941,8 @@ public class Schematics extends BaseService {
   public ServiceCall<TemplateRepoTarUploadResponse> templateRepoUpload(TemplateRepoUploadOptions templateRepoUploadOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(templateRepoUploadOptions,
       "templateRepoUploadOptions cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.isTrue((templateRepoUploadOptions.file() != null), "At least one of  or file must be supplied.");
+    com.ibm.cloud.sdk.core.util.Validator.isTrue((templateRepoUploadOptions.file() != null),
+      "At least one of  or file must be supplied.");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("w_id", templateRepoUploadOptions.wId());
     pathParamsMap.put("t_id", templateRepoUploadOptions.tId());
@@ -852,8 +971,7 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or
-   *  platform access to the workspace ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions,
    *  see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -921,8 +1039,7 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or platform
-   *  access to the workspace ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions,
    *  see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -955,7 +1072,7 @@ public class Schematics extends BaseService {
    * @param getWorkspaceInputMetadataOptions the {@link GetWorkspaceInputMetadataOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link List}
    */
-  public ServiceCall<List<Object>> getWorkspaceInputMetadata(GetWorkspaceInputMetadataOptions getWorkspaceInputMetadataOptions) {
+  public ServiceCall<List<Map<String, Object>>> getWorkspaceInputMetadata(GetWorkspaceInputMetadataOptions getWorkspaceInputMetadataOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getWorkspaceInputMetadataOptions,
       "getWorkspaceInputMetadataOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -967,8 +1084,8 @@ public class Schematics extends BaseService {
       builder.header(header.getKey(), header.getValue());
     }
     builder.header("Accept", "application/json");
-    ResponseConverter<List<Object>> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<List<Object>>() { }.getType());
+    ResponseConverter<List<Map<String, Object>>> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<List<Map<String, Object>>>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -1024,6 +1141,7 @@ public class Schematics extends BaseService {
   /**
    * Get Terraform statefile URL.
    *
+   * This API is deprecated, and is replaced by the `GET /v2/jobs/{job_id}/files`, with `file_type` equal `state_file`.
    * Retrieve the URL to the Terraform statefile (`terraform.tfstate`). You use the URL to access the Terraform
    * statefile. The Terraform statefile includes detailed information about the IBM Cloud resources that you provisioned
    * with IBM Cloud Schematics and Schematics uses the file to determine future create, modify, or delete actions for
@@ -1032,16 +1150,18 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or platform access
-   *  to the workspace ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions,
    *  see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param getWorkspaceStateOptions the {@link GetWorkspaceStateOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link StateStoreResponseList}
+   * @deprecated this method is deprecated and may be removed in a future release
    */
+   @Deprecated
   public ServiceCall<StateStoreResponseList> getWorkspaceState(GetWorkspaceStateOptions getWorkspaceStateOptions) {
+    LOGGER.warning("A deprecated operation has been invoked: getWorkspaceState");
     com.ibm.cloud.sdk.core.util.Validator.notNull(getWorkspaceStateOptions,
       "getWorkspaceStateOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -1060,15 +1180,19 @@ public class Schematics extends BaseService {
   /**
    * Show Terraform statefile content.
    *
+   * This API is deprecated, and is replaced by the `GET /v2/jobs/{job_id}/files`, with `file_type` equal `state_file`.
    * Show the content of the Terraform statefile (`terraform.tfstate`) that was created when your Terraform template was
    * applied in IBM Cloud. The statefile holds detailed information about the IBM Cloud resources that were created by
    * IBM Cloud Schematics and Schematics uses the file to determine future create, modify, or delete actions for your
    * resources.
    *
    * @param getWorkspaceTemplateStateOptions the {@link GetWorkspaceTemplateStateOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link List}
+   * @return a {@link ServiceCall} with a result of type {@link TemplateStateStore}
+   * @deprecated this method is deprecated and may be removed in a future release
    */
-  public ServiceCall<Object> getWorkspaceTemplateState(GetWorkspaceTemplateStateOptions getWorkspaceTemplateStateOptions) {
+   @Deprecated
+  public ServiceCall<TemplateStateStore> getWorkspaceTemplateState(GetWorkspaceTemplateStateOptions getWorkspaceTemplateStateOptions) {
+    LOGGER.warning("A deprecated operation has been invoked: getWorkspaceTemplateState");
     com.ibm.cloud.sdk.core.util.Validator.notNull(getWorkspaceTemplateStateOptions,
       "getWorkspaceTemplateStateOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -1080,8 +1204,8 @@ public class Schematics extends BaseService {
       builder.header(header.getKey(), header.getValue());
     }
     builder.header("Accept", "application/json");
-    ResponseConverter<Object> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Object>() { }.getType());
+    ResponseConverter<TemplateStateStore> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<TemplateStateStore>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -1093,16 +1217,18 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or platform access
-   *  to the workspace ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions,
    *  see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param getWorkspaceActivityLogsOptions the {@link GetWorkspaceActivityLogsOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link WorkspaceActivityLogs}
+   * @deprecated this method is deprecated and may be removed in a future release
    */
+   @Deprecated
   public ServiceCall<WorkspaceActivityLogs> getWorkspaceActivityLogs(GetWorkspaceActivityLogsOptions getWorkspaceActivityLogsOptions) {
+    LOGGER.warning("A deprecated operation has been invoked: getWorkspaceActivityLogs");
     com.ibm.cloud.sdk.core.util.Validator.notNull(getWorkspaceActivityLogsOptions,
       "getWorkspaceActivityLogsOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -1127,8 +1253,11 @@ public class Schematics extends BaseService {
    *
    * @param getWorkspaceLogUrlsOptions the {@link GetWorkspaceLogUrlsOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link LogStoreResponseList}
+   * @deprecated this method is deprecated and may be removed in a future release
    */
+   @Deprecated
   public ServiceCall<LogStoreResponseList> getWorkspaceLogUrls(GetWorkspaceLogUrlsOptions getWorkspaceLogUrlsOptions) {
+    LOGGER.warning("A deprecated operation has been invoked: getWorkspaceLogUrls");
     com.ibm.cloud.sdk.core.util.Validator.notNull(getWorkspaceLogUrlsOptions,
       "getWorkspaceLogUrlsOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -1145,15 +1274,16 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * Show logs for the latest action for a workspace template.
+   * Show latest logs for a workspace template.
    *
    * Show the Terraform logs for the most recent job of a template that ran against your workspace.
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or platform access to the workspace ID and the
-   * resource group. For more information, about Schematics access and permissions, see [Schematics service access roles
-   * and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions,
+   *  see [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param getTemplateLogsOptions the {@link GetTemplateLogsOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link String}
@@ -1235,8 +1365,7 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or
-   *  platform access to an action ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions, see
    *  [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -1283,8 +1412,7 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or
-   *  platform access to an action ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions, see
    *  [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -1304,6 +1432,10 @@ public class Schematics extends BaseService {
    * host file already present in your Git repository. For sample templates, see IBM Cloud Automation
    * [templates](https://github.com/Cloud-Schematics).
    *
+   *  The Schematics action API now supports bastion host connection with `non-root` user, and bastion connection type
+   * is marked as optional, when inventory connection type is set as [Windows Remote
+   * Management](https://www.ibm.com/docs/en/license-metric-tool?topic=v-configuring-winrm-hyper-hosts)(`winrm`).
+   *
    *  For more information, about the Schematics create action,
    *  see [ibmcloud schematics action
    * create](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-create-action).
@@ -1313,11 +1445,10 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or
-   *  platform access to an action ID and the resource group.
-   *  For more information, about Schematics access and permissions, see
-   *  [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions.
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions,
+   *  see [Schematics service access roles and required
+   * permissions](/docs/schematics?topic=schematics-access#action-permissions).
    *
    * @param createActionOptions the {@link CreateActionOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link Action}
@@ -1346,6 +1477,12 @@ public class Schematics extends BaseService {
     }
     if (createActionOptions.resourceGroup() != null) {
       contentJson.addProperty("resource_group", createActionOptions.resourceGroup());
+    }
+    if (createActionOptions.bastionConnectionType() != null) {
+      contentJson.addProperty("bastion_connection_type", createActionOptions.bastionConnectionType());
+    }
+    if (createActionOptions.inventoryConnectionType() != null) {
+      contentJson.addProperty("inventory_connection_type", createActionOptions.inventoryConnectionType());
     }
     if (createActionOptions.tags() != null) {
       contentJson.add("tags", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createActionOptions.tags()));
@@ -1389,12 +1526,6 @@ public class Schematics extends BaseService {
     if (createActionOptions.settings() != null) {
       contentJson.add("settings", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createActionOptions.settings()));
     }
-    if (createActionOptions.state() != null) {
-      contentJson.add("state", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createActionOptions.state()));
-    }
-    if (createActionOptions.sysLock() != null) {
-      contentJson.add("sys_lock", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createActionOptions.sysLock()));
-    }
     builder.bodyJson(contentJson);
     ResponseConverter<Action> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Action>() { }.getType());
@@ -1410,6 +1541,10 @@ public class Schematics extends BaseService {
    * host file already present in your Git repository. For sample templates, see IBM Cloud Automation
    * [templates](https://github.com/Cloud-Schematics).
    *
+   *  The Schematics action API now supports bastion host connection with `non-root` user, and bastion connection type
+   * is marked as optional, when inventory connection type is set as [Windows Remote
+   * Management](https://www.ibm.com/docs/en/license-metric-tool?topic=v-configuring-winrm-hyper-hosts)(`winrm`).
+   *
    *  For more information, about the Schematics create action,
    *  see [ibmcloud schematics action
    * create](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-create-action).
@@ -1419,11 +1554,10 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or
-   *  platform access to an action ID and the resource group.
-   *  For more information, about Schematics access and permissions, see
-   *  [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions.
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions,
+   *  see [Schematics service access roles and required
+   * permissions](/docs/schematics?topic=schematics-access#action-permissions).
    *
    * @return a {@link ServiceCall} with a result of type {@link Action}
    */
@@ -1439,8 +1573,7 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or
-   *  platform access to an action ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions, see
    *  [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
@@ -1478,11 +1611,10 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or
-   *  platform access to an action ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions, see
    *  [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions.
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param deleteActionOptions the {@link DeleteActionOptions} containing the options for the call
    * @return a {@link ServiceCall} with a void result
@@ -1515,17 +1647,19 @@ public class Schematics extends BaseService {
    * [Schematics action state
    * diagram](https://cloud.ibm.com/docs/schematics?topic=schematics-action-setup#action-state-diagram).
    *
-   *  **Note** you cannot update the location and region once an action is created.
-   *  Also, make sure your IP addresses are in the
-   * [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses].
+   *  The Schematics action API now supports bastion host connection with `non-root` user, and bastion connection type
+   * is marked as optional, when inventory connection type is set as [Windows Remote
+   * Management](https://www.ibm.com/docs/en/license-metric-tool?topic=v-configuring-winrm-hyper-hosts)(`winrm`).
+   *
+   *  **Note** you cannot update the location and region once an action is created. Also, make sure your IP addresses
+   * are in the [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses].
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or
-   *  platform access to an action ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions, see
    *  [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions.
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param updateActionOptions the {@link UpdateActionOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link Action}
@@ -1556,6 +1690,12 @@ public class Schematics extends BaseService {
     }
     if (updateActionOptions.resourceGroup() != null) {
       contentJson.addProperty("resource_group", updateActionOptions.resourceGroup());
+    }
+    if (updateActionOptions.bastionConnectionType() != null) {
+      contentJson.addProperty("bastion_connection_type", updateActionOptions.bastionConnectionType());
+    }
+    if (updateActionOptions.inventoryConnectionType() != null) {
+      contentJson.addProperty("inventory_connection_type", updateActionOptions.inventoryConnectionType());
     }
     if (updateActionOptions.tags() != null) {
       contentJson.add("tags", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateActionOptions.tags()));
@@ -1599,12 +1739,6 @@ public class Schematics extends BaseService {
     if (updateActionOptions.settings() != null) {
       contentJson.add("settings", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateActionOptions.settings()));
     }
-    if (updateActionOptions.state() != null) {
-      contentJson.add("state", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateActionOptions.state()));
-    }
-    if (updateActionOptions.sysLock() != null) {
-      contentJson.add("sys_lock", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateActionOptions.sysLock()));
-    }
     builder.bodyJson(contentJson);
     ResponseConverter<Action> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Action>() { }.getType());
@@ -1617,10 +1751,12 @@ public class Schematics extends BaseService {
    * Update your template by uploading tape archive file (.tar) file from  your local machine. Before you use this API,
    * you must create an action  without a link to a GitHub or GitLab repository with the `POST /v2/actions` API.
    *
-   * &lt;h3&gt;Authorization&lt;/h3&gt;
-   *   Schematics support generic authorization such as service access or  platform access to an action ID and the
-   * resource group.  For more information, about Schematics access and permissions, see  [Schematics service access
-   * roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions.
+   *  &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions,
+   *  see [Schematics service access roles and required
+   * permissions](/docs/schematics?topic=schematics-access#action-permissions).
    *
    * @param uploadTemplateTarActionOptions the {@link UploadTemplateTarActionOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link TemplateRepoTarUploadResponse}
@@ -1628,7 +1764,8 @@ public class Schematics extends BaseService {
   public ServiceCall<TemplateRepoTarUploadResponse> uploadTemplateTarAction(UploadTemplateTarActionOptions uploadTemplateTarActionOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(uploadTemplateTarActionOptions,
       "uploadTemplateTarActionOptions cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.isTrue((uploadTemplateTarActionOptions.file() != null), "At least one of  or file must be supplied.");
+    com.ibm.cloud.sdk.core.util.Validator.isTrue((uploadTemplateTarActionOptions.file() != null),
+      "At least one of  or file must be supplied.");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("action_id", uploadTemplateTarActionOptions.actionId());
     RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/actions/{action_id}/template_repo_upload", pathParamsMap));
@@ -1650,7 +1787,7 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * List all workspace jobs.
+   * List workspace jobs.
    *
    * Retrieve a list of all jobs that ran against a workspace. Jobs are generated when you use the `apply`, `plan`,
    * `destroy`, and `refresh`,   command API.
@@ -1714,9 +1851,11 @@ public class Schematics extends BaseService {
    * resources that are already applied are not reverted.  If a creation, update, or deletion is currently in progress,
    * Schematics waits for  the job to be completed first. Then, any other resource creations, updates, or  deletions
    * that are included in your Terraform template file are ignored.
-   * &lt;h3&gt;Authorization&lt;/h3&gt;  Schematics supports generic authorization such as service access or platform
-   * access  to the workspace ID and the resource group. For more information, about Schematics  access and permissions,
-   * see [Schematics service access roles and required
+   * &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions,
+   *  see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param deleteWorkspaceActivityOptions the {@link DeleteWorkspaceActivityOptions} containing the options for the call
@@ -1746,9 +1885,8 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or platform access
-   *  to the workspace ID and the resource group. For more information, about Schematics
-   *  access and permissions,
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions,
    *  see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
@@ -1812,8 +1950,7 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or
-   *  platform access to the workspace ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions,
    *  see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -1864,10 +2001,9 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or platform access
-   *   to the workspace ID and the resource group.
-   *   For more information, about Schematics access and permissions,
-   *   see [Schematics service access roles and required
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions,
+   *  see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param destroyWorkspaceCommandOptions the {@link DestroyWorkspaceCommandOptions} containing the options for the call
@@ -1916,8 +2052,7 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or platform access
-   *  to the workspace ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions,
    *  see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -1940,6 +2075,11 @@ public class Schematics extends BaseService {
     if (planWorkspaceCommandOptions.delegatedToken() != null) {
       builder.header("delegated_token", planWorkspaceCommandOptions.delegatedToken());
     }
+    final JsonObject contentJson = new JsonObject();
+    if (planWorkspaceCommandOptions.actionOptions() != null) {
+      contentJson.add("action_options", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(planWorkspaceCommandOptions.actionOptions()));
+    }
+    builder.bodyJson(contentJson);
     ResponseConverter<WorkspaceActivityPlanResult> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<WorkspaceActivityPlanResult>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -1955,8 +2095,7 @@ public class Schematics extends BaseService {
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
    *
-   *  Schematics support generic authorization such as service access or platform access
-   *  to the workspace ID and the resource group.
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions,
    *  see [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -1992,8 +2131,8 @@ public class Schematics extends BaseService {
    * /v2/jobs/{job_id}`, or `DELETE /v2/jobs/{job_id}`.
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
-   *  Schematics support generic authorization such as service access or
-   *  platform access to the job ID and the resource group.
+   *
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions, see
    *  [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -2032,6 +2171,9 @@ public class Schematics extends BaseService {
     if (listJobsOptions.actionId() != null) {
       builder.query("action_id", String.valueOf(listJobsOptions.actionId()));
     }
+    if (listJobsOptions.workspaceId() != null) {
+      builder.query("workspace_id", String.valueOf(listJobsOptions.workspaceId()));
+    }
     if (listJobsOptions.list() != null) {
       builder.query("list", String.valueOf(listJobsOptions.list()));
     }
@@ -2048,8 +2190,8 @@ public class Schematics extends BaseService {
    * /v2/jobs/{job_id}`, or `DELETE /v2/jobs/{job_id}`.
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
-   *  Schematics support generic authorization such as service access or
-   *  platform access to the job ID and the resource group.
+   *
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions, see
    *  [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -2110,6 +2252,9 @@ public class Schematics extends BaseService {
     if (createJobOptions.status() != null) {
       contentJson.add("status", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createJobOptions.status()));
     }
+    if (createJobOptions.cartOrderData() != null) {
+      contentJson.add("cart_order_data", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createJobOptions.cartOrderData()));
+    }
     if (createJobOptions.data() != null) {
       contentJson.add("data", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createJobOptions.data()));
     }
@@ -2118,6 +2263,9 @@ public class Schematics extends BaseService {
     }
     if (createJobOptions.logSummary() != null) {
       contentJson.add("log_summary", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createJobOptions.logSummary()));
+    }
+    if (createJobOptions.agent() != null) {
+      contentJson.add("agent", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createJobOptions.agent()));
     }
     builder.bodyJson(contentJson);
     ResponseConverter<Job> responseConverter =
@@ -2131,8 +2279,8 @@ public class Schematics extends BaseService {
    * Retrieve the detailed information of Job
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
-   *  Schematics support generic authorization such as service access or
-   *  platform access to the job ID and the resource group.
+   *
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions, see
    *  [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -2166,8 +2314,8 @@ public class Schematics extends BaseService {
    * Schematics job.
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
-   *  Schematics support generic authorization such as service access or
-   *  platform access to the job ID and the resource group.
+   *
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions, see
    *  [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -2218,6 +2366,9 @@ public class Schematics extends BaseService {
     if (updateJobOptions.status() != null) {
       contentJson.add("status", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateJobOptions.status()));
     }
+    if (updateJobOptions.cartOrderData() != null) {
+      contentJson.add("cart_order_data", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateJobOptions.cartOrderData()));
+    }
     if (updateJobOptions.data() != null) {
       contentJson.add("data", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateJobOptions.data()));
     }
@@ -2226,6 +2377,9 @@ public class Schematics extends BaseService {
     }
     if (updateJobOptions.logSummary() != null) {
       contentJson.add("log_summary", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateJobOptions.logSummary()));
+    }
+    if (updateJobOptions.agent() != null) {
+      contentJson.add("agent", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateJobOptions.agent()));
     }
     builder.bodyJson(contentJson);
     ResponseConverter<Job> responseConverter =
@@ -2241,8 +2395,8 @@ public class Schematics extends BaseService {
    * update the action or workspace.
    *
    *  &lt;h3&gt;Authorization&lt;/h3&gt;
-   *  Schematics support generic authorization such as service access or
-   *  platform access to the job ID and the resource group.
+   *
+   *  Schematics support generic authorization for its resources.
    *  For more information, about Schematics access and permissions, see
    *  [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
@@ -2274,11 +2428,9 @@ public class Schematics extends BaseService {
   /**
    * Get job logs.
    *
-   * Retrieve the job logs
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or  platform
-   * access to the action ID and the resource group.  For more information, about Schematics access and permissions, see
-   *  [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   * Retrieve the job logs &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization for its
+   * resources. For more information, about Schematics access and permissions, see [Schematics service access roles and
+   * required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param listJobLogsOptions the {@link ListJobLogsOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link JobLog}
@@ -2300,10 +2452,44 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * Delete multiple workspaces.
+   * Get output files from the Job record.
    *
-   * Delete multiple workspaces.  Use ?destroy_resource="true" to destroy the related cloud resources,  otherwise the
-   * resources must be managed outside of Schematics.
+   * Get output files from the Job record. For more information, about the Schematics job status, download job logs, and
+   * download the output files, see [Download Schematics
+   * Job](https://cloud.ibm.com/docs/schematics?topic=schematics-job-download).
+   *
+   * @param getJobFilesOptions the {@link GetJobFilesOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link JobFileData}
+   */
+  public ServiceCall<JobFileData> getJobFiles(GetJobFilesOptions getJobFilesOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getJobFilesOptions,
+      "getJobFilesOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("job_id", getJobFilesOptions.jobId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/jobs/{job_id}/files", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "getJobFiles");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.query("file_type", String.valueOf(getJobFilesOptions.fileType()));
+    ResponseConverter<JobFileData> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<JobFileData>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Delete one or more workspace.
+   *
+   * Delete one or multiple Schematics workspace. Deleting a workspace does not destroy the resources from the
+   * Schematics workspace.
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see
+   *    [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param createWorkspaceDeletionJobOptions the {@link CreateWorkspaceDeletionJobOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link WorkspaceBulkDeleteResponse}
@@ -2318,24 +2504,15 @@ public class Schematics extends BaseService {
     }
     builder.header("Accept", "application/json");
     builder.header("refresh_token", createWorkspaceDeletionJobOptions.refreshToken());
-    if (createWorkspaceDeletionJobOptions.destroyResources() != null) {
-      builder.query("destroy_resources", String.valueOf(createWorkspaceDeletionJobOptions.destroyResources()));
-    }
     final JsonObject contentJson = new JsonObject();
-    if (createWorkspaceDeletionJobOptions.newDeleteWorkspaces() != null) {
-      contentJson.addProperty("delete_workspaces", createWorkspaceDeletionJobOptions.newDeleteWorkspaces());
+    if (createWorkspaceDeletionJobOptions.job() != null) {
+      contentJson.addProperty("job", createWorkspaceDeletionJobOptions.job());
     }
-    if (createWorkspaceDeletionJobOptions.newDestroyResources() != null) {
-      contentJson.addProperty("destroy_resources", createWorkspaceDeletionJobOptions.newDestroyResources());
+    if (createWorkspaceDeletionJobOptions.version() != null) {
+      contentJson.addProperty("version", createWorkspaceDeletionJobOptions.version());
     }
-    if (createWorkspaceDeletionJobOptions.newJob() != null) {
-      contentJson.addProperty("job", createWorkspaceDeletionJobOptions.newJob());
-    }
-    if (createWorkspaceDeletionJobOptions.newVersion() != null) {
-      contentJson.addProperty("version", createWorkspaceDeletionJobOptions.newVersion());
-    }
-    if (createWorkspaceDeletionJobOptions.newWorkspaces() != null) {
-      contentJson.add("workspaces", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createWorkspaceDeletionJobOptions.newWorkspaces()));
+    if (createWorkspaceDeletionJobOptions.workspaces() != null) {
+      contentJson.add("workspaces", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createWorkspaceDeletionJobOptions.workspaces()));
     }
     builder.bodyJson(contentJson);
     ResponseConverter<WorkspaceBulkDeleteResponse> responseConverter =
@@ -2346,7 +2523,14 @@ public class Schematics extends BaseService {
   /**
    * Get the workspace deletion job status.
    *
-   * Get the workspace deletion job status.
+   * Retrieve detailed information for a workspace deletion job status.
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see
+   *    [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param getWorkspaceDeletionJobStatusOptions the {@link GetWorkspaceDeletionJobStatusOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link WorkspaceJobResponse}
@@ -2368,16 +2552,19 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * List all inventory definitions.
+   * List inventory definitions.
    *
    * Retrieve a list of all Schematics inventories that depends on the API endpoint that you have access. For example,
    * if you use an API endpoint for a geography, such as North America, only inventories that are created in `us-south`
    * or `us-east` are retrieved. For more information, about supported API endpoints, see
    * [APIendpoints](/apidocs/schematics#api-endpoints).
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions, see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   *
+   *  &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param listInventoriesOptions the {@link ListInventoriesOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecordList}
@@ -2410,16 +2597,19 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * List all inventory definitions.
+   * List inventory definitions.
    *
    * Retrieve a list of all Schematics inventories that depends on the API endpoint that you have access. For example,
    * if you use an API endpoint for a geography, such as North America, only inventories that are created in `us-south`
    * or `us-east` are retrieved. For more information, about supported API endpoints, see
    * [APIendpoints](/apidocs/schematics#api-endpoints).
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions, see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   *
+   *  &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecordList}
    */
@@ -2433,14 +2623,18 @@ public class Schematics extends BaseService {
    * Create an IBM Cloud Schematics inventory as a single IBM Cloud resource where you want to run Ansible playbook by
    * using Schematics actions. For more information, about inventory host groups, refer to [creating static and dynamic
    * inventory for Schematics actions](https://cloud.ibm.com/docs/schematics?topic=schematics-inventories-setup).
-   * **Note** you cannot update the location and region, resource group once an action is created.  Also, make sure your
+   *
+   *  **Note** you cannot update the location and region, resource group once an action is created. Also, make sure your
    * IP addresses are in the [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
-   * If your Git repository already contains a host file. Schematics does not  overwrite the host file already present
+   *  If your Git repository already contains a host file. Schematics does not overwrite the host file already present
    * in your Git repository.
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions, see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   *
+   *  &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param createInventoryOptions the {@link CreateInventoryOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecord}
@@ -2485,14 +2679,18 @@ public class Schematics extends BaseService {
    * Create an IBM Cloud Schematics inventory as a single IBM Cloud resource where you want to run Ansible playbook by
    * using Schematics actions. For more information, about inventory host groups, refer to [creating static and dynamic
    * inventory for Schematics actions](https://cloud.ibm.com/docs/schematics?topic=schematics-inventories-setup).
-   * **Note** you cannot update the location and region, resource group once an action is created.  Also, make sure your
+   *
+   *  **Note** you cannot update the location and region, resource group once an action is created. Also, make sure your
    * IP addresses are in the [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
-   * If your Git repository already contains a host file. Schematics does not  overwrite the host file already present
+   *  If your Git repository already contains a host file. Schematics does not overwrite the host file already present
    * in your Git repository.
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions, see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   *
+   *  &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecord}
    */
@@ -2501,19 +2699,22 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * Get the inventory definition.
+   * Get an inventory definition.
    *
    * Use this API to retrieve the detailed information for a resource inventory definition used to target an action in
    * your IBM Cloud account. For more information, about inventory get, refer to [ibmcloud schematics inventory
    * get](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-get-inv).
+   *
    *  **Note** you can fetch only the location and region, resource group from where your inventory is created.
    *  Also, make sure your IP addresses are in the
    * [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
    *
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions, see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   *  &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param getInventoryOptions the {@link GetInventoryOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecord}
@@ -2529,25 +2730,31 @@ public class Schematics extends BaseService {
       builder.header(header.getKey(), header.getValue());
     }
     builder.header("Accept", "application/json");
+    if (getInventoryOptions.profile() != null) {
+      builder.query("profile", String.valueOf(getInventoryOptions.profile()));
+    }
     ResponseConverter<InventoryResourceRecord> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<InventoryResourceRecord>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
   /**
-   * Replace an inventory definition.
+   * Update an inventory definition.
    *
    * Use this API to update the inventory definition resource used to target an action. For more information, about
    * inventory update, refer to [ibmcloud schematics inventory
    * update](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-update-inv).
+   *
    *  **Note** you cannot update the location and region, resource group once an action is created.
    *  Also, make sure your IP addresses are in the
    * [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
    *
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions, see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   *  &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param replaceInventoryOptions the {@link ReplaceInventoryOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecord}
@@ -2589,19 +2796,22 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * Delete inventory definition.
+   * Delete an inventory definition.
    *
    * Use this API to delete the resource inventory definition by using the inventory ID that you want to run against.
    * For more information, about inventory delete, refer to [ibmcloud schematics inventory
    * delete](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-delete-inventory).
-   *  **Note** you cannot delete the location and region, resource group from where your inventory is created.
-   *  Also, make sure your IP addresses are in the
+   *
+   *  **Note** you cannot delete the location and region, resource group from where your inventory is created. Also,
+   * make sure your IP addresses are in the
    * [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
    *
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions, see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   *  &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param deleteInventoryOptions the {@link DeleteInventoryOptions} containing the options for the call
    * @return a {@link ServiceCall} with a void result
@@ -2627,60 +2837,18 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * Update the inventory definition.
-   *
-   * Update the resource inventory definition.
-   *
-   * @param updateInventoryOptions the {@link UpdateInventoryOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link InventoryResourceRecord}
-   */
-  public ServiceCall<InventoryResourceRecord> updateInventory(UpdateInventoryOptions updateInventoryOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(updateInventoryOptions,
-      "updateInventoryOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("inventory_id", updateInventoryOptions.inventoryId());
-    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/inventories/{inventory_id}", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "updateInventory");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    final JsonObject contentJson = new JsonObject();
-    if (updateInventoryOptions.name() != null) {
-      contentJson.addProperty("name", updateInventoryOptions.name());
-    }
-    if (updateInventoryOptions.description() != null) {
-      contentJson.addProperty("description", updateInventoryOptions.description());
-    }
-    if (updateInventoryOptions.location() != null) {
-      contentJson.addProperty("location", updateInventoryOptions.location());
-    }
-    if (updateInventoryOptions.resourceGroup() != null) {
-      contentJson.addProperty("resource_group", updateInventoryOptions.resourceGroup());
-    }
-    if (updateInventoryOptions.inventoriesIni() != null) {
-      contentJson.addProperty("inventories_ini", updateInventoryOptions.inventoriesIni());
-    }
-    if (updateInventoryOptions.resourceQueries() != null) {
-      contentJson.add("resource_queries", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateInventoryOptions.resourceQueries()));
-    }
-    builder.bodyJson(contentJson);
-    ResponseConverter<InventoryResourceRecord> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<InventoryResourceRecord>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
    * List resource queries.
    *
    * Retrieve the list of resource query definitions that you have access to.  The list of resource queries that is
    * returned depends on the API  endpoint that you use. For example, if you use an API endpoint for a geography, such
    * as North America, only resource query definitions that are created in `us-south` or `us-east` are retrieved. For
    * more information, about supported API endpoints, see [API endpoints](/apidocs/schematics#api-endpoints).
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions,  see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   * &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param listResourceQueryOptions the {@link ListResourceQueryOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ResourceQueryRecordList}
@@ -2719,10 +2887,12 @@ public class Schematics extends BaseService {
    * returned depends on the API  endpoint that you use. For example, if you use an API endpoint for a geography, such
    * as North America, only resource query definitions that are created in `us-south` or `us-east` are retrieved. For
    * more information, about supported API endpoints, see [API endpoints](/apidocs/schematics#api-endpoints).
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions,  see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   * &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @return a {@link ServiceCall} with a result of type {@link ResourceQueryRecordList}
    */
@@ -2741,10 +2911,12 @@ public class Schematics extends BaseService {
    * IP addresses are  in the [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
    * If your Git repository already contains a host file.  Schematics does not overwrite the host file already present
    * in your Git repository.
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions,  see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   * &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param createResourceQueryOptions the {@link CreateResourceQueryOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ResourceQueryRecord}
@@ -2785,10 +2957,12 @@ public class Schematics extends BaseService {
    * IP addresses are  in the [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
    * If your Git repository already contains a host file.  Schematics does not overwrite the host file already present
    * in your Git repository.
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions,  see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   * &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @return a {@link ServiceCall} with a result of type {@link ResourceQueryRecord}
    */
@@ -2802,10 +2976,12 @@ public class Schematics extends BaseService {
    * Use this API to retrieve the information resource query by Id.  For more information, about resource query
    * commands, refer to  [ibmcloud schematics resource query
    * get](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-get-rq).
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions,  see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   * &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param getResourcesQueryOptions the {@link GetResourcesQueryOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ResourceQueryRecord}
@@ -2827,18 +3003,20 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * Replace resources query definition.
+   * Update resources query definition.
    *
-   * Use this API to replace the resource query definition used to build  the dynamic inventory for the Schematics
+   * Use this API to update the resource query definition used to build  the dynamic inventory for the Schematics
    * Action.  For more information, about resource query commands, refer to [ibmcloud schematics resource query
    * update](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-update-rq).
    * **Note** you cannot update the location and region, resource group  once a resource query is created. Also, make
    * sure your IP addresses  are in the
    * [allowlist](https://cloud.ibm.com/docs/schematics?topic=schematics-allowed-ipaddresses).
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions,  see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   * &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param replaceResourcesQueryOptions the {@link ReplaceResourcesQueryOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ResourceQueryRecord}
@@ -2901,10 +3079,12 @@ public class Schematics extends BaseService {
    * refer to  [ibmcloud schematics resource query
    * delete](https://cloud.ibm.com/docs/schematics?topic=schematics-schematics-cli-reference#schematics-delete-resource-query).
    *
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to an action ID and the resource group. For more information, about Schematics access and permissions,  see
-   * [Schematics service access roles and required
-   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#action-permissions).
+   * &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param deleteResourcesQueryOptions the {@link DeleteResourcesQueryOptions} containing the options for the call
    * @return a {@link ServiceCall} with a void result
@@ -2930,16 +3110,773 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * Get KMS settings.
+   * Get all registered/unregistered agents in the Account.
    *
-   * Retrieve the KMS on the API endpoint that you have access. For example, if you use an API endpoint for a geography,
-   * such as North America, only Schematics resource that are created in `us-south` or `us-east` are retrieved.
+   * Get all registered or unregistered agents, in the Account.
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param listAgentOptions the {@link ListAgentOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link AgentList}
+   * @deprecated this method is deprecated and may be removed in a future release
+   */
+   @Deprecated
+  public ServiceCall<AgentList> listAgent(ListAgentOptions listAgentOptions) {
+    LOGGER.warning("A deprecated operation has been invoked: listAgent");
+    if (listAgentOptions == null) {
+      listAgentOptions = new ListAgentOptions.Builder().build();
+    }
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/settings/agents"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "listAgent");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (listAgentOptions.offset() != null) {
+      builder.query("offset", String.valueOf(listAgentOptions.offset()));
+    }
+    if (listAgentOptions.limit() != null) {
+      builder.query("limit", String.valueOf(listAgentOptions.limit()));
+    }
+    if (listAgentOptions.profile() != null) {
+      builder.query("profile", String.valueOf(listAgentOptions.profile()));
+    }
+    if (listAgentOptions.filter() != null) {
+      builder.query("filter", String.valueOf(listAgentOptions.filter()));
+    }
+    ResponseConverter<AgentList> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<AgentList>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get all registered/unregistered agents in the Account.
+   *
+   * Get all registered or unregistered agents, in the Account.
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @return a {@link ServiceCall} with a result of type {@link AgentList}
+   * @deprecated this method is deprecated and may be removed in a future release
+   */
+  @Deprecated
+  public ServiceCall<AgentList> listAgent() {
+    return listAgent(null);
+  }
+
+  /**
+   * Register the agent with schematics.
+   *
+   * Register the agent with schematics
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param registerAgentOptions the {@link RegisterAgentOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link Agent}
+   * @deprecated this method is deprecated and may be removed in a future release
+   */
+   @Deprecated
+  public ServiceCall<Agent> registerAgent(RegisterAgentOptions registerAgentOptions) {
+    LOGGER.warning("A deprecated operation has been invoked: registerAgent");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(registerAgentOptions,
+      "registerAgentOptions cannot be null");
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/settings/agents"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "registerAgent");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    final JsonObject contentJson = new JsonObject();
+    contentJson.addProperty("name", registerAgentOptions.name());
+    contentJson.addProperty("agent_location", registerAgentOptions.agentLocation());
+    contentJson.addProperty("location", registerAgentOptions.location());
+    contentJson.addProperty("profile_id", registerAgentOptions.profileId());
+    if (registerAgentOptions.description() != null) {
+      contentJson.addProperty("description", registerAgentOptions.description());
+    }
+    if (registerAgentOptions.resourceGroup() != null) {
+      contentJson.addProperty("resource_group", registerAgentOptions.resourceGroup());
+    }
+    if (registerAgentOptions.tags() != null) {
+      contentJson.add("tags", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(registerAgentOptions.tags()));
+    }
+    if (registerAgentOptions.userState() != null) {
+      contentJson.add("user_state", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(registerAgentOptions.userState()));
+    }
+    builder.bodyJson(contentJson);
+    ResponseConverter<Agent> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Agent>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get the registered agent details.
+   *
+   * Reterive list the registered agent details
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param getAgentOptions the {@link GetAgentOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link Agent}
+   * @deprecated this method is deprecated and may be removed in a future release
+   */
+   @Deprecated
+  public ServiceCall<Agent> getAgent(GetAgentOptions getAgentOptions) {
+    LOGGER.warning("A deprecated operation has been invoked: getAgent");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getAgentOptions,
+      "getAgentOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("agent_id", getAgentOptions.agentId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/settings/agents/{agent_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "getAgent");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (getAgentOptions.profile() != null) {
+      builder.query("profile", String.valueOf(getAgentOptions.profile()));
+    }
+    ResponseConverter<Agent> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Agent>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Deregister the agent.
+   *
+   * Deregistering an agent.
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param deleteAgentOptions the {@link DeleteAgentOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a void result
+   * @deprecated this method is deprecated and may be removed in a future release
+   */
+   @Deprecated
+  public ServiceCall<Void> deleteAgent(DeleteAgentOptions deleteAgentOptions) {
+    LOGGER.warning("A deprecated operation has been invoked: deleteAgent");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(deleteAgentOptions,
+      "deleteAgentOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("agent_id", deleteAgentOptions.agentId());
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/settings/agents/{agent_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "deleteAgent");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Update the agent registration.
+   *
+   * Update the agent registeration.
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param updateAgentRegistrationOptions the {@link UpdateAgentRegistrationOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link Agent}
+   * @deprecated this method is deprecated and may be removed in a future release
+   */
+   @Deprecated
+  public ServiceCall<Agent> updateAgentRegistration(UpdateAgentRegistrationOptions updateAgentRegistrationOptions) {
+    LOGGER.warning("A deprecated operation has been invoked: updateAgentRegistration");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(updateAgentRegistrationOptions,
+      "updateAgentRegistrationOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("agent_id", updateAgentRegistrationOptions.agentId());
+    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/settings/agents/{agent_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "updateAgentRegistration");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    final JsonObject contentJson = new JsonObject();
+    contentJson.addProperty("name", updateAgentRegistrationOptions.name());
+    contentJson.addProperty("agent_location", updateAgentRegistrationOptions.agentLocation());
+    contentJson.addProperty("location", updateAgentRegistrationOptions.location());
+    contentJson.addProperty("profile_id", updateAgentRegistrationOptions.profileId());
+    if (updateAgentRegistrationOptions.description() != null) {
+      contentJson.addProperty("description", updateAgentRegistrationOptions.description());
+    }
+    if (updateAgentRegistrationOptions.resourceGroup() != null) {
+      contentJson.addProperty("resource_group", updateAgentRegistrationOptions.resourceGroup());
+    }
+    if (updateAgentRegistrationOptions.tags() != null) {
+      contentJson.add("tags", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateAgentRegistrationOptions.tags()));
+    }
+    if (updateAgentRegistrationOptions.userState() != null) {
+      contentJson.add("user_state", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateAgentRegistrationOptions.userState()));
+    }
+    builder.bodyJson(contentJson);
+    ResponseConverter<Agent> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Agent>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * List agents.
+   *
+   * Retrieve a list of Schematics agents from your IBM Cloud account that you have access to. The list of agents that
+   * is returned depends on the API endpoint that you use. For example, if you use an API endpoint for a geography, such
+   * as North America, only agents that are created in `us-south or `us-east` are returned. For more information about
+   * frequently asked questions, see [FAQ](https://cloud.ibm.com/docs/schematics?topic=schematics-faqs-agent) and
+   * [Troubleshooting guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found). For more
+   * information about supported API endpoints, see [API
+   * endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param listAgentDataOptions the {@link ListAgentDataOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link AgentDataList}
+   */
+  public ServiceCall<AgentDataList> listAgentData(ListAgentDataOptions listAgentDataOptions) {
+    if (listAgentDataOptions == null) {
+      listAgentDataOptions = new ListAgentDataOptions.Builder().build();
+    }
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/agents"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "listAgentData");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (listAgentDataOptions.offset() != null) {
+      builder.query("offset", String.valueOf(listAgentDataOptions.offset()));
+    }
+    if (listAgentDataOptions.limit() != null) {
+      builder.query("limit", String.valueOf(listAgentDataOptions.limit()));
+    }
+    if (listAgentDataOptions.profile() != null) {
+      builder.query("profile", String.valueOf(listAgentDataOptions.profile()));
+    }
+    if (listAgentDataOptions.filter() != null) {
+      builder.query("filter", String.valueOf(listAgentDataOptions.filter()));
+    }
+    ResponseConverter<AgentDataList> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<AgentDataList>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * List agents.
+   *
+   * Retrieve a list of Schematics agents from your IBM Cloud account that you have access to. The list of agents that
+   * is returned depends on the API endpoint that you use. For example, if you use an API endpoint for a geography, such
+   * as North America, only agents that are created in `us-south or `us-east` are returned. For more information about
+   * frequently asked questions, see [FAQ](https://cloud.ibm.com/docs/schematics?topic=schematics-faqs-agent) and
+   * [Troubleshooting guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found). For more
+   * information about supported API endpoints, see [API
+   * endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @return a {@link ServiceCall} with a result of type {@link AgentDataList}
+   */
+  public ServiceCall<AgentDataList> listAgentData() {
+    return listAgentData(null);
+  }
+
+  /**
+   * Create an agent.
+   *
+   * Subsequently, create an agent definition to manage the agent deployment with the agent configuration that will be
+   * used to deploy your agent to its target location.
+   * **Getting API endpoint**:-
+   * * The Schematics API endpoint that you use to create the agent determines where your Schematics agent run and your
+   * data is stored. For more information about supported API endpoints, see [API
+   * endpoints](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints). * If you use the API endpoint for a
+   * geography and not a specific location, such as North America, you can specify the location in your API request
+   * body. * If you do not specify the location in the request body, Schematics determines your agent location based on
+   * availability. * If you use an API endpoint for a specific location, such as Frankfurt, the location that you enter
+   * in your API request body must match your API endpoint. * You also have the option to not specify a location in your
+   * API request body if you use a location-specific API endpoint. * Follow the
+   * [steps](https://cloud.ibm.com/docs/schematics?topic=schematics-setup-api#cs_api) to retrieve your IAM access token
+   * and authenticate with IBM Cloud Schematics by using the API. * For more information about frequently asked
+   * questions, see [FAQ](https://cloud.ibm.com/docs/schematics?topic=schematics-faqs-agent) and [Troubleshooting
+   * guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found).
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param createAgentDataOptions the {@link CreateAgentDataOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link AgentData}
+   */
+  public ServiceCall<AgentData> createAgentData(CreateAgentDataOptions createAgentDataOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(createAgentDataOptions,
+      "createAgentDataOptions cannot be null");
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/agents"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "createAgentData");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    final JsonObject contentJson = new JsonObject();
+    contentJson.addProperty("name", createAgentDataOptions.name());
+    contentJson.addProperty("resource_group", createAgentDataOptions.resourceGroup());
+    contentJson.addProperty("version", createAgentDataOptions.version());
+    contentJson.addProperty("schematics_location", createAgentDataOptions.schematicsLocation());
+    contentJson.addProperty("agent_location", createAgentDataOptions.agentLocation());
+    contentJson.add("agent_infrastructure", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createAgentDataOptions.agentInfrastructure()));
+    if (createAgentDataOptions.description() != null) {
+      contentJson.addProperty("description", createAgentDataOptions.description());
+    }
+    if (createAgentDataOptions.tags() != null) {
+      contentJson.add("tags", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createAgentDataOptions.tags()));
+    }
+    if (createAgentDataOptions.agentMetadata() != null) {
+      contentJson.add("agent_metadata", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createAgentDataOptions.agentMetadata()));
+    }
+    if (createAgentDataOptions.agentInputs() != null) {
+      contentJson.add("agent_inputs", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createAgentDataOptions.agentInputs()));
+    }
+    if (createAgentDataOptions.userState() != null) {
+      contentJson.add("user_state", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createAgentDataOptions.userState()));
+    }
+    if (createAgentDataOptions.agentKpi() != null) {
+      contentJson.add("agent_kpi", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createAgentDataOptions.agentKpi()));
+    }
+    builder.bodyJson(contentJson);
+    ResponseConverter<AgentData> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<AgentData>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get agent details.
+   *
+   * Retrieve a detailed configuration of an agent with a specific agent ID. The agent that is returned depends on the
+   * API endpoint that you use. For example, if you use an API endpoint for a geography, such as North America, only
+   * agents that are created in `us-south or `us-east` are returned. For more information about frequently asked
+   * questions, see [FAQ](https://cloud.ibm.com/docs/schematics?topic=schematics-faqs-agent) and [Troubleshooting
+   * guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found). For more information about
+   * supported API endpoints, see [API endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param getAgentDataOptions the {@link GetAgentDataOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link AgentData}
+   */
+  public ServiceCall<AgentData> getAgentData(GetAgentDataOptions getAgentDataOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getAgentDataOptions,
+      "getAgentDataOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("agent_id", getAgentDataOptions.agentId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/agents/{agent_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "getAgentData");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (getAgentDataOptions.profile() != null) {
+      builder.query("profile", String.valueOf(getAgentDataOptions.profile()));
+    }
+    ResponseConverter<AgentData> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<AgentData>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Update agent.
+   *
+   * Use update agent API to update or replace the entire agent. For more information about steps to apply `UPDATE` and
+   * `PUT` command, see [Deploying
+   * agent](https://cloud.ibm.com/docs/schematics?topic=schematics-deploy-agent-overview&amp;interface=api). For more
+   * information about supported API endpoints, see [API
+   * endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param updateAgentDataOptions the {@link UpdateAgentDataOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link AgentData}
+   */
+  public ServiceCall<AgentData> updateAgentData(UpdateAgentDataOptions updateAgentDataOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(updateAgentDataOptions,
+      "updateAgentDataOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("agent_id", updateAgentDataOptions.agentId());
+    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/agents/{agent_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "updateAgentData");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (updateAgentDataOptions.refreshToken() != null) {
+      builder.header("refresh_token", updateAgentDataOptions.refreshToken());
+    }
+    final JsonObject contentJson = new JsonObject();
+    contentJson.addProperty("name", updateAgentDataOptions.name());
+    contentJson.addProperty("resource_group", updateAgentDataOptions.resourceGroup());
+    contentJson.addProperty("version", updateAgentDataOptions.version());
+    contentJson.addProperty("schematics_location", updateAgentDataOptions.schematicsLocation());
+    contentJson.addProperty("agent_location", updateAgentDataOptions.agentLocation());
+    contentJson.add("agent_infrastructure", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateAgentDataOptions.agentInfrastructure()));
+    if (updateAgentDataOptions.description() != null) {
+      contentJson.addProperty("description", updateAgentDataOptions.description());
+    }
+    if (updateAgentDataOptions.tags() != null) {
+      contentJson.add("tags", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateAgentDataOptions.tags()));
+    }
+    if (updateAgentDataOptions.agentMetadata() != null) {
+      contentJson.add("agent_metadata", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateAgentDataOptions.agentMetadata()));
+    }
+    if (updateAgentDataOptions.agentInputs() != null) {
+      contentJson.add("agent_inputs", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateAgentDataOptions.agentInputs()));
+    }
+    if (updateAgentDataOptions.userState() != null) {
+      contentJson.add("user_state", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateAgentDataOptions.userState()));
+    }
+    if (updateAgentDataOptions.agentKpi() != null) {
+      contentJson.add("agent_kpi", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateAgentDataOptions.agentKpi()));
+    }
+    builder.bodyJson(contentJson);
+    ResponseConverter<AgentData> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<AgentData>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Delete agent.
+   *
+   * Use this API to disable and delete the agent. Follow the
+   * [steps](https://cloud.ibm.com/docs/schematics?topic=schematics-setup-api#cs_api) to retrieve your IAM access token
+   * and authenticate with IBM Cloud Schematics by using the API. For more information about frequently asked questions,
+   * see [FAQ](/docs/schematics?topic=schematics-faqs-agent) and [Troubleshooting
+   * guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found).
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param deleteAgentDataOptions the {@link DeleteAgentDataOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a void result
+   */
+  public ServiceCall<Void> deleteAgentData(DeleteAgentDataOptions deleteAgentDataOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(deleteAgentDataOptions,
+      "deleteAgentDataOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("agent_id", deleteAgentDataOptions.agentId());
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/agents/{agent_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "deleteAgentData");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get agent versions.
+   *
+   * Retrieve the list of agent version's available to be deployed. For more information about supported API endpoints,
+   * see [API endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param getAgentVersionsOptions the {@link GetAgentVersionsOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link AgentVersions}
+   */
+  public ServiceCall<AgentVersions> getAgentVersions(GetAgentVersionsOptions getAgentVersionsOptions) {
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/agents/versions"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "getAgentVersions");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    ResponseConverter<AgentVersions> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<AgentVersions>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get agent versions.
+   *
+   * Retrieve the list of agent version's available to be deployed. For more information about supported API endpoints,
+   * see [API endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @return a {@link ServiceCall} with a result of type {@link AgentVersions}
+   */
+  public ServiceCall<AgentVersions> getAgentVersions() {
+    return getAgentVersions(null);
+  }
+
+  /**
+   * Get pre-requisite scanner job status.
+   *
+   * Use get pre-requisite scanner job status API for deploying an agent by using the `agent_id`, `job_id`. The API
+   * results the status as **pending**, **in-progress**, **success**, or **failed** in a string format. For more
+   * information about supported API endpoints, see [API
+   * endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
    * &lt;h3&gt;Authorization&lt;/h3&gt;
    *
+   *   Schematics support generic authorization for its resources. For more information, about Schematics access and
+   * permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
-   *  Schematics support generic authorization such as service access or platform access to the action ID and the
-   * resource group. For more information, about Schematics access and permissions, see [Schematics service access roles
-   * and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   * @param getPrsAgentJobOptions the {@link GetPrsAgentJobOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link AgentPRSJob}
+   */
+  public ServiceCall<AgentPRSJob> getPrsAgentJob(GetPrsAgentJobOptions getPrsAgentJobOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getPrsAgentJobOptions,
+      "getPrsAgentJobOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("agent_id", getPrsAgentJobOptions.agentId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/agents/{agent_id}/prs", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "getPrsAgentJob");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    ResponseConverter<AgentPRSJob> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<AgentPRSJob>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Run pre-requisite scanner job.
+   *
+   * Use run pre-requisite scanner job API before deploying an agent. The API results the agent `prs` job updation time
+   * with the E-mail address and the status in a string format. For more information about supported API endpoints, see
+   * [API endpoint](/apidocs/schematics/schematics#api-endpoints).
+   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization for its resources. For more
+   * information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param prsAgentJobOptions the {@link PrsAgentJobOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link AgentPRSJob}
+   */
+  public ServiceCall<AgentPRSJob> prsAgentJob(PrsAgentJobOptions prsAgentJobOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(prsAgentJobOptions,
+      "prsAgentJobOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("agent_id", prsAgentJobOptions.agentId());
+    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/agents/{agent_id}/prs", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "prsAgentJob");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (prsAgentJobOptions.force() != null) {
+      builder.query("force", String.valueOf(prsAgentJobOptions.force()));
+    }
+    ResponseConverter<AgentPRSJob> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<AgentPRSJob>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get agent health check job.
+   *
+   * Use get agent health check job API to retrieve the agent health check job status based on the agent ID. For more
+   * information about supported API endpoints, see [API endpoint](/apidocs/schematics/schematics#api-endpoints).
+   * &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources. For more information, about Schematics access and
+   * permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param getHealthCheckAgentJobOptions the {@link GetHealthCheckAgentJobOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link AgentHealthJob}
+   */
+  public ServiceCall<AgentHealthJob> getHealthCheckAgentJob(GetHealthCheckAgentJobOptions getHealthCheckAgentJobOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getHealthCheckAgentJobOptions,
+      "getHealthCheckAgentJobOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("agent_id", getHealthCheckAgentJobOptions.agentId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/agents/{agent_id}/health", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "getHealthCheckAgentJob");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    ResponseConverter<AgentHealthJob> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<AgentHealthJob>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Run agent health check.
+   *
+   * Use run agent health check job API to execute an agent health check job based on the agent ID. For more information
+   * about supported API endpoints, see [API
+   * endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
+   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization for its resources. For more
+   * information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param healthCheckAgentJobOptions the {@link HealthCheckAgentJobOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link AgentHealthJob}
+   */
+  public ServiceCall<AgentHealthJob> healthCheckAgentJob(HealthCheckAgentJobOptions healthCheckAgentJobOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(healthCheckAgentJobOptions,
+      "healthCheckAgentJobOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("agent_id", healthCheckAgentJobOptions.agentId());
+    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/agents/{agent_id}/health", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "healthCheckAgentJob");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (healthCheckAgentJobOptions.force() != null) {
+      builder.query("force", String.valueOf(healthCheckAgentJobOptions.force()));
+    }
+    ResponseConverter<AgentHealthJob> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<AgentHealthJob>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get agent deployment job.
+   *
+   * Use get agent deployment job API to retrieve the agent deployment job status based on the agent ID. For more
+   * information about supported API endpoints, see [API
+   * endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
+   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization for its resources. For more
+   * information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param getDeployAgentJobOptions the {@link GetDeployAgentJobOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link AgentDeployJob}
+   */
+  public ServiceCall<AgentDeployJob> getDeployAgentJob(GetDeployAgentJobOptions getDeployAgentJobOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getDeployAgentJobOptions,
+      "getDeployAgentJobOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("agent_id", getDeployAgentJobOptions.agentId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/agents/{agent_id}/deploy", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "getDeployAgentJob");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    ResponseConverter<AgentDeployJob> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<AgentDeployJob>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Run the agent deployment job.
+   *
+   * Use run agent deployment job API to execute the agent deployment job based on the agent ID. For more information
+   * about supported API endpoints, see [API
+   * endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
+   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization for its resources. For more
+   * information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param deployAgentJobOptions the {@link DeployAgentJobOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link AgentDeployJob}
+   */
+  public ServiceCall<AgentDeployJob> deployAgentJob(DeployAgentJobOptions deployAgentJobOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(deployAgentJobOptions,
+      "deployAgentJobOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("agent_id", deployAgentJobOptions.agentId());
+    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/agents/{agent_id}/deploy", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "deployAgentJob");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (deployAgentJobOptions.force() != null) {
+      builder.query("force", String.valueOf(deployAgentJobOptions.force()));
+    }
+    ResponseConverter<AgentDeployJob> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<AgentDeployJob>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Delete resources provisioned by agent.
+   *
+   * Use this API to destroy the resources provisioned for running an agent.
+   *
+   * @param deleteAgentResourcesOptions the {@link DeleteAgentResourcesOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a void result
+   */
+  public ServiceCall<Void> deleteAgentResources(DeleteAgentResourcesOptions deleteAgentResourcesOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(deleteAgentResourcesOptions,
+      "deleteAgentResourcesOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("agent_id", deleteAgentResourcesOptions.agentId());
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/agents/{agent_id}/resources", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "deleteAgentResources");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("refresh_token", deleteAgentResourcesOptions.refreshToken());
+    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get a KMS settings.
+   *
+   * Retrieve the kms instance that is integrated with Schematics for the **byok** and **kyok**. For each geographic
+   * location supported in Schematics we can have different kms settings. For example `US` and `EU` will have different
+   * kms settings.
+   * &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
+   * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param getKmsSettingsOptions the {@link GetKmsSettingsOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link KMSSettings}
@@ -2960,15 +3897,16 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * Replace KMS settings.
+   * Update a KMS settings.
    *
-   * Replace or Update the KMS setting for your location, by using your private endpoint, `CRN`, primary `CRK`, and
-   * secondary `CRK`. **Note** you can update the KMS settings only once. For example, if you use an API endpoint for a
-   * geography, such as North America, only Schematics resource that are created in `us-south` or `us-east` are
-   * retrieved.
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to the action ID and the resource group. For more information, about Schematics access and permissions, see
-   * [Schematics service access roles and required
+   * Replace or Update kms settings for a given location can be updated.
+   * **Note** you can update the kms settings only once. For example, if you use an API endpoint for a geography, such
+   * as North America, only kms settings for that region can be retrieved.
+   * &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param updateKmsSettingsOptions the {@link UpdateKmsSettingsOptions} containing the options for the call
@@ -3006,15 +3944,16 @@ public class Schematics extends BaseService {
   }
 
   /**
-   * Replace KMS settings.
+   * Update a KMS settings.
    *
-   * Replace or Update the KMS setting for your location, by using your private endpoint, `CRN`, primary `CRK`, and
-   * secondary `CRK`. **Note** you can update the KMS settings only once. For example, if you use an API endpoint for a
-   * geography, such as North America, only Schematics resource that are created in `us-south` or `us-east` are
-   * retrieved.
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to the action ID and the resource group. For more information, about Schematics access and permissions, see
-   * [Schematics service access roles and required
+   * Replace or Update kms settings for a given location can be updated.
+   * **Note** you can update the kms settings only once. For example, if you use an API endpoint for a geography, such
+   * as North America, only kms settings for that region can be retrieved.
+   * &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @return a {@link ServiceCall} with a result of type {@link KMSSettings}
@@ -3026,11 +3965,14 @@ public class Schematics extends BaseService {
   /**
    * List KMS instances.
    *
-   * Lists the KMS instances of your IBM Cloud account to find your Key Protect or Hyper Protect Crypto Services by
-   * using the location and encrypted scheme such as KYOK or BYOK.
-   * &lt;h3&gt;Authorization&lt;/h3&gt; Schematics support generic authorization such as service access or platform
-   * access to the action ID and the resource group. For more information, about Schematics access and permissions, see
-   * [Schematics service access roles and required
+   * Lists the kms instances of your IBM Cloud account to find your Key Protect or Hyper Protect Crypto Services by
+   * using the location and encrypted scheme.
+   *
+   *  &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *  Schematics support generic authorization for its resources.
+   *  For more information, about Schematics access and permissions, see
+   *  [Schematics service access roles and required
    * permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
    *
    * @param listKmsOptions the {@link ListKmsOptions} containing the options for the call
@@ -3058,6 +4000,289 @@ public class Schematics extends BaseService {
     }
     ResponseConverter<KMSDiscovery> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<KMSDiscovery>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * List policies.
+   *
+   * Retrieve a list of all policies from the account that you have access. the list of policies that is returned
+   * depends on the API endpoint that you use. For example, if you use an API endpoint for a geography, such as North
+   * America, only policies that are created in `us-south` or `us-east` are returned. For more information about
+   * supported API endpoints, see [API endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param listPolicyOptions the {@link ListPolicyOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link PolicyList}
+   */
+  public ServiceCall<PolicyList> listPolicy(ListPolicyOptions listPolicyOptions) {
+    if (listPolicyOptions == null) {
+      listPolicyOptions = new ListPolicyOptions.Builder().build();
+    }
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/settings/policies"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "listPolicy");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (listPolicyOptions.offset() != null) {
+      builder.query("offset", String.valueOf(listPolicyOptions.offset()));
+    }
+    if (listPolicyOptions.limit() != null) {
+      builder.query("limit", String.valueOf(listPolicyOptions.limit()));
+    }
+    if (listPolicyOptions.profile() != null) {
+      builder.query("profile", String.valueOf(listPolicyOptions.profile()));
+    }
+    ResponseConverter<PolicyList> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<PolicyList>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * List policies.
+   *
+   * Retrieve a list of all policies from the account that you have access. the list of policies that is returned
+   * depends on the API endpoint that you use. For example, if you use an API endpoint for a geography, such as North
+   * America, only policies that are created in `us-south` or `us-east` are returned. For more information about
+   * supported API endpoints, see [API endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @return a {@link ServiceCall} with a result of type {@link PolicyList}
+   */
+  public ServiceCall<PolicyList> listPolicy() {
+    return listPolicy(null);
+  }
+
+  /**
+   * Create a policy account.
+   *
+   * Use this API to create a policy using Schematics to select one or more Schematics objects (such as, Workspaces,
+   * Action) to deliver targeted Schematics feature. For more information about frequently asked questions, see
+   * [FAQ](https://cloud.ibm.com/docs/schematics?topic=schematics-faqs-agent) and [Troubleshooting
+   * guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found).
+   *
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param createPolicyOptions the {@link CreatePolicyOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link Policy}
+   */
+  public ServiceCall<Policy> createPolicy(CreatePolicyOptions createPolicyOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(createPolicyOptions,
+      "createPolicyOptions cannot be null");
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/settings/policies"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "createPolicy");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    final JsonObject contentJson = new JsonObject();
+    if (createPolicyOptions.name() != null) {
+      contentJson.addProperty("name", createPolicyOptions.name());
+    }
+    if (createPolicyOptions.description() != null) {
+      contentJson.addProperty("description", createPolicyOptions.description());
+    }
+    if (createPolicyOptions.resourceGroup() != null) {
+      contentJson.addProperty("resource_group", createPolicyOptions.resourceGroup());
+    }
+    if (createPolicyOptions.tags() != null) {
+      contentJson.add("tags", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createPolicyOptions.tags()));
+    }
+    if (createPolicyOptions.location() != null) {
+      contentJson.addProperty("location", createPolicyOptions.location());
+    }
+    if (createPolicyOptions.state() != null) {
+      contentJson.add("state", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createPolicyOptions.state()));
+    }
+    if (createPolicyOptions.kind() != null) {
+      contentJson.addProperty("kind", createPolicyOptions.kind());
+    }
+    if (createPolicyOptions.target() != null) {
+      contentJson.add("target", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createPolicyOptions.target()));
+    }
+    if (createPolicyOptions.parameter() != null) {
+      contentJson.add("parameter", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createPolicyOptions.parameter()));
+    }
+    if (createPolicyOptions.scopedResources() != null) {
+      contentJson.add("scoped_resources", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createPolicyOptions.scopedResources()));
+    }
+    builder.bodyJson(contentJson);
+    ResponseConverter<Policy> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Policy>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Create a policy account.
+   *
+   * Use this API to create a policy using Schematics to select one or more Schematics objects (such as, Workspaces,
+   * Action) to deliver targeted Schematics feature. For more information about frequently asked questions, see
+   * [FAQ](https://cloud.ibm.com/docs/schematics?topic=schematics-faqs-agent) and [Troubleshooting
+   * guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found).
+   *
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @return a {@link ServiceCall} with a result of type {@link Policy}
+   */
+  public ServiceCall<Policy> createPolicy() {
+    return createPolicy(null);
+  }
+
+  /**
+   * Get policy.
+   *
+   * Retrieve the detailed information of a policy details identified by `policy_id`. For more information about
+   * frequently asked questions, see [FAQ](https://cloud.ibm.com/docs/schematics?topic=schematics-faqs-agent) and
+   * [Troubleshooting guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found). For more
+   * information about supported API endpoints, see [API
+   * endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param getPolicyOptions the {@link GetPolicyOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link Policy}
+   */
+  public ServiceCall<Policy> getPolicy(GetPolicyOptions getPolicyOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getPolicyOptions,
+      "getPolicyOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("policy_id", getPolicyOptions.policyId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/settings/policies/{policy_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "getPolicy");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (getPolicyOptions.profile() != null) {
+      builder.query("profile", String.valueOf(getPolicyOptions.profile()));
+    }
+    ResponseConverter<Policy> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Policy>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Delete policy.
+   *
+   * Use this API to delete the policy. Follow the
+   * [steps](https://cloud.ibm.com/docs/schematics?topic=schematics-setup-api#cs_api) to retrieve your IAM access token
+   * and authenticate with IBM Cloud Schematics by using the API. For more information about frequently asked questions,
+   * see [FAQ](https://cloud.ibm.com/docs/schematics?topic=schematics-faqs-agent) and [Troubleshooting
+   * guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found).
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param deletePolicyOptions the {@link DeletePolicyOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a void result
+   */
+  public ServiceCall<Void> deletePolicy(DeletePolicyOptions deletePolicyOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(deletePolicyOptions,
+      "deletePolicyOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("policy_id", deletePolicyOptions.policyId());
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/settings/policies/{policy_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "deletePolicy");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Update policy.
+   *
+   * Use update policy API to update or replace the policy details by using policy ID. For more information about
+   * supported API endpoints, see [API endpoint](https://cloud.ibm.com/apidocs/schematics/schematics#api-endpoints).
+   * Follow the [steps](https://cloud.ibm.com/docs/schematics?topic=schematics-setup-api#cs_api) to retrieve your IAM
+   * access token and authenticate with IBM Cloud Schematics by using the API. For more information about frequently
+   * asked questions, see [FAQ](https://cloud.ibm.com/docs/schematics?topic=schematics-faqs-agent) and [Troubleshooting
+   * guide](https://cloud.ibm.com/docs/schematics?topic=schematics-agent-crn-not-found).
+   *
+   *
+   *    &lt;h3&gt;Authorization&lt;/h3&gt;
+   *
+   *    Schematics support generic authorization for its resources.
+   *    For more information, about Schematics access and permissions, see [Schematics service access
+   *    roles and required permissions](https://cloud.ibm.com/docs/schematics?topic=schematics-access#access-roles).
+   *
+   * @param updatePolicyOptions the {@link UpdatePolicyOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link Policy}
+   */
+  public ServiceCall<Policy> updatePolicy(UpdatePolicyOptions updatePolicyOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(updatePolicyOptions,
+      "updatePolicyOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("policy_id", updatePolicyOptions.policyId());
+    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/v2/settings/policies/{policy_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "updatePolicy");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    final JsonObject contentJson = new JsonObject();
+    if (updatePolicyOptions.name() != null) {
+      contentJson.addProperty("name", updatePolicyOptions.name());
+    }
+    if (updatePolicyOptions.description() != null) {
+      contentJson.addProperty("description", updatePolicyOptions.description());
+    }
+    if (updatePolicyOptions.resourceGroup() != null) {
+      contentJson.addProperty("resource_group", updatePolicyOptions.resourceGroup());
+    }
+    if (updatePolicyOptions.tags() != null) {
+      contentJson.add("tags", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updatePolicyOptions.tags()));
+    }
+    if (updatePolicyOptions.location() != null) {
+      contentJson.addProperty("location", updatePolicyOptions.location());
+    }
+    if (updatePolicyOptions.state() != null) {
+      contentJson.add("state", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updatePolicyOptions.state()));
+    }
+    if (updatePolicyOptions.kind() != null) {
+      contentJson.addProperty("kind", updatePolicyOptions.kind());
+    }
+    if (updatePolicyOptions.target() != null) {
+      contentJson.add("target", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updatePolicyOptions.target()));
+    }
+    if (updatePolicyOptions.parameter() != null) {
+      contentJson.add("parameter", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updatePolicyOptions.parameter()));
+    }
+    if (updatePolicyOptions.scopedResources() != null) {
+      contentJson.add("scoped_resources", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updatePolicyOptions.scopedResources()));
+    }
+    builder.bodyJson(contentJson);
+    ResponseConverter<Policy> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Policy>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 

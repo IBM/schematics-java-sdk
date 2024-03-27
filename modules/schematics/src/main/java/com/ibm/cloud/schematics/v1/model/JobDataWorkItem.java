@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -40,10 +40,6 @@ public class JobDataWorkItem extends GenericModel {
     String IBM_GIT_LAB = "ibm_git_lab";
     /** ibm_cloud_catalog. */
     String IBM_CLOUD_CATALOG = "ibm_cloud_catalog";
-    /** external_scm. */
-    String EXTERNAL_SCM = "external_scm";
-    /** cos_bucket. */
-    String COS_BUCKET = "cos_bucket";
   }
 
   @SerializedName("command_object_id")
@@ -77,6 +73,11 @@ public class JobDataWorkItem extends GenericModel {
     private JobDataWorkItemLastJob lastJob;
     private Date updatedAt;
 
+    /**
+     * Instantiates a new Builder from an existing JobDataWorkItem instance.
+     *
+     * @param jobDataWorkItem the instance to initialize the Builder with
+     */
     private Builder(JobDataWorkItem jobDataWorkItem) {
       this.commandObjectId = jobDataWorkItem.commandObjectId;
       this.commandObjectName = jobDataWorkItem.commandObjectName;
@@ -106,9 +107,9 @@ public class JobDataWorkItem extends GenericModel {
     }
 
     /**
-     * Adds an inputs to inputs.
+     * Adds a new element to inputs.
      *
-     * @param inputs the new inputs
+     * @param inputs the new element to be added
      * @return the JobDataWorkItem builder
      */
     public Builder addInputs(VariableData inputs) {
@@ -122,9 +123,9 @@ public class JobDataWorkItem extends GenericModel {
     }
 
     /**
-     * Adds an outputs to outputs.
+     * Adds a new element to outputs.
      *
-     * @param outputs the new outputs
+     * @param outputs the new element to be added
      * @return the JobDataWorkItem builder
      */
     public Builder addOutputs(VariableData outputs) {
@@ -138,9 +139,9 @@ public class JobDataWorkItem extends GenericModel {
     }
 
     /**
-     * Adds an settings to settings.
+     * Adds a new element to settings.
      *
-     * @param settings the new settings
+     * @param settings the new element to be added
      * @return the JobDataWorkItem builder
      */
     public Builder addSettings(VariableData settings) {
@@ -266,6 +267,8 @@ public class JobDataWorkItem extends GenericModel {
       return this;
     }
   }
+
+  protected JobDataWorkItem() { }
 
   protected JobDataWorkItem(Builder builder) {
     commandObjectId = builder.commandObjectId;

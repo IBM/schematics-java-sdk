@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -35,6 +35,11 @@ public class ListKmsOptions extends GenericModel {
     private Long limit;
     private String sort;
 
+    /**
+     * Instantiates a new Builder from an existing ListKmsOptions instance.
+     *
+     * @param listKmsOptions the instance to initialize the Builder with
+     */
     private Builder(ListKmsOptions listKmsOptions) {
       this.encryptionScheme = listKmsOptions.encryptionScheme;
       this.location = listKmsOptions.location;
@@ -125,6 +130,8 @@ public class ListKmsOptions extends GenericModel {
     }
   }
 
+  protected ListKmsOptions() { }
+
   protected ListKmsOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.encryptionScheme,
       "encryptionScheme cannot be null");
@@ -171,7 +178,7 @@ public class ListKmsOptions extends GenericModel {
   /**
    * Gets the resourceGroup.
    *
-   * The resource group (by default, fetch from all resource groups).
+   * The resource group (by default, fetch from all resource groups) name or ID.
    *
    * @return the resourceGroup
    */

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,6 +13,7 @@
 package com.ibm.cloud.schematics.v1.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -23,9 +24,13 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class UserValues extends GenericModel {
 
   @SerializedName("env_values")
-  protected List<Object> envValues;
+  protected List<Map<String, Object>> envValues;
+  @SerializedName("env_values_map")
+  protected List<EnvVariableRequestMap> envValuesMap;
   protected String values;
   protected List<WorkspaceVariableResponse> variablestore;
+
+  protected UserValues() { }
 
   /**
    * Gets the envValues.
@@ -39,8 +44,24 @@ public class UserValues extends GenericModel {
    *
    * @return the envValues
    */
-  public List<Object> getEnvValues() {
+  public List<Map<String, Object>> getEnvValues() {
     return envValues;
+  }
+
+  /**
+   * Gets the envValuesMap.
+   *
+   * A list of environment variables that you want to apply during the execution of a bash script or Terraform job. This
+   * field must be provided as a list of key-value pairs, for example, **TF_LOG=debug**. Each entry will be a map with
+   * one entry where `key is the environment variable name and value is value`. You can define environment variables for
+   * IBM Cloud catalog offerings that are provisioned by using a bash script. See [example to use special environment
+   * variable](https://cloud.ibm.com/docs/schematics?topic=schematics-set-parallelism#parallelism-example)  that are
+   * supported by Schematics.
+   *
+   * @return the envValuesMap
+   */
+  public List<EnvVariableRequestMap> getEnvValuesMap() {
+    return envValuesMap;
   }
 
   /**

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -18,7 +18,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * individual location details.
+ * An individual location details.
  */
 public class SchematicsLocationsLite extends GenericModel {
 
@@ -32,11 +32,19 @@ public class SchematicsLocationsLite extends GenericModel {
   @SerializedName("paired_region")
   protected List<String> pairedRegion;
   protected Boolean restricted;
+  @SerializedName("display_name")
+  protected String displayName;
+  @SerializedName("schematics_regional_public_endpoint")
+  protected String schematicsRegionalPublicEndpoint;
+  @SerializedName("schematics_regional_private_endpoint")
+  protected String schematicsRegionalPrivateEndpoint;
+
+  protected SchematicsLocationsLite() { }
 
   /**
    * Gets the region.
    *
-   * Geographical Region code having the data centres of IBM Cloud Schematics service.
+   * The Geographical region code having the data centres of the IBM Cloud Schematics service.
    *
    * @return the region
    */
@@ -47,7 +55,7 @@ public class SchematicsLocationsLite extends GenericModel {
   /**
    * Gets the metro.
    *
-   * Geographical city locations having the data centres of IBM Cloud Schematics service.
+   * The Geographical city locations having the data centres of the IBM Cloud Schematics service.
    *
    * @return the metro
    */
@@ -58,7 +66,7 @@ public class SchematicsLocationsLite extends GenericModel {
   /**
    * Gets the geographyCode.
    *
-   * Geographical continent locations code having the data centres of IBM Cloud Schematics service.
+   * The Geographical continent locations code having the data centres of the IBM Cloud Schematics service.
    *
    * @return the geographyCode
    */
@@ -69,7 +77,7 @@ public class SchematicsLocationsLite extends GenericModel {
   /**
    * Gets the geography.
    *
-   * Geographical continent locations having the data centres of IBM Cloud Schematics service.
+   * The Geographical continent locations having the data centres of the IBM Cloud Schematics service.
    *
    * @return the geography
    */
@@ -80,7 +88,7 @@ public class SchematicsLocationsLite extends GenericModel {
   /**
    * Gets the country.
    *
-   * Country locations having the data centres of IBM Cloud Schematics service.
+   * The Country locations having the data centres of the IBM Cloud Schematics service.
    *
    * @return the country
    */
@@ -102,7 +110,7 @@ public class SchematicsLocationsLite extends GenericModel {
   /**
    * Gets the pairedRegion.
    *
-   * List of paired regions used by Schematics.
+   * The list of paired regions used by the Schematics.
    *
    * @return the pairedRegion
    */
@@ -113,12 +121,45 @@ public class SchematicsLocationsLite extends GenericModel {
   /**
    * Gets the restricted.
    *
-   * Restricted Region.
+   * The restricted region.
    *
    * @return the restricted
    */
   public Boolean isRestricted() {
     return restricted;
+  }
+
+  /**
+   * Gets the displayName.
+   *
+   * Display name for the region.
+   *
+   * @return the displayName
+   */
+  public String getDisplayName() {
+    return displayName;
+  }
+
+  /**
+   * Gets the schematicsRegionalPublicEndpoint.
+   *
+   * Schematics public endpoint for the region.
+   *
+   * @return the schematicsRegionalPublicEndpoint
+   */
+  public String getSchematicsRegionalPublicEndpoint() {
+    return schematicsRegionalPublicEndpoint;
+  }
+
+  /**
+   * Gets the schematicsRegionalPrivateEndpoint.
+   *
+   * Schematics private endpoint for the region.
+   *
+   * @return the schematicsRegionalPrivateEndpoint
+   */
+  public String getSchematicsRegionalPrivateEndpoint() {
+    return schematicsRegionalPrivateEndpoint;
   }
 }
 

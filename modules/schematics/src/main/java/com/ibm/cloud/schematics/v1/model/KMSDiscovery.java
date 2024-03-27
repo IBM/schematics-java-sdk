@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -18,7 +18,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Discovered KMS instances.
+ * Discover kms instances in the account based on location.
  */
 public class KMSDiscovery extends GenericModel {
 
@@ -29,10 +29,12 @@ public class KMSDiscovery extends GenericModel {
   @SerializedName("kms_instances")
   protected List<KMSInstances> kmsInstances;
 
+  protected KMSDiscovery() { }
+
   /**
    * Gets the totalCount.
    *
-   * Total number of records.
+   * The total number of records.
    *
    * @return the totalCount
    */
@@ -43,7 +45,7 @@ public class KMSDiscovery extends GenericModel {
   /**
    * Gets the limit.
    *
-   * Number of records returned.
+   * The number of records returned.
    *
    * @return the limit
    */
@@ -54,7 +56,7 @@ public class KMSDiscovery extends GenericModel {
   /**
    * Gets the offset.
    *
-   * Skipped number of records.
+   * The skipped number of records.
    *
    * @return the offset
    */
@@ -65,7 +67,7 @@ public class KMSDiscovery extends GenericModel {
   /**
    * Gets the kmsInstances.
    *
-   * List of KMS instances.
+   * The list of kms instances.
    *
    * @return the kmsInstances
    */

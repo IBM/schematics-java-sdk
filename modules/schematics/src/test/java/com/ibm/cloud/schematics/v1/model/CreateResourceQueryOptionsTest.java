@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -19,8 +19,6 @@ import com.ibm.cloud.schematics.v1.model.ResourceQueryParam;
 import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -46,20 +44,20 @@ public class CreateResourceQueryOptionsTest {
 
     ResourceQuery resourceQueryModel = new ResourceQuery.Builder()
       .queryType("workspaces")
-      .queryCondition(new java.util.ArrayList<ResourceQueryParam>(java.util.Arrays.asList(resourceQueryParamModel)))
-      .querySelect(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
+      .queryCondition(java.util.Arrays.asList(resourceQueryParamModel))
+      .querySelect(java.util.Arrays.asList("testString"))
       .build();
     assertEquals(resourceQueryModel.queryType(), "workspaces");
-    assertEquals(resourceQueryModel.queryCondition(), new java.util.ArrayList<ResourceQueryParam>(java.util.Arrays.asList(resourceQueryParamModel)));
-    assertEquals(resourceQueryModel.querySelect(), new java.util.ArrayList<String>(java.util.Arrays.asList("testString")));
+    assertEquals(resourceQueryModel.queryCondition(), java.util.Arrays.asList(resourceQueryParamModel));
+    assertEquals(resourceQueryModel.querySelect(), java.util.Arrays.asList("testString"));
 
     CreateResourceQueryOptions createResourceQueryOptionsModel = new CreateResourceQueryOptions.Builder()
       .type("vsi")
       .name("testString")
-      .queries(new java.util.ArrayList<ResourceQuery>(java.util.Arrays.asList(resourceQueryModel)))
+      .queries(java.util.Arrays.asList(resourceQueryModel))
       .build();
     assertEquals(createResourceQueryOptionsModel.type(), "vsi");
     assertEquals(createResourceQueryOptionsModel.name(), "testString");
-    assertEquals(createResourceQueryOptionsModel.queries(), new java.util.ArrayList<ResourceQuery>(java.util.Arrays.asList(resourceQueryModel)));
+    assertEquals(createResourceQueryOptionsModel.queries(), java.util.Arrays.asList(resourceQueryModel));
   }
 }

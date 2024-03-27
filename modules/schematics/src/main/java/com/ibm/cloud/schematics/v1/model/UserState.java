@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -54,6 +54,11 @@ public class UserState extends GenericModel {
     private String setBy;
     private Date setAt;
 
+    /**
+     * Instantiates a new Builder from an existing UserState instance.
+     *
+     * @param userState the instance to initialize the Builder with
+     */
     private Builder(UserState userState) {
       this.state = userState.state;
       this.setBy = userState.setBy;
@@ -108,6 +113,8 @@ public class UserState extends GenericModel {
       return this;
     }
   }
+
+  protected UserState() { }
 
   protected UserState(Builder builder) {
     state = builder.state;

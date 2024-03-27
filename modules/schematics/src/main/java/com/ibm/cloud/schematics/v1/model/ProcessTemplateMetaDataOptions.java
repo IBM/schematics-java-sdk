@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -35,10 +35,6 @@ public class ProcessTemplateMetaDataOptions extends GenericModel {
     String IBM_GIT_LAB = "ibm_git_lab";
     /** ibm_cloud_catalog. */
     String IBM_CLOUD_CATALOG = "ibm_cloud_catalog";
-    /** external_scm. */
-    String EXTERNAL_SCM = "external_scm";
-    /** cos_bucket. */
-    String COS_BUCKET = "cos_bucket";
   }
 
   protected String templateType;
@@ -57,6 +53,11 @@ public class ProcessTemplateMetaDataOptions extends GenericModel {
     private String sourceType;
     private String xGithubToken;
 
+    /**
+     * Instantiates a new Builder from an existing ProcessTemplateMetaDataOptions instance.
+     *
+     * @param processTemplateMetaDataOptions the instance to initialize the Builder with
+     */
     private Builder(ProcessTemplateMetaDataOptions processTemplateMetaDataOptions) {
       this.templateType = processTemplateMetaDataOptions.templateType;
       this.source = processTemplateMetaDataOptions.source;
@@ -147,6 +148,8 @@ public class ProcessTemplateMetaDataOptions extends GenericModel {
     }
   }
 
+  protected ProcessTemplateMetaDataOptions() { }
+
   protected ProcessTemplateMetaDataOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.templateType,
       "templateType cannot be null");
@@ -171,7 +174,7 @@ public class ProcessTemplateMetaDataOptions extends GenericModel {
   /**
    * Gets the templateType.
    *
-   * Template type (terraform, ansible, helm, cloudpak, bash script).
+   * Template type such as **terraform**, **ansible**, **helm**, **cloudpak**, or **bash script**.
    *
    * @return the templateType
    */
@@ -193,7 +196,7 @@ public class ProcessTemplateMetaDataOptions extends GenericModel {
   /**
    * Gets the region.
    *
-   * Region to which request should go. Applicable only on global endpoint.
+   * Region on which request should process. Applicable only on global endpoint.
    *
    * @return the region
    */

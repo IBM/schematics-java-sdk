@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -63,6 +63,9 @@ public class ActionLite extends GenericModel {
   protected Date updatedAt;
   @SerializedName("updated_by")
   protected String updatedBy;
+  protected AgentInfo agent;
+
+  protected ActionLite() { }
 
   /**
    * Gets the name.
@@ -240,6 +243,17 @@ public class ActionLite extends GenericModel {
    */
   public String getUpdatedBy() {
     return updatedBy;
+  }
+
+  /**
+   * Gets the agent.
+   *
+   * Agent name, Agent id and associated policy ID information.
+   *
+   * @return the agent
+   */
+  public AgentInfo getAgent() {
+    return agent;
   }
 }
 

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -31,6 +31,11 @@ public class DeleteActionOptions extends GenericModel {
     private Boolean force;
     private Boolean propagate;
 
+    /**
+     * Instantiates a new Builder from an existing DeleteActionOptions instance.
+     *
+     * @param deleteActionOptions the instance to initialize the Builder with
+     */
     private Builder(DeleteActionOptions deleteActionOptions) {
       this.actionId = deleteActionOptions.actionId;
       this.force = deleteActionOptions.force;
@@ -94,6 +99,8 @@ public class DeleteActionOptions extends GenericModel {
       return this;
     }
   }
+
+  protected DeleteActionOptions() { }
 
   protected DeleteActionOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.actionId,

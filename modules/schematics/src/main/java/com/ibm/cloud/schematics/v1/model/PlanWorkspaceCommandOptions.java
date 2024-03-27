@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -21,6 +21,7 @@ public class PlanWorkspaceCommandOptions extends GenericModel {
 
   protected String wId;
   protected String refreshToken;
+  protected WorkspaceActivityOptionsTemplate actionOptions;
   protected String delegatedToken;
 
   /**
@@ -29,11 +30,18 @@ public class PlanWorkspaceCommandOptions extends GenericModel {
   public static class Builder {
     private String wId;
     private String refreshToken;
+    private WorkspaceActivityOptionsTemplate actionOptions;
     private String delegatedToken;
 
+    /**
+     * Instantiates a new Builder from an existing PlanWorkspaceCommandOptions instance.
+     *
+     * @param planWorkspaceCommandOptions the instance to initialize the Builder with
+     */
     private Builder(PlanWorkspaceCommandOptions planWorkspaceCommandOptions) {
       this.wId = planWorkspaceCommandOptions.wId;
       this.refreshToken = planWorkspaceCommandOptions.refreshToken;
+      this.actionOptions = planWorkspaceCommandOptions.actionOptions;
       this.delegatedToken = planWorkspaceCommandOptions.delegatedToken;
     }
 
@@ -86,6 +94,17 @@ public class PlanWorkspaceCommandOptions extends GenericModel {
     }
 
     /**
+     * Set the actionOptions.
+     *
+     * @param actionOptions the actionOptions
+     * @return the PlanWorkspaceCommandOptions builder
+     */
+    public Builder actionOptions(WorkspaceActivityOptionsTemplate actionOptions) {
+      this.actionOptions = actionOptions;
+      return this;
+    }
+
+    /**
      * Set the delegatedToken.
      *
      * @param delegatedToken the delegatedToken
@@ -97,6 +116,8 @@ public class PlanWorkspaceCommandOptions extends GenericModel {
     }
   }
 
+  protected PlanWorkspaceCommandOptions() { }
+
   protected PlanWorkspaceCommandOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.wId,
       "wId cannot be empty");
@@ -104,6 +125,7 @@ public class PlanWorkspaceCommandOptions extends GenericModel {
       "refreshToken cannot be null");
     wId = builder.wId;
     refreshToken = builder.refreshToken;
+    actionOptions = builder.actionOptions;
     delegatedToken = builder.delegatedToken;
   }
 
@@ -150,6 +172,17 @@ public class PlanWorkspaceCommandOptions extends GenericModel {
    */
   public String refreshToken() {
     return refreshToken;
+  }
+
+  /**
+   * Gets the actionOptions.
+   *
+   * Workspace job options template.
+   *
+   * @return the actionOptions
+   */
+  public WorkspaceActivityOptionsTemplate actionOptions() {
+    return actionOptions;
   }
 
   /**

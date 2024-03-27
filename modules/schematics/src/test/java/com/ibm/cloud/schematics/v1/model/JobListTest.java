@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,6 +13,7 @@
 
 package com.ibm.cloud.schematics.v1.model;
 
+import com.ibm.cloud.schematics.v1.model.AgentInfo;
 import com.ibm.cloud.schematics.v1.model.JobList;
 import com.ibm.cloud.schematics.v1.model.JobLite;
 import com.ibm.cloud.schematics.v1.model.JobLogSummary;
@@ -35,8 +36,6 @@ import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.sdk.core.util.DateUtils;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;

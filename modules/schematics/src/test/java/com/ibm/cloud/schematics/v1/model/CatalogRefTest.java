@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,6 +14,7 @@
 package com.ibm.cloud.schematics.v1.model;
 
 import com.ibm.cloud.schematics.v1.model.CatalogRef;
+import com.ibm.cloud.schematics.v1.model.ServiceExtensions;
 import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -31,6 +32,15 @@ public class CatalogRefTest {
 
   @Test
   public void testCatalogRef() throws Throwable {
+    ServiceExtensions serviceExtensionsModel = new ServiceExtensions.Builder()
+      .name("flavor")
+      .value("testString")
+      .type("string")
+      .build();
+    assertEquals(serviceExtensionsModel.name(), "flavor");
+    assertEquals(serviceExtensionsModel.value(), "testString");
+    assertEquals(serviceExtensionsModel.type(), "string");
+
     CatalogRef catalogRefModel = new CatalogRef.Builder()
       .dryRun(true)
       .owningAccount("testString")
@@ -41,6 +51,7 @@ public class CatalogRefTest {
       .itemUrl("testString")
       .launchUrl("testString")
       .offeringVersion("testString")
+      .serviceExtensions(java.util.Arrays.asList(serviceExtensionsModel))
       .build();
     assertEquals(catalogRefModel.dryRun(), Boolean.valueOf(true));
     assertEquals(catalogRefModel.owningAccount(), "testString");
@@ -51,6 +62,7 @@ public class CatalogRefTest {
     assertEquals(catalogRefModel.itemUrl(), "testString");
     assertEquals(catalogRefModel.launchUrl(), "testString");
     assertEquals(catalogRefModel.offeringVersion(), "testString");
+    assertEquals(catalogRefModel.serviceExtensions(), java.util.Arrays.asList(serviceExtensionsModel));
 
     String json = TestUtilities.serialize(catalogRefModel);
 

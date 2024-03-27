@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -12,15 +12,18 @@
  */
 package com.ibm.cloud.schematics.v1.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * User editable variable data &amp; system generated reference to value.
+ * User editable variable data and system generated reference to the value.
  */
 public class VariableData extends GenericModel {
 
   protected String name;
   protected String value;
+  @SerializedName("use_default")
+  protected Boolean useDefault;
   protected VariableMetadata metadata;
   protected String link;
 
@@ -30,11 +33,18 @@ public class VariableData extends GenericModel {
   public static class Builder {
     private String name;
     private String value;
+    private Boolean useDefault;
     private VariableMetadata metadata;
 
+    /**
+     * Instantiates a new Builder from an existing VariableData instance.
+     *
+     * @param variableData the instance to initialize the Builder with
+     */
     private Builder(VariableData variableData) {
       this.name = variableData.name;
       this.value = variableData.value;
+      this.useDefault = variableData.useDefault;
       this.metadata = variableData.metadata;
     }
 
@@ -76,6 +86,17 @@ public class VariableData extends GenericModel {
     }
 
     /**
+     * Set the useDefault.
+     *
+     * @param useDefault the useDefault
+     * @return the VariableData builder
+     */
+    public Builder useDefault(Boolean useDefault) {
+      this.useDefault = useDefault;
+      return this;
+    }
+
+    /**
      * Set the metadata.
      *
      * @param metadata the metadata
@@ -87,9 +108,12 @@ public class VariableData extends GenericModel {
     }
   }
 
+  protected VariableData() { }
+
   protected VariableData(Builder builder) {
     name = builder.name;
     value = builder.value;
+    useDefault = builder.useDefault;
     metadata = builder.metadata;
   }
 
@@ -105,7 +129,7 @@ public class VariableData extends GenericModel {
   /**
    * Gets the name.
    *
-   * Name of the variable.
+   * The name of the variable. For example, `name = "inventory username"`.
    *
    * @return the name
    */
@@ -116,7 +140,9 @@ public class VariableData extends GenericModel {
   /**
    * Gets the value.
    *
-   * Value for the variable or reference to the value.
+   * The value for the variable or reference to the value. For example, `value = "&lt;provide your ssh_key_value with
+   * \n&gt;"`. **Note** The SSH key should contain `\n` at the end of the key details in case of command line or API
+   * calls.
    *
    * @return the value
    */
@@ -125,9 +151,20 @@ public class VariableData extends GenericModel {
   }
 
   /**
+   * Gets the useDefault.
+   *
+   * True, will ignore the data in the value attribute, instead the data in metadata.default_value will be used.
+   *
+   * @return the useDefault
+   */
+  public Boolean useDefault() {
+    return useDefault;
+  }
+
+  /**
    * Gets the metadata.
    *
-   * User editable metadata for the variables.
+   * An user editable metadata for the variables.
    *
    * @return the metadata
    */
@@ -138,7 +175,7 @@ public class VariableData extends GenericModel {
   /**
    * Gets the link.
    *
-   * Reference link to the variable value By default the expression will point to self.value.
+   * The reference link to the variable value By default the expression points to `$self.value`.
    *
    * @return the link
    */

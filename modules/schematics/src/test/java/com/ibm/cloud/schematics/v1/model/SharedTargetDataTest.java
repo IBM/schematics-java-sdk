@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -17,8 +17,6 @@ import com.ibm.cloud.schematics.v1.model.SharedTargetData;
 import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -38,7 +36,7 @@ public class SharedTargetDataTest {
       .clusterId("testString")
       .clusterName("testString")
       .clusterType("testString")
-      .entitlementKeys(new java.util.ArrayList<Object>(java.util.Arrays.asList(TestUtilities.createMockMap())))
+      .entitlementKeys(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))
       .namespace("testString")
       .region("testString")
       .resourceGroupId("testString")
@@ -49,7 +47,7 @@ public class SharedTargetDataTest {
     assertEquals(sharedTargetDataModel.clusterId(), "testString");
     assertEquals(sharedTargetDataModel.clusterName(), "testString");
     assertEquals(sharedTargetDataModel.clusterType(), "testString");
-    assertEquals(sharedTargetDataModel.entitlementKeys(), new java.util.ArrayList<Object>(java.util.Arrays.asList(TestUtilities.createMockMap())));
+    assertEquals(sharedTargetDataModel.entitlementKeys(), java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")));
     assertEquals(sharedTargetDataModel.namespace(), "testString");
     assertEquals(sharedTargetDataModel.region(), "testString");
     assertEquals(sharedTargetDataModel.resourceGroupId(), "testString");

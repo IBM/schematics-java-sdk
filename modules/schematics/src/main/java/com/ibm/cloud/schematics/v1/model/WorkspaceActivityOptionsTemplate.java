@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -34,6 +34,11 @@ public class WorkspaceActivityOptionsTemplate extends GenericModel {
     private List<String> target;
     private List<String> tfVars;
 
+    /**
+     * Instantiates a new Builder from an existing WorkspaceActivityOptionsTemplate instance.
+     *
+     * @param workspaceActivityOptionsTemplate the instance to initialize the Builder with
+     */
     private Builder(WorkspaceActivityOptionsTemplate workspaceActivityOptionsTemplate) {
       this.target = workspaceActivityOptionsTemplate.target;
       this.tfVars = workspaceActivityOptionsTemplate.tfVars;
@@ -55,9 +60,9 @@ public class WorkspaceActivityOptionsTemplate extends GenericModel {
     }
 
     /**
-     * Adds an target to target.
+     * Adds a new element to target.
      *
-     * @param target the new target
+     * @param target the new element to be added
      * @return the WorkspaceActivityOptionsTemplate builder
      */
     public Builder addTarget(String target) {
@@ -71,9 +76,9 @@ public class WorkspaceActivityOptionsTemplate extends GenericModel {
     }
 
     /**
-     * Adds an tfVars to tfVars.
+     * Adds a new element to tfVars.
      *
-     * @param tfVars the new tfVars
+     * @param tfVars the new element to be added
      * @return the WorkspaceActivityOptionsTemplate builder
      */
     public Builder addTfVars(String tfVars) {
@@ -110,6 +115,8 @@ public class WorkspaceActivityOptionsTemplate extends GenericModel {
       return this;
     }
   }
+
+  protected WorkspaceActivityOptionsTemplate() { }
 
   protected WorkspaceActivityOptionsTemplate(Builder builder) {
     target = builder.target;

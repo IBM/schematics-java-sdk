@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -80,20 +80,10 @@ public class CreateJobOptions extends GenericModel {
     String DELETE_WORKSPACE = "delete_workspace";
     /** create_cart. */
     String CREATE_CART = "create_cart";
-    /** create_environment. */
-    String CREATE_ENVIRONMENT = "create_environment";
-    /** put_environment. */
-    String PUT_ENVIRONMENT = "put_environment";
-    /** delete_environment. */
-    String DELETE_ENVIRONMENT = "delete_environment";
-    /** environment_init. */
-    String ENVIRONMENT_INIT = "environment_init";
-    /** environment_install. */
-    String ENVIRONMENT_INSTALL = "environment_install";
-    /** environment_uninstall. */
-    String ENVIRONMENT_UNINSTALL = "environment_uninstall";
     /** repository_process. */
     String REPOSITORY_PROCESS = "repository_process";
+    /** terraform_commands. */
+    String TERRAFORM_COMMANDS = "terraform_commands";
   }
 
   /**
@@ -123,9 +113,11 @@ public class CreateJobOptions extends GenericModel {
   protected List<String> tags;
   protected String location;
   protected JobStatus status;
+  protected List<CartOrderData> cartOrderData;
   protected JobData data;
   protected BastionResourceDefinition bastion;
   protected JobLogSummary logSummary;
+  protected AgentInfo agent;
 
   /**
    * Builder.
@@ -142,10 +134,17 @@ public class CreateJobOptions extends GenericModel {
     private List<String> tags;
     private String location;
     private JobStatus status;
+    private List<CartOrderData> cartOrderData;
     private JobData data;
     private BastionResourceDefinition bastion;
     private JobLogSummary logSummary;
+    private AgentInfo agent;
 
+    /**
+     * Instantiates a new Builder from an existing CreateJobOptions instance.
+     *
+     * @param createJobOptions the instance to initialize the Builder with
+     */
     private Builder(CreateJobOptions createJobOptions) {
       this.refreshToken = createJobOptions.refreshToken;
       this.commandObject = createJobOptions.commandObject;
@@ -158,9 +157,11 @@ public class CreateJobOptions extends GenericModel {
       this.tags = createJobOptions.tags;
       this.location = createJobOptions.location;
       this.status = createJobOptions.status;
+      this.cartOrderData = createJobOptions.cartOrderData;
       this.data = createJobOptions.data;
       this.bastion = createJobOptions.bastion;
       this.logSummary = createJobOptions.logSummary;
+      this.agent = createJobOptions.agent;
     }
 
     /**
@@ -188,9 +189,9 @@ public class CreateJobOptions extends GenericModel {
     }
 
     /**
-     * Adds an commandOptions to commandOptions.
+     * Adds a new element to commandOptions.
      *
-     * @param commandOptions the new commandOptions
+     * @param commandOptions the new element to be added
      * @return the CreateJobOptions builder
      */
     public Builder addCommandOptions(String commandOptions) {
@@ -204,9 +205,9 @@ public class CreateJobOptions extends GenericModel {
     }
 
     /**
-     * Adds an inputs to inputs.
+     * Adds a new element to inputs.
      *
-     * @param inputs the new inputs
+     * @param inputs the new element to be added
      * @return the CreateJobOptions builder
      */
     public Builder addInputs(VariableData inputs) {
@@ -220,9 +221,9 @@ public class CreateJobOptions extends GenericModel {
     }
 
     /**
-     * Adds an settings to settings.
+     * Adds a new element to settings.
      *
-     * @param settings the new settings
+     * @param settings the new element to be added
      * @return the CreateJobOptions builder
      */
     public Builder addSettings(VariableData settings) {
@@ -236,9 +237,9 @@ public class CreateJobOptions extends GenericModel {
     }
 
     /**
-     * Adds an tags to tags.
+     * Adds a new element to tags.
      *
-     * @param tags the new tags
+     * @param tags the new element to be added
      * @return the CreateJobOptions builder
      */
     public Builder addTags(String tags) {
@@ -248,6 +249,22 @@ public class CreateJobOptions extends GenericModel {
         this.tags = new ArrayList<String>();
       }
       this.tags.add(tags);
+      return this;
+    }
+
+    /**
+     * Adds a new element to cartOrderData.
+     *
+     * @param cartOrderData the new element to be added
+     * @return the CreateJobOptions builder
+     */
+    public Builder addCartOrderData(CartOrderData cartOrderData) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(cartOrderData,
+        "cartOrderData cannot be null");
+      if (this.cartOrderData == null) {
+        this.cartOrderData = new ArrayList<CartOrderData>();
+      }
+      this.cartOrderData.add(cartOrderData);
       return this;
     }
 
@@ -377,6 +394,18 @@ public class CreateJobOptions extends GenericModel {
     }
 
     /**
+     * Set the cartOrderData.
+     * Existing cartOrderData will be replaced.
+     *
+     * @param cartOrderData the cartOrderData
+     * @return the CreateJobOptions builder
+     */
+    public Builder cartOrderData(List<CartOrderData> cartOrderData) {
+      this.cartOrderData = cartOrderData;
+      return this;
+    }
+
+    /**
      * Set the data.
      *
      * @param data the data
@@ -410,6 +439,17 @@ public class CreateJobOptions extends GenericModel {
     }
 
     /**
+     * Set the agent.
+     *
+     * @param agent the agent
+     * @return the CreateJobOptions builder
+     */
+    public Builder agent(AgentInfo agent) {
+      this.agent = agent;
+      return this;
+    }
+
+    /**
      * Set the job.
      *
      * @param job the job
@@ -426,12 +466,16 @@ public class CreateJobOptions extends GenericModel {
       this.tags = job.tags();
       this.location = job.location();
       this.status = job.status();
+      this.cartOrderData = job.cartOrderData();
       this.data = job.data();
       this.bastion = job.bastion();
       this.logSummary = job.logSummary();
+      this.agent = job.agent();
       return this;
     }
   }
+
+  protected CreateJobOptions() { }
 
   protected CreateJobOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.refreshToken,
@@ -447,9 +491,11 @@ public class CreateJobOptions extends GenericModel {
     tags = builder.tags;
     location = builder.location;
     status = builder.status;
+    cartOrderData = builder.cartOrderData;
     data = builder.data;
     bastion = builder.bastion;
     logSummary = builder.logSummary;
+    agent = builder.agent;
   }
 
   /**
@@ -598,6 +644,17 @@ public class CreateJobOptions extends GenericModel {
   }
 
   /**
+   * Gets the cartOrderData.
+   *
+   * Contains the cart order data which can be used for different purpose for eg. service tagging.
+   *
+   * @return the cartOrderData
+   */
+  public List<CartOrderData> cartOrderData() {
+    return cartOrderData;
+  }
+
+  /**
    * Gets the data.
    *
    * Job data.
@@ -628,6 +685,17 @@ public class CreateJobOptions extends GenericModel {
    */
   public JobLogSummary logSummary() {
     return logSummary;
+  }
+
+  /**
+   * Gets the agent.
+   *
+   * Agent name, Agent id and associated policy ID information.
+   *
+   * @return the agent
+   */
+  public AgentInfo agent() {
+    return agent;
   }
 }
 

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -21,8 +21,6 @@ import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.sdk.core.util.DateUtils;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -39,13 +37,16 @@ public class JobDataWorkspaceTest {
   public void testJobDataWorkspace() throws Throwable {
     VariableMetadata variableMetadataModel = new VariableMetadata.Builder()
       .type("boolean")
-      .aliases(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
+      .aliases(java.util.Arrays.asList("testString"))
       .description("testString")
+      .cloudDataType("testString")
       .defaultValue("testString")
+      .linkStatus("normal")
       .secure(true)
       .immutable(true)
       .hidden(true)
-      .options(new java.util.ArrayList<String>(java.util.Arrays.asList("testString")))
+      .required(true)
+      .options(java.util.Arrays.asList("testString"))
       .minValue(Long.valueOf("26"))
       .maxValue(Long.valueOf("26"))
       .minLength(Long.valueOf("26"))
@@ -56,13 +57,16 @@ public class JobDataWorkspaceTest {
       .source("testString")
       .build();
     assertEquals(variableMetadataModel.type(), "boolean");
-    assertEquals(variableMetadataModel.aliases(), new java.util.ArrayList<String>(java.util.Arrays.asList("testString")));
+    assertEquals(variableMetadataModel.aliases(), java.util.Arrays.asList("testString"));
     assertEquals(variableMetadataModel.description(), "testString");
+    assertEquals(variableMetadataModel.cloudDataType(), "testString");
     assertEquals(variableMetadataModel.defaultValue(), "testString");
+    assertEquals(variableMetadataModel.linkStatus(), "normal");
     assertEquals(variableMetadataModel.secure(), Boolean.valueOf(true));
     assertEquals(variableMetadataModel.immutable(), Boolean.valueOf(true));
     assertEquals(variableMetadataModel.hidden(), Boolean.valueOf(true));
-    assertEquals(variableMetadataModel.options(), new java.util.ArrayList<String>(java.util.Arrays.asList("testString")));
+    assertEquals(variableMetadataModel.required(), Boolean.valueOf(true));
+    assertEquals(variableMetadataModel.options(), java.util.Arrays.asList("testString"));
     assertEquals(variableMetadataModel.minValue(), Long.valueOf("26"));
     assertEquals(variableMetadataModel.maxValue(), Long.valueOf("26"));
     assertEquals(variableMetadataModel.minLength(), Long.valueOf("26"));
@@ -75,46 +79,48 @@ public class JobDataWorkspaceTest {
     VariableData variableDataModel = new VariableData.Builder()
       .name("testString")
       .value("testString")
+      .useDefault(true)
       .metadata(variableMetadataModel)
       .build();
     assertEquals(variableDataModel.name(), "testString");
     assertEquals(variableDataModel.value(), "testString");
+    assertEquals(variableDataModel.useDefault(), Boolean.valueOf(true));
     assertEquals(variableDataModel.metadata(), variableMetadataModel);
 
     JobDataTemplate jobDataTemplateModel = new JobDataTemplate.Builder()
       .templateId("testString")
       .templateName("testString")
       .flowIndex(Long.valueOf("26"))
-      .inputs(new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)))
-      .outputs(new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)))
-      .settings(new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)))
+      .inputs(java.util.Arrays.asList(variableDataModel))
+      .outputs(java.util.Arrays.asList(variableDataModel))
+      .settings(java.util.Arrays.asList(variableDataModel))
       .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .build();
     assertEquals(jobDataTemplateModel.templateId(), "testString");
     assertEquals(jobDataTemplateModel.templateName(), "testString");
     assertEquals(jobDataTemplateModel.flowIndex(), Long.valueOf("26"));
-    assertEquals(jobDataTemplateModel.inputs(), new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)));
-    assertEquals(jobDataTemplateModel.outputs(), new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)));
-    assertEquals(jobDataTemplateModel.settings(), new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)));
+    assertEquals(jobDataTemplateModel.inputs(), java.util.Arrays.asList(variableDataModel));
+    assertEquals(jobDataTemplateModel.outputs(), java.util.Arrays.asList(variableDataModel));
+    assertEquals(jobDataTemplateModel.settings(), java.util.Arrays.asList(variableDataModel));
     assertEquals(jobDataTemplateModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
 
     JobDataWorkspace jobDataWorkspaceModel = new JobDataWorkspace.Builder()
       .workspaceName("testString")
       .flowId("testString")
       .flowName("testString")
-      .inputs(new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)))
-      .outputs(new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)))
-      .settings(new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)))
-      .templateData(new java.util.ArrayList<JobDataTemplate>(java.util.Arrays.asList(jobDataTemplateModel)))
+      .inputs(java.util.Arrays.asList(variableDataModel))
+      .outputs(java.util.Arrays.asList(variableDataModel))
+      .settings(java.util.Arrays.asList(variableDataModel))
+      .templateData(java.util.Arrays.asList(jobDataTemplateModel))
       .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .build();
     assertEquals(jobDataWorkspaceModel.workspaceName(), "testString");
     assertEquals(jobDataWorkspaceModel.flowId(), "testString");
     assertEquals(jobDataWorkspaceModel.flowName(), "testString");
-    assertEquals(jobDataWorkspaceModel.inputs(), new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)));
-    assertEquals(jobDataWorkspaceModel.outputs(), new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)));
-    assertEquals(jobDataWorkspaceModel.settings(), new java.util.ArrayList<VariableData>(java.util.Arrays.asList(variableDataModel)));
-    assertEquals(jobDataWorkspaceModel.templateData(), new java.util.ArrayList<JobDataTemplate>(java.util.Arrays.asList(jobDataTemplateModel)));
+    assertEquals(jobDataWorkspaceModel.inputs(), java.util.Arrays.asList(variableDataModel));
+    assertEquals(jobDataWorkspaceModel.outputs(), java.util.Arrays.asList(variableDataModel));
+    assertEquals(jobDataWorkspaceModel.settings(), java.util.Arrays.asList(variableDataModel));
+    assertEquals(jobDataWorkspaceModel.templateData(), java.util.Arrays.asList(jobDataTemplateModel));
     assertEquals(jobDataWorkspaceModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
 
     String json = TestUtilities.serialize(jobDataWorkspaceModel);

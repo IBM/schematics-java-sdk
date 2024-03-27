@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -41,6 +41,11 @@ public class GetWorkspaceReadmeOptions extends GenericModel {
     private String ref;
     private String formatted;
 
+    /**
+     * Instantiates a new Builder from an existing GetWorkspaceReadmeOptions instance.
+     *
+     * @param getWorkspaceReadmeOptions the instance to initialize the Builder with
+     */
     private Builder(GetWorkspaceReadmeOptions getWorkspaceReadmeOptions) {
       this.wId = getWorkspaceReadmeOptions.wId;
       this.ref = getWorkspaceReadmeOptions.ref;
@@ -104,6 +109,8 @@ public class GetWorkspaceReadmeOptions extends GenericModel {
       return this;
     }
   }
+
+  protected GetWorkspaceReadmeOptions() { }
 
   protected GetWorkspaceReadmeOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.wId,

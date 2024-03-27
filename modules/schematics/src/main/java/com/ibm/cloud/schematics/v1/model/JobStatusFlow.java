@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -38,6 +38,12 @@ public class JobStatusFlow extends GenericModel {
     String JOB_FAILED = "job_failed";
     /** job_cancelled. */
     String JOB_CANCELLED = "job_cancelled";
+    /** job_stopped. */
+    String JOB_STOPPED = "job_stopped";
+    /** job_stop_in_progress. */
+    String JOB_STOP_IN_PROGRESS = "job_stop_in_progress";
+    /** job_ready_to_execute. */
+    String JOB_READY_TO_EXECUTE = "job_ready_to_execute";
   }
 
   @SerializedName("flow_id")
@@ -63,6 +69,11 @@ public class JobStatusFlow extends GenericModel {
     private List<JobStatusWorkitem> workitems;
     private Date updatedAt;
 
+    /**
+     * Instantiates a new Builder from an existing JobStatusFlow instance.
+     *
+     * @param jobStatusFlow the instance to initialize the Builder with
+     */
     private Builder(JobStatusFlow jobStatusFlow) {
       this.flowId = jobStatusFlow.flowId;
       this.flowName = jobStatusFlow.flowName;
@@ -88,9 +99,9 @@ public class JobStatusFlow extends GenericModel {
     }
 
     /**
-     * Adds an workitems to workitems.
+     * Adds a new element to workitems.
      *
-     * @param workitems the new workitems
+     * @param workitems the new element to be added
      * @return the JobStatusFlow builder
      */
     public Builder addWorkitems(JobStatusWorkitem workitems) {
@@ -170,6 +181,8 @@ public class JobStatusFlow extends GenericModel {
       return this;
     }
   }
+
+  protected JobStatusFlow() { }
 
   protected JobStatusFlow(Builder builder) {
     flowId = builder.flowId;

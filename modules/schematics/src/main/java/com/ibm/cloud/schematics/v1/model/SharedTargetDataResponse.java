@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,6 +13,7 @@
 package com.ibm.cloud.schematics.v1.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -28,11 +29,13 @@ public class SharedTargetDataResponse extends GenericModel {
   @SerializedName("cluster_name")
   protected String clusterName;
   @SerializedName("entitlement_keys")
-  protected List<Object> entitlementKeys;
+  protected List<Map<String, Object>> entitlementKeys;
   protected String namespace;
   protected String region;
   @SerializedName("resource_group_id")
   protected String resourceGroupId;
+
+  protected SharedTargetDataResponse() { }
 
   /**
    * Gets the clusterId.
@@ -64,7 +67,7 @@ public class SharedTargetDataResponse extends GenericModel {
    *
    * @return the entitlementKeys
    */
-  public List<Object> getEntitlementKeys() {
+  public List<Map<String, Object>> getEntitlementKeys() {
     return entitlementKeys;
   }
 

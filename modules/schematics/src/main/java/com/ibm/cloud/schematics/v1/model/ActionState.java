@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -49,6 +49,11 @@ public class ActionState extends GenericModel {
     private String statusJobId;
     private String statusMessage;
 
+    /**
+     * Instantiates a new Builder from an existing ActionState instance.
+     *
+     * @param actionState the instance to initialize the Builder with
+     */
     private Builder(ActionState actionState) {
       this.statusCode = actionState.statusCode;
       this.statusJobId = actionState.statusJobId;
@@ -103,6 +108,8 @@ public class ActionState extends GenericModel {
       return this;
     }
   }
+
+  protected ActionState() { }
 
   protected ActionState(Builder builder) {
     statusCode = builder.statusCode;

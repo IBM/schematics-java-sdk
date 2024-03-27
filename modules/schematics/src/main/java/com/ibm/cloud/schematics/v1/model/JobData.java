@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -57,6 +57,11 @@ public class JobData extends GenericModel {
     private JobDataSystem systemJobData;
     private JobDataFlow flowJobData;
 
+    /**
+     * Instantiates a new Builder from an existing JobData instance.
+     *
+     * @param jobData the instance to initialize the Builder with
+     */
     private Builder(JobData jobData) {
       this.jobType = jobData.jobType;
       this.workspaceJobData = jobData.workspaceJobData;
@@ -144,6 +149,8 @@ public class JobData extends GenericModel {
       return this;
     }
   }
+
+  protected JobData() { }
 
   protected JobData(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.jobType,

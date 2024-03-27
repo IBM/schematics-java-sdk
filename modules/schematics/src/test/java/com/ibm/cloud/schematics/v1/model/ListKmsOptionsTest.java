@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -35,13 +35,13 @@ public class ListKmsOptionsTest {
       .encryptionScheme("testString")
       .location("testString")
       .resourceGroup("testString")
-      .limit(Long.valueOf("1"))
+      .limit(Long.valueOf("100"))
       .sort("testString")
       .build();
     assertEquals(listKmsOptionsModel.encryptionScheme(), "testString");
     assertEquals(listKmsOptionsModel.location(), "testString");
     assertEquals(listKmsOptionsModel.resourceGroup(), "testString");
-    assertEquals(listKmsOptionsModel.limit(), Long.valueOf("1"));
+    assertEquals(listKmsOptionsModel.limit(), Long.valueOf("100"));
     assertEquals(listKmsOptionsModel.sort(), "testString");
   }
 

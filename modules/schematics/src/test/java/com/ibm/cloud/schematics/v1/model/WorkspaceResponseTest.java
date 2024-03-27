@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,11 +13,14 @@
 
 package com.ibm.cloud.schematics.v1.model;
 
+import com.ibm.cloud.schematics.v1.model.AgentInfo;
 import com.ibm.cloud.schematics.v1.model.CatalogRef;
+import com.ibm.cloud.schematics.v1.model.Dependencies;
 import com.ibm.cloud.schematics.v1.model.EnvVariableResponse;
+import com.ibm.cloud.schematics.v1.model.LastJob;
+import com.ibm.cloud.schematics.v1.model.ServiceExtensions;
 import com.ibm.cloud.schematics.v1.model.SharedTargetDataResponse;
 import com.ibm.cloud.schematics.v1.model.TemplateRepoResponse;
-import com.ibm.cloud.schematics.v1.model.TemplateRunTimeDataResponse;
 import com.ibm.cloud.schematics.v1.model.TemplateSourceDataResponse;
 import com.ibm.cloud.schematics.v1.model.WorkspaceResponse;
 import com.ibm.cloud.schematics.v1.model.WorkspaceStatusMessage;
@@ -27,8 +30,6 @@ import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.sdk.core.util.DateUtils;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -46,16 +47,11 @@ public class WorkspaceResponseTest {
     WorkspaceResponse workspaceResponseModel = new WorkspaceResponse();
     assertNull(workspaceResponseModel.getAppliedShareddataIds());
     assertNull(workspaceResponseModel.getCatalogRef());
-    assertNull(workspaceResponseModel.getCreatedAt());
-    assertNull(workspaceResponseModel.getCreatedBy());
-    assertNull(workspaceResponseModel.getCrn());
+    assertNull(workspaceResponseModel.getDependencies());
     assertNull(workspaceResponseModel.getDescription());
-    assertNull(workspaceResponseModel.getId());
-    assertNull(workspaceResponseModel.getLastHealthCheckAt());
     assertNull(workspaceResponseModel.getLocation());
     assertNull(workspaceResponseModel.getName());
     assertNull(workspaceResponseModel.getResourceGroup());
-    assertNull(workspaceResponseModel.getRuntimeData());
     assertNull(workspaceResponseModel.getSharedData());
     assertNull(workspaceResponseModel.getStatus());
     assertNull(workspaceResponseModel.getTags());
@@ -63,9 +59,13 @@ public class WorkspaceResponseTest {
     assertNull(workspaceResponseModel.getTemplateRef());
     assertNull(workspaceResponseModel.getTemplateRepo());
     assertNull(workspaceResponseModel.getType());
-    assertNull(workspaceResponseModel.getUpdatedAt());
-    assertNull(workspaceResponseModel.getUpdatedBy());
+    assertNull(workspaceResponseModel.getCartId());
+    assertNull(workspaceResponseModel.getProjectId());
+    assertNull(workspaceResponseModel.getLastActionName());
+    assertNull(workspaceResponseModel.getLastActivityId());
+    assertNull(workspaceResponseModel.getLastJob());
     assertNull(workspaceResponseModel.getWorkspaceStatus());
     assertNull(workspaceResponseModel.getWorkspaceStatusMsg());
+    assertNull(workspaceResponseModel.getAgent());
   }
 }

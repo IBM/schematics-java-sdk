@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,21 +33,23 @@ public class ListJobsOptionsTest {
   public void testListJobsOptions() throws Throwable {
     ListJobsOptions listJobsOptionsModel = new ListJobsOptions.Builder()
       .offset(Long.valueOf("0"))
-      .limit(Long.valueOf("1"))
+      .limit(Long.valueOf("100"))
       .sort("testString")
       .profile("ids")
-      .resource("workspace")
+      .resource("workspaces")
       .resourceId("testString")
       .actionId("testString")
+      .workspaceId("testString")
       .list("all")
       .build();
     assertEquals(listJobsOptionsModel.offset(), Long.valueOf("0"));
-    assertEquals(listJobsOptionsModel.limit(), Long.valueOf("1"));
+    assertEquals(listJobsOptionsModel.limit(), Long.valueOf("100"));
     assertEquals(listJobsOptionsModel.sort(), "testString");
     assertEquals(listJobsOptionsModel.profile(), "ids");
-    assertEquals(listJobsOptionsModel.resource(), "workspace");
+    assertEquals(listJobsOptionsModel.resource(), "workspaces");
     assertEquals(listJobsOptionsModel.resourceId(), "testString");
     assertEquals(listJobsOptionsModel.actionId(), "testString");
+    assertEquals(listJobsOptionsModel.workspaceId(), "testString");
     assertEquals(listJobsOptionsModel.list(), "all");
   }
 }

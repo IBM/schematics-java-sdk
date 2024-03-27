@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,6 +14,7 @@ package com.ibm.cloud.schematics.v1.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
@@ -24,7 +25,7 @@ public class ReplaceWorkspaceInputsOptions extends GenericModel {
 
   protected String wId;
   protected String tId;
-  protected List<Object> envValues;
+  protected List<Map<String, Object>> envValues;
   protected String values;
   protected List<WorkspaceVariableRequest> variablestore;
 
@@ -34,10 +35,15 @@ public class ReplaceWorkspaceInputsOptions extends GenericModel {
   public static class Builder {
     private String wId;
     private String tId;
-    private List<Object> envValues;
+    private List<Map<String, Object>> envValues;
     private String values;
     private List<WorkspaceVariableRequest> variablestore;
 
+    /**
+     * Instantiates a new Builder from an existing ReplaceWorkspaceInputsOptions instance.
+     *
+     * @param replaceWorkspaceInputsOptions the instance to initialize the Builder with
+     */
     private Builder(ReplaceWorkspaceInputsOptions replaceWorkspaceInputsOptions) {
       this.wId = replaceWorkspaceInputsOptions.wId;
       this.tId = replaceWorkspaceInputsOptions.tId;
@@ -73,25 +79,25 @@ public class ReplaceWorkspaceInputsOptions extends GenericModel {
     }
 
     /**
-     * Adds an envValues to envValues.
+     * Adds a new element to envValues.
      *
-     * @param envValues the new envValues
+     * @param envValues the new element to be added
      * @return the ReplaceWorkspaceInputsOptions builder
      */
-    public Builder addEnvValues(Object envValues) {
+    public Builder addEnvValues(Map<String, Object> envValues) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(envValues,
         "envValues cannot be null");
       if (this.envValues == null) {
-        this.envValues = new ArrayList<Object>();
+        this.envValues = new ArrayList<Map<String, Object>>();
       }
       this.envValues.add(envValues);
       return this;
     }
 
     /**
-     * Adds an variablestore to variablestore.
+     * Adds a new element to variablestore.
      *
-     * @param variablestore the new variablestore
+     * @param variablestore the new element to be added
      * @return the ReplaceWorkspaceInputsOptions builder
      */
     public Builder addVariablestore(WorkspaceVariableRequest variablestore) {
@@ -133,7 +139,7 @@ public class ReplaceWorkspaceInputsOptions extends GenericModel {
      * @param envValues the envValues
      * @return the ReplaceWorkspaceInputsOptions builder
      */
-    public Builder envValues(List<Object> envValues) {
+    public Builder envValues(List<Map<String, Object>> envValues) {
       this.envValues = envValues;
       return this;
     }
@@ -161,6 +167,8 @@ public class ReplaceWorkspaceInputsOptions extends GenericModel {
       return this;
     }
   }
+
+  protected ReplaceWorkspaceInputsOptions() { }
 
   protected ReplaceWorkspaceInputsOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.wId,
@@ -219,7 +227,7 @@ public class ReplaceWorkspaceInputsOptions extends GenericModel {
    *
    * @return the envValues
    */
-  public List<Object> envValues() {
+  public List<Map<String, Object>> envValues() {
     return envValues;
   }
 
