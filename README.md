@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/IBM/schematics-java-sdk.svg?branch=main)](https://travis-ci.com/IBM/schematics-java-sdk)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-#IBM Cloud Schematics Java SDK Version 1.2.0
+# IBM Cloud Schematics Java SDK Version 1.2.0
 Java client library to interact with various [IBM Cloud Schematics](https://cloud.ibm.com/apidocs?category=schematics).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
