@@ -1,29 +1,37 @@
 ---
 language: java
 dist: jammy
+
 jdk:
 - openjdk11
+
 notifications:
   email: true
+
 branches:
   except:
   - gh-pages
+
 cache:
   directories:
   - "$HOME/.m2"
+
 env:
   global:
     - MVN_ARGS="--settings build/.travis.settings.xml"
+
 stages:
- - name: Build-Test
- - name: Semantic-Release
-   if: (branch = main) AND (type IN (push, api)) AND (fork = false)
- - name: Publish-Release
-   if: (tag IS present) AND (fork = false)
+  - name: Build-Test
+  - name: Semantic-Release
+    if: (branch = main) AND (type IN (push, api)) AND (fork = false)
+  - name: Publish-Release
+    if: (tag IS present) AND (fork = false)
+
 before_install:
   - sudo apt-get update
   - env | grep TRAVIS
   - pyenv global 3.8
+
 jobs:
   include:
     - stage: Build-Test
@@ -32,10 +40,12 @@ jobs:
       script:
         - build/setMavenVersion.sh
         - mvn verify -fae -DskipITs $MVN_ARGS
+
     - jdk: openjdk17
       install: true
       script:
         - mvn verify -fae -DskipITs $MVN_ARGS
+
     - stage: Semantic-Release
       install:
         - nvm install 18
@@ -45,6 +55,7 @@ jobs:
         - pip install --user bump2version
       script:
         - npm run semantic-release
+
     - stage: Publish-Release
       jdk: openjdk11
       name: Publish-Javadoc
@@ -55,6 +66,7 @@ jobs:
         - build/publishJavadoc.sh
       after_success:
         - echo "Javadocs successfully published to gh-pages!"
+
     - jdk: openjdk11
       name: Publish-To-Maven-Central
       install: true
