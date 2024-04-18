@@ -5,7 +5,7 @@
 
   <groupId>com.ibm.cloud</groupId>
   <artifactId>schematics-parent</artifactId>
-  <version>1.2.0</version>
+  <version>99-SNAPSHOT</version>
   <name>IBM Cloud Schematics Java SDK</name>
   <packaging>pom</packaging>
   <description>Java Client Library to access the IBM Cloud Schematics</description>

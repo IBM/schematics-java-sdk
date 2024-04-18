@@ -7,7 +7,7 @@
         <!-- >>> Replace this with the parent pom's artifactId -->
         <artifactId>schematics-parent</artifactId>
         <groupId>com.ibm.cloud</groupId>
-        <version>1.2.0</version>
+        <version>99-SNAPSHOT</version>
         <relativePath>../..</relativePath>
     </parent>
 
@@ -15,7 +15,7 @@
     <artifactId>schematics-common</artifactId>
 
     <!-- >>> Replace this with the common module's description (e.g. Platform Services Common Library) -->
-    <name>Schematics Common Library</name>
+    <name>Schematics SDK Common Library</name>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -58,13 +58,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <developers>
-        <developer>
-            <name>IBM Cloud DevX SDK Development</name>
-            <email>devxsdk@us.ibm.com</email>
-            <url>https://www.ibm.com/</url>
-        </developer>
-    </developers>
-
 </project>
