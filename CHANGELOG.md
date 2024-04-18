@@ -1,3 +1,19 @@
+# [1.2.0](https://github.com/IBM/schematics-java-sdk/compare/1.1.0...1.2.0) (2024-04-18)
+
+
+### Bug Fixes
+
+* **codecov:** remove references to codecov tool ([ac03326](https://github.com/IBM/schematics-java-sdk/commit/ac03326bca49f1bc3d5bbf8264385cd3ccd6aa14))
+
+
+### Features
+
+* **build:** deploy artifacts to maven central ([24a76d2](https://github.com/IBM/schematics-java-sdk/commit/24a76d27d1cdb1f11da85bceebd29899491dac2e))
+* **build:** deploy artifacts to maven central ([e898e9a](https://github.com/IBM/schematics-java-sdk/commit/e898e9aee37dba6f5c893e8a198e3dd8cf043044))
+* **build:** deploy artifacts to maven central ([033f5c0](https://github.com/IBM/schematics-java-sdk/commit/033f5c0c8dabea51b4ab33b6a9e03a98495e8ac6))
+* **build:** deploy artifacts to maven central ([20502e0](https://github.com/IBM/schematics-java-sdk/commit/20502e0c0bc5be85035d5a17f93a3f3cb8d98f99))
+* **build:** deploy artifacts to maven central ([79e8068](https://github.com/IBM/schematics-java-sdk/commit/79e80688758e5852c42e7ade85382c7de105ecc2))
+
 # [1.1.0](https://github.com/IBM/schematics-java-sdk/compare/1.0.2...1.1.0) (2021-09-12)
 
 
