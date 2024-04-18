@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/IBM/schematics-java-sdk/compare/1.2.0...1.3.0) (2024-04-18)
+
+
+### Features
+
+* address build-related issues ([8713fb7](https://github.com/IBM/schematics-java-sdk/commit/8713fb7d7b710087b8285bdb67b68cba38124255))
+
 # [1.2.0](https://github.com/IBM/schematics-java-sdk/compare/1.1.0...1.2.0) (2024-04-18)
 
 
