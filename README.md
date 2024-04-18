@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/IBM/schematics-java-sdk.svg?branch=main)](https://travis-ci.com/IBM/schematics-java-sdk)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-# IBM Cloud Schematics Java SDK Version 1.1.0
+# IBM Cloud Schematics Java SDK Version 1.2.0
 Java client library to interact with various [IBM Cloud Schematics](https://cloud.ibm.com/apidocs?category=schematics).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
@@ -21,7 +21,7 @@ Changes might occur which impact applications that use this SDK.
 
 <!-- toc -->
 
-- [IBM Cloud Schematics Java SDK Version 1.1.0](#ibm-cloud-schematics-java-sdk-version-110)
+- [IBM Cloud Schematics Java SDK Version 1.2.0](#ibm-cloud-schematics-java-sdk-version-110)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Prerequisites](#prerequisites)
@@ -49,7 +49,7 @@ The IBM Cloud Schematics Java SDK allows developers to programmatically interact
 
 Service Name | Artifact Coordinates
 --- | ---
-[Schematics](https://cloud.ibm.com/apidocs/schematics) | com.ibm.cloud:schematics:1.1.0 -->
+[Schematics](https://cloud.ibm.com/apidocs/schematics) | com.ibm.cloud:schematics:1.2.0 -->
 
 ## Prerequisites
 
@@ -60,7 +60,7 @@ Service Name | Artifact Coordinates
 * Java 8 or above.
 
 ## Installation
-The current version of this SDK is: 1.1.0
+The current version of this SDK is: 1.2.0
 
 Each service's artifact coordinates are listed in the table above.
 
@@ -78,13 +78,13 @@ artifact coordinates (group id, artifact id and version) for the service, like t
 <dependency>
     <groupId>com.ibm.cloud</groupId>
     <artifactId>schematics-service</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 
 ##### Gradle
 ```gradle
-'com.ibm.cloud:schematics-service:1.1.0'
+'com.ibm.cloud:schematics-service:1.2.0'
 ```
 
 ## Authentication
