@@ -58,16 +58,6 @@ jobs:
 
     - stage: Publish-Release
       jdk: openjdk11
-      name: Publish-Javadoc
-      install: true
-      script:
-        - build/setMavenVersion.sh
-        - mvn clean javadoc:aggregate $MVN_ARGS
-        - build/publishJavadoc.sh
-      after_success:
-        - echo "Javadocs successfully published to gh-pages!"
-
-    - jdk: openjdk11
       name: Publish-To-Maven-Central
       install: true
       script:
@@ -76,3 +66,13 @@ jobs:
         - mvn deploy $MVN_ARGS -DskipTests -P central
       after_success:
         - echo "Maven artifacts successfully published to Maven Central!"
+#       name: Publish-Javadoc
+#       install: true
+#       script:
+#         - build/setMavenVersion.sh
+#         - mvn clean javadoc:aggregate $MVN_ARGS
+#         - build/publishJavadoc.sh
+#       after_success:
+#         - echo "Javadocs successfully published to gh-pages!"
+# 
+#     - jdk: openjdk11

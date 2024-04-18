@@ -5,7 +5,7 @@
     <parent>
         <artifactId>schematics-parent</artifactId>
         <groupId>com.ibm.cloud</groupId>
-        <version>1.2.0</version>
+        <version>99-SNAPSHOT</version>
         <relativePath>../..</relativePath>
     </parent>
 
@@ -46,13 +46,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <developers>
-        <developer>
-            <name>IBM Cloud DevX SDK Development</name>
-            <email>devxsdk@us.ibm.com</email>
-            <url>https://www.ibm.com/</url>
-        </developer>
-    </developers>
-
 </project>

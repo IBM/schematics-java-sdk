@@ -17,7 +17,7 @@ echo '<!DOCTYPE html>
         <h1>IBM Cloud Schematics Java SDK Documentation</h1>
     </div>
 
-    <p><a href="https://cloud.ibm.com/apidocs?category=<service-category>">My Services Info</a>
+    <p><a href="https://cloud.ibm.com/apidocs?category=devops">Schematics Info</a>
         | <a href="https://github.com/IBM/schematics-java-sdk">GitHub</a>
     </p>
 

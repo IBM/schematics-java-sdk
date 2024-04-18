@@ -3,38 +3,32 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>schematics-parent</artifactId>
         <groupId>com.ibm.cloud</groupId>
-        <version>1.1.0</version>
+        <artifactId>schematics-parent</artifactId>
+        <version>99-SNAPSHOT</version>
         <relativePath>../..</relativePath>
     </parent>
 
     <artifactId>schematics-examples</artifactId>
     <packaging>jar</packaging>
-    <name>Code Examples</name>
-
-    <properties>
-        <maven.javadoc.skip>true</maven.javadoc.skip>
-    </properties>
+    <name>Schematics Code Examples</name>
 
     <dependencies>
         <!-- There should be a dependency for each module whose request example class exists in this "examples" module. Add 
             new "dependency" entries here as needed when you add a request examples class for a new service. Note: the "artifactId" values 
             below should reflect the "artifactId" value specified in each module's pom.xml file (i.e. not the module's directory name). -->
         <dependency>
-            <groupId>com.ibm.cloud</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>schematics</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j-version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-jdk14</artifactId>
-            <version>${slf4j-version}</version>
         </dependency>
     </dependencies>
     
@@ -43,18 +37,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <!-- Build an executable JAR -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.ibm.cloud.my_services.example_service.v1.ExampleServiceExamples</mainClass>
-                        </manifest>
-                    </archive>
+                    <minimizeJar>true</minimizeJar>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# This script will publish the aggregated javadocs found in the project's "target" directory.
-# The javadocs are committed and pushed to the git repository's gh-pages branch.
-# Be sure to customize this file to reflect your SDK project's settings (git url, 
-
 # Publish javadocs only for a tagged-release.
 if [[ -n "${TRAVIS_TAG}" ]]; then
 
@@ -11,7 +7,7 @@ if [[ -n "${TRAVIS_TAG}" ]]; then
 
     printf "\n>>>>> Cloning repository's gh-pages branch into directory 'gh-pages'\n"
     rm -fr ./gh-pages
-    git clone --branch=gh-pages https://${GH_TOKEN}@XXXGH_URL_NOSCHEMEXXX.git gh-pages
+    git clone --branch=gh-pages https://${GH_TOKEN}@github.com/IBM/schematics-java-sdk.git gh-pages
 
     printf "\n>>>>> Finished cloning...\n"
 
