@@ -58,10 +58,10 @@
 
     <module>modules/schematics</module>
 
+    <!--
     <module>modules/coverage-reports</module>
-
-    <!-- This module should always be listed last -->
     <module>modules/examples</module>
+    -->
   </modules>
 
   <licenses>
