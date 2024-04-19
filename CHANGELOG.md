@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/IBM/[secure]-java-sdk/compare/1.3.0...1.3.1) (2024-04-19)
+
+
+### Bug Fixes
+
+* **build:** skip examples module in build ([#13](https://github.com/IBM/[secure]-java-sdk/issues/13)) ([565dcda](https://github.com/IBM/[secure]-java-sdk/commit/565dcda4bc1479efd232a77b6fa59266d5f301c2))
+
 # [1.3.0](https://github.com/IBM/schematics-java-sdk/compare/1.2.0...1.3.0) (2024-04-18)
 
 
