@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.schematics.v1.model;
 
 import com.google.gson.annotations.SerializedName;
@@ -140,9 +141,9 @@ public class CredentialVariableData extends GenericModel {
   /**
    * Gets the value.
    *
-   * The credential value for the variable or reference to the value. For example, `value = "&lt;provide your
-   * ssh_key_value with \n&gt;"`. **Note** The SSH key should contain `\n` at the end of the key details in case of
-   * command line or API calls.
+   * The credential value for the variable or reference to the value. **Note** The SSH key should contain three `\n` in
+   * the SSH key value as shown in the example for CLI or API calls. When using Bastion from API you need to add SSH key
+   * in both `credentials` and `bastion_credentials`.
    *
    * @return the value
    */

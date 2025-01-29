@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -12,7 +12,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.86.1-c3d7bcef-20240308-215042
+ * IBM OpenAPI SDK Code Generator Version: 3.96.1-5136e54a-20241108-203028
  */
 
 package com.ibm.cloud.schematics.v1;
@@ -609,6 +609,9 @@ public class Schematics extends BaseService {
     if (createWorkspaceOptions.agentId() != null) {
       contentJson.addProperty("agent_id", createWorkspaceOptions.agentId());
     }
+    if (createWorkspaceOptions.settings() != null) {
+      contentJson.add("settings", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createWorkspaceOptions.settings()));
+    }
     builder.bodyJson(contentJson);
     ResponseConverter<WorkspaceResponse> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<WorkspaceResponse>() { }.getType());
@@ -762,6 +765,9 @@ public class Schematics extends BaseService {
     if (replaceWorkspaceOptions.agentId() != null) {
       contentJson.addProperty("agent_id", replaceWorkspaceOptions.agentId());
     }
+    if (replaceWorkspaceOptions.settings() != null) {
+      contentJson.add("settings", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceWorkspaceOptions.settings()));
+    }
     builder.bodyJson(contentJson);
     ResponseConverter<WorkspaceResponse> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<WorkspaceResponse>() { }.getType());
@@ -882,6 +888,9 @@ public class Schematics extends BaseService {
     }
     if (updateWorkspaceOptions.agentId() != null) {
       contentJson.addProperty("agent_id", updateWorkspaceOptions.agentId());
+    }
+    if (updateWorkspaceOptions.settings() != null) {
+      contentJson.add("settings", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateWorkspaceOptions.settings()));
     }
     builder.bodyJson(contentJson);
     ResponseConverter<WorkspaceResponse> responseConverter =
@@ -3605,6 +3614,9 @@ public class Schematics extends BaseService {
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("schematics", "v1", "deleteAgentData");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
+    }
+    if (deleteAgentDataOptions.force() != null) {
+      builder.query("force", String.valueOf(deleteAgentDataOptions.force()));
     }
     ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
     return createServiceCall(builder.build(), responseConverter);

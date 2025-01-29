@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.schematics.v1.model;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class CreateWorkspaceOptions extends GenericModel {
   protected List<String> type;
   protected WorkspaceStatusRequest workspaceStatus;
   protected String agentId;
+  protected List<VariableData> settings;
   protected String xGithubToken;
 
   /**
@@ -58,6 +60,7 @@ public class CreateWorkspaceOptions extends GenericModel {
     private List<String> type;
     private WorkspaceStatusRequest workspaceStatus;
     private String agentId;
+    private List<VariableData> settings;
     private String xGithubToken;
 
     /**
@@ -81,6 +84,7 @@ public class CreateWorkspaceOptions extends GenericModel {
       this.type = createWorkspaceOptions.type;
       this.workspaceStatus = createWorkspaceOptions.workspaceStatus;
       this.agentId = createWorkspaceOptions.agentId;
+      this.settings = createWorkspaceOptions.settings;
       this.xGithubToken = createWorkspaceOptions.xGithubToken;
     }
 
@@ -162,6 +166,22 @@ public class CreateWorkspaceOptions extends GenericModel {
         this.type = new ArrayList<String>();
       }
       this.type.add(type);
+      return this;
+    }
+
+    /**
+     * Adds a new element to settings.
+     *
+     * @param settings the new element to be added
+     * @return the CreateWorkspaceOptions builder
+     */
+    public Builder addSettings(VariableData settings) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(settings,
+        "settings cannot be null");
+      if (this.settings == null) {
+        this.settings = new ArrayList<VariableData>();
+      }
+      this.settings.add(settings);
       return this;
     }
 
@@ -337,6 +357,18 @@ public class CreateWorkspaceOptions extends GenericModel {
     }
 
     /**
+     * Set the settings.
+     * Existing settings will be replaced.
+     *
+     * @param settings the settings
+     * @return the CreateWorkspaceOptions builder
+     */
+    public Builder settings(List<VariableData> settings) {
+      this.settings = settings;
+      return this;
+    }
+
+    /**
      * Set the xGithubToken.
      *
      * @param xGithubToken the xGithubToken
@@ -366,6 +398,7 @@ public class CreateWorkspaceOptions extends GenericModel {
     type = builder.type;
     workspaceStatus = builder.workspaceStatus;
     agentId = builder.agentId;
+    settings = builder.settings;
     xGithubToken = builder.xGithubToken;
   }
 
@@ -551,6 +584,17 @@ public class CreateWorkspaceOptions extends GenericModel {
    */
   public String agentId() {
     return agentId;
+  }
+
+  /**
+   * Gets the settings.
+   *
+   * Input settings to be applied to the workspace, for example, `job_timeout_override`.
+   *
+   * @return the settings
+   */
+  public List<VariableData> settings() {
+    return settings;
   }
 
   /**

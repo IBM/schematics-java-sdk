@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.schematics.v1.model;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -20,12 +21,14 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class DeleteAgentDataOptions extends GenericModel {
 
   protected String agentId;
+  protected Boolean force;
 
   /**
    * Builder.
    */
   public static class Builder {
     private String agentId;
+    private Boolean force;
 
     /**
      * Instantiates a new Builder from an existing DeleteAgentDataOptions instance.
@@ -34,6 +37,7 @@ public class DeleteAgentDataOptions extends GenericModel {
      */
     private Builder(DeleteAgentDataOptions deleteAgentDataOptions) {
       this.agentId = deleteAgentDataOptions.agentId;
+      this.force = deleteAgentDataOptions.force;
     }
 
     /**
@@ -70,6 +74,17 @@ public class DeleteAgentDataOptions extends GenericModel {
       this.agentId = agentId;
       return this;
     }
+
+    /**
+     * Set the force.
+     *
+     * @param force the force
+     * @return the DeleteAgentDataOptions builder
+     */
+    public Builder force(Boolean force) {
+      this.force = force;
+      return this;
+    }
   }
 
   protected DeleteAgentDataOptions() { }
@@ -78,6 +93,7 @@ public class DeleteAgentDataOptions extends GenericModel {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.agentId,
       "agentId cannot be empty");
     agentId = builder.agentId;
+    force = builder.force;
   }
 
   /**
@@ -98,6 +114,17 @@ public class DeleteAgentDataOptions extends GenericModel {
    */
   public String agentId() {
     return agentId;
+  }
+
+  /**
+   * Gets the force.
+   *
+   * Equivalent to -force options in the command line, default is false.
+   *
+   * @return the force
+   */
+  public Boolean force() {
+    return force;
   }
 }
 

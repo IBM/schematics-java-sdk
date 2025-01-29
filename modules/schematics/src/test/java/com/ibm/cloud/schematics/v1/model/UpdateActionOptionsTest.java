@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -144,12 +144,12 @@ public class UpdateActionOptionsTest {
 
     CredentialVariableData credentialVariableDataModel = new CredentialVariableData.Builder()
       .name("testString")
-      .value("testString")
+      .value("-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n")
       .useDefault(true)
       .metadata(credentialVariableMetadataModel)
       .build();
     assertEquals(credentialVariableDataModel.name(), "testString");
-    assertEquals(credentialVariableDataModel.value(), "testString");
+    assertEquals(credentialVariableDataModel.value(), "-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n");
     assertEquals(credentialVariableDataModel.useDefault(), Boolean.valueOf(true));
     assertEquals(credentialVariableDataModel.metadata(), credentialVariableMetadataModel);
 
