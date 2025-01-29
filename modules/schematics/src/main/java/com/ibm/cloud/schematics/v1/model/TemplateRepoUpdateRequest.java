@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -10,6 +10,7 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+
 package com.ibm.cloud.schematics.v1.model;
 
 import com.google.gson.annotations.SerializedName;
@@ -27,6 +28,8 @@ public class TemplateRepoUpdateRequest extends GenericModel {
   @SerializedName("repo_url")
   protected String repoUrl;
   protected String url;
+  @SerializedName("skip_submodules_checkout")
+  protected Boolean skipSubmodulesCheckout;
 
   /**
    * Builder.
@@ -37,6 +40,7 @@ public class TemplateRepoUpdateRequest extends GenericModel {
     private String repoShaValue;
     private String repoUrl;
     private String url;
+    private Boolean skipSubmodulesCheckout;
 
     /**
      * Instantiates a new Builder from an existing TemplateRepoUpdateRequest instance.
@@ -49,6 +53,7 @@ public class TemplateRepoUpdateRequest extends GenericModel {
       this.repoShaValue = templateRepoUpdateRequest.repoShaValue;
       this.repoUrl = templateRepoUpdateRequest.repoUrl;
       this.url = templateRepoUpdateRequest.url;
+      this.skipSubmodulesCheckout = templateRepoUpdateRequest.skipSubmodulesCheckout;
     }
 
     /**
@@ -120,6 +125,17 @@ public class TemplateRepoUpdateRequest extends GenericModel {
       this.url = url;
       return this;
     }
+
+    /**
+     * Set the skipSubmodulesCheckout.
+     *
+     * @param skipSubmodulesCheckout the skipSubmodulesCheckout
+     * @return the TemplateRepoUpdateRequest builder
+     */
+    public Builder skipSubmodulesCheckout(Boolean skipSubmodulesCheckout) {
+      this.skipSubmodulesCheckout = skipSubmodulesCheckout;
+      return this;
+    }
   }
 
   protected TemplateRepoUpdateRequest() { }
@@ -130,6 +146,7 @@ public class TemplateRepoUpdateRequest extends GenericModel {
     repoShaValue = builder.repoShaValue;
     repoUrl = builder.repoUrl;
     url = builder.url;
+    skipSubmodulesCheckout = builder.skipSubmodulesCheckout;
   }
 
   /**
@@ -194,6 +211,17 @@ public class TemplateRepoUpdateRequest extends GenericModel {
    */
   public String url() {
     return url;
+  }
+
+  /**
+   * Gets the skipSubmodulesCheckout.
+   *
+   * Set this variable to checkout git sub-modules.
+   *
+   * @return the skipSubmodulesCheckout
+   */
+  public Boolean skipSubmodulesCheckout() {
+    return skipSubmodulesCheckout;
   }
 }
 

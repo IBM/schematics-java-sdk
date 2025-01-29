@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -37,12 +37,14 @@ public class TemplateRepoUpdateRequestTest {
       .repoShaValue("testString")
       .repoUrl("testString")
       .url("testString")
+      .skipSubmodulesCheckout(true)
       .build();
     assertEquals(templateRepoUpdateRequestModel.branch(), "testString");
     assertEquals(templateRepoUpdateRequestModel.release(), "testString");
     assertEquals(templateRepoUpdateRequestModel.repoShaValue(), "testString");
     assertEquals(templateRepoUpdateRequestModel.repoUrl(), "testString");
     assertEquals(templateRepoUpdateRequestModel.url(), "testString");
+    assertEquals(templateRepoUpdateRequestModel.skipSubmodulesCheckout(), Boolean.valueOf(true));
 
     String json = TestUtilities.serialize(templateRepoUpdateRequestModel);
 
@@ -53,5 +55,6 @@ public class TemplateRepoUpdateRequestTest {
     assertEquals(templateRepoUpdateRequestModelNew.repoShaValue(), "testString");
     assertEquals(templateRepoUpdateRequestModelNew.repoUrl(), "testString");
     assertEquals(templateRepoUpdateRequestModelNew.url(), "testString");
+    assertEquals(templateRepoUpdateRequestModelNew.skipSubmodulesCheckout(), Boolean.valueOf(true));
   }
 }

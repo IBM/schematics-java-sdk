@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,8 +33,10 @@ public class DeleteAgentDataOptionsTest {
   public void testDeleteAgentDataOptions() throws Throwable {
     DeleteAgentDataOptions deleteAgentDataOptionsModel = new DeleteAgentDataOptions.Builder()
       .agentId("testString")
+      .force(true)
       .build();
     assertEquals(deleteAgentDataOptionsModel.agentId(), "testString");
+    assertEquals(deleteAgentDataOptionsModel.force(), Boolean.valueOf(true));
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

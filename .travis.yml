@@ -46,12 +46,11 @@ jobs:
         - mvn verify -fae -DskipITs $MVN_ARGS
 
     - stage: Semantic-Release
+      language: node_js
+      node_js: 22
       install:
-        - nvm install 18
-        - node --version
-        - npm --version
+        - pip install --user bump-my-version
         - npm install
-        - pip install --user bump2version
       script:
         - npm run semantic-release
 
