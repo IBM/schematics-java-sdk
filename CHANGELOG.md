@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/IBM/[secure]-java-sdk/compare/1.3.1...1.4.0) (2025-02-13)
+
+
+### Features
+
+* **build:** Regenerate Schematics Java SDK ([88b1f3b](https://github.com/IBM/[secure]-java-sdk/commit/88b1f3bdcddba43873bf59c9c6497ec74aedad2c))
+
 ## [1.3.1](https://github.com/IBM/[secure]-java-sdk/compare/1.3.0...1.3.1) (2024-04-19)
 
 
