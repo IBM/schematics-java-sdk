@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -40,40 +40,40 @@ public class PolicyTest {
   public void testPolicy() throws Throwable {
     UserState userStateModel = new UserState.Builder()
       .state("draft")
-      .setBy("testString")
-      .setAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .setBy("set_by")
+      .setAt(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
     assertEquals(userStateModel.state(), "draft");
-    assertEquals(userStateModel.setBy(), "testString");
-    assertEquals(userStateModel.setAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(userStateModel.setBy(), "set_by");
+    assertEquals(userStateModel.setAt(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
 
     PolicyObjectSelector policyObjectSelectorModel = new PolicyObjectSelector.Builder()
-      .kind("workspace")
-      .tags(java.util.Arrays.asList("testString"))
-      .resourceGroups(java.util.Arrays.asList("testString"))
-      .locations(java.util.Arrays.asList("us-south"))
+      .kind("kind")
+      .tags(java.util.Arrays.asList("tags", "tags", "tags", "tags", "tags"))
+      .resourceGroups(java.util.Arrays.asList("resource_groups", "resource_groups", "resource_groups", "resource_groups", "resource_groups"))
+      .locations(java.util.Arrays.asList(null, null, null, null, null))
       .build();
-    assertEquals(policyObjectSelectorModel.kind(), "workspace");
-    assertEquals(policyObjectSelectorModel.tags(), java.util.Arrays.asList("testString"));
-    assertEquals(policyObjectSelectorModel.resourceGroups(), java.util.Arrays.asList("testString"));
-    assertEquals(policyObjectSelectorModel.locations(), java.util.Arrays.asList("us-south"));
+    assertEquals(policyObjectSelectorModel.kind(), "kind");
+    assertEquals(policyObjectSelectorModel.tags(), java.util.Arrays.asList("tags", "tags", "tags", "tags", "tags"));
+    assertEquals(policyObjectSelectorModel.resourceGroups(), java.util.Arrays.asList("resource_groups", "resource_groups", "resource_groups", "resource_groups", "resource_groups"));
+    assertEquals(policyObjectSelectorModel.locations(), java.util.Arrays.asList(null, null, null, null, null));
 
     PolicyObjects policyObjectsModel = new PolicyObjects.Builder()
       .selectorKind("ids")
-      .selectorIds(java.util.Arrays.asList("testString"))
+      .selectorIds(java.util.Arrays.asList("selector_ids", "selector_ids", "selector_ids", "selector_ids", "selector_ids"))
       .selectorScope(java.util.Arrays.asList(policyObjectSelectorModel))
       .build();
     assertEquals(policyObjectsModel.selectorKind(), "ids");
-    assertEquals(policyObjectsModel.selectorIds(), java.util.Arrays.asList("testString"));
+    assertEquals(policyObjectsModel.selectorIds(), java.util.Arrays.asList("selector_ids", "selector_ids", "selector_ids", "selector_ids", "selector_ids"));
     assertEquals(policyObjectsModel.selectorScope(), java.util.Arrays.asList(policyObjectSelectorModel));
 
     AgentAssignmentPolicyParameter agentAssignmentPolicyParameterModel = new AgentAssignmentPolicyParameter.Builder()
-      .selectorKind("ids")
-      .selectorIds(java.util.Arrays.asList("testString"))
+      .selectorKind("null")
+      .selectorIds(java.util.Arrays.asList("selector_ids", "selector_ids", "selector_ids", "selector_ids", "selector_ids"))
       .selectorScope(java.util.Arrays.asList(policyObjectSelectorModel))
       .build();
-    assertEquals(agentAssignmentPolicyParameterModel.selectorKind(), "ids");
-    assertEquals(agentAssignmentPolicyParameterModel.selectorIds(), java.util.Arrays.asList("testString"));
+    assertEquals(agentAssignmentPolicyParameterModel.selectorKind(), "null");
+    assertEquals(agentAssignmentPolicyParameterModel.selectorIds(), java.util.Arrays.asList("selector_ids", "selector_ids", "selector_ids", "selector_ids", "selector_ids"));
     assertEquals(agentAssignmentPolicyParameterModel.selectorScope(), java.util.Arrays.asList(policyObjectSelectorModel));
 
     PolicyParameter policyParameterModel = new PolicyParameter.Builder()
@@ -83,10 +83,10 @@ public class PolicyTest {
 
     ScopedResource scopedResourceModel = new ScopedResource.Builder()
       .kind("workspace")
-      .id("testString")
+      .id("id")
       .build();
     assertEquals(scopedResourceModel.kind(), "workspace");
-    assertEquals(scopedResourceModel.id(), "testString");
+    assertEquals(scopedResourceModel.id(), "id");
 
     Policy policyModel = new Policy.Builder()
       .name("Agent1-DevWS")
@@ -124,4 +124,10 @@ public class PolicyTest {
     assertEquals(policyModelNew.target().toString(), policyObjectsModel.toString());
     assertEquals(policyModelNew.parameter().toString(), policyParameterModel.toString());
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testPolicyError() throws Throwable {
+    new Policy.Builder().build();
+  }
+
 }

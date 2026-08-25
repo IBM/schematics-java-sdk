@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -89,26 +89,32 @@ public class CreatePolicyOptionsTest {
     assertEquals(scopedResourceModel.id(), "testString");
 
     CreatePolicyOptions createPolicyOptionsModel = new CreatePolicyOptions.Builder()
+      .kind("agent_assignment_policy")
       .name("Agent1-DevWS")
       .description("Policy for job execution of secured workspaces on agent1")
       .resourceGroup("Default")
       .tags(java.util.Arrays.asList("policy:secured-job"))
       .location("us-south")
       .state(userStateModel)
-      .kind("agent_assignment_policy")
       .target(policyObjectsModel)
       .parameter(policyParameterModel)
       .scopedResources(java.util.Arrays.asList(scopedResourceModel))
       .build();
+    assertEquals(createPolicyOptionsModel.kind(), "agent_assignment_policy");
     assertEquals(createPolicyOptionsModel.name(), "Agent1-DevWS");
     assertEquals(createPolicyOptionsModel.description(), "Policy for job execution of secured workspaces on agent1");
     assertEquals(createPolicyOptionsModel.resourceGroup(), "Default");
     assertEquals(createPolicyOptionsModel.tags(), java.util.Arrays.asList("policy:secured-job"));
     assertEquals(createPolicyOptionsModel.location(), "us-south");
     assertEquals(createPolicyOptionsModel.state(), userStateModel);
-    assertEquals(createPolicyOptionsModel.kind(), "agent_assignment_policy");
     assertEquals(createPolicyOptionsModel.target(), policyObjectsModel);
     assertEquals(createPolicyOptionsModel.parameter(), policyParameterModel);
     assertEquals(createPolicyOptionsModel.scopedResources(), java.util.Arrays.asList(scopedResourceModel));
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testCreatePolicyOptionsError() throws Throwable {
+    new CreatePolicyOptions.Builder().build();
+  }
+
 }

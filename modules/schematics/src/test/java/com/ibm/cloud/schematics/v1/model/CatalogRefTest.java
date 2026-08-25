@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -34,11 +34,11 @@ public class CatalogRefTest {
   public void testCatalogRef() throws Throwable {
     ServiceExtensions serviceExtensionsModel = new ServiceExtensions.Builder()
       .name("flavor")
-      .value("testString")
+      .value("value")
       .type("string")
       .build();
     assertEquals(serviceExtensionsModel.name(), "flavor");
-    assertEquals(serviceExtensionsModel.value(), "testString");
+    assertEquals(serviceExtensionsModel.value(), "value");
     assertEquals(serviceExtensionsModel.type(), "string");
 
     CatalogRef catalogRefModel = new CatalogRef.Builder()

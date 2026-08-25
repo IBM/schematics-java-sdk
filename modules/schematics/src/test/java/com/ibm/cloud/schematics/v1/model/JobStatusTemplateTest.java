@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -35,14 +35,14 @@ public class JobStatusTemplateTest {
     JobStatusTemplate jobStatusTemplateModel = new JobStatusTemplate.Builder()
       .templateId("testString")
       .templateName("testString")
-      .flowIndex(Long.valueOf("26"))
+      .flowIndex(Long.valueOf("0"))
       .statusCode("job_pending")
       .statusMessage("testString")
       .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .build();
     assertEquals(jobStatusTemplateModel.templateId(), "testString");
     assertEquals(jobStatusTemplateModel.templateName(), "testString");
-    assertEquals(jobStatusTemplateModel.flowIndex(), Long.valueOf("26"));
+    assertEquals(jobStatusTemplateModel.flowIndex(), Long.valueOf("0"));
     assertEquals(jobStatusTemplateModel.statusCode(), "job_pending");
     assertEquals(jobStatusTemplateModel.statusMessage(), "testString");
     assertEquals(jobStatusTemplateModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
@@ -53,7 +53,7 @@ public class JobStatusTemplateTest {
     assertTrue(jobStatusTemplateModelNew instanceof JobStatusTemplate);
     assertEquals(jobStatusTemplateModelNew.templateId(), "testString");
     assertEquals(jobStatusTemplateModelNew.templateName(), "testString");
-    assertEquals(jobStatusTemplateModelNew.flowIndex(), Long.valueOf("26"));
+    assertEquals(jobStatusTemplateModelNew.flowIndex(), Long.valueOf("0"));
     assertEquals(jobStatusTemplateModelNew.statusCode(), "job_pending");
     assertEquals(jobStatusTemplateModelNew.statusMessage(), "testString");
     assertEquals(jobStatusTemplateModelNew.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));

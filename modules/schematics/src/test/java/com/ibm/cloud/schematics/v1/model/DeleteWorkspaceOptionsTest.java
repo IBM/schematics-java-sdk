@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,12 +32,12 @@ public class DeleteWorkspaceOptionsTest {
   @Test
   public void testDeleteWorkspaceOptions() throws Throwable {
     DeleteWorkspaceOptions deleteWorkspaceOptionsModel = new DeleteWorkspaceOptions.Builder()
-      .refreshToken("testString")
       .wId("testString")
+      .refreshToken("testString")
       .destroyResources("testString")
       .build();
-    assertEquals(deleteWorkspaceOptionsModel.refreshToken(), "testString");
     assertEquals(deleteWorkspaceOptionsModel.wId(), "testString");
+    assertEquals(deleteWorkspaceOptionsModel.refreshToken(), "testString");
     assertEquals(deleteWorkspaceOptionsModel.destroyResources(), "testString");
   }
 

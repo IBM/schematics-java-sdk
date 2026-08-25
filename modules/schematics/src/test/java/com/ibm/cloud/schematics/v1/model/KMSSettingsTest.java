@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -34,22 +34,22 @@ public class KMSSettingsTest {
   @Test
   public void testKMSSettings() throws Throwable {
     KMSSettingsPrimaryCrk kmsSettingsPrimaryCrkModel = new KMSSettingsPrimaryCrk.Builder()
-      .kmsName("testString")
-      .kmsPrivateEndpoint("testString")
-      .keyCrn("testString")
+      .kmsName("kms_name")
+      .kmsPrivateEndpoint("kms_private_endpoint")
+      .keyCrn("key_crn")
       .build();
-    assertEquals(kmsSettingsPrimaryCrkModel.kmsName(), "testString");
-    assertEquals(kmsSettingsPrimaryCrkModel.kmsPrivateEndpoint(), "testString");
-    assertEquals(kmsSettingsPrimaryCrkModel.keyCrn(), "testString");
+    assertEquals(kmsSettingsPrimaryCrkModel.kmsName(), "kms_name");
+    assertEquals(kmsSettingsPrimaryCrkModel.kmsPrivateEndpoint(), "kms_private_endpoint");
+    assertEquals(kmsSettingsPrimaryCrkModel.keyCrn(), "key_crn");
 
     KMSSettingsSecondaryCrk kmsSettingsSecondaryCrkModel = new KMSSettingsSecondaryCrk.Builder()
-      .kmsName("testString")
-      .kmsPrivateEndpoint("testString")
-      .keyCrn("testString")
+      .kmsName("kms_name")
+      .kmsPrivateEndpoint("kms_private_endpoint")
+      .keyCrn("key_crn")
       .build();
-    assertEquals(kmsSettingsSecondaryCrkModel.kmsName(), "testString");
-    assertEquals(kmsSettingsSecondaryCrkModel.kmsPrivateEndpoint(), "testString");
-    assertEquals(kmsSettingsSecondaryCrkModel.keyCrn(), "testString");
+    assertEquals(kmsSettingsSecondaryCrkModel.kmsName(), "kms_name");
+    assertEquals(kmsSettingsSecondaryCrkModel.kmsPrivateEndpoint(), "kms_private_endpoint");
+    assertEquals(kmsSettingsSecondaryCrkModel.keyCrn(), "key_crn");
 
     KMSSettings kmsSettingsModel = new KMSSettings.Builder()
       .location("testString")

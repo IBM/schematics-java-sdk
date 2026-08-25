@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -20,16 +20,16 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class DeleteWorkspaceOptions extends GenericModel {
 
-  protected String refreshToken;
   protected String wId;
+  protected String refreshToken;
   protected String destroyResources;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String refreshToken;
     private String wId;
+    private String refreshToken;
     private String destroyResources;
 
     /**
@@ -38,8 +38,8 @@ public class DeleteWorkspaceOptions extends GenericModel {
      * @param deleteWorkspaceOptions the instance to initialize the Builder with
      */
     private Builder(DeleteWorkspaceOptions deleteWorkspaceOptions) {
-      this.refreshToken = deleteWorkspaceOptions.refreshToken;
       this.wId = deleteWorkspaceOptions.wId;
+      this.refreshToken = deleteWorkspaceOptions.refreshToken;
       this.destroyResources = deleteWorkspaceOptions.destroyResources;
     }
 
@@ -52,12 +52,12 @@ public class DeleteWorkspaceOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param refreshToken the refreshToken
      * @param wId the wId
+     * @param refreshToken the refreshToken
      */
-    public Builder(String refreshToken, String wId) {
-      this.refreshToken = refreshToken;
+    public Builder(String wId, String refreshToken) {
       this.wId = wId;
+      this.refreshToken = refreshToken;
     }
 
     /**
@@ -70,17 +70,6 @@ public class DeleteWorkspaceOptions extends GenericModel {
     }
 
     /**
-     * Set the refreshToken.
-     *
-     * @param refreshToken the refreshToken
-     * @return the DeleteWorkspaceOptions builder
-     */
-    public Builder refreshToken(String refreshToken) {
-      this.refreshToken = refreshToken;
-      return this;
-    }
-
-    /**
      * Set the wId.
      *
      * @param wId the wId
@@ -88,6 +77,17 @@ public class DeleteWorkspaceOptions extends GenericModel {
      */
     public Builder wId(String wId) {
       this.wId = wId;
+      return this;
+    }
+
+    /**
+     * Set the refreshToken.
+     *
+     * @param refreshToken the refreshToken
+     * @return the DeleteWorkspaceOptions builder
+     */
+    public Builder refreshToken(String refreshToken) {
+      this.refreshToken = refreshToken;
       return this;
     }
 
@@ -106,12 +106,12 @@ public class DeleteWorkspaceOptions extends GenericModel {
   protected DeleteWorkspaceOptions() { }
 
   protected DeleteWorkspaceOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.refreshToken,
-      "refreshToken cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.wId,
       "wId cannot be empty");
-    refreshToken = builder.refreshToken;
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.refreshToken,
+      "refreshToken cannot be null");
     wId = builder.wId;
+    refreshToken = builder.refreshToken;
     destroyResources = builder.destroyResources;
   }
 
@@ -125,6 +125,17 @@ public class DeleteWorkspaceOptions extends GenericModel {
   }
 
   /**
+   * Gets the wId.
+   *
+   * The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API.
+   *
+   * @return the wId
+   */
+  public String wId() {
+    return wId;
+  }
+
+  /**
    * Gets the refreshToken.
    *
    * The IAM refresh token for the user or service identity. The IAM refresh token is required only if you want to
@@ -135,8 +146,8 @@ public class DeleteWorkspaceOptions extends GenericModel {
    *   * Use `export IBMCLOUD_API_KEY=&lt;ibmcloud_api_key&gt;`, and execute `curl -X POST
    * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
    * "grant_type=urn:ibm:params:oauth:grant-type:apikey&amp;apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
    * key](/apidocs/iam-identity-token-api#create-api-key).
    *
    *   **Limitation**:
@@ -148,17 +159,6 @@ public class DeleteWorkspaceOptions extends GenericModel {
    */
   public String refreshToken() {
     return refreshToken;
-  }
-
-  /**
-   * Gets the wId.
-   *
-   * The ID of the workspace.  To find the workspace ID, use the `GET /v1/workspaces` API.
-   *
-   * @return the wId
-   */
-  public String wId() {
-    return wId;
   }
 
   /**

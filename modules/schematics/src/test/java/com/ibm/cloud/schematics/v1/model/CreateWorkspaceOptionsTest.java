@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -18,11 +18,11 @@ import com.ibm.cloud.schematics.v1.model.CreateWorkspaceOptions;
 import com.ibm.cloud.schematics.v1.model.Dependencies;
 import com.ibm.cloud.schematics.v1.model.EnvironmentValuesMetadata;
 import com.ibm.cloud.schematics.v1.model.InjectTerraformTemplateInner;
-import com.ibm.cloud.schematics.v1.model.InjectTerraformTemplateInnerTftParametersItem;
 import com.ibm.cloud.schematics.v1.model.ServiceExtensions;
 import com.ibm.cloud.schematics.v1.model.SharedTargetData;
 import com.ibm.cloud.schematics.v1.model.TemplateRepoRequest;
 import com.ibm.cloud.schematics.v1.model.TemplateSourceDataRequest;
+import com.ibm.cloud.schematics.v1.model.TftParametersObject;
 import com.ibm.cloud.schematics.v1.model.VariableData;
 import com.ibm.cloud.schematics.v1.model.VariableMetadata;
 import com.ibm.cloud.schematics.v1.model.WorkspaceStatusRequest;
@@ -85,7 +85,7 @@ public class CreateWorkspaceOptionsTest {
     assertEquals(dependenciesModel.children(), java.util.Arrays.asList("testString"));
 
     SharedTargetData sharedTargetDataModel = new SharedTargetData.Builder()
-      .clusterCreatedOn("testString")
+      .clusterCreatedOn(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .clusterId("testString")
       .clusterName("testString")
       .clusterType("testString")
@@ -93,10 +93,10 @@ public class CreateWorkspaceOptionsTest {
       .namespace("testString")
       .region("testString")
       .resourceGroupId("testString")
-      .workerCount(Long.valueOf("26"))
+      .workerCount(Long.valueOf("0"))
       .workerMachineType("testString")
       .build();
-    assertEquals(sharedTargetDataModel.clusterCreatedOn(), "testString");
+    assertEquals(sharedTargetDataModel.clusterCreatedOn(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
     assertEquals(sharedTargetDataModel.clusterId(), "testString");
     assertEquals(sharedTargetDataModel.clusterName(), "testString");
     assertEquals(sharedTargetDataModel.clusterType(), "testString");
@@ -104,7 +104,7 @@ public class CreateWorkspaceOptionsTest {
     assertEquals(sharedTargetDataModel.namespace(), "testString");
     assertEquals(sharedTargetDataModel.region(), "testString");
     assertEquals(sharedTargetDataModel.resourceGroupId(), "testString");
-    assertEquals(sharedTargetDataModel.workerCount(), Long.valueOf("26"));
+    assertEquals(sharedTargetDataModel.workerCount(), Long.valueOf("0"));
     assertEquals(sharedTargetDataModel.workerMachineType(), "testString");
 
     EnvironmentValuesMetadata environmentValuesMetadataModel = new EnvironmentValuesMetadata.Builder()
@@ -116,12 +116,12 @@ public class CreateWorkspaceOptionsTest {
     assertEquals(environmentValuesMetadataModel.name(), "testString");
     assertEquals(environmentValuesMetadataModel.secure(), Boolean.valueOf(true));
 
-    InjectTerraformTemplateInnerTftParametersItem injectTerraformTemplateInnerTftParametersItemModel = new InjectTerraformTemplateInnerTftParametersItem.Builder()
+    TftParametersObject tftParametersObjectModel = new TftParametersObject.Builder()
       .name("testString")
       .value("testString")
       .build();
-    assertEquals(injectTerraformTemplateInnerTftParametersItemModel.name(), "testString");
-    assertEquals(injectTerraformTemplateInnerTftParametersItemModel.value(), "testString");
+    assertEquals(tftParametersObjectModel.name(), "testString");
+    assertEquals(tftParametersObjectModel.value(), "testString");
 
     InjectTerraformTemplateInner injectTerraformTemplateInnerModel = new InjectTerraformTemplateInner.Builder()
       .tftGitUrl("testString")
@@ -129,14 +129,14 @@ public class CreateWorkspaceOptionsTest {
       .tftPrefix("testString")
       .injectionType("testString")
       .tftName("testString")
-      .tftParameters(java.util.Arrays.asList(injectTerraformTemplateInnerTftParametersItemModel))
+      .tftParameters(java.util.Arrays.asList(tftParametersObjectModel))
       .build();
     assertEquals(injectTerraformTemplateInnerModel.tftGitUrl(), "testString");
     assertEquals(injectTerraformTemplateInnerModel.tftGitToken(), "testString");
     assertEquals(injectTerraformTemplateInnerModel.tftPrefix(), "testString");
     assertEquals(injectTerraformTemplateInnerModel.injectionType(), "testString");
     assertEquals(injectTerraformTemplateInnerModel.tftName(), "testString");
-    assertEquals(injectTerraformTemplateInnerModel.tftParameters(), java.util.Arrays.asList(injectTerraformTemplateInnerTftParametersItemModel));
+    assertEquals(injectTerraformTemplateInnerModel.tftParameters(), java.util.Arrays.asList(tftParametersObjectModel));
 
     WorkspaceVariableRequest workspaceVariableRequestModel = new WorkspaceVariableRequest.Builder()
       .description("testString")
@@ -220,12 +220,12 @@ public class CreateWorkspaceOptionsTest {
       .hidden(true)
       .required(true)
       .options(java.util.Arrays.asList("testString"))
-      .minValue(Long.valueOf("26"))
-      .maxValue(Long.valueOf("26"))
-      .minLength(Long.valueOf("26"))
-      .maxLength(Long.valueOf("26"))
+      .minValue(Long.valueOf("0"))
+      .maxValue(Long.valueOf("0"))
+      .minLength(Long.valueOf("0"))
+      .maxLength(Long.valueOf("0"))
       .matches("testString")
-      .position(Long.valueOf("26"))
+      .position(Long.valueOf("0"))
       .groupBy("testString")
       .source("testString")
       .build();
@@ -240,12 +240,12 @@ public class CreateWorkspaceOptionsTest {
     assertEquals(variableMetadataModel.hidden(), Boolean.valueOf(true));
     assertEquals(variableMetadataModel.required(), Boolean.valueOf(true));
     assertEquals(variableMetadataModel.options(), java.util.Arrays.asList("testString"));
-    assertEquals(variableMetadataModel.minValue(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.maxValue(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.minLength(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.maxLength(), Long.valueOf("26"));
+    assertEquals(variableMetadataModel.minValue(), Long.valueOf("0"));
+    assertEquals(variableMetadataModel.maxValue(), Long.valueOf("0"));
+    assertEquals(variableMetadataModel.minLength(), Long.valueOf("0"));
+    assertEquals(variableMetadataModel.maxLength(), Long.valueOf("0"));
     assertEquals(variableMetadataModel.matches(), "testString");
-    assertEquals(variableMetadataModel.position(), Long.valueOf("26"));
+    assertEquals(variableMetadataModel.position(), Long.valueOf("0"));
     assertEquals(variableMetadataModel.groupBy(), "testString");
     assertEquals(variableMetadataModel.source(), "testString");
 

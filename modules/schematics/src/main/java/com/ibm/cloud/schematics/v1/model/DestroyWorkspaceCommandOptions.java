@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -20,8 +20,8 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class DestroyWorkspaceCommandOptions extends GenericModel {
 
-  protected String wId;
   protected String refreshToken;
+  protected String wId;
   protected WorkspaceActivityOptionsTemplate actionOptions;
   protected String delegatedToken;
 
@@ -29,8 +29,8 @@ public class DestroyWorkspaceCommandOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String wId;
     private String refreshToken;
+    private String wId;
     private WorkspaceActivityOptionsTemplate actionOptions;
     private String delegatedToken;
 
@@ -40,8 +40,8 @@ public class DestroyWorkspaceCommandOptions extends GenericModel {
      * @param destroyWorkspaceCommandOptions the instance to initialize the Builder with
      */
     private Builder(DestroyWorkspaceCommandOptions destroyWorkspaceCommandOptions) {
-      this.wId = destroyWorkspaceCommandOptions.wId;
       this.refreshToken = destroyWorkspaceCommandOptions.refreshToken;
+      this.wId = destroyWorkspaceCommandOptions.wId;
       this.actionOptions = destroyWorkspaceCommandOptions.actionOptions;
       this.delegatedToken = destroyWorkspaceCommandOptions.delegatedToken;
     }
@@ -55,12 +55,12 @@ public class DestroyWorkspaceCommandOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param wId the wId
      * @param refreshToken the refreshToken
+     * @param wId the wId
      */
-    public Builder(String wId, String refreshToken) {
-      this.wId = wId;
+    public Builder(String refreshToken, String wId) {
       this.refreshToken = refreshToken;
+      this.wId = wId;
     }
 
     /**
@@ -73,17 +73,6 @@ public class DestroyWorkspaceCommandOptions extends GenericModel {
     }
 
     /**
-     * Set the wId.
-     *
-     * @param wId the wId
-     * @return the DestroyWorkspaceCommandOptions builder
-     */
-    public Builder wId(String wId) {
-      this.wId = wId;
-      return this;
-    }
-
-    /**
      * Set the refreshToken.
      *
      * @param refreshToken the refreshToken
@@ -91,6 +80,17 @@ public class DestroyWorkspaceCommandOptions extends GenericModel {
      */
     public Builder refreshToken(String refreshToken) {
       this.refreshToken = refreshToken;
+      return this;
+    }
+
+    /**
+     * Set the wId.
+     *
+     * @param wId the wId
+     * @return the DestroyWorkspaceCommandOptions builder
+     */
+    public Builder wId(String wId) {
+      this.wId = wId;
       return this;
     }
 
@@ -120,12 +120,12 @@ public class DestroyWorkspaceCommandOptions extends GenericModel {
   protected DestroyWorkspaceCommandOptions() { }
 
   protected DestroyWorkspaceCommandOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.wId,
-      "wId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.refreshToken,
       "refreshToken cannot be null");
-    wId = builder.wId;
+    com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.wId,
+      "wId cannot be empty");
     refreshToken = builder.refreshToken;
+    wId = builder.wId;
     actionOptions = builder.actionOptions;
     delegatedToken = builder.delegatedToken;
   }
@@ -140,18 +140,6 @@ public class DestroyWorkspaceCommandOptions extends GenericModel {
   }
 
   /**
-   * Gets the wId.
-   *
-   * The ID of the workspace for which you want to perform a Schematics `destroy` job.  To find the workspace ID, use
-   * the `GET /workspaces` API.
-   *
-   * @return the wId
-   */
-  public String wId() {
-    return wId;
-  }
-
-  /**
    * Gets the refreshToken.
    *
    * The IAM refresh token for the user or service identity.
@@ -160,8 +148,8 @@ public class DestroyWorkspaceCommandOptions extends GenericModel {
    *   * Use `export IBMCLOUD_API_KEY=&lt;ibmcloud_api_key&gt;`, and execute `curl -X POST
    * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
    * "grant_type=urn:ibm:params:oauth:grant-type:apikey&amp;apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
    * key](/apidocs/iam-identity-token-api#create-api-key).
    *
    *   **Limitation**:
@@ -173,6 +161,18 @@ public class DestroyWorkspaceCommandOptions extends GenericModel {
    */
   public String refreshToken() {
     return refreshToken;
+  }
+
+  /**
+   * Gets the wId.
+   *
+   * The ID of the workspace for which you want to perform a Schematics `destroy` job.  To find the workspace ID, use
+   * the `GET /workspaces` API.
+   *
+   * @return the wId
+   */
+  public String wId() {
+    return wId;
   }
 
   /**

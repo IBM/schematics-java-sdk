@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -36,49 +36,49 @@ public class JobStatusWorkspaceTest {
   @Test
   public void testJobStatusWorkspace() throws Throwable {
     JobStatusWorkitem jobStatusWorkitemModel = new JobStatusWorkitem.Builder()
-      .workspaceId("testString")
-      .workspaceName("testString")
-      .jobId("testString")
-      .statusCode("job_pending")
-      .statusMessage("testString")
-      .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .workspaceId("workspace_id")
+      .workspaceName("workspace_name")
+      .jobId("job_id")
+      .statusCode("null")
+      .statusMessage("status_message")
+      .updatedAt(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
-    assertEquals(jobStatusWorkitemModel.workspaceId(), "testString");
-    assertEquals(jobStatusWorkitemModel.workspaceName(), "testString");
-    assertEquals(jobStatusWorkitemModel.jobId(), "testString");
-    assertEquals(jobStatusWorkitemModel.statusCode(), "job_pending");
-    assertEquals(jobStatusWorkitemModel.statusMessage(), "testString");
-    assertEquals(jobStatusWorkitemModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(jobStatusWorkitemModel.workspaceId(), "workspace_id");
+    assertEquals(jobStatusWorkitemModel.workspaceName(), "workspace_name");
+    assertEquals(jobStatusWorkitemModel.jobId(), "job_id");
+    assertEquals(jobStatusWorkitemModel.statusCode(), "null");
+    assertEquals(jobStatusWorkitemModel.statusMessage(), "status_message");
+    assertEquals(jobStatusWorkitemModel.updatedAt(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
 
     JobStatusFlow jobStatusFlowModel = new JobStatusFlow.Builder()
-      .flowId("testString")
-      .flowName("testString")
-      .statusCode("job_pending")
-      .statusMessage("testString")
+      .flowId("flow_id")
+      .flowName("flow_name")
+      .statusCode("null")
+      .statusMessage("status_message")
       .workitems(java.util.Arrays.asList(jobStatusWorkitemModel))
-      .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .updatedAt(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
-    assertEquals(jobStatusFlowModel.flowId(), "testString");
-    assertEquals(jobStatusFlowModel.flowName(), "testString");
-    assertEquals(jobStatusFlowModel.statusCode(), "job_pending");
-    assertEquals(jobStatusFlowModel.statusMessage(), "testString");
+    assertEquals(jobStatusFlowModel.flowId(), "flow_id");
+    assertEquals(jobStatusFlowModel.flowName(), "flow_name");
+    assertEquals(jobStatusFlowModel.statusCode(), "null");
+    assertEquals(jobStatusFlowModel.statusMessage(), "status_message");
     assertEquals(jobStatusFlowModel.workitems(), java.util.Arrays.asList(jobStatusWorkitemModel));
-    assertEquals(jobStatusFlowModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(jobStatusFlowModel.updatedAt(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
 
     JobStatusTemplate jobStatusTemplateModel = new JobStatusTemplate.Builder()
-      .templateId("testString")
-      .templateName("testString")
-      .flowIndex(Long.valueOf("26"))
-      .statusCode("job_pending")
-      .statusMessage("testString")
-      .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .templateId("template_id")
+      .templateName("template_name")
+      .flowIndex(Long.valueOf("2302"))
+      .statusCode("null")
+      .statusMessage("status_message")
+      .updatedAt(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
-    assertEquals(jobStatusTemplateModel.templateId(), "testString");
-    assertEquals(jobStatusTemplateModel.templateName(), "testString");
-    assertEquals(jobStatusTemplateModel.flowIndex(), Long.valueOf("26"));
-    assertEquals(jobStatusTemplateModel.statusCode(), "job_pending");
-    assertEquals(jobStatusTemplateModel.statusMessage(), "testString");
-    assertEquals(jobStatusTemplateModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(jobStatusTemplateModel.templateId(), "template_id");
+    assertEquals(jobStatusTemplateModel.templateName(), "template_name");
+    assertEquals(jobStatusTemplateModel.flowIndex(), Long.valueOf("2302"));
+    assertEquals(jobStatusTemplateModel.statusCode(), "null");
+    assertEquals(jobStatusTemplateModel.statusMessage(), "status_message");
+    assertEquals(jobStatusTemplateModel.updatedAt(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
 
     JobStatusWorkspace jobStatusWorkspaceModel = new JobStatusWorkspace.Builder()
       .workspaceName("testString")

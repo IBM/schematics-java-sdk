@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -34,15 +34,15 @@ public class JobStatusSystemTest {
   @Test
   public void testJobStatusSystem() throws Throwable {
     JobStatusSchematicsResources jobStatusSchematicsResourcesModel = new JobStatusSchematicsResources.Builder()
-      .statusCode("job_pending")
-      .statusMessage("testString")
-      .schematicsResourceId("testString")
-      .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .statusCode("null")
+      .statusMessage("status_message")
+      .schematicsResourceId("schematics_resource_id")
+      .updatedAt(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
-    assertEquals(jobStatusSchematicsResourcesModel.statusCode(), "job_pending");
-    assertEquals(jobStatusSchematicsResourcesModel.statusMessage(), "testString");
-    assertEquals(jobStatusSchematicsResourcesModel.schematicsResourceId(), "testString");
-    assertEquals(jobStatusSchematicsResourcesModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(jobStatusSchematicsResourcesModel.statusCode(), "null");
+    assertEquals(jobStatusSchematicsResourcesModel.statusMessage(), "status_message");
+    assertEquals(jobStatusSchematicsResourcesModel.schematicsResourceId(), "schematics_resource_id");
+    assertEquals(jobStatusSchematicsResourcesModel.updatedAt(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
 
     JobStatusSystem jobStatusSystemModel = new JobStatusSystem.Builder()
       .systemStatusMessage("testString")

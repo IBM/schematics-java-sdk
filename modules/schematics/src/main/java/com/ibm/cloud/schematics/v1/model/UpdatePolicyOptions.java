@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -24,6 +24,15 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class UpdatePolicyOptions extends GenericModel {
 
   /**
+   * Policy kind or categories for managing and deriving policy decision
+   *   * `agent_assignment_policy` Agent assignment policy for job execution.
+   */
+  public interface Kind {
+    /** agent_assignment_policy. */
+    String AGENT_ASSIGNMENT_POLICY = "agent_assignment_policy";
+  }
+
+  /**
    * List of locations supported by IBM Cloud Schematics service.  While creating your workspace or action, choose the
    * right region, since it cannot be changed.  Note, this does not limit the location of the IBM Cloud resources,
    * provisioned using Schematics.
@@ -39,23 +48,14 @@ public class UpdatePolicyOptions extends GenericModel {
     String EU_DE = "eu-de";
   }
 
-  /**
-   * Policy kind or categories for managing and deriving policy decision
-   *   * `agent_assignment_policy` Agent assignment policy for job execution.
-   */
-  public interface Kind {
-    /** agent_assignment_policy. */
-    String AGENT_ASSIGNMENT_POLICY = "agent_assignment_policy";
-  }
-
   protected String policyId;
+  protected String kind;
   protected String name;
   protected String description;
   protected String resourceGroup;
   protected List<String> tags;
   protected String location;
   protected UserState state;
-  protected String kind;
   protected PolicyObjects target;
   protected PolicyParameter parameter;
   protected List<ScopedResource> scopedResources;
@@ -65,13 +65,13 @@ public class UpdatePolicyOptions extends GenericModel {
    */
   public static class Builder {
     private String policyId;
+    private String kind;
     private String name;
     private String description;
     private String resourceGroup;
     private List<String> tags;
     private String location;
     private UserState state;
-    private String kind;
     private PolicyObjects target;
     private PolicyParameter parameter;
     private List<ScopedResource> scopedResources;
@@ -83,13 +83,13 @@ public class UpdatePolicyOptions extends GenericModel {
      */
     private Builder(UpdatePolicyOptions updatePolicyOptions) {
       this.policyId = updatePolicyOptions.policyId;
+      this.kind = updatePolicyOptions.kind;
       this.name = updatePolicyOptions.name;
       this.description = updatePolicyOptions.description;
       this.resourceGroup = updatePolicyOptions.resourceGroup;
       this.tags = updatePolicyOptions.tags;
       this.location = updatePolicyOptions.location;
       this.state = updatePolicyOptions.state;
-      this.kind = updatePolicyOptions.kind;
       this.target = updatePolicyOptions.target;
       this.parameter = updatePolicyOptions.parameter;
       this.scopedResources = updatePolicyOptions.scopedResources;
@@ -105,9 +105,11 @@ public class UpdatePolicyOptions extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param policyId the policyId
+     * @param kind the kind
      */
-    public Builder(String policyId) {
+    public Builder(String policyId, String kind) {
       this.policyId = policyId;
+      this.kind = kind;
     }
 
     /**
@@ -159,6 +161,17 @@ public class UpdatePolicyOptions extends GenericModel {
      */
     public Builder policyId(String policyId) {
       this.policyId = policyId;
+      return this;
+    }
+
+    /**
+     * Set the kind.
+     *
+     * @param kind the kind
+     * @return the UpdatePolicyOptions builder
+     */
+    public Builder kind(String kind) {
+      this.kind = kind;
       return this;
     }
 
@@ -230,17 +243,6 @@ public class UpdatePolicyOptions extends GenericModel {
     }
 
     /**
-     * Set the kind.
-     *
-     * @param kind the kind
-     * @return the UpdatePolicyOptions builder
-     */
-    public Builder kind(String kind) {
-      this.kind = kind;
-      return this;
-    }
-
-    /**
      * Set the target.
      *
      * @param target the target
@@ -281,13 +283,13 @@ public class UpdatePolicyOptions extends GenericModel {
      * @return the UpdatePolicyOptions builder
      */
     public Builder policy(Policy policy) {
+      this.kind = policy.kind();
       this.name = policy.name();
       this.description = policy.description();
       this.resourceGroup = policy.resourceGroup();
       this.tags = policy.tags();
       this.location = policy.location();
       this.state = policy.state();
-      this.kind = policy.kind();
       this.target = policy.target();
       this.parameter = policy.parameter();
       this.scopedResources = policy.scopedResources();
@@ -300,14 +302,16 @@ public class UpdatePolicyOptions extends GenericModel {
   protected UpdatePolicyOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.policyId,
       "policyId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.kind,
+      "kind cannot be null");
     policyId = builder.policyId;
+    kind = builder.kind;
     name = builder.name;
     description = builder.description;
     resourceGroup = builder.resourceGroup;
     tags = builder.tags;
     location = builder.location;
     state = builder.state;
-    kind = builder.kind;
     target = builder.target;
     parameter = builder.parameter;
     scopedResources = builder.scopedResources;
@@ -331,6 +335,18 @@ public class UpdatePolicyOptions extends GenericModel {
    */
   public String policyId() {
     return policyId;
+  }
+
+  /**
+   * Gets the kind.
+   *
+   * Policy kind or categories for managing and deriving policy decision
+   *   * `agent_assignment_policy` Agent assignment policy for job execution.
+   *
+   * @return the kind
+   */
+  public String kind() {
+    return kind;
   }
 
   /**
@@ -399,18 +415,6 @@ public class UpdatePolicyOptions extends GenericModel {
    */
   public UserState state() {
     return state;
-  }
-
-  /**
-   * Gets the kind.
-   *
-   * Policy kind or categories for managing and deriving policy decision
-   *   * `agent_assignment_policy` Agent assignment policy for job execution.
-   *
-   * @return the kind
-   */
-  public String kind() {
-    return kind;
   }
 
   /**

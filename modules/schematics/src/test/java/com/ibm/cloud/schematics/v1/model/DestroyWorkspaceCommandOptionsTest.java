@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -40,13 +40,13 @@ public class DestroyWorkspaceCommandOptionsTest {
     assertEquals(workspaceActivityOptionsTemplateModel.tfVars(), java.util.Arrays.asList("testString"));
 
     DestroyWorkspaceCommandOptions destroyWorkspaceCommandOptionsModel = new DestroyWorkspaceCommandOptions.Builder()
-      .wId("testString")
       .refreshToken("testString")
+      .wId("testString")
       .actionOptions(workspaceActivityOptionsTemplateModel)
       .delegatedToken("testString")
       .build();
-    assertEquals(destroyWorkspaceCommandOptionsModel.wId(), "testString");
     assertEquals(destroyWorkspaceCommandOptionsModel.refreshToken(), "testString");
+    assertEquals(destroyWorkspaceCommandOptionsModel.wId(), "testString");
     assertEquals(destroyWorkspaceCommandOptionsModel.actionOptions(), workspaceActivityOptionsTemplateModel);
     assertEquals(destroyWorkspaceCommandOptionsModel.delegatedToken(), "testString");
   }

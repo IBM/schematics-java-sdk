@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -37,72 +37,72 @@ public class JobDataWorkspaceTest {
   public void testJobDataWorkspace() throws Throwable {
     VariableMetadata variableMetadataModel = new VariableMetadata.Builder()
       .type("boolean")
-      .aliases(java.util.Arrays.asList("testString"))
-      .description("testString")
-      .cloudDataType("testString")
-      .defaultValue("testString")
+      .aliases(java.util.Arrays.asList("aliases", "aliases", "aliases", "aliases", "aliases"))
+      .description("description")
+      .cloudDataType("cloud_data_type")
+      .defaultValue("default_value")
       .linkStatus("normal")
       .secure(true)
       .immutable(true)
       .hidden(true)
       .required(true)
-      .options(java.util.Arrays.asList("testString"))
-      .minValue(Long.valueOf("26"))
-      .maxValue(Long.valueOf("26"))
-      .minLength(Long.valueOf("26"))
-      .maxLength(Long.valueOf("26"))
-      .matches("testString")
-      .position(Long.valueOf("26"))
-      .groupBy("testString")
-      .source("testString")
+      .options(java.util.Arrays.asList("options", "options", "options", "options", "options"))
+      .minValue(Long.valueOf("5962"))
+      .maxValue(Long.valueOf("5637"))
+      .minLength(Long.valueOf("2302"))
+      .maxLength(Long.valueOf("7061"))
+      .matches("matches")
+      .position(Long.valueOf("9301"))
+      .groupBy("group_by")
+      .source("source")
       .build();
     assertEquals(variableMetadataModel.type(), "boolean");
-    assertEquals(variableMetadataModel.aliases(), java.util.Arrays.asList("testString"));
-    assertEquals(variableMetadataModel.description(), "testString");
-    assertEquals(variableMetadataModel.cloudDataType(), "testString");
-    assertEquals(variableMetadataModel.defaultValue(), "testString");
+    assertEquals(variableMetadataModel.aliases(), java.util.Arrays.asList("aliases", "aliases", "aliases", "aliases", "aliases"));
+    assertEquals(variableMetadataModel.description(), "description");
+    assertEquals(variableMetadataModel.cloudDataType(), "cloud_data_type");
+    assertEquals(variableMetadataModel.defaultValue(), "default_value");
     assertEquals(variableMetadataModel.linkStatus(), "normal");
     assertEquals(variableMetadataModel.secure(), Boolean.valueOf(true));
     assertEquals(variableMetadataModel.immutable(), Boolean.valueOf(true));
     assertEquals(variableMetadataModel.hidden(), Boolean.valueOf(true));
     assertEquals(variableMetadataModel.required(), Boolean.valueOf(true));
-    assertEquals(variableMetadataModel.options(), java.util.Arrays.asList("testString"));
-    assertEquals(variableMetadataModel.minValue(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.maxValue(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.minLength(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.maxLength(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.matches(), "testString");
-    assertEquals(variableMetadataModel.position(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.groupBy(), "testString");
-    assertEquals(variableMetadataModel.source(), "testString");
+    assertEquals(variableMetadataModel.options(), java.util.Arrays.asList("options", "options", "options", "options", "options"));
+    assertEquals(variableMetadataModel.minValue(), Long.valueOf("5962"));
+    assertEquals(variableMetadataModel.maxValue(), Long.valueOf("5637"));
+    assertEquals(variableMetadataModel.minLength(), Long.valueOf("2302"));
+    assertEquals(variableMetadataModel.maxLength(), Long.valueOf("7061"));
+    assertEquals(variableMetadataModel.matches(), "matches");
+    assertEquals(variableMetadataModel.position(), Long.valueOf("9301"));
+    assertEquals(variableMetadataModel.groupBy(), "group_by");
+    assertEquals(variableMetadataModel.source(), "source");
 
     VariableData variableDataModel = new VariableData.Builder()
-      .name("testString")
-      .value("testString")
+      .name("name")
+      .value("value")
       .useDefault(true)
       .metadata(variableMetadataModel)
       .build();
-    assertEquals(variableDataModel.name(), "testString");
-    assertEquals(variableDataModel.value(), "testString");
+    assertEquals(variableDataModel.name(), "name");
+    assertEquals(variableDataModel.value(), "value");
     assertEquals(variableDataModel.useDefault(), Boolean.valueOf(true));
     assertEquals(variableDataModel.metadata(), variableMetadataModel);
 
     JobDataTemplate jobDataTemplateModel = new JobDataTemplate.Builder()
-      .templateId("testString")
-      .templateName("testString")
-      .flowIndex(Long.valueOf("26"))
+      .templateId("template_id")
+      .templateName("template_name")
+      .flowIndex(Long.valueOf("800"))
       .inputs(java.util.Arrays.asList(variableDataModel))
       .outputs(java.util.Arrays.asList(variableDataModel))
       .settings(java.util.Arrays.asList(variableDataModel))
-      .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .updatedAt(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
-    assertEquals(jobDataTemplateModel.templateId(), "testString");
-    assertEquals(jobDataTemplateModel.templateName(), "testString");
-    assertEquals(jobDataTemplateModel.flowIndex(), Long.valueOf("26"));
+    assertEquals(jobDataTemplateModel.templateId(), "template_id");
+    assertEquals(jobDataTemplateModel.templateName(), "template_name");
+    assertEquals(jobDataTemplateModel.flowIndex(), Long.valueOf("800"));
     assertEquals(jobDataTemplateModel.inputs(), java.util.Arrays.asList(variableDataModel));
     assertEquals(jobDataTemplateModel.outputs(), java.util.Arrays.asList(variableDataModel));
     assertEquals(jobDataTemplateModel.settings(), java.util.Arrays.asList(variableDataModel));
-    assertEquals(jobDataTemplateModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(jobDataTemplateModel.updatedAt(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
 
     JobDataWorkspace jobDataWorkspaceModel = new JobDataWorkspace.Builder()
       .workspaceName("testString")

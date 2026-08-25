@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -34,60 +34,60 @@ public class ExternalSourceTest {
   @Test
   public void testExternalSource() throws Throwable {
     GitSource gitSourceModel = new GitSource.Builder()
-      .computedGitRepoUrl("testString")
-      .gitRepoUrl("testString")
-      .gitToken("testString")
-      .gitRepoFolder("testString")
-      .gitRelease("testString")
-      .gitBranch("testString")
+      .computedGitRepoUrl("computed_git_repo_url")
+      .gitRepoUrl("git_repo_url")
+      .gitToken("git_token")
+      .gitRepoFolder("git_repo_folder")
+      .gitRelease("git_release")
+      .gitBranch("git_branch")
       .build();
-    assertEquals(gitSourceModel.computedGitRepoUrl(), "testString");
-    assertEquals(gitSourceModel.gitRepoUrl(), "testString");
-    assertEquals(gitSourceModel.gitToken(), "testString");
-    assertEquals(gitSourceModel.gitRepoFolder(), "testString");
-    assertEquals(gitSourceModel.gitRelease(), "testString");
-    assertEquals(gitSourceModel.gitBranch(), "testString");
+    assertEquals(gitSourceModel.computedGitRepoUrl(), "computed_git_repo_url");
+    assertEquals(gitSourceModel.gitRepoUrl(), "git_repo_url");
+    assertEquals(gitSourceModel.gitToken(), "git_token");
+    assertEquals(gitSourceModel.gitRepoFolder(), "git_repo_folder");
+    assertEquals(gitSourceModel.gitRelease(), "git_release");
+    assertEquals(gitSourceModel.gitBranch(), "git_branch");
 
     CatalogSource catalogSourceModel = new CatalogSource.Builder()
-      .catalogName("testString")
-      .catalogId("testString")
-      .offeringName("testString")
-      .offeringVersion("testString")
-      .offeringKind("testString")
-      .offeringTargetKind("testString")
-      .offeringId("testString")
-      .offeringVersionId("testString")
-      .offeringVersionFlavourName("testString")
-      .offeringRepoUrl("testString")
-      .offeringProvisionerWorkingDirectory("testString")
+      .catalogName("catalog_name")
+      .catalogId("catalog_id")
+      .offeringName("offering_name")
+      .offeringVersion("offering_version")
+      .offeringKind("offering_kind")
+      .offeringTargetKind("offering_target_kind")
+      .offeringId("offering_id")
+      .offeringVersionId("offering_version_id")
+      .offeringVersionFlavourName("offering_version_flavour_name")
+      .offeringRepoUrl("offering_repo_url")
+      .offeringProvisionerWorkingDirectory("offering_provisioner_working_directory")
       .dryRun(true)
-      .owningAccount("testString")
-      .itemIconUrl("testString")
-      .itemId("testString")
-      .itemName("testString")
-      .itemReadmeUrl("testString")
-      .itemUrl("testString")
-      .launchUrl("testString")
+      .owningAccount("owning_account")
+      .itemIconUrl("item_icon_url")
+      .itemId("item_id")
+      .itemName("item_name")
+      .itemReadmeUrl("item_readme_url")
+      .itemUrl("item_url")
+      .launchUrl("launch_url")
       .build();
-    assertEquals(catalogSourceModel.catalogName(), "testString");
-    assertEquals(catalogSourceModel.catalogId(), "testString");
-    assertEquals(catalogSourceModel.offeringName(), "testString");
-    assertEquals(catalogSourceModel.offeringVersion(), "testString");
-    assertEquals(catalogSourceModel.offeringKind(), "testString");
-    assertEquals(catalogSourceModel.offeringTargetKind(), "testString");
-    assertEquals(catalogSourceModel.offeringId(), "testString");
-    assertEquals(catalogSourceModel.offeringVersionId(), "testString");
-    assertEquals(catalogSourceModel.offeringVersionFlavourName(), "testString");
-    assertEquals(catalogSourceModel.offeringRepoUrl(), "testString");
-    assertEquals(catalogSourceModel.offeringProvisionerWorkingDirectory(), "testString");
+    assertEquals(catalogSourceModel.catalogName(), "catalog_name");
+    assertEquals(catalogSourceModel.catalogId(), "catalog_id");
+    assertEquals(catalogSourceModel.offeringName(), "offering_name");
+    assertEquals(catalogSourceModel.offeringVersion(), "offering_version");
+    assertEquals(catalogSourceModel.offeringKind(), "offering_kind");
+    assertEquals(catalogSourceModel.offeringTargetKind(), "offering_target_kind");
+    assertEquals(catalogSourceModel.offeringId(), "offering_id");
+    assertEquals(catalogSourceModel.offeringVersionId(), "offering_version_id");
+    assertEquals(catalogSourceModel.offeringVersionFlavourName(), "offering_version_flavour_name");
+    assertEquals(catalogSourceModel.offeringRepoUrl(), "offering_repo_url");
+    assertEquals(catalogSourceModel.offeringProvisionerWorkingDirectory(), "offering_provisioner_working_directory");
     assertEquals(catalogSourceModel.dryRun(), Boolean.valueOf(true));
-    assertEquals(catalogSourceModel.owningAccount(), "testString");
-    assertEquals(catalogSourceModel.itemIconUrl(), "testString");
-    assertEquals(catalogSourceModel.itemId(), "testString");
-    assertEquals(catalogSourceModel.itemName(), "testString");
-    assertEquals(catalogSourceModel.itemReadmeUrl(), "testString");
-    assertEquals(catalogSourceModel.itemUrl(), "testString");
-    assertEquals(catalogSourceModel.launchUrl(), "testString");
+    assertEquals(catalogSourceModel.owningAccount(), "owning_account");
+    assertEquals(catalogSourceModel.itemIconUrl(), "item_icon_url");
+    assertEquals(catalogSourceModel.itemId(), "item_id");
+    assertEquals(catalogSourceModel.itemName(), "item_name");
+    assertEquals(catalogSourceModel.itemReadmeUrl(), "item_readme_url");
+    assertEquals(catalogSourceModel.itemUrl(), "item_url");
+    assertEquals(catalogSourceModel.launchUrl(), "launch_url");
 
     ExternalSource externalSourceModel = new ExternalSource.Builder()
       .sourceType("local")

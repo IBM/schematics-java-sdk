@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -110,6 +110,15 @@ public class Policy extends GenericModel {
      * Instantiates a new builder.
      */
     public Builder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param kind the kind
+     */
+    public Builder(String kind) {
+      this.kind = kind;
     }
 
     /**
@@ -269,6 +278,8 @@ public class Policy extends GenericModel {
   protected Policy() { }
 
   protected Policy(Builder builder) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.kind,
+      "kind cannot be null");
     name = builder.name;
     description = builder.description;
     resourceGroup = builder.resourceGroup;

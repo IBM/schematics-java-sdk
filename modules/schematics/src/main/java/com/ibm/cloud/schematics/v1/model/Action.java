@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -127,7 +127,7 @@ public class Action extends GenericModel {
   protected Date updatedAt;
   @SerializedName("updated_by")
   protected String updatedBy;
-  protected ActionState state;
+  protected ActionLiteState state;
   @SerializedName("playbook_names")
   protected List<String> playbookNames;
   @SerializedName("sys_lock")
@@ -902,7 +902,7 @@ public class Action extends GenericModel {
    *
    * @return the state
    */
-  public ActionState state() {
+  public ActionLiteState state() {
     return state;
   }
 

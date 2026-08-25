@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -18,8 +18,6 @@ import com.ibm.cloud.schematics.v1.model.Action;
 import com.ibm.cloud.schematics.v1.model.ActionList;
 import com.ibm.cloud.schematics.v1.model.ActionLite;
 import com.ibm.cloud.schematics.v1.model.ActionLiteState;
-import com.ibm.cloud.schematics.v1.model.ActionState;
-import com.ibm.cloud.schematics.v1.model.Agent;
 import com.ibm.cloud.schematics.v1.model.AgentAssignmentPolicyParameter;
 import com.ibm.cloud.schematics.v1.model.AgentData;
 import com.ibm.cloud.schematics.v1.model.AgentDataList;
@@ -34,10 +32,8 @@ import com.ibm.cloud.schematics.v1.model.AgentInfo;
 import com.ibm.cloud.schematics.v1.model.AgentInfrastructure;
 import com.ibm.cloud.schematics.v1.model.AgentKPIData;
 import com.ibm.cloud.schematics.v1.model.AgentKPIDataLite;
-import com.ibm.cloud.schematics.v1.model.AgentList;
 import com.ibm.cloud.schematics.v1.model.AgentMetadataInfo;
 import com.ibm.cloud.schematics.v1.model.AgentPRSJob;
-import com.ibm.cloud.schematics.v1.model.AgentSystemState;
 import com.ibm.cloud.schematics.v1.model.AgentSystemStatus;
 import com.ibm.cloud.schematics.v1.model.AgentUserState;
 import com.ibm.cloud.schematics.v1.model.AgentVersionInfo;
@@ -48,7 +44,6 @@ import com.ibm.cloud.schematics.v1.model.CartOrderData;
 import com.ibm.cloud.schematics.v1.model.CatalogRef;
 import com.ibm.cloud.schematics.v1.model.CatalogSource;
 import com.ibm.cloud.schematics.v1.model.CommandsInfo;
-import com.ibm.cloud.schematics.v1.model.ConnectionState;
 import com.ibm.cloud.schematics.v1.model.CreateActionOptions;
 import com.ibm.cloud.schematics.v1.model.CreateAgentDataOptions;
 import com.ibm.cloud.schematics.v1.model.CreateInventoryOptions;
@@ -61,7 +56,7 @@ import com.ibm.cloud.schematics.v1.model.CredentialVariableData;
 import com.ibm.cloud.schematics.v1.model.CredentialVariableMetadata;
 import com.ibm.cloud.schematics.v1.model.DeleteActionOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteAgentDataOptions;
-import com.ibm.cloud.schematics.v1.model.DeleteAgentOptions;
+import com.ibm.cloud.schematics.v1.model.DeleteAgentResources202Response;
 import com.ibm.cloud.schematics.v1.model.DeleteAgentResourcesOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteInventoryOptions;
 import com.ibm.cloud.schematics.v1.model.DeleteJobOptions;
@@ -80,17 +75,13 @@ import com.ibm.cloud.schematics.v1.model.ExecuteResourceQueryOptions;
 import com.ibm.cloud.schematics.v1.model.ExternalSource;
 import com.ibm.cloud.schematics.v1.model.GetActionOptions;
 import com.ibm.cloud.schematics.v1.model.GetAgentDataOptions;
-import com.ibm.cloud.schematics.v1.model.GetAgentOptions;
 import com.ibm.cloud.schematics.v1.model.GetAgentVersionsOptions;
 import com.ibm.cloud.schematics.v1.model.GetAllWorkspaceInputsOptions;
-import com.ibm.cloud.schematics.v1.model.GetDeployAgentJobOptions;
-import com.ibm.cloud.schematics.v1.model.GetHealthCheckAgentJobOptions;
 import com.ibm.cloud.schematics.v1.model.GetInventoryOptions;
 import com.ibm.cloud.schematics.v1.model.GetJobFilesOptions;
 import com.ibm.cloud.schematics.v1.model.GetJobOptions;
 import com.ibm.cloud.schematics.v1.model.GetKmsSettingsOptions;
 import com.ibm.cloud.schematics.v1.model.GetPolicyOptions;
-import com.ibm.cloud.schematics.v1.model.GetPrsAgentJobOptions;
 import com.ibm.cloud.schematics.v1.model.GetResourcesQueryOptions;
 import com.ibm.cloud.schematics.v1.model.GetSchematicsVersionOptions;
 import com.ibm.cloud.schematics.v1.model.GetTemplateActivityLogOptions;
@@ -99,20 +90,25 @@ import com.ibm.cloud.schematics.v1.model.GetWorkspaceActivityLogsOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceActivityOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceDeletionJobStatusOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceInputMetadataOptions;
+import com.ibm.cloud.schematics.v1.model.GetWorkspaceInputMetadataV2Options;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceInputsOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceLogUrlsOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceOutputsOptions;
+import com.ibm.cloud.schematics.v1.model.GetWorkspaceOutputsV2Options;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceReadmeOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceResourcesOptions;
+import com.ibm.cloud.schematics.v1.model.GetWorkspaceResourcesV2Options;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceStateOptions;
 import com.ibm.cloud.schematics.v1.model.GetWorkspaceTemplateStateOptions;
 import com.ibm.cloud.schematics.v1.model.GitSource;
+import com.ibm.cloud.schematics.v1.model.Group;
 import com.ibm.cloud.schematics.v1.model.HealthCheckAgentJobOptions;
+import com.ibm.cloud.schematics.v1.model.Host;
 import com.ibm.cloud.schematics.v1.model.InjectTerraformTemplateInner;
-import com.ibm.cloud.schematics.v1.model.InjectTerraformTemplateInnerTftParametersItem;
 import com.ibm.cloud.schematics.v1.model.InventoryResourceRecord;
 import com.ibm.cloud.schematics.v1.model.InventoryResourceRecordList;
+import com.ibm.cloud.schematics.v1.model.InventoryView;
 import com.ibm.cloud.schematics.v1.model.Job;
 import com.ibm.cloud.schematics.v1.model.JobData;
 import com.ibm.cloud.schematics.v1.model.JobDataAction;
@@ -132,7 +128,7 @@ import com.ibm.cloud.schematics.v1.model.JobLogSummary;
 import com.ibm.cloud.schematics.v1.model.JobLogSummaryActionJob;
 import com.ibm.cloud.schematics.v1.model.JobLogSummaryActionJobRecap;
 import com.ibm.cloud.schematics.v1.model.JobLogSummaryFlowJob;
-import com.ibm.cloud.schematics.v1.model.JobLogSummaryLogErrors;
+import com.ibm.cloud.schematics.v1.model.JobLogSummaryLogErrorsInner;
 import com.ibm.cloud.schematics.v1.model.JobLogSummaryRepoDownloadJob;
 import com.ibm.cloud.schematics.v1.model.JobLogSummarySystemJob;
 import com.ibm.cloud.schematics.v1.model.JobLogSummaryWorkitems;
@@ -147,14 +143,13 @@ import com.ibm.cloud.schematics.v1.model.JobStatusWorkitem;
 import com.ibm.cloud.schematics.v1.model.JobStatusWorkspace;
 import com.ibm.cloud.schematics.v1.model.KMSDiscovery;
 import com.ibm.cloud.schematics.v1.model.KMSInstances;
-import com.ibm.cloud.schematics.v1.model.KMSInstancesKeys;
+import com.ibm.cloud.schematics.v1.model.KMSInstancesKeysInner;
 import com.ibm.cloud.schematics.v1.model.KMSSettings;
 import com.ibm.cloud.schematics.v1.model.KMSSettingsPrimaryCrk;
 import com.ibm.cloud.schematics.v1.model.KMSSettingsSecondaryCrk;
 import com.ibm.cloud.schematics.v1.model.LastJob;
 import com.ibm.cloud.schematics.v1.model.ListActionsOptions;
 import com.ibm.cloud.schematics.v1.model.ListAgentDataOptions;
-import com.ibm.cloud.schematics.v1.model.ListAgentOptions;
 import com.ibm.cloud.schematics.v1.model.ListInventoriesOptions;
 import com.ibm.cloud.schematics.v1.model.ListJobLogsOptions;
 import com.ibm.cloud.schematics.v1.model.ListJobsOptions;
@@ -163,13 +158,14 @@ import com.ibm.cloud.schematics.v1.model.ListLocationsOptions;
 import com.ibm.cloud.schematics.v1.model.ListPolicyOptions;
 import com.ibm.cloud.schematics.v1.model.ListResourceGroupOptions;
 import com.ibm.cloud.schematics.v1.model.ListResourceQueryOptions;
-import com.ibm.cloud.schematics.v1.model.ListSchematicsLocationOptions;
 import com.ibm.cloud.schematics.v1.model.ListWorkspaceActivitiesOptions;
 import com.ibm.cloud.schematics.v1.model.ListWorkspacesOptions;
 import com.ibm.cloud.schematics.v1.model.LogStoreResponse;
 import com.ibm.cloud.schematics.v1.model.LogStoreResponseList;
 import com.ibm.cloud.schematics.v1.model.LogSummary;
+import com.ibm.cloud.schematics.v1.model.OutputValueDetail;
 import com.ibm.cloud.schematics.v1.model.OutputValuesInner;
+import com.ibm.cloud.schematics.v1.model.OutputValuesObject;
 import com.ibm.cloud.schematics.v1.model.PlanWorkspaceCommandOptions;
 import com.ibm.cloud.schematics.v1.model.Policy;
 import com.ibm.cloud.schematics.v1.model.PolicyList;
@@ -180,7 +176,6 @@ import com.ibm.cloud.schematics.v1.model.PolicyParameter;
 import com.ibm.cloud.schematics.v1.model.ProcessTemplateMetaDataOptions;
 import com.ibm.cloud.schematics.v1.model.PrsAgentJobOptions;
 import com.ibm.cloud.schematics.v1.model.RefreshWorkspaceCommandOptions;
-import com.ibm.cloud.schematics.v1.model.RegisterAgentOptions;
 import com.ibm.cloud.schematics.v1.model.ReplaceInventoryOptions;
 import com.ibm.cloud.schematics.v1.model.ReplaceResourcesQueryOptions;
 import com.ibm.cloud.schematics.v1.model.ReplaceWorkspaceInputsOptions;
@@ -194,7 +189,6 @@ import com.ibm.cloud.schematics.v1.model.ResourceQueryResponseRecord;
 import com.ibm.cloud.schematics.v1.model.ResourceQueryResponseRecordQueryOutput;
 import com.ibm.cloud.schematics.v1.model.ResourceQueryResponseRecordResponse;
 import com.ibm.cloud.schematics.v1.model.RunWorkspaceCommandsOptions;
-import com.ibm.cloud.schematics.v1.model.SchematicsLocations;
 import com.ibm.cloud.schematics.v1.model.SchematicsLocationsList;
 import com.ibm.cloud.schematics.v1.model.SchematicsLocationsLite;
 import com.ibm.cloud.schematics.v1.model.ScopedResource;
@@ -205,22 +199,27 @@ import com.ibm.cloud.schematics.v1.model.StateStoreResponse;
 import com.ibm.cloud.schematics.v1.model.StateStoreResponseList;
 import com.ibm.cloud.schematics.v1.model.SystemLock;
 import com.ibm.cloud.schematics.v1.model.TemplateMetaDataResponse;
+import com.ibm.cloud.schematics.v1.model.TemplateMetadataObject;
 import com.ibm.cloud.schematics.v1.model.TemplateReadme;
 import com.ibm.cloud.schematics.v1.model.TemplateRepoRequest;
 import com.ibm.cloud.schematics.v1.model.TemplateRepoResponse;
 import com.ibm.cloud.schematics.v1.model.TemplateRepoTarUploadResponse;
 import com.ibm.cloud.schematics.v1.model.TemplateRepoUpdateRequest;
 import com.ibm.cloud.schematics.v1.model.TemplateRepoUploadOptions;
+import com.ibm.cloud.schematics.v1.model.TemplateResourceExtension;
+import com.ibm.cloud.schematics.v1.model.TemplateResourceItem;
 import com.ibm.cloud.schematics.v1.model.TemplateResources;
+import com.ibm.cloud.schematics.v1.model.TemplateResourcesObject;
 import com.ibm.cloud.schematics.v1.model.TemplateRunTimeDataResponse;
 import com.ibm.cloud.schematics.v1.model.TemplateSourceDataRequest;
 import com.ibm.cloud.schematics.v1.model.TemplateSourceDataResponse;
 import com.ibm.cloud.schematics.v1.model.TemplateStateStore;
 import com.ibm.cloud.schematics.v1.model.TemplateValues;
+import com.ibm.cloud.schematics.v1.model.TemplateValuesMetaData;
 import com.ibm.cloud.schematics.v1.model.TerraformCommand;
+import com.ibm.cloud.schematics.v1.model.TftParametersObject;
 import com.ibm.cloud.schematics.v1.model.UpdateActionOptions;
 import com.ibm.cloud.schematics.v1.model.UpdateAgentDataOptions;
-import com.ibm.cloud.schematics.v1.model.UpdateAgentRegistrationOptions;
 import com.ibm.cloud.schematics.v1.model.UpdateJobOptions;
 import com.ibm.cloud.schematics.v1.model.UpdateKmsSettingsOptions;
 import com.ibm.cloud.schematics.v1.model.UpdatePolicyOptions;
@@ -289,48 +288,6 @@ public class SchematicsTest {
   public void testConstructorWithNullAuthenticator() throws Throwable {
     final String serviceName = "testService";
     new Schematics(serviceName, null);
-  }
-
-  // Test the listSchematicsLocation operation with a valid options model parameter
-  @Test
-  public void testListSchematicsLocationWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "[{\"name\": \"name\", \"id\": \"id\", \"country\": \"country\", \"geography\": \"geography\", \"geography_code\": \"geographyCode\", \"metro\": \"metro\", \"multizone_metro\": \"multizoneMetro\", \"kind\": \"kind\", \"paired_region\": [\"pairedRegion\"], \"restricted\": true, \"agent_metadata\": [{\"name\": \"purpose\", \"value\": [\"value\"]}]}]";
-    String listSchematicsLocationPath = "/v1/locations";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the ListSchematicsLocationOptions model
-    ListSchematicsLocationOptions listSchematicsLocationOptionsModel = new ListSchematicsLocationOptions();
-
-    // Invoke listSchematicsLocation() with a valid options model and verify the result
-    Response<List<SchematicsLocations>> response = schematicsService.listSchematicsLocation(listSchematicsLocationOptionsModel).execute();
-    assertNotNull(response);
-    List<SchematicsLocations> responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, listSchematicsLocationPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the listSchematicsLocation operation with and without retries enabled
-  @Test
-  public void testListSchematicsLocationWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testListSchematicsLocationWOptions();
-
-    schematicsService.disableRetries();
-    testListSchematicsLocationWOptions();
   }
 
   // Test the listLocations operation with a valid options model parameter
@@ -421,7 +378,7 @@ public class SchematicsTest {
   @Test
   public void testGetSchematicsVersionWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"builddate\": \"builddate\", \"buildno\": \"buildno\", \"commitsha\": \"commitsha\", \"helm_provider_version\": \"helmProviderVersion\", \"helm_version\": \"helmVersion\", \"supported_template_types\": {\"anyKey\": \"anyValue\"}, \"terraform_provider_version\": \"terraformProviderVersion\", \"terraform_version\": \"terraformVersion\"}";
+    String mockResponseBody = "{\"builddate\": \"2019-01-01T12:00:00.000Z\", \"buildno\": \"buildno\", \"commitsha\": \"commitsha\", \"helm_provider_version\": \"helmProviderVersion\", \"helm_version\": \"helmVersion\", \"supported_template_types\": {\"anyKey\": \"anyValue\"}, \"terraform_provider_version\": \"terraformProviderVersion\", \"terraform_version\": \"terraformVersion\"}";
     String getSchematicsVersionPath = "/v1/version";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -463,7 +420,7 @@ public class SchematicsTest {
   @Test
   public void testProcessTemplateMetaDataWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"type\": \"type\", \"variables\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}]}";
+    String mockResponseBody = "{\"type\": \"type\", \"variables\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}]}";
     String processTemplateMetaDataPath = "/v2/template_metadata_processor";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -472,12 +429,12 @@ public class SchematicsTest {
 
     // Construct an instance of the GitSource model
     GitSource gitSourceModel = new GitSource.Builder()
-      .computedGitRepoUrl("testString")
-      .gitRepoUrl("testString")
+      .computedGitRepoUrl("https://github.com/IBM-Cloud/terraform-provider-ibm/tree/master/examples/ibm-vsi")
+      .gitRepoUrl("https://github.com/IBM-Cloud/terraform-provider-ibm")
       .gitToken("testString")
-      .gitRepoFolder("testString")
-      .gitRelease("testString")
-      .gitBranch("testString")
+      .gitRepoFolder("examples/ibm-vsi")
+      .gitRelease("v1.0.0")
+      .gitBranch("master")
       .build();
 
     // Construct an instance of the CatalogSource model
@@ -505,14 +462,14 @@ public class SchematicsTest {
 
     // Construct an instance of the ExternalSource model
     ExternalSource externalSourceModel = new ExternalSource.Builder()
-      .sourceType("local")
+      .sourceType("git_hub")
       .git(gitSourceModel)
       .catalog(catalogSourceModel)
       .build();
 
     // Construct an instance of the ProcessTemplateMetaDataOptions model
     ProcessTemplateMetaDataOptions processTemplateMetaDataOptionsModel = new ProcessTemplateMetaDataOptions.Builder()
-      .templateType("testString")
+      .templateType("terraform_v1_0")
       .source(externalSourceModel)
       .region("testString")
       .sourceType("local")
@@ -558,7 +515,7 @@ public class SchematicsTest {
   @Test
   public void testListWorkspacesWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"count\": 5, \"limit\": 5, \"offset\": 6, \"workspaces\": [{\"applied_shareddata_ids\": [\"appliedShareddataIds\"], \"catalog_ref\": {\"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\", \"offering_version\": \"offeringVersion\", \"service_extensions\": [{\"name\": \"flavor\", \"value\": \"anyValue\", \"type\": \"string\"}]}, \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"crn\": \"crn\", \"dependencies\": {\"parents\": [\"parents\"], \"children\": [\"children\"]}, \"description\": \"description\", \"id\": \"id\", \"last_health_check_at\": \"2019-01-01T12:00:00.000Z\", \"location\": \"location\", \"name\": \"name\", \"resource_group\": \"resourceGroup\", \"runtime_data\": [{\"engine_cmd\": \"engineCmd\", \"engine_name\": \"engineName\", \"engine_version\": \"engineVersion\", \"id\": \"id\", \"log_store_url\": \"logStoreUrl\", \"output_values\": [{\"anyKey\": \"anyValue\"}], \"resources\": [[{\"anyKey\": \"anyValue\"}]], \"state_store_url\": \"stateStoreUrl\"}], \"shared_data\": {\"cluster_id\": \"clusterId\", \"cluster_name\": \"clusterName\", \"entitlement_keys\": [{\"anyKey\": \"anyValue\"}], \"namespace\": \"namespace\", \"region\": \"region\", \"resource_group_id\": \"resourceGroupId\"}, \"status\": \"status\", \"tags\": [\"tags\"], \"template_data\": [{\"env_values\": [{\"hidden\": true, \"name\": \"name\", \"secure\": true, \"value\": \"value\"}], \"folder\": \"folder\", \"compact\": false, \"has_githubtoken\": true, \"id\": \"id\", \"type\": \"type\", \"uninstall_script_name\": \"uninstallScriptName\", \"values\": \"values\", \"values_metadata\": [{\"anyKey\": \"anyValue\"}], \"values_url\": \"valuesUrl\", \"variablestore\": [{\"description\": \"description\", \"name\": \"name\", \"secure\": true, \"type\": \"type\", \"value\": \"value\"}]}], \"template_ref\": \"templateRef\", \"template_repo\": {\"branch\": \"branch\", \"full_url\": \"fullUrl\", \"has_uploadedgitrepotar\": false, \"release\": \"release\", \"repo_sha_value\": \"repoShaValue\", \"repo_url\": \"repoUrl\", \"url\": \"url\", \"skip_submodules_checkout\": true}, \"type\": [\"type\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"cart_id\": \"cartId\", \"project_id\": \"projectId\", \"last_action_name\": \"lastActionName\", \"last_activity_id\": \"lastActivityId\", \"last_job\": {\"job_id\": \"jobId\", \"job_name\": \"jobName\", \"job_status\": \"jobStatus\"}, \"workspace_status\": {\"frozen\": true, \"frozen_at\": \"2019-01-01T12:00:00.000Z\", \"frozen_by\": \"frozenBy\", \"locked\": true, \"locked_by\": \"lockedBy\", \"locked_time\": \"2019-01-01T12:00:00.000Z\"}, \"workspace_status_msg\": {\"status_code\": \"statusCode\", \"status_msg\": \"statusMsg\"}, \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}, \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}]}";
+    String mockResponseBody = "{\"count\": 0, \"limit\": 0, \"offset\": 0, \"workspaces\": [{\"applied_shareddata_ids\": [\"appliedShareddataIds\"], \"catalog_ref\": {\"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\", \"offering_version\": \"offeringVersion\", \"service_extensions\": [{\"name\": \"flavor\", \"value\": \"value\", \"type\": \"string\"}]}, \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"crn\": \"crn\", \"dependencies\": {\"parents\": [\"parents\"], \"children\": [\"children\"]}, \"description\": \"description\", \"id\": \"id\", \"last_health_check_at\": \"2019-01-01T12:00:00.000Z\", \"location\": \"location\", \"name\": \"name\", \"resource_group\": \"resourceGroup\", \"runtime_data\": [{\"engine_cmd\": \"engineCmd\", \"engine_name\": \"engineName\", \"engine_version\": \"engineVersion\", \"id\": \"id\", \"log_store_url\": \"logStoreUrl\", \"output_values\": [{\"anyKey\": \"anyValue\"}], \"resources\": [[{\"anyKey\": \"anyValue\"}]], \"state_store_url\": \"stateStoreUrl\"}], \"shared_data\": {\"cluster_id\": \"clusterId\", \"cluster_name\": \"clusterName\", \"entitlement_keys\": [{\"anyKey\": \"anyValue\"}], \"namespace\": \"namespace\", \"region\": \"region\", \"resource_group_id\": \"resourceGroupId\"}, \"status\": \"status\", \"tags\": [\"tags\"], \"template_data\": [{\"env_values\": [{\"hidden\": true, \"name\": \"name\", \"secure\": true, \"value\": \"value\"}], \"folder\": \"folder\", \"compact\": false, \"has_githubtoken\": true, \"id\": \"id\", \"type\": \"type\", \"uninstall_script_name\": \"uninstallScriptName\", \"values\": \"values\", \"values_metadata\": [{\"anyKey\": \"anyValue\"}], \"values_url\": \"valuesUrl\", \"variablestore\": [{\"description\": \"description\", \"name\": \"name\", \"secure\": true, \"type\": \"type\", \"value\": \"value\"}]}], \"template_ref\": \"templateRef\", \"template_repo\": {\"branch\": \"branch\", \"full_url\": \"fullUrl\", \"has_uploadedgitrepotar\": false, \"release\": \"release\", \"repo_sha_value\": \"repoShaValue\", \"repo_url\": \"repoUrl\", \"url\": \"url\", \"skip_submodules_checkout\": true}, \"type\": [\"type\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"cart_id\": \"cartId\", \"project_id\": \"projectId\", \"last_action_name\": \"lastActionName\", \"last_activity_id\": \"lastActivityId\", \"last_job\": {\"job_id\": \"jobId\", \"job_name\": \"jobName\", \"job_status\": \"jobStatus\"}, \"workspace_status\": {\"frozen\": true, \"frozen_at\": \"2019-01-01T12:00:00.000Z\", \"frozen_by\": \"frozenBy\", \"locked\": true, \"locked_by\": \"lockedBy\", \"locked_time\": \"2019-01-01T12:00:00.000Z\"}, \"workspace_status_msg\": {\"status_code\": \"statusCode\", \"status_msg\": \"statusMsg\"}, \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}, \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}]}";
     String listWorkspacesPath = "/v1/workspaces";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -609,7 +566,7 @@ public class SchematicsTest {
   @Test
   public void testCreateWorkspaceWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"applied_shareddata_ids\": [\"appliedShareddataIds\"], \"catalog_ref\": {\"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\", \"offering_version\": \"offeringVersion\", \"service_extensions\": [{\"name\": \"flavor\", \"value\": \"anyValue\", \"type\": \"string\"}]}, \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"crn\": \"crn\", \"dependencies\": {\"parents\": [\"parents\"], \"children\": [\"children\"]}, \"description\": \"description\", \"id\": \"id\", \"last_health_check_at\": \"2019-01-01T12:00:00.000Z\", \"location\": \"location\", \"name\": \"name\", \"resource_group\": \"resourceGroup\", \"runtime_data\": [{\"engine_cmd\": \"engineCmd\", \"engine_name\": \"engineName\", \"engine_version\": \"engineVersion\", \"id\": \"id\", \"log_store_url\": \"logStoreUrl\", \"output_values\": [{\"anyKey\": \"anyValue\"}], \"resources\": [[{\"anyKey\": \"anyValue\"}]], \"state_store_url\": \"stateStoreUrl\"}], \"shared_data\": {\"cluster_id\": \"clusterId\", \"cluster_name\": \"clusterName\", \"entitlement_keys\": [{\"anyKey\": \"anyValue\"}], \"namespace\": \"namespace\", \"region\": \"region\", \"resource_group_id\": \"resourceGroupId\"}, \"status\": \"status\", \"tags\": [\"tags\"], \"template_data\": [{\"env_values\": [{\"hidden\": true, \"name\": \"name\", \"secure\": true, \"value\": \"value\"}], \"folder\": \"folder\", \"compact\": false, \"has_githubtoken\": true, \"id\": \"id\", \"type\": \"type\", \"uninstall_script_name\": \"uninstallScriptName\", \"values\": \"values\", \"values_metadata\": [{\"anyKey\": \"anyValue\"}], \"values_url\": \"valuesUrl\", \"variablestore\": [{\"description\": \"description\", \"name\": \"name\", \"secure\": true, \"type\": \"type\", \"value\": \"value\"}]}], \"template_ref\": \"templateRef\", \"template_repo\": {\"branch\": \"branch\", \"full_url\": \"fullUrl\", \"has_uploadedgitrepotar\": false, \"release\": \"release\", \"repo_sha_value\": \"repoShaValue\", \"repo_url\": \"repoUrl\", \"url\": \"url\", \"skip_submodules_checkout\": true}, \"type\": [\"type\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"cart_id\": \"cartId\", \"project_id\": \"projectId\", \"last_action_name\": \"lastActionName\", \"last_activity_id\": \"lastActivityId\", \"last_job\": {\"job_id\": \"jobId\", \"job_name\": \"jobName\", \"job_status\": \"jobStatus\"}, \"workspace_status\": {\"frozen\": true, \"frozen_at\": \"2019-01-01T12:00:00.000Z\", \"frozen_by\": \"frozenBy\", \"locked\": true, \"locked_by\": \"lockedBy\", \"locked_time\": \"2019-01-01T12:00:00.000Z\"}, \"workspace_status_msg\": {\"status_code\": \"statusCode\", \"status_msg\": \"statusMsg\"}, \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}, \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
+    String mockResponseBody = "{\"applied_shareddata_ids\": [\"appliedShareddataIds\"], \"catalog_ref\": {\"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\", \"offering_version\": \"offeringVersion\", \"service_extensions\": [{\"name\": \"flavor\", \"value\": \"value\", \"type\": \"string\"}]}, \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"crn\": \"crn\", \"dependencies\": {\"parents\": [\"parents\"], \"children\": [\"children\"]}, \"description\": \"description\", \"id\": \"id\", \"last_health_check_at\": \"2019-01-01T12:00:00.000Z\", \"location\": \"location\", \"name\": \"name\", \"resource_group\": \"resourceGroup\", \"runtime_data\": [{\"engine_cmd\": \"engineCmd\", \"engine_name\": \"engineName\", \"engine_version\": \"engineVersion\", \"id\": \"id\", \"log_store_url\": \"logStoreUrl\", \"output_values\": [{\"anyKey\": \"anyValue\"}], \"resources\": [[{\"anyKey\": \"anyValue\"}]], \"state_store_url\": \"stateStoreUrl\"}], \"shared_data\": {\"cluster_id\": \"clusterId\", \"cluster_name\": \"clusterName\", \"entitlement_keys\": [{\"anyKey\": \"anyValue\"}], \"namespace\": \"namespace\", \"region\": \"region\", \"resource_group_id\": \"resourceGroupId\"}, \"status\": \"status\", \"tags\": [\"tags\"], \"template_data\": [{\"env_values\": [{\"hidden\": true, \"name\": \"name\", \"secure\": true, \"value\": \"value\"}], \"folder\": \"folder\", \"compact\": false, \"has_githubtoken\": true, \"id\": \"id\", \"type\": \"type\", \"uninstall_script_name\": \"uninstallScriptName\", \"values\": \"values\", \"values_metadata\": [{\"anyKey\": \"anyValue\"}], \"values_url\": \"valuesUrl\", \"variablestore\": [{\"description\": \"description\", \"name\": \"name\", \"secure\": true, \"type\": \"type\", \"value\": \"value\"}]}], \"template_ref\": \"templateRef\", \"template_repo\": {\"branch\": \"branch\", \"full_url\": \"fullUrl\", \"has_uploadedgitrepotar\": false, \"release\": \"release\", \"repo_sha_value\": \"repoShaValue\", \"repo_url\": \"repoUrl\", \"url\": \"url\", \"skip_submodules_checkout\": true}, \"type\": [\"type\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"cart_id\": \"cartId\", \"project_id\": \"projectId\", \"last_action_name\": \"lastActionName\", \"last_activity_id\": \"lastActivityId\", \"last_job\": {\"job_id\": \"jobId\", \"job_name\": \"jobName\", \"job_status\": \"jobStatus\"}, \"workspace_status\": {\"frozen\": true, \"frozen_at\": \"2019-01-01T12:00:00.000Z\", \"frozen_by\": \"frozenBy\", \"locked\": true, \"locked_by\": \"lockedBy\", \"locked_time\": \"2019-01-01T12:00:00.000Z\"}, \"workspace_status_msg\": {\"status_code\": \"statusCode\", \"status_msg\": \"statusMsg\"}, \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}, \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
     String createWorkspacePath = "/v1/workspaces";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -645,7 +602,7 @@ public class SchematicsTest {
 
     // Construct an instance of the SharedTargetData model
     SharedTargetData sharedTargetDataModel = new SharedTargetData.Builder()
-      .clusterCreatedOn("testString")
+      .clusterCreatedOn(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .clusterId("testString")
       .clusterName("testString")
       .clusterType("testString")
@@ -653,7 +610,7 @@ public class SchematicsTest {
       .namespace("testString")
       .region("testString")
       .resourceGroupId("testString")
-      .workerCount(Long.valueOf("26"))
+      .workerCount(Long.valueOf("0"))
       .workerMachineType("testString")
       .build();
 
@@ -664,8 +621,8 @@ public class SchematicsTest {
       .secure(true)
       .build();
 
-    // Construct an instance of the InjectTerraformTemplateInnerTftParametersItem model
-    InjectTerraformTemplateInnerTftParametersItem injectTerraformTemplateInnerTftParametersItemModel = new InjectTerraformTemplateInnerTftParametersItem.Builder()
+    // Construct an instance of the TftParametersObject model
+    TftParametersObject tftParametersObjectModel = new TftParametersObject.Builder()
       .name("testString")
       .value("testString")
       .build();
@@ -677,17 +634,17 @@ public class SchematicsTest {
       .tftPrefix("testString")
       .injectionType("testString")
       .tftName("testString")
-      .tftParameters(java.util.Arrays.asList(injectTerraformTemplateInnerTftParametersItemModel))
+      .tftParameters(java.util.Arrays.asList(tftParametersObjectModel))
       .build();
 
     // Construct an instance of the WorkspaceVariableRequest model
     WorkspaceVariableRequest workspaceVariableRequestModel = new WorkspaceVariableRequest.Builder()
       .description("testString")
-      .name("testString")
+      .name("region")
       .secure(true)
-      .type("testString")
+      .type("string")
       .useDefault(true)
-      .value("testString")
+      .value("us-south")
       .build();
 
     // Construct an instance of the TemplateSourceDataRequest model
@@ -698,7 +655,7 @@ public class SchematicsTest {
       .compact(true)
       .initStateFile("testString")
       .injectors(java.util.Arrays.asList(injectTerraformTemplateInnerModel))
-      .type("testString")
+      .type("terraform_v1.9")
       .uninstallScriptName("testString")
       .values("testString")
       .valuesMetadata(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))
@@ -711,7 +668,7 @@ public class SchematicsTest {
       .release("testString")
       .repoShaValue("testString")
       .repoUrl("testString")
-      .url("testString")
+      .url("https://github.com/ptaube/tf_cloudless_sleepy")
       .skipSubmodulesCheckout(true)
       .build();
 
@@ -738,12 +695,12 @@ public class SchematicsTest {
       .hidden(true)
       .required(true)
       .options(java.util.Arrays.asList("testString"))
-      .minValue(Long.valueOf("26"))
-      .maxValue(Long.valueOf("26"))
-      .minLength(Long.valueOf("26"))
-      .maxLength(Long.valueOf("26"))
+      .minValue(Long.valueOf("0"))
+      .maxValue(Long.valueOf("0"))
+      .minLength(Long.valueOf("0"))
+      .maxLength(Long.valueOf("0"))
       .matches("testString")
-      .position(Long.valueOf("26"))
+      .position(Long.valueOf("0"))
       .groupBy("testString")
       .source("testString")
       .build();
@@ -761,16 +718,16 @@ public class SchematicsTest {
       .appliedShareddataIds(java.util.Arrays.asList("testString"))
       .catalogRef(catalogRefModel)
       .dependencies(dependenciesModel)
-      .description("testString")
-      .location("testString")
-      .name("testString")
-      .resourceGroup("testString")
+      .description("Workspace to provision infrastructure")
+      .location("us-east")
+      .name("my-terraform-workspace")
+      .resourceGroup("Default")
       .sharedData(sharedTargetDataModel)
-      .tags(java.util.Arrays.asList("testString"))
+      .tags(java.util.Arrays.asList("env:dev", "project:demo"))
       .templateData(java.util.Arrays.asList(templateSourceDataRequestModel))
       .templateRef("testString")
       .templateRepo(templateRepoRequestModel)
-      .type(java.util.Arrays.asList("testString"))
+      .type(java.util.Arrays.asList("terraform_v1.9"))
       .workspaceStatus(workspaceStatusRequestModel)
       .agentId("testString")
       .settings(java.util.Arrays.asList(variableDataModel))
@@ -805,11 +762,67 @@ public class SchematicsTest {
     testCreateWorkspaceWOptions();
   }
 
+  // Test the deleteWorkspace operation with a valid options model parameter
+  @Test
+  public void testDeleteWorkspaceWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "\"{\\\"message\\\":\\\"Successfully deleted workspace\\\"}\"";
+    String deleteWorkspacePath = "/v1/workspaces/testString";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the DeleteWorkspaceOptions model
+    DeleteWorkspaceOptions deleteWorkspaceOptionsModel = new DeleteWorkspaceOptions.Builder()
+      .wId("testString")
+      .refreshToken("testString")
+      .destroyResources("testString")
+      .build();
+
+    // Invoke deleteWorkspace() with a valid options model and verify the result
+    Response<String> response = schematicsService.deleteWorkspace(deleteWorkspaceOptionsModel).execute();
+    assertNotNull(response);
+    String responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "DELETE");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, deleteWorkspacePath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Refresh_token"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(query.get("destroy_resources"), "testString");
+  }
+
+  // Test the deleteWorkspace operation with and without retries enabled
+  @Test
+  public void testDeleteWorkspaceWRetries() throws Throwable {
+    schematicsService.enableRetries(4, 30);
+    testDeleteWorkspaceWOptions();
+
+    schematicsService.disableRetries();
+    testDeleteWorkspaceWOptions();
+  }
+
+  // Test the deleteWorkspace operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testDeleteWorkspaceNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.deleteWorkspace(null).execute();
+  }
+
   // Test the getWorkspace operation with a valid options model parameter
   @Test
   public void testGetWorkspaceWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"applied_shareddata_ids\": [\"appliedShareddataIds\"], \"catalog_ref\": {\"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\", \"offering_version\": \"offeringVersion\", \"service_extensions\": [{\"name\": \"flavor\", \"value\": \"anyValue\", \"type\": \"string\"}]}, \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"crn\": \"crn\", \"dependencies\": {\"parents\": [\"parents\"], \"children\": [\"children\"]}, \"description\": \"description\", \"id\": \"id\", \"last_health_check_at\": \"2019-01-01T12:00:00.000Z\", \"location\": \"location\", \"name\": \"name\", \"resource_group\": \"resourceGroup\", \"runtime_data\": [{\"engine_cmd\": \"engineCmd\", \"engine_name\": \"engineName\", \"engine_version\": \"engineVersion\", \"id\": \"id\", \"log_store_url\": \"logStoreUrl\", \"output_values\": [{\"anyKey\": \"anyValue\"}], \"resources\": [[{\"anyKey\": \"anyValue\"}]], \"state_store_url\": \"stateStoreUrl\"}], \"shared_data\": {\"cluster_id\": \"clusterId\", \"cluster_name\": \"clusterName\", \"entitlement_keys\": [{\"anyKey\": \"anyValue\"}], \"namespace\": \"namespace\", \"region\": \"region\", \"resource_group_id\": \"resourceGroupId\"}, \"status\": \"status\", \"tags\": [\"tags\"], \"template_data\": [{\"env_values\": [{\"hidden\": true, \"name\": \"name\", \"secure\": true, \"value\": \"value\"}], \"folder\": \"folder\", \"compact\": false, \"has_githubtoken\": true, \"id\": \"id\", \"type\": \"type\", \"uninstall_script_name\": \"uninstallScriptName\", \"values\": \"values\", \"values_metadata\": [{\"anyKey\": \"anyValue\"}], \"values_url\": \"valuesUrl\", \"variablestore\": [{\"description\": \"description\", \"name\": \"name\", \"secure\": true, \"type\": \"type\", \"value\": \"value\"}]}], \"template_ref\": \"templateRef\", \"template_repo\": {\"branch\": \"branch\", \"full_url\": \"fullUrl\", \"has_uploadedgitrepotar\": false, \"release\": \"release\", \"repo_sha_value\": \"repoShaValue\", \"repo_url\": \"repoUrl\", \"url\": \"url\", \"skip_submodules_checkout\": true}, \"type\": [\"type\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"cart_id\": \"cartId\", \"project_id\": \"projectId\", \"last_action_name\": \"lastActionName\", \"last_activity_id\": \"lastActivityId\", \"last_job\": {\"job_id\": \"jobId\", \"job_name\": \"jobName\", \"job_status\": \"jobStatus\"}, \"workspace_status\": {\"frozen\": true, \"frozen_at\": \"2019-01-01T12:00:00.000Z\", \"frozen_by\": \"frozenBy\", \"locked\": true, \"locked_by\": \"lockedBy\", \"locked_time\": \"2019-01-01T12:00:00.000Z\"}, \"workspace_status_msg\": {\"status_code\": \"statusCode\", \"status_msg\": \"statusMsg\"}, \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}, \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
+    String mockResponseBody = "{\"applied_shareddata_ids\": [\"appliedShareddataIds\"], \"catalog_ref\": {\"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\", \"offering_version\": \"offeringVersion\", \"service_extensions\": [{\"name\": \"flavor\", \"value\": \"value\", \"type\": \"string\"}]}, \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"crn\": \"crn\", \"dependencies\": {\"parents\": [\"parents\"], \"children\": [\"children\"]}, \"description\": \"description\", \"id\": \"id\", \"last_health_check_at\": \"2019-01-01T12:00:00.000Z\", \"location\": \"location\", \"name\": \"name\", \"resource_group\": \"resourceGroup\", \"runtime_data\": [{\"engine_cmd\": \"engineCmd\", \"engine_name\": \"engineName\", \"engine_version\": \"engineVersion\", \"id\": \"id\", \"log_store_url\": \"logStoreUrl\", \"output_values\": [{\"anyKey\": \"anyValue\"}], \"resources\": [[{\"anyKey\": \"anyValue\"}]], \"state_store_url\": \"stateStoreUrl\"}], \"shared_data\": {\"cluster_id\": \"clusterId\", \"cluster_name\": \"clusterName\", \"entitlement_keys\": [{\"anyKey\": \"anyValue\"}], \"namespace\": \"namespace\", \"region\": \"region\", \"resource_group_id\": \"resourceGroupId\"}, \"status\": \"status\", \"tags\": [\"tags\"], \"template_data\": [{\"env_values\": [{\"hidden\": true, \"name\": \"name\", \"secure\": true, \"value\": \"value\"}], \"folder\": \"folder\", \"compact\": false, \"has_githubtoken\": true, \"id\": \"id\", \"type\": \"type\", \"uninstall_script_name\": \"uninstallScriptName\", \"values\": \"values\", \"values_metadata\": [{\"anyKey\": \"anyValue\"}], \"values_url\": \"valuesUrl\", \"variablestore\": [{\"description\": \"description\", \"name\": \"name\", \"secure\": true, \"type\": \"type\", \"value\": \"value\"}]}], \"template_ref\": \"templateRef\", \"template_repo\": {\"branch\": \"branch\", \"full_url\": \"fullUrl\", \"has_uploadedgitrepotar\": false, \"release\": \"release\", \"repo_sha_value\": \"repoShaValue\", \"repo_url\": \"repoUrl\", \"url\": \"url\", \"skip_submodules_checkout\": true}, \"type\": [\"type\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"cart_id\": \"cartId\", \"project_id\": \"projectId\", \"last_action_name\": \"lastActionName\", \"last_activity_id\": \"lastActivityId\", \"last_job\": {\"job_id\": \"jobId\", \"job_name\": \"jobName\", \"job_status\": \"jobStatus\"}, \"workspace_status\": {\"frozen\": true, \"frozen_at\": \"2019-01-01T12:00:00.000Z\", \"frozen_by\": \"frozenBy\", \"locked\": true, \"locked_by\": \"lockedBy\", \"locked_time\": \"2019-01-01T12:00:00.000Z\"}, \"workspace_status_msg\": {\"status_code\": \"statusCode\", \"status_msg\": \"statusMsg\"}, \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}, \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
     String getWorkspacePath = "/v1/workspaces/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -856,278 +869,11 @@ public class SchematicsTest {
     schematicsService.getWorkspace(null).execute();
   }
 
-  // Test the replaceWorkspace operation with a valid options model parameter
-  @Test
-  public void testReplaceWorkspaceWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"applied_shareddata_ids\": [\"appliedShareddataIds\"], \"catalog_ref\": {\"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\", \"offering_version\": \"offeringVersion\", \"service_extensions\": [{\"name\": \"flavor\", \"value\": \"anyValue\", \"type\": \"string\"}]}, \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"crn\": \"crn\", \"dependencies\": {\"parents\": [\"parents\"], \"children\": [\"children\"]}, \"description\": \"description\", \"id\": \"id\", \"last_health_check_at\": \"2019-01-01T12:00:00.000Z\", \"location\": \"location\", \"name\": \"name\", \"resource_group\": \"resourceGroup\", \"runtime_data\": [{\"engine_cmd\": \"engineCmd\", \"engine_name\": \"engineName\", \"engine_version\": \"engineVersion\", \"id\": \"id\", \"log_store_url\": \"logStoreUrl\", \"output_values\": [{\"anyKey\": \"anyValue\"}], \"resources\": [[{\"anyKey\": \"anyValue\"}]], \"state_store_url\": \"stateStoreUrl\"}], \"shared_data\": {\"cluster_id\": \"clusterId\", \"cluster_name\": \"clusterName\", \"entitlement_keys\": [{\"anyKey\": \"anyValue\"}], \"namespace\": \"namespace\", \"region\": \"region\", \"resource_group_id\": \"resourceGroupId\"}, \"status\": \"status\", \"tags\": [\"tags\"], \"template_data\": [{\"env_values\": [{\"hidden\": true, \"name\": \"name\", \"secure\": true, \"value\": \"value\"}], \"folder\": \"folder\", \"compact\": false, \"has_githubtoken\": true, \"id\": \"id\", \"type\": \"type\", \"uninstall_script_name\": \"uninstallScriptName\", \"values\": \"values\", \"values_metadata\": [{\"anyKey\": \"anyValue\"}], \"values_url\": \"valuesUrl\", \"variablestore\": [{\"description\": \"description\", \"name\": \"name\", \"secure\": true, \"type\": \"type\", \"value\": \"value\"}]}], \"template_ref\": \"templateRef\", \"template_repo\": {\"branch\": \"branch\", \"full_url\": \"fullUrl\", \"has_uploadedgitrepotar\": false, \"release\": \"release\", \"repo_sha_value\": \"repoShaValue\", \"repo_url\": \"repoUrl\", \"url\": \"url\", \"skip_submodules_checkout\": true}, \"type\": [\"type\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"cart_id\": \"cartId\", \"project_id\": \"projectId\", \"last_action_name\": \"lastActionName\", \"last_activity_id\": \"lastActivityId\", \"last_job\": {\"job_id\": \"jobId\", \"job_name\": \"jobName\", \"job_status\": \"jobStatus\"}, \"workspace_status\": {\"frozen\": true, \"frozen_at\": \"2019-01-01T12:00:00.000Z\", \"frozen_by\": \"frozenBy\", \"locked\": true, \"locked_by\": \"lockedBy\", \"locked_time\": \"2019-01-01T12:00:00.000Z\"}, \"workspace_status_msg\": {\"status_code\": \"statusCode\", \"status_msg\": \"statusMsg\"}, \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}, \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
-    String replaceWorkspacePath = "/v1/workspaces/testString";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the ServiceExtensions model
-    ServiceExtensions serviceExtensionsModel = new ServiceExtensions.Builder()
-      .name("flavor")
-      .value("testString")
-      .type("string")
-      .build();
-
-    // Construct an instance of the CatalogRef model
-    CatalogRef catalogRefModel = new CatalogRef.Builder()
-      .dryRun(true)
-      .owningAccount("testString")
-      .itemIconUrl("testString")
-      .itemId("testString")
-      .itemName("testString")
-      .itemReadmeUrl("testString")
-      .itemUrl("testString")
-      .launchUrl("testString")
-      .offeringVersion("testString")
-      .serviceExtensions(java.util.Arrays.asList(serviceExtensionsModel))
-      .build();
-
-    // Construct an instance of the Dependencies model
-    Dependencies dependenciesModel = new Dependencies.Builder()
-      .parents(java.util.Arrays.asList("testString"))
-      .children(java.util.Arrays.asList("testString"))
-      .build();
-
-    // Construct an instance of the SharedTargetData model
-    SharedTargetData sharedTargetDataModel = new SharedTargetData.Builder()
-      .clusterCreatedOn("testString")
-      .clusterId("testString")
-      .clusterName("testString")
-      .clusterType("testString")
-      .entitlementKeys(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))
-      .namespace("testString")
-      .region("testString")
-      .resourceGroupId("testString")
-      .workerCount(Long.valueOf("26"))
-      .workerMachineType("testString")
-      .build();
-
-    // Construct an instance of the EnvironmentValuesMetadata model
-    EnvironmentValuesMetadata environmentValuesMetadataModel = new EnvironmentValuesMetadata.Builder()
-      .hidden(true)
-      .name("testString")
-      .secure(true)
-      .build();
-
-    // Construct an instance of the InjectTerraformTemplateInnerTftParametersItem model
-    InjectTerraformTemplateInnerTftParametersItem injectTerraformTemplateInnerTftParametersItemModel = new InjectTerraformTemplateInnerTftParametersItem.Builder()
-      .name("testString")
-      .value("testString")
-      .build();
-
-    // Construct an instance of the InjectTerraformTemplateInner model
-    InjectTerraformTemplateInner injectTerraformTemplateInnerModel = new InjectTerraformTemplateInner.Builder()
-      .tftGitUrl("testString")
-      .tftGitToken("testString")
-      .tftPrefix("testString")
-      .injectionType("testString")
-      .tftName("testString")
-      .tftParameters(java.util.Arrays.asList(injectTerraformTemplateInnerTftParametersItemModel))
-      .build();
-
-    // Construct an instance of the WorkspaceVariableRequest model
-    WorkspaceVariableRequest workspaceVariableRequestModel = new WorkspaceVariableRequest.Builder()
-      .description("testString")
-      .name("testString")
-      .secure(true)
-      .type("testString")
-      .useDefault(true)
-      .value("testString")
-      .build();
-
-    // Construct an instance of the TemplateSourceDataRequest model
-    TemplateSourceDataRequest templateSourceDataRequestModel = new TemplateSourceDataRequest.Builder()
-      .envValues(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))
-      .envValuesMetadata(java.util.Arrays.asList(environmentValuesMetadataModel))
-      .folder("testString")
-      .compact(true)
-      .initStateFile("testString")
-      .injectors(java.util.Arrays.asList(injectTerraformTemplateInnerModel))
-      .type("testString")
-      .uninstallScriptName("testString")
-      .values("testString")
-      .valuesMetadata(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))
-      .variablestore(java.util.Arrays.asList(workspaceVariableRequestModel))
-      .build();
-
-    // Construct an instance of the TemplateRepoUpdateRequest model
-    TemplateRepoUpdateRequest templateRepoUpdateRequestModel = new TemplateRepoUpdateRequest.Builder()
-      .branch("testString")
-      .release("testString")
-      .repoShaValue("testString")
-      .repoUrl("testString")
-      .url("testString")
-      .skipSubmodulesCheckout(true)
-      .build();
-
-    // Construct an instance of the WorkspaceStatusUpdateRequest model
-    WorkspaceStatusUpdateRequest workspaceStatusUpdateRequestModel = new WorkspaceStatusUpdateRequest.Builder()
-      .frozen(true)
-      .frozenAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .frozenBy("testString")
-      .locked(true)
-      .lockedBy("testString")
-      .lockedTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
-      .build();
-
-    // Construct an instance of the WorkspaceStatusMessage model
-    WorkspaceStatusMessage workspaceStatusMessageModel = new WorkspaceStatusMessage.Builder()
-      .statusCode("testString")
-      .statusMsg("testString")
-      .build();
-
-    // Construct an instance of the VariableMetadata model
-    VariableMetadata variableMetadataModel = new VariableMetadata.Builder()
-      .type("boolean")
-      .aliases(java.util.Arrays.asList("testString"))
-      .description("testString")
-      .cloudDataType("testString")
-      .defaultValue("testString")
-      .linkStatus("normal")
-      .secure(true)
-      .immutable(true)
-      .hidden(true)
-      .required(true)
-      .options(java.util.Arrays.asList("testString"))
-      .minValue(Long.valueOf("26"))
-      .maxValue(Long.valueOf("26"))
-      .minLength(Long.valueOf("26"))
-      .maxLength(Long.valueOf("26"))
-      .matches("testString")
-      .position(Long.valueOf("26"))
-      .groupBy("testString")
-      .source("testString")
-      .build();
-
-    // Construct an instance of the VariableData model
-    VariableData variableDataModel = new VariableData.Builder()
-      .name("testString")
-      .value("testString")
-      .useDefault(true)
-      .metadata(variableMetadataModel)
-      .build();
-
-    // Construct an instance of the ReplaceWorkspaceOptions model
-    ReplaceWorkspaceOptions replaceWorkspaceOptionsModel = new ReplaceWorkspaceOptions.Builder()
-      .wId("testString")
-      .catalogRef(catalogRefModel)
-      .description("testString")
-      .dependencies(dependenciesModel)
-      .name("testString")
-      .sharedData(sharedTargetDataModel)
-      .tags(java.util.Arrays.asList("testString"))
-      .templateData(java.util.Arrays.asList(templateSourceDataRequestModel))
-      .templateRepo(templateRepoUpdateRequestModel)
-      .type(java.util.Arrays.asList("testString"))
-      .workspaceStatus(workspaceStatusUpdateRequestModel)
-      .workspaceStatusMsg(workspaceStatusMessageModel)
-      .agentId("testString")
-      .settings(java.util.Arrays.asList(variableDataModel))
-      .xGithubToken("testString")
-      .build();
-
-    // Invoke replaceWorkspace() with a valid options model and verify the result
-    Response<WorkspaceResponse> response = schematicsService.replaceWorkspace(replaceWorkspaceOptionsModel).execute();
-    assertNotNull(response);
-    WorkspaceResponse responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "PUT");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, replaceWorkspacePath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the replaceWorkspace operation with and without retries enabled
-  @Test
-  public void testReplaceWorkspaceWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testReplaceWorkspaceWOptions();
-
-    schematicsService.disableRetries();
-    testReplaceWorkspaceWOptions();
-  }
-
-  // Test the replaceWorkspace operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testReplaceWorkspaceNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.replaceWorkspace(null).execute();
-  }
-
-  // Test the deleteWorkspace operation with a valid options model parameter
-  @Test
-  public void testDeleteWorkspaceWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "\"operationResponse\"";
-    String deleteWorkspacePath = "/v1/workspaces/testString";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the DeleteWorkspaceOptions model
-    DeleteWorkspaceOptions deleteWorkspaceOptionsModel = new DeleteWorkspaceOptions.Builder()
-      .refreshToken("testString")
-      .wId("testString")
-      .destroyResources("testString")
-      .build();
-
-    // Invoke deleteWorkspace() with a valid options model and verify the result
-    Response<String> response = schematicsService.deleteWorkspace(deleteWorkspaceOptionsModel).execute();
-    assertNotNull(response);
-    String responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "DELETE");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, deleteWorkspacePath);
-    // Verify header parameters
-    assertEquals(request.getHeader("Refresh_token"), "testString");
-    // Verify query params
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    assertEquals(query.get("destroy_resources"), "testString");
-  }
-
-  // Test the deleteWorkspace operation with and without retries enabled
-  @Test
-  public void testDeleteWorkspaceWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testDeleteWorkspaceWOptions();
-
-    schematicsService.disableRetries();
-    testDeleteWorkspaceWOptions();
-  }
-
-  // Test the deleteWorkspace operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testDeleteWorkspaceNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.deleteWorkspace(null).execute();
-  }
-
   // Test the updateWorkspace operation with a valid options model parameter
   @Test
   public void testUpdateWorkspaceWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"applied_shareddata_ids\": [\"appliedShareddataIds\"], \"catalog_ref\": {\"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\", \"offering_version\": \"offeringVersion\", \"service_extensions\": [{\"name\": \"flavor\", \"value\": \"anyValue\", \"type\": \"string\"}]}, \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"crn\": \"crn\", \"dependencies\": {\"parents\": [\"parents\"], \"children\": [\"children\"]}, \"description\": \"description\", \"id\": \"id\", \"last_health_check_at\": \"2019-01-01T12:00:00.000Z\", \"location\": \"location\", \"name\": \"name\", \"resource_group\": \"resourceGroup\", \"runtime_data\": [{\"engine_cmd\": \"engineCmd\", \"engine_name\": \"engineName\", \"engine_version\": \"engineVersion\", \"id\": \"id\", \"log_store_url\": \"logStoreUrl\", \"output_values\": [{\"anyKey\": \"anyValue\"}], \"resources\": [[{\"anyKey\": \"anyValue\"}]], \"state_store_url\": \"stateStoreUrl\"}], \"shared_data\": {\"cluster_id\": \"clusterId\", \"cluster_name\": \"clusterName\", \"entitlement_keys\": [{\"anyKey\": \"anyValue\"}], \"namespace\": \"namespace\", \"region\": \"region\", \"resource_group_id\": \"resourceGroupId\"}, \"status\": \"status\", \"tags\": [\"tags\"], \"template_data\": [{\"env_values\": [{\"hidden\": true, \"name\": \"name\", \"secure\": true, \"value\": \"value\"}], \"folder\": \"folder\", \"compact\": false, \"has_githubtoken\": true, \"id\": \"id\", \"type\": \"type\", \"uninstall_script_name\": \"uninstallScriptName\", \"values\": \"values\", \"values_metadata\": [{\"anyKey\": \"anyValue\"}], \"values_url\": \"valuesUrl\", \"variablestore\": [{\"description\": \"description\", \"name\": \"name\", \"secure\": true, \"type\": \"type\", \"value\": \"value\"}]}], \"template_ref\": \"templateRef\", \"template_repo\": {\"branch\": \"branch\", \"full_url\": \"fullUrl\", \"has_uploadedgitrepotar\": false, \"release\": \"release\", \"repo_sha_value\": \"repoShaValue\", \"repo_url\": \"repoUrl\", \"url\": \"url\", \"skip_submodules_checkout\": true}, \"type\": [\"type\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"cart_id\": \"cartId\", \"project_id\": \"projectId\", \"last_action_name\": \"lastActionName\", \"last_activity_id\": \"lastActivityId\", \"last_job\": {\"job_id\": \"jobId\", \"job_name\": \"jobName\", \"job_status\": \"jobStatus\"}, \"workspace_status\": {\"frozen\": true, \"frozen_at\": \"2019-01-01T12:00:00.000Z\", \"frozen_by\": \"frozenBy\", \"locked\": true, \"locked_by\": \"lockedBy\", \"locked_time\": \"2019-01-01T12:00:00.000Z\"}, \"workspace_status_msg\": {\"status_code\": \"statusCode\", \"status_msg\": \"statusMsg\"}, \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}, \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
+    String mockResponseBody = "{\"applied_shareddata_ids\": [\"appliedShareddataIds\"], \"catalog_ref\": {\"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\", \"offering_version\": \"offeringVersion\", \"service_extensions\": [{\"name\": \"flavor\", \"value\": \"value\", \"type\": \"string\"}]}, \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"crn\": \"crn\", \"dependencies\": {\"parents\": [\"parents\"], \"children\": [\"children\"]}, \"description\": \"description\", \"id\": \"id\", \"last_health_check_at\": \"2019-01-01T12:00:00.000Z\", \"location\": \"location\", \"name\": \"name\", \"resource_group\": \"resourceGroup\", \"runtime_data\": [{\"engine_cmd\": \"engineCmd\", \"engine_name\": \"engineName\", \"engine_version\": \"engineVersion\", \"id\": \"id\", \"log_store_url\": \"logStoreUrl\", \"output_values\": [{\"anyKey\": \"anyValue\"}], \"resources\": [[{\"anyKey\": \"anyValue\"}]], \"state_store_url\": \"stateStoreUrl\"}], \"shared_data\": {\"cluster_id\": \"clusterId\", \"cluster_name\": \"clusterName\", \"entitlement_keys\": [{\"anyKey\": \"anyValue\"}], \"namespace\": \"namespace\", \"region\": \"region\", \"resource_group_id\": \"resourceGroupId\"}, \"status\": \"status\", \"tags\": [\"tags\"], \"template_data\": [{\"env_values\": [{\"hidden\": true, \"name\": \"name\", \"secure\": true, \"value\": \"value\"}], \"folder\": \"folder\", \"compact\": false, \"has_githubtoken\": true, \"id\": \"id\", \"type\": \"type\", \"uninstall_script_name\": \"uninstallScriptName\", \"values\": \"values\", \"values_metadata\": [{\"anyKey\": \"anyValue\"}], \"values_url\": \"valuesUrl\", \"variablestore\": [{\"description\": \"description\", \"name\": \"name\", \"secure\": true, \"type\": \"type\", \"value\": \"value\"}]}], \"template_ref\": \"templateRef\", \"template_repo\": {\"branch\": \"branch\", \"full_url\": \"fullUrl\", \"has_uploadedgitrepotar\": false, \"release\": \"release\", \"repo_sha_value\": \"repoShaValue\", \"repo_url\": \"repoUrl\", \"url\": \"url\", \"skip_submodules_checkout\": true}, \"type\": [\"type\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"cart_id\": \"cartId\", \"project_id\": \"projectId\", \"last_action_name\": \"lastActionName\", \"last_activity_id\": \"lastActivityId\", \"last_job\": {\"job_id\": \"jobId\", \"job_name\": \"jobName\", \"job_status\": \"jobStatus\"}, \"workspace_status\": {\"frozen\": true, \"frozen_at\": \"2019-01-01T12:00:00.000Z\", \"frozen_by\": \"frozenBy\", \"locked\": true, \"locked_by\": \"lockedBy\", \"locked_time\": \"2019-01-01T12:00:00.000Z\"}, \"workspace_status_msg\": {\"status_code\": \"statusCode\", \"status_msg\": \"statusMsg\"}, \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}, \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
     String updateWorkspacePath = "/v1/workspaces/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -1163,7 +909,7 @@ public class SchematicsTest {
 
     // Construct an instance of the SharedTargetData model
     SharedTargetData sharedTargetDataModel = new SharedTargetData.Builder()
-      .clusterCreatedOn("testString")
+      .clusterCreatedOn(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .clusterId("testString")
       .clusterName("testString")
       .clusterType("testString")
@@ -1171,7 +917,7 @@ public class SchematicsTest {
       .namespace("testString")
       .region("testString")
       .resourceGroupId("testString")
-      .workerCount(Long.valueOf("26"))
+      .workerCount(Long.valueOf("0"))
       .workerMachineType("testString")
       .build();
 
@@ -1182,8 +928,8 @@ public class SchematicsTest {
       .secure(true)
       .build();
 
-    // Construct an instance of the InjectTerraformTemplateInnerTftParametersItem model
-    InjectTerraformTemplateInnerTftParametersItem injectTerraformTemplateInnerTftParametersItemModel = new InjectTerraformTemplateInnerTftParametersItem.Builder()
+    // Construct an instance of the TftParametersObject model
+    TftParametersObject tftParametersObjectModel = new TftParametersObject.Builder()
       .name("testString")
       .value("testString")
       .build();
@@ -1195,7 +941,7 @@ public class SchematicsTest {
       .tftPrefix("testString")
       .injectionType("testString")
       .tftName("testString")
-      .tftParameters(java.util.Arrays.asList(injectTerraformTemplateInnerTftParametersItemModel))
+      .tftParameters(java.util.Arrays.asList(tftParametersObjectModel))
       .build();
 
     // Construct an instance of the WorkspaceVariableRequest model
@@ -1235,7 +981,7 @@ public class SchematicsTest {
 
     // Construct an instance of the WorkspaceStatusUpdateRequest model
     WorkspaceStatusUpdateRequest workspaceStatusUpdateRequestModel = new WorkspaceStatusUpdateRequest.Builder()
-      .frozen(true)
+      .frozen(false)
       .frozenAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .frozenBy("testString")
       .locked(true)
@@ -1262,12 +1008,12 @@ public class SchematicsTest {
       .hidden(true)
       .required(true)
       .options(java.util.Arrays.asList("testString"))
-      .minValue(Long.valueOf("26"))
-      .maxValue(Long.valueOf("26"))
-      .minLength(Long.valueOf("26"))
-      .maxLength(Long.valueOf("26"))
+      .minValue(Long.valueOf("0"))
+      .maxValue(Long.valueOf("0"))
+      .minLength(Long.valueOf("0"))
+      .maxLength(Long.valueOf("0"))
       .matches("testString")
-      .position(Long.valueOf("26"))
+      .position(Long.valueOf("0"))
       .groupBy("testString")
       .source("testString")
       .build();
@@ -1284,11 +1030,11 @@ public class SchematicsTest {
     UpdateWorkspaceOptions updateWorkspaceOptionsModel = new UpdateWorkspaceOptions.Builder()
       .wId("testString")
       .catalogRef(catalogRefModel)
-      .description("testString")
+      .description("Updated workspace description")
       .dependencies(dependenciesModel)
-      .name("testString")
+      .name("my-workspace-updated")
       .sharedData(sharedTargetDataModel)
-      .tags(java.util.Arrays.asList("testString"))
+      .tags(java.util.Arrays.asList("env:production", "team:devops"))
       .templateData(java.util.Arrays.asList(templateSourceDataRequestModel))
       .templateRepo(templateRepoUpdateRequestModel)
       .type(java.util.Arrays.asList("testString"))
@@ -1331,6 +1077,217 @@ public class SchematicsTest {
   public void testUpdateWorkspaceNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
     schematicsService.updateWorkspace(null).execute();
+  }
+
+  // Test the replaceWorkspace operation with a valid options model parameter
+  @Test
+  public void testReplaceWorkspaceWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"applied_shareddata_ids\": [\"appliedShareddataIds\"], \"catalog_ref\": {\"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\", \"offering_version\": \"offeringVersion\", \"service_extensions\": [{\"name\": \"flavor\", \"value\": \"value\", \"type\": \"string\"}]}, \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"crn\": \"crn\", \"dependencies\": {\"parents\": [\"parents\"], \"children\": [\"children\"]}, \"description\": \"description\", \"id\": \"id\", \"last_health_check_at\": \"2019-01-01T12:00:00.000Z\", \"location\": \"location\", \"name\": \"name\", \"resource_group\": \"resourceGroup\", \"runtime_data\": [{\"engine_cmd\": \"engineCmd\", \"engine_name\": \"engineName\", \"engine_version\": \"engineVersion\", \"id\": \"id\", \"log_store_url\": \"logStoreUrl\", \"output_values\": [{\"anyKey\": \"anyValue\"}], \"resources\": [[{\"anyKey\": \"anyValue\"}]], \"state_store_url\": \"stateStoreUrl\"}], \"shared_data\": {\"cluster_id\": \"clusterId\", \"cluster_name\": \"clusterName\", \"entitlement_keys\": [{\"anyKey\": \"anyValue\"}], \"namespace\": \"namespace\", \"region\": \"region\", \"resource_group_id\": \"resourceGroupId\"}, \"status\": \"status\", \"tags\": [\"tags\"], \"template_data\": [{\"env_values\": [{\"hidden\": true, \"name\": \"name\", \"secure\": true, \"value\": \"value\"}], \"folder\": \"folder\", \"compact\": false, \"has_githubtoken\": true, \"id\": \"id\", \"type\": \"type\", \"uninstall_script_name\": \"uninstallScriptName\", \"values\": \"values\", \"values_metadata\": [{\"anyKey\": \"anyValue\"}], \"values_url\": \"valuesUrl\", \"variablestore\": [{\"description\": \"description\", \"name\": \"name\", \"secure\": true, \"type\": \"type\", \"value\": \"value\"}]}], \"template_ref\": \"templateRef\", \"template_repo\": {\"branch\": \"branch\", \"full_url\": \"fullUrl\", \"has_uploadedgitrepotar\": false, \"release\": \"release\", \"repo_sha_value\": \"repoShaValue\", \"repo_url\": \"repoUrl\", \"url\": \"url\", \"skip_submodules_checkout\": true}, \"type\": [\"type\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"cart_id\": \"cartId\", \"project_id\": \"projectId\", \"last_action_name\": \"lastActionName\", \"last_activity_id\": \"lastActivityId\", \"last_job\": {\"job_id\": \"jobId\", \"job_name\": \"jobName\", \"job_status\": \"jobStatus\"}, \"workspace_status\": {\"frozen\": true, \"frozen_at\": \"2019-01-01T12:00:00.000Z\", \"frozen_by\": \"frozenBy\", \"locked\": true, \"locked_by\": \"lockedBy\", \"locked_time\": \"2019-01-01T12:00:00.000Z\"}, \"workspace_status_msg\": {\"status_code\": \"statusCode\", \"status_msg\": \"statusMsg\"}, \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}, \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
+    String replaceWorkspacePath = "/v1/workspaces/testString";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the ServiceExtensions model
+    ServiceExtensions serviceExtensionsModel = new ServiceExtensions.Builder()
+      .name("flavor")
+      .value("testString")
+      .type("string")
+      .build();
+
+    // Construct an instance of the CatalogRef model
+    CatalogRef catalogRefModel = new CatalogRef.Builder()
+      .dryRun(true)
+      .owningAccount("testString")
+      .itemIconUrl("testString")
+      .itemId("testString")
+      .itemName("testString")
+      .itemReadmeUrl("testString")
+      .itemUrl("testString")
+      .launchUrl("testString")
+      .offeringVersion("testString")
+      .serviceExtensions(java.util.Arrays.asList(serviceExtensionsModel))
+      .build();
+
+    // Construct an instance of the Dependencies model
+    Dependencies dependenciesModel = new Dependencies.Builder()
+      .parents(java.util.Arrays.asList("testString"))
+      .children(java.util.Arrays.asList("testString"))
+      .build();
+
+    // Construct an instance of the SharedTargetData model
+    SharedTargetData sharedTargetDataModel = new SharedTargetData.Builder()
+      .clusterCreatedOn(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .clusterId("testString")
+      .clusterName("testString")
+      .clusterType("testString")
+      .entitlementKeys(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))
+      .namespace("testString")
+      .region("testString")
+      .resourceGroupId("testString")
+      .workerCount(Long.valueOf("0"))
+      .workerMachineType("testString")
+      .build();
+
+    // Construct an instance of the EnvironmentValuesMetadata model
+    EnvironmentValuesMetadata environmentValuesMetadataModel = new EnvironmentValuesMetadata.Builder()
+      .hidden(true)
+      .name("testString")
+      .secure(true)
+      .build();
+
+    // Construct an instance of the TftParametersObject model
+    TftParametersObject tftParametersObjectModel = new TftParametersObject.Builder()
+      .name("testString")
+      .value("testString")
+      .build();
+
+    // Construct an instance of the InjectTerraformTemplateInner model
+    InjectTerraformTemplateInner injectTerraformTemplateInnerModel = new InjectTerraformTemplateInner.Builder()
+      .tftGitUrl("testString")
+      .tftGitToken("testString")
+      .tftPrefix("testString")
+      .injectionType("testString")
+      .tftName("testString")
+      .tftParameters(java.util.Arrays.asList(tftParametersObjectModel))
+      .build();
+
+    // Construct an instance of the WorkspaceVariableRequest model
+    WorkspaceVariableRequest workspaceVariableRequestModel = new WorkspaceVariableRequest.Builder()
+      .description("Description of sample_var")
+      .name("sample_var")
+      .secure(false)
+      .type("testString")
+      .useDefault(true)
+      .value("THIS IS IBM CLOUD TERRAFORM CLI DEMO")
+      .build();
+
+    // Construct an instance of the TemplateSourceDataRequest model
+    TemplateSourceDataRequest templateSourceDataRequestModel = new TemplateSourceDataRequest.Builder()
+      .envValues(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))
+      .envValuesMetadata(java.util.Arrays.asList(environmentValuesMetadataModel))
+      .folder(".")
+      .compact(true)
+      .initStateFile("testString")
+      .injectors(java.util.Arrays.asList(injectTerraformTemplateInnerModel))
+      .type("terraform_v1.0")
+      .uninstallScriptName("testString")
+      .values("testString")
+      .valuesMetadata(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))
+      .variablestore(java.util.Arrays.asList(workspaceVariableRequestModel))
+      .build();
+
+    // Construct an instance of the TemplateRepoUpdateRequest model
+    TemplateRepoUpdateRequest templateRepoUpdateRequestModel = new TemplateRepoUpdateRequest.Builder()
+      .branch("testString")
+      .release("testString")
+      .repoShaValue("testString")
+      .repoUrl("testString")
+      .url("https://github.com/ptaube/tf_cloudless_sleepy")
+      .skipSubmodulesCheckout(true)
+      .build();
+
+    // Construct an instance of the WorkspaceStatusUpdateRequest model
+    WorkspaceStatusUpdateRequest workspaceStatusUpdateRequestModel = new WorkspaceStatusUpdateRequest.Builder()
+      .frozen(true)
+      .frozenAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .frozenBy("testString")
+      .locked(true)
+      .lockedBy("testString")
+      .lockedTime(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .build();
+
+    // Construct an instance of the WorkspaceStatusMessage model
+    WorkspaceStatusMessage workspaceStatusMessageModel = new WorkspaceStatusMessage.Builder()
+      .statusCode("testString")
+      .statusMsg("testString")
+      .build();
+
+    // Construct an instance of the VariableMetadata model
+    VariableMetadata variableMetadataModel = new VariableMetadata.Builder()
+      .type("boolean")
+      .aliases(java.util.Arrays.asList("testString"))
+      .description("testString")
+      .cloudDataType("testString")
+      .defaultValue("testString")
+      .linkStatus("normal")
+      .secure(true)
+      .immutable(true)
+      .hidden(true)
+      .required(true)
+      .options(java.util.Arrays.asList("testString"))
+      .minValue(Long.valueOf("0"))
+      .maxValue(Long.valueOf("0"))
+      .minLength(Long.valueOf("0"))
+      .maxLength(Long.valueOf("0"))
+      .matches("testString")
+      .position(Long.valueOf("0"))
+      .groupBy("testString")
+      .source("testString")
+      .build();
+
+    // Construct an instance of the VariableData model
+    VariableData variableDataModel = new VariableData.Builder()
+      .name("testString")
+      .value("testString")
+      .useDefault(true)
+      .metadata(variableMetadataModel)
+      .build();
+
+    // Construct an instance of the ReplaceWorkspaceOptions model
+    ReplaceWorkspaceOptions replaceWorkspaceOptionsModel = new ReplaceWorkspaceOptions.Builder()
+      .wId("testString")
+      .catalogRef(catalogRefModel)
+      .description("terraform workspace updated")
+      .dependencies(dependenciesModel)
+      .name("testWorkspaceApi")
+      .sharedData(sharedTargetDataModel)
+      .tags(java.util.Arrays.asList("department:HR", "application:compensation", "environment:staging"))
+      .templateData(java.util.Arrays.asList(templateSourceDataRequestModel))
+      .templateRepo(templateRepoUpdateRequestModel)
+      .type(java.util.Arrays.asList("terraform_v1.0"))
+      .workspaceStatus(workspaceStatusUpdateRequestModel)
+      .workspaceStatusMsg(workspaceStatusMessageModel)
+      .agentId("testString")
+      .settings(java.util.Arrays.asList(variableDataModel))
+      .xGithubToken("testString")
+      .build();
+
+    // Invoke replaceWorkspace() with a valid options model and verify the result
+    Response<WorkspaceResponse> response = schematicsService.replaceWorkspace(replaceWorkspaceOptionsModel).execute();
+    assertNotNull(response);
+    WorkspaceResponse responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "PUT");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, replaceWorkspacePath);
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the replaceWorkspace operation with and without retries enabled
+  @Test
+  public void testReplaceWorkspaceWRetries() throws Throwable {
+    schematicsService.enableRetries(4, 30);
+    testReplaceWorkspaceWOptions();
+
+    schematicsService.disableRetries();
+    testReplaceWorkspaceWOptions();
+  }
+
+  // Test the replaceWorkspace operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testReplaceWorkspaceNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.replaceWorkspace(null).execute();
   }
 
   // Test the getWorkspaceReadme operation with a valid options model parameter
@@ -1507,12 +1464,12 @@ public class SchematicsTest {
 
     // Construct an instance of the WorkspaceVariableRequest model
     WorkspaceVariableRequest workspaceVariableRequestModel = new WorkspaceVariableRequest.Builder()
-      .description("testString")
-      .name("testString")
-      .secure(true)
-      .type("testString")
+      .description("IBM Cloud region")
+      .name("region")
+      .secure(false)
+      .type("string")
       .useDefault(true)
-      .value("testString")
+      .value("us-south")
       .build();
 
     // Construct an instance of the ReplaceWorkspaceInputsOptions model
@@ -1520,7 +1477,7 @@ public class SchematicsTest {
       .wId("testString")
       .tId("testString")
       .envValues(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))
-      .values("testString")
+      .values("string")
       .variablestore(java.util.Arrays.asList(workspaceVariableRequestModel))
       .build();
 
@@ -1563,7 +1520,7 @@ public class SchematicsTest {
   @Test
   public void testGetAllWorkspaceInputsWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"runtime_data\": [{\"engine_cmd\": \"engineCmd\", \"engine_name\": \"engineName\", \"engine_version\": \"engineVersion\", \"id\": \"id\", \"log_store_url\": \"logStoreUrl\", \"output_values\": [{\"anyKey\": \"anyValue\"}], \"resources\": [[{\"anyKey\": \"anyValue\"}]], \"state_store_url\": \"stateStoreUrl\"}], \"shared_data\": {\"cluster_created_on\": \"clusterCreatedOn\", \"cluster_id\": \"clusterId\", \"cluster_name\": \"clusterName\", \"cluster_type\": \"clusterType\", \"entitlement_keys\": [{\"anyKey\": \"anyValue\"}], \"namespace\": \"namespace\", \"region\": \"region\", \"resource_group_id\": \"resourceGroupId\", \"worker_count\": 11, \"worker_machine_type\": \"workerMachineType\"}, \"template_data\": [{\"env_values\": [{\"hidden\": true, \"name\": \"name\", \"secure\": true, \"value\": \"value\"}], \"folder\": \"folder\", \"compact\": false, \"has_githubtoken\": true, \"id\": \"id\", \"type\": \"type\", \"uninstall_script_name\": \"uninstallScriptName\", \"values\": \"values\", \"values_metadata\": [{\"anyKey\": \"anyValue\"}], \"values_url\": \"valuesUrl\", \"variablestore\": [{\"description\": \"description\", \"name\": \"name\", \"secure\": true, \"type\": \"type\", \"value\": \"value\"}]}]}";
+    String mockResponseBody = "{\"runtime_data\": [{\"engine_cmd\": \"engineCmd\", \"engine_name\": \"engineName\", \"engine_version\": \"engineVersion\", \"id\": \"id\", \"log_store_url\": \"logStoreUrl\", \"output_values\": [{\"anyKey\": \"anyValue\"}], \"resources\": [[{\"anyKey\": \"anyValue\"}]], \"state_store_url\": \"stateStoreUrl\"}], \"shared_data\": {\"cluster_created_on\": \"2019-01-01T12:00:00.000Z\", \"cluster_id\": \"clusterId\", \"cluster_name\": \"clusterName\", \"cluster_type\": \"clusterType\", \"entitlement_keys\": [{\"anyKey\": \"anyValue\"}], \"namespace\": \"namespace\", \"region\": \"region\", \"resource_group_id\": \"resourceGroupId\", \"worker_count\": 0, \"worker_machine_type\": \"workerMachineType\"}, \"template_data\": [{\"env_values\": [{\"hidden\": true, \"name\": \"name\", \"secure\": true, \"value\": \"value\"}], \"folder\": \"folder\", \"compact\": false, \"has_githubtoken\": true, \"id\": \"id\", \"type\": \"type\", \"uninstall_script_name\": \"uninstallScriptName\", \"values\": \"values\", \"values_metadata\": [{\"anyKey\": \"anyValue\"}], \"values_url\": \"valuesUrl\", \"variablestore\": [{\"description\": \"description\", \"name\": \"name\", \"secure\": true, \"type\": \"type\", \"value\": \"value\"}]}]}";
     String getAllWorkspaceInputsPath = "/v1/workspaces/testString/templates/values";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -1608,6 +1565,58 @@ public class SchematicsTest {
   public void testGetAllWorkspaceInputsNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
     schematicsService.getAllWorkspaceInputs(null).execute();
+  }
+
+  // Test the getWorkspaceInputMetadataV2 operation with a valid options model parameter
+  @Test
+  public void testGetWorkspaceInputMetadataV2WOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"values_metadata\": [{\"name\": \"name\", \"type\": \"type\", \"source\": \"source\", \"default\": \"xDefault\", \"override_value\": \"overrideValue\", \"var_aliases\": [\"varAliases\"], \"var_ref\": \"varRef\", \"options\": [\"options\"], \"matches\": \"matches\", \"secure\": true, \"hidden\": true, \"immutable\": false, \"min_value\": \"minValue\", \"max_value\": \"maxValue\", \"min_value_len\": \"minValueLen\", \"max_value_len\": \"maxValueLen\", \"description\": \"description\", \"sort_order\": 0, \"group_by\": \"groupBy\", \"force_new\": true, \"metadata_value_key\": \"metadataValueKey\"}]}";
+    String getWorkspaceInputMetadataV2Path = "/v2/workspaces/testString/template_data/testString/values_metadata";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetWorkspaceInputMetadataV2Options model
+    GetWorkspaceInputMetadataV2Options getWorkspaceInputMetadataV2OptionsModel = new GetWorkspaceInputMetadataV2Options.Builder()
+      .wId("testString")
+      .tId("testString")
+      .build();
+
+    // Invoke getWorkspaceInputMetadataV2() with a valid options model and verify the result
+    Response<TemplateValuesMetaData> response = schematicsService.getWorkspaceInputMetadataV2(getWorkspaceInputMetadataV2OptionsModel).execute();
+    assertNotNull(response);
+    TemplateValuesMetaData responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getWorkspaceInputMetadataV2Path);
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the getWorkspaceInputMetadataV2 operation with and without retries enabled
+  @Test
+  public void testGetWorkspaceInputMetadataV2WRetries() throws Throwable {
+    schematicsService.enableRetries(4, 30);
+    testGetWorkspaceInputMetadataV2WOptions();
+
+    schematicsService.disableRetries();
+    testGetWorkspaceInputMetadataV2WOptions();
+  }
+
+  // Test the getWorkspaceInputMetadataV2 operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetWorkspaceInputMetadataV2NoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.getWorkspaceInputMetadataV2(null).execute();
   }
 
   // Test the getWorkspaceInputMetadata operation with a valid options model parameter
@@ -1662,6 +1671,57 @@ public class SchematicsTest {
     schematicsService.getWorkspaceInputMetadata(null).execute();
   }
 
+  // Test the getWorkspaceOutputsV2 operation with a valid options model parameter
+  @Test
+  public void testGetWorkspaceOutputsV2WOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"id\": \"id\", \"folder\": \"folder\", \"type\": \"type\", \"values\": [{\"name\": \"name\", \"description\": \"description\", \"sensitive\": false, \"type\": \"anyValue\", \"value\": \"anyValue\"}]}";
+    String getWorkspaceOutputsV2Path = "/v2/workspaces/testString/output_values";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetWorkspaceOutputsV2Options model
+    GetWorkspaceOutputsV2Options getWorkspaceOutputsV2OptionsModel = new GetWorkspaceOutputsV2Options.Builder()
+      .wId("testString")
+      .build();
+
+    // Invoke getWorkspaceOutputsV2() with a valid options model and verify the result
+    Response<OutputValuesObject> response = schematicsService.getWorkspaceOutputsV2(getWorkspaceOutputsV2OptionsModel).execute();
+    assertNotNull(response);
+    OutputValuesObject responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getWorkspaceOutputsV2Path);
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the getWorkspaceOutputsV2 operation with and without retries enabled
+  @Test
+  public void testGetWorkspaceOutputsV2WRetries() throws Throwable {
+    schematicsService.enableRetries(4, 30);
+    testGetWorkspaceOutputsV2WOptions();
+
+    schematicsService.disableRetries();
+    testGetWorkspaceOutputsV2WOptions();
+  }
+
+  // Test the getWorkspaceOutputsV2 operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetWorkspaceOutputsV2NoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.getWorkspaceOutputsV2(null).execute();
+  }
+
   // Test the getWorkspaceOutputs operation with a valid options model parameter
   @Test
   public void testGetWorkspaceOutputsWOptions() throws Throwable {
@@ -1713,11 +1773,62 @@ public class SchematicsTest {
     schematicsService.getWorkspaceOutputs(null).execute();
   }
 
+  // Test the getWorkspaceResourcesV2 operation with a valid options model parameter
+  @Test
+  public void testGetWorkspaceResourcesV2WOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"id\": \"id\", \"folder\": \"folder\", \"type\": \"type\", \"generated_at\": \"generatedAt\", \"resources\": [{\"resource_id\": \"resourceId\", \"resource_name\": \"resourceName\", \"resource_type\": \"resourceType\", \"resource_crn\": \"resourceCrn\", \"resource_icon_url\": \"resourceIconUrl\", \"resource_controller_url\": \"resourceControllerUrl\", \"resource_group_name\": \"resourceGroupName\", \"resource_status\": \"resourceStatus\", \"resource_tainted\": false, \"resource_extension\": {\"resource_name\": \"resourceName\", \"resource_data_array\": [{\"anyKey\": \"anyValue\"}], \"resource_type\": \"resourceType\"}}], \"null_resources\": [{\"resource_id\": \"resourceId\", \"resource_name\": \"resourceName\", \"resource_type\": \"resourceType\", \"resource_crn\": \"resourceCrn\", \"resource_icon_url\": \"resourceIconUrl\", \"resource_controller_url\": \"resourceControllerUrl\", \"resource_group_name\": \"resourceGroupName\", \"resource_status\": \"resourceStatus\", \"resource_tainted\": false, \"resource_extension\": {\"resource_name\": \"resourceName\", \"resource_data_array\": [{\"anyKey\": \"anyValue\"}], \"resource_type\": \"resourceType\"}}], \"resources_count\": 0}";
+    String getWorkspaceResourcesV2Path = "/v2/workspaces/testString/resources";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetWorkspaceResourcesV2Options model
+    GetWorkspaceResourcesV2Options getWorkspaceResourcesV2OptionsModel = new GetWorkspaceResourcesV2Options.Builder()
+      .wId("testString")
+      .build();
+
+    // Invoke getWorkspaceResourcesV2() with a valid options model and verify the result
+    Response<TemplateResourcesObject> response = schematicsService.getWorkspaceResourcesV2(getWorkspaceResourcesV2OptionsModel).execute();
+    assertNotNull(response);
+    TemplateResourcesObject responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getWorkspaceResourcesV2Path);
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the getWorkspaceResourcesV2 operation with and without retries enabled
+  @Test
+  public void testGetWorkspaceResourcesV2WRetries() throws Throwable {
+    schematicsService.enableRetries(4, 30);
+    testGetWorkspaceResourcesV2WOptions();
+
+    schematicsService.disableRetries();
+    testGetWorkspaceResourcesV2WOptions();
+  }
+
+  // Test the getWorkspaceResourcesV2 operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetWorkspaceResourcesV2NoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.getWorkspaceResourcesV2(null).execute();
+  }
+
   // Test the getWorkspaceResources operation with a valid options model parameter
   @Test
   public void testGetWorkspaceResourcesWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "[{\"folder\": \"folder\", \"id\": \"id\", \"generated_at\": \"2019-01-01T12:00:00.000Z\", \"null_resources\": [{\"anyKey\": \"anyValue\"}], \"related_resources\": [{\"anyKey\": \"anyValue\"}], \"resources\": [{\"anyKey\": \"anyValue\"}], \"resources_count\": 14, \"type\": \"type\"}]";
+    String mockResponseBody = "[{\"folder\": \"folder\", \"id\": \"id\", \"generated_at\": \"2019-01-01T12:00:00.000Z\", \"null_resources\": [{\"anyKey\": \"anyValue\"}], \"related_resources\": [{\"anyKey\": \"anyValue\"}], \"resources\": [{\"anyKey\": \"anyValue\"}], \"resources_count\": 0, \"type\": \"type\"}]";
     String getWorkspaceResourcesPath = "/v1/workspaces/testString/resources";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -2095,7 +2206,7 @@ public class SchematicsTest {
   @Test
   public void testListActionsWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"total_count\": 10, \"limit\": 5, \"offset\": 6, \"actions\": [{\"name\": \"Stop Action\", \"description\": \"This Action can be used to Stop the targets\", \"id\": \"id\", \"crn\": \"crn\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"namespace\": \"namespace\", \"tags\": [\"tags\"], \"playbook_name\": \"playbookName\", \"user_state\": {\"state\": \"draft\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"state\": {\"status_code\": \"normal\", \"status_message\": \"statusMessage\"}, \"sys_lock\": {\"sys_locked\": false, \"sys_locked_by\": \"sysLockedBy\", \"sys_locked_at\": \"2019-01-01T12:00:00.000Z\"}, \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}, \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}]}";
+    String mockResponseBody = "{\"total_count\": 0, \"limit\": 0, \"offset\": 0, \"actions\": [{\"name\": \"Stop Action\", \"description\": \"This Action can be used to Stop the targets\", \"id\": \"id\", \"crn\": \"crn\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"namespace\": \"namespace\", \"tags\": [\"tags\"], \"playbook_name\": \"playbookName\", \"user_state\": {\"state\": \"draft\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"state\": {\"status_code\": \"normal\", \"status_message\": \"statusMessage\"}, \"sys_lock\": {\"sys_locked\": false, \"sys_locked_by\": \"sysLockedBy\", \"sys_locked_at\": \"2019-01-01T12:00:00.000Z\"}, \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}, \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}]}";
     String listActionsPath = "/v2/actions";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -2146,7 +2257,7 @@ public class SchematicsTest {
   @Test
   public void testCreateActionWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"name\": \"Stop Action\", \"description\": \"The description of your action. The description can be up to 2048 characters long in size. **Example** you can use the description to stop the targets.\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"bastion_connection_type\": \"ssh\", \"inventory_connection_type\": \"ssh\", \"tags\": [\"tags\"], \"user_state\": {\"state\": \"draft\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"source_readme_url\": \"sourceReadmeUrl\", \"source\": {\"source_type\": \"local\", \"git\": {\"computed_git_repo_url\": \"computedGitRepoUrl\", \"git_repo_url\": \"gitRepoUrl\", \"git_token\": \"gitToken\", \"git_repo_folder\": \"gitRepoFolder\", \"git_release\": \"gitRelease\", \"git_branch\": \"gitBranch\", \"git_commit\": \"gitCommit\", \"git_commit_timestamp\": \"gitCommitTimestamp\"}, \"catalog\": {\"catalog_name\": \"catalogName\", \"catalog_id\": \"catalogId\", \"offering_name\": \"offeringName\", \"offering_version\": \"offeringVersion\", \"offering_kind\": \"offeringKind\", \"offering_target_kind\": \"offeringTargetKind\", \"offering_id\": \"offeringId\", \"offering_version_id\": \"offeringVersionId\", \"offering_version_flavour_name\": \"offeringVersionFlavourName\", \"offering_repo_url\": \"offeringRepoUrl\", \"offering_provisioner_working_directory\": \"offeringProvisionerWorkingDirectory\", \"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\"}}, \"source_type\": \"local\", \"command_parameter\": \"commandParameter\", \"inventory\": \"inventory\", \"credentials\": [{\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"bastion_credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"targets_ini\": \"targetsIni\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"id\": \"id\", \"crn\": \"crn\", \"account\": \"account\", \"source_created_at\": \"2019-01-01T12:00:00.000Z\", \"source_created_by\": \"sourceCreatedBy\", \"source_updated_at\": \"2019-01-01T12:00:00.000Z\", \"source_updated_by\": \"sourceUpdatedBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"state\": {\"status_code\": \"normal\", \"status_job_id\": \"statusJobId\", \"status_message\": \"statusMessage\"}, \"playbook_names\": [\"playbookNames\"], \"sys_lock\": {\"sys_locked\": false, \"sys_locked_by\": \"sysLockedBy\", \"sys_locked_at\": \"2019-01-01T12:00:00.000Z\"}, \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
+    String mockResponseBody = "{\"name\": \"Stop Action\", \"description\": \"The description of your action. The description can be up to 2048 characters long in size. **Example** you can use the description to stop the targets.\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"bastion_connection_type\": \"ssh\", \"inventory_connection_type\": \"ssh\", \"tags\": [\"tags\"], \"user_state\": {\"state\": \"draft\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"source_readme_url\": \"sourceReadmeUrl\", \"source\": {\"source_type\": \"local\", \"git\": {\"computed_git_repo_url\": \"computedGitRepoUrl\", \"git_repo_url\": \"gitRepoUrl\", \"git_token\": \"gitToken\", \"git_repo_folder\": \"gitRepoFolder\", \"git_release\": \"gitRelease\", \"git_branch\": \"gitBranch\", \"git_commit\": \"gitCommit\", \"git_commit_timestamp\": \"2019-01-01T12:00:00.000Z\"}, \"catalog\": {\"catalog_name\": \"catalogName\", \"catalog_id\": \"catalogId\", \"offering_name\": \"offeringName\", \"offering_version\": \"offeringVersion\", \"offering_kind\": \"offeringKind\", \"offering_target_kind\": \"offeringTargetKind\", \"offering_id\": \"offeringId\", \"offering_version_id\": \"offeringVersionId\", \"offering_version_flavour_name\": \"offeringVersionFlavourName\", \"offering_repo_url\": \"offeringRepoUrl\", \"offering_provisioner_working_directory\": \"offeringProvisionerWorkingDirectory\", \"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\"}}, \"source_type\": \"local\", \"command_parameter\": \"commandParameter\", \"inventory\": \"inventory\", \"credentials\": [{\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"bastion_credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"targets_ini\": \"targetsIni\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"id\": \"id\", \"crn\": \"crn\", \"account\": \"account\", \"source_created_at\": \"2019-01-01T12:00:00.000Z\", \"source_created_by\": \"sourceCreatedBy\", \"source_updated_at\": \"2019-01-01T12:00:00.000Z\", \"source_updated_by\": \"sourceUpdatedBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"state\": {\"status_code\": \"normal\", \"status_message\": \"statusMessage\"}, \"playbook_names\": [\"playbookNames\"], \"sys_lock\": {\"sys_locked\": false, \"sys_locked_by\": \"sysLockedBy\", \"sys_locked_at\": \"2019-01-01T12:00:00.000Z\"}, \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
     String createActionPath = "/v2/actions";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -2163,7 +2274,7 @@ public class SchematicsTest {
     // Construct an instance of the GitSource model
     GitSource gitSourceModel = new GitSource.Builder()
       .computedGitRepoUrl("testString")
-      .gitRepoUrl("testString")
+      .gitRepoUrl("https://github.com/Cloud-Schematics/ansible-is-instance-actions")
       .gitToken("testString")
       .gitRepoFolder("testString")
       .gitRelease("testString")
@@ -2195,7 +2306,7 @@ public class SchematicsTest {
 
     // Construct an instance of the ExternalSource model
     ExternalSource externalSourceModel = new ExternalSource.Builder()
-      .sourceType("local")
+      .sourceType("git")
       .git(gitSourceModel)
       .catalog(catalogSourceModel)
       .build();
@@ -2211,7 +2322,7 @@ public class SchematicsTest {
       .immutable(true)
       .hidden(true)
       .required(true)
-      .position(Long.valueOf("26"))
+      .position(Long.valueOf("0"))
       .groupBy("testString")
       .source("testString")
       .build();
@@ -2220,6 +2331,7 @@ public class SchematicsTest {
     CredentialVariableData credentialVariableDataModel = new CredentialVariableData.Builder()
       .name("testString")
       .value("-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n")
+      .redacted("testString")
       .useDefault(true)
       .metadata(credentialVariableMetadataModel)
       .build();
@@ -2243,12 +2355,12 @@ public class SchematicsTest {
       .hidden(true)
       .required(true)
       .options(java.util.Arrays.asList("testString"))
-      .minValue(Long.valueOf("26"))
-      .maxValue(Long.valueOf("26"))
-      .minLength(Long.valueOf("26"))
-      .maxLength(Long.valueOf("26"))
+      .minValue(Long.valueOf("0"))
+      .maxValue(Long.valueOf("0"))
+      .minLength(Long.valueOf("0"))
+      .maxLength(Long.valueOf("0"))
       .matches("testString")
-      .position(Long.valueOf("26"))
+      .position(Long.valueOf("0"))
       .groupBy("testString")
       .source("testString")
       .build();
@@ -2263,13 +2375,13 @@ public class SchematicsTest {
 
     // Construct an instance of the CreateActionOptions model
     CreateActionOptions createActionOptionsModel = new CreateActionOptions.Builder()
-      .name("Stop Action")
-      .description("The description of your action. The description can be up to 2048 characters long in size. **Example** you can use the description to stop the targets.")
+      .name("Example-12ab1334")
+      .description("action_description")
       .location("us-south")
-      .resourceGroup("testString")
+      .resourceGroup("test")
       .bastionConnectionType("ssh")
       .inventoryConnectionType("ssh")
-      .tags(java.util.Arrays.asList("testString"))
+      .tags(java.util.Arrays.asList("department:HR", "application:compensation", "environment:staging", "env:dev", "k8s"))
       .userState(userStateModel)
       .sourceReadmeUrl("testString")
       .source(externalSourceModel)
@@ -2312,59 +2424,6 @@ public class SchematicsTest {
 
     schematicsService.disableRetries();
     testCreateActionWOptions();
-  }
-
-  // Test the getAction operation with a valid options model parameter
-  @Test
-  public void testGetActionWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"name\": \"Stop Action\", \"description\": \"The description of your action. The description can be up to 2048 characters long in size. **Example** you can use the description to stop the targets.\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"bastion_connection_type\": \"ssh\", \"inventory_connection_type\": \"ssh\", \"tags\": [\"tags\"], \"user_state\": {\"state\": \"draft\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"source_readme_url\": \"sourceReadmeUrl\", \"source\": {\"source_type\": \"local\", \"git\": {\"computed_git_repo_url\": \"computedGitRepoUrl\", \"git_repo_url\": \"gitRepoUrl\", \"git_token\": \"gitToken\", \"git_repo_folder\": \"gitRepoFolder\", \"git_release\": \"gitRelease\", \"git_branch\": \"gitBranch\", \"git_commit\": \"gitCommit\", \"git_commit_timestamp\": \"gitCommitTimestamp\"}, \"catalog\": {\"catalog_name\": \"catalogName\", \"catalog_id\": \"catalogId\", \"offering_name\": \"offeringName\", \"offering_version\": \"offeringVersion\", \"offering_kind\": \"offeringKind\", \"offering_target_kind\": \"offeringTargetKind\", \"offering_id\": \"offeringId\", \"offering_version_id\": \"offeringVersionId\", \"offering_version_flavour_name\": \"offeringVersionFlavourName\", \"offering_repo_url\": \"offeringRepoUrl\", \"offering_provisioner_working_directory\": \"offeringProvisionerWorkingDirectory\", \"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\"}}, \"source_type\": \"local\", \"command_parameter\": \"commandParameter\", \"inventory\": \"inventory\", \"credentials\": [{\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"bastion_credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"targets_ini\": \"targetsIni\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"id\": \"id\", \"crn\": \"crn\", \"account\": \"account\", \"source_created_at\": \"2019-01-01T12:00:00.000Z\", \"source_created_by\": \"sourceCreatedBy\", \"source_updated_at\": \"2019-01-01T12:00:00.000Z\", \"source_updated_by\": \"sourceUpdatedBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"state\": {\"status_code\": \"normal\", \"status_job_id\": \"statusJobId\", \"status_message\": \"statusMessage\"}, \"playbook_names\": [\"playbookNames\"], \"sys_lock\": {\"sys_locked\": false, \"sys_locked_by\": \"sysLockedBy\", \"sys_locked_at\": \"2019-01-01T12:00:00.000Z\"}, \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
-    String getActionPath = "/v2/actions/testString";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the GetActionOptions model
-    GetActionOptions getActionOptionsModel = new GetActionOptions.Builder()
-      .actionId("testString")
-      .profile("summary")
-      .build();
-
-    // Invoke getAction() with a valid options model and verify the result
-    Response<Action> response = schematicsService.getAction(getActionOptionsModel).execute();
-    assertNotNull(response);
-    Action responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getActionPath);
-    // Verify query params
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    assertEquals(query.get("profile"), "summary");
-  }
-
-  // Test the getAction operation with and without retries enabled
-  @Test
-  public void testGetActionWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testGetActionWOptions();
-
-    schematicsService.disableRetries();
-    testGetActionWOptions();
-  }
-
-  // Test the getAction operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testGetActionNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.getAction(null).execute();
   }
 
   // Test the deleteAction operation with a valid options model parameter
@@ -2419,11 +2478,64 @@ public class SchematicsTest {
     schematicsService.deleteAction(null).execute();
   }
 
+  // Test the getAction operation with a valid options model parameter
+  @Test
+  public void testGetActionWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"name\": \"Stop Action\", \"description\": \"The description of your action. The description can be up to 2048 characters long in size. **Example** you can use the description to stop the targets.\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"bastion_connection_type\": \"ssh\", \"inventory_connection_type\": \"ssh\", \"tags\": [\"tags\"], \"user_state\": {\"state\": \"draft\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"source_readme_url\": \"sourceReadmeUrl\", \"source\": {\"source_type\": \"local\", \"git\": {\"computed_git_repo_url\": \"computedGitRepoUrl\", \"git_repo_url\": \"gitRepoUrl\", \"git_token\": \"gitToken\", \"git_repo_folder\": \"gitRepoFolder\", \"git_release\": \"gitRelease\", \"git_branch\": \"gitBranch\", \"git_commit\": \"gitCommit\", \"git_commit_timestamp\": \"2019-01-01T12:00:00.000Z\"}, \"catalog\": {\"catalog_name\": \"catalogName\", \"catalog_id\": \"catalogId\", \"offering_name\": \"offeringName\", \"offering_version\": \"offeringVersion\", \"offering_kind\": \"offeringKind\", \"offering_target_kind\": \"offeringTargetKind\", \"offering_id\": \"offeringId\", \"offering_version_id\": \"offeringVersionId\", \"offering_version_flavour_name\": \"offeringVersionFlavourName\", \"offering_repo_url\": \"offeringRepoUrl\", \"offering_provisioner_working_directory\": \"offeringProvisionerWorkingDirectory\", \"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\"}}, \"source_type\": \"local\", \"command_parameter\": \"commandParameter\", \"inventory\": \"inventory\", \"credentials\": [{\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"bastion_credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"targets_ini\": \"targetsIni\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"id\": \"id\", \"crn\": \"crn\", \"account\": \"account\", \"source_created_at\": \"2019-01-01T12:00:00.000Z\", \"source_created_by\": \"sourceCreatedBy\", \"source_updated_at\": \"2019-01-01T12:00:00.000Z\", \"source_updated_by\": \"sourceUpdatedBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"state\": {\"status_code\": \"normal\", \"status_message\": \"statusMessage\"}, \"playbook_names\": [\"playbookNames\"], \"sys_lock\": {\"sys_locked\": false, \"sys_locked_by\": \"sysLockedBy\", \"sys_locked_at\": \"2019-01-01T12:00:00.000Z\"}, \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
+    String getActionPath = "/v2/actions/testString";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetActionOptions model
+    GetActionOptions getActionOptionsModel = new GetActionOptions.Builder()
+      .actionId("testString")
+      .profile("summary")
+      .build();
+
+    // Invoke getAction() with a valid options model and verify the result
+    Response<Action> response = schematicsService.getAction(getActionOptionsModel).execute();
+    assertNotNull(response);
+    Action responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getActionPath);
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(query.get("profile"), "summary");
+  }
+
+  // Test the getAction operation with and without retries enabled
+  @Test
+  public void testGetActionWRetries() throws Throwable {
+    schematicsService.enableRetries(4, 30);
+    testGetActionWOptions();
+
+    schematicsService.disableRetries();
+    testGetActionWOptions();
+  }
+
+  // Test the getAction operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetActionNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.getAction(null).execute();
+  }
+
   // Test the updateAction operation with a valid options model parameter
   @Test
   public void testUpdateActionWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"name\": \"Stop Action\", \"description\": \"The description of your action. The description can be up to 2048 characters long in size. **Example** you can use the description to stop the targets.\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"bastion_connection_type\": \"ssh\", \"inventory_connection_type\": \"ssh\", \"tags\": [\"tags\"], \"user_state\": {\"state\": \"draft\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"source_readme_url\": \"sourceReadmeUrl\", \"source\": {\"source_type\": \"local\", \"git\": {\"computed_git_repo_url\": \"computedGitRepoUrl\", \"git_repo_url\": \"gitRepoUrl\", \"git_token\": \"gitToken\", \"git_repo_folder\": \"gitRepoFolder\", \"git_release\": \"gitRelease\", \"git_branch\": \"gitBranch\", \"git_commit\": \"gitCommit\", \"git_commit_timestamp\": \"gitCommitTimestamp\"}, \"catalog\": {\"catalog_name\": \"catalogName\", \"catalog_id\": \"catalogId\", \"offering_name\": \"offeringName\", \"offering_version\": \"offeringVersion\", \"offering_kind\": \"offeringKind\", \"offering_target_kind\": \"offeringTargetKind\", \"offering_id\": \"offeringId\", \"offering_version_id\": \"offeringVersionId\", \"offering_version_flavour_name\": \"offeringVersionFlavourName\", \"offering_repo_url\": \"offeringRepoUrl\", \"offering_provisioner_working_directory\": \"offeringProvisionerWorkingDirectory\", \"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\"}}, \"source_type\": \"local\", \"command_parameter\": \"commandParameter\", \"inventory\": \"inventory\", \"credentials\": [{\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"bastion_credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"targets_ini\": \"targetsIni\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"id\": \"id\", \"crn\": \"crn\", \"account\": \"account\", \"source_created_at\": \"2019-01-01T12:00:00.000Z\", \"source_created_by\": \"sourceCreatedBy\", \"source_updated_at\": \"2019-01-01T12:00:00.000Z\", \"source_updated_by\": \"sourceUpdatedBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"state\": {\"status_code\": \"normal\", \"status_job_id\": \"statusJobId\", \"status_message\": \"statusMessage\"}, \"playbook_names\": [\"playbookNames\"], \"sys_lock\": {\"sys_locked\": false, \"sys_locked_by\": \"sysLockedBy\", \"sys_locked_at\": \"2019-01-01T12:00:00.000Z\"}, \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
+    String mockResponseBody = "{\"name\": \"Stop Action\", \"description\": \"The description of your action. The description can be up to 2048 characters long in size. **Example** you can use the description to stop the targets.\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"bastion_connection_type\": \"ssh\", \"inventory_connection_type\": \"ssh\", \"tags\": [\"tags\"], \"user_state\": {\"state\": \"draft\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"source_readme_url\": \"sourceReadmeUrl\", \"source\": {\"source_type\": \"local\", \"git\": {\"computed_git_repo_url\": \"computedGitRepoUrl\", \"git_repo_url\": \"gitRepoUrl\", \"git_token\": \"gitToken\", \"git_repo_folder\": \"gitRepoFolder\", \"git_release\": \"gitRelease\", \"git_branch\": \"gitBranch\", \"git_commit\": \"gitCommit\", \"git_commit_timestamp\": \"2019-01-01T12:00:00.000Z\"}, \"catalog\": {\"catalog_name\": \"catalogName\", \"catalog_id\": \"catalogId\", \"offering_name\": \"offeringName\", \"offering_version\": \"offeringVersion\", \"offering_kind\": \"offeringKind\", \"offering_target_kind\": \"offeringTargetKind\", \"offering_id\": \"offeringId\", \"offering_version_id\": \"offeringVersionId\", \"offering_version_flavour_name\": \"offeringVersionFlavourName\", \"offering_repo_url\": \"offeringRepoUrl\", \"offering_provisioner_working_directory\": \"offeringProvisionerWorkingDirectory\", \"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\"}}, \"source_type\": \"local\", \"command_parameter\": \"commandParameter\", \"inventory\": \"inventory\", \"credentials\": [{\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"bastion_credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"targets_ini\": \"targetsIni\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"id\": \"id\", \"crn\": \"crn\", \"account\": \"account\", \"source_created_at\": \"2019-01-01T12:00:00.000Z\", \"source_created_by\": \"sourceCreatedBy\", \"source_updated_at\": \"2019-01-01T12:00:00.000Z\", \"source_updated_by\": \"sourceUpdatedBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"state\": {\"status_code\": \"normal\", \"status_message\": \"statusMessage\"}, \"playbook_names\": [\"playbookNames\"], \"sys_lock\": {\"sys_locked\": false, \"sys_locked_by\": \"sysLockedBy\", \"sys_locked_at\": \"2019-01-01T12:00:00.000Z\"}, \"git_token_ref\": \"gitTokenRef\", \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
     String updateActionPath = "/v2/actions/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -2440,11 +2552,11 @@ public class SchematicsTest {
     // Construct an instance of the GitSource model
     GitSource gitSourceModel = new GitSource.Builder()
       .computedGitRepoUrl("testString")
-      .gitRepoUrl("testString")
+      .gitRepoUrl("https://github.com/Cloud-Schematics/ansible-lamp-stack")
       .gitToken("testString")
       .gitRepoFolder("testString")
       .gitRelease("testString")
-      .gitBranch("testString")
+      .gitBranch("v2.0")
       .build();
 
     // Construct an instance of the CatalogSource model
@@ -2472,7 +2584,7 @@ public class SchematicsTest {
 
     // Construct an instance of the ExternalSource model
     ExternalSource externalSourceModel = new ExternalSource.Builder()
-      .sourceType("local")
+      .sourceType("git_hub")
       .git(gitSourceModel)
       .catalog(catalogSourceModel)
       .build();
@@ -2488,7 +2600,7 @@ public class SchematicsTest {
       .immutable(true)
       .hidden(true)
       .required(true)
-      .position(Long.valueOf("26"))
+      .position(Long.valueOf("0"))
       .groupBy("testString")
       .source("testString")
       .build();
@@ -2497,6 +2609,7 @@ public class SchematicsTest {
     CredentialVariableData credentialVariableDataModel = new CredentialVariableData.Builder()
       .name("testString")
       .value("-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n")
+      .redacted("testString")
       .useDefault(true)
       .metadata(credentialVariableMetadataModel)
       .build();
@@ -2509,7 +2622,7 @@ public class SchematicsTest {
 
     // Construct an instance of the VariableMetadata model
     VariableMetadata variableMetadataModel = new VariableMetadata.Builder()
-      .type("boolean")
+      .type("string")
       .aliases(java.util.Arrays.asList("testString"))
       .description("testString")
       .cloudDataType("testString")
@@ -2520,20 +2633,20 @@ public class SchematicsTest {
       .hidden(true)
       .required(true)
       .options(java.util.Arrays.asList("testString"))
-      .minValue(Long.valueOf("26"))
-      .maxValue(Long.valueOf("26"))
-      .minLength(Long.valueOf("26"))
-      .maxLength(Long.valueOf("26"))
+      .minValue(Long.valueOf("0"))
+      .maxValue(Long.valueOf("0"))
+      .minLength(Long.valueOf("0"))
+      .maxLength(Long.valueOf("0"))
       .matches("testString")
-      .position(Long.valueOf("26"))
+      .position(Long.valueOf("0"))
       .groupBy("testString")
       .source("testString")
       .build();
 
     // Construct an instance of the VariableData model
     VariableData variableDataModel = new VariableData.Builder()
-      .name("testString")
-      .value("testString")
+      .name("db_password")
+      .value("NewSecurePassword456")
       .useDefault(true)
       .metadata(variableMetadataModel)
       .build();
@@ -2541,18 +2654,18 @@ public class SchematicsTest {
     // Construct an instance of the UpdateActionOptions model
     UpdateActionOptions updateActionOptionsModel = new UpdateActionOptions.Builder()
       .actionId("testString")
-      .name("Stop Action")
-      .description("The description of your action. The description can be up to 2048 characters long in size. **Example** you can use the description to stop the targets.")
+      .name("Deploy LAMP Stack - Updated")
+      .description("Updated action to deploy LAMP stack with new configuration")
       .location("us-south")
       .resourceGroup("testString")
       .bastionConnectionType("ssh")
       .inventoryConnectionType("ssh")
-      .tags(java.util.Arrays.asList("testString"))
+      .tags(java.util.Arrays.asList("env:production", "app:lamp", "version:2.0"))
       .userState(userStateModel)
       .sourceReadmeUrl("testString")
       .source(externalSourceModel)
       .sourceType("local")
-      .commandParameter("testString")
+      .commandParameter("site-v2.yml")
       .inventory("testString")
       .credentials(java.util.Arrays.asList(credentialVariableDataModel))
       .bastion(bastionResourceDefinitionModel)
@@ -2656,7 +2769,7 @@ public class SchematicsTest {
   @Test
   public void testListWorkspaceActivitiesWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"actions\": [{\"action_id\": \"actionId\", \"message\": [\"message\"], \"name\": \"name\", \"performed_at\": \"2019-01-01T12:00:00.000Z\", \"performed_by\": \"performedBy\", \"status\": \"status\", \"templates\": [{\"end_time\": \"2019-01-01T12:00:00.000Z\", \"log_summary\": {\"activity_status\": \"activityStatus\", \"detected_template_type\": \"detectedTemplateType\", \"discarded_files\": 14, \"error\": \"error\", \"resources_added\": 14, \"resources_destroyed\": 18, \"resources_modified\": 17, \"scanned_files\": 12, \"template_variable_count\": 21, \"time_taken\": 9}, \"log_url\": \"logUrl\", \"message\": \"message\", \"start_time\": \"2019-01-01T12:00:00.000Z\", \"status\": \"status\", \"template_id\": \"templateId\", \"template_type\": \"templateType\"}]}], \"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\"}";
+    String mockResponseBody = "{\"actions\": [{\"action_id\": \"actionId\", \"message\": [\"message\"], \"name\": \"name\", \"performed_at\": \"2019-01-01T12:00:00.000Z\", \"performed_by\": \"performedBy\", \"status\": \"status\", \"templates\": [{\"end_time\": \"2019-01-01T12:00:00.000Z\", \"log_summary\": {\"activity_status\": \"activityStatus\", \"detected_template_type\": \"detectedTemplateType\", \"discarded_files\": 0, \"error\": \"error\", \"resources_added\": 0, \"resources_destroyed\": 0, \"resources_modified\": 0, \"scanned_files\": 0, \"template_variable_count\": 0, \"time_taken\": 9}, \"log_url\": \"logUrl\", \"message\": \"message\", \"start_time\": \"2019-01-01T12:00:00.000Z\", \"status\": \"status\", \"template_id\": \"templateId\", \"template_type\": \"templateType\"}]}], \"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\"}";
     String listWorkspaceActivitiesPath = "/v1/workspaces/testString/actions";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -2705,58 +2818,6 @@ public class SchematicsTest {
   public void testListWorkspaceActivitiesNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
     schematicsService.listWorkspaceActivities(null).execute();
-  }
-
-  // Test the getWorkspaceActivity operation with a valid options model parameter
-  @Test
-  public void testGetWorkspaceActivityWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"action_id\": \"actionId\", \"message\": [\"message\"], \"name\": \"name\", \"performed_at\": \"2019-01-01T12:00:00.000Z\", \"performed_by\": \"performedBy\", \"status\": \"status\", \"templates\": [{\"end_time\": \"2019-01-01T12:00:00.000Z\", \"log_summary\": {\"activity_status\": \"activityStatus\", \"detected_template_type\": \"detectedTemplateType\", \"discarded_files\": 14, \"error\": \"error\", \"resources_added\": 14, \"resources_destroyed\": 18, \"resources_modified\": 17, \"scanned_files\": 12, \"template_variable_count\": 21, \"time_taken\": 9}, \"log_url\": \"logUrl\", \"message\": \"message\", \"start_time\": \"2019-01-01T12:00:00.000Z\", \"status\": \"status\", \"template_id\": \"templateId\", \"template_type\": \"templateType\"}]}";
-    String getWorkspaceActivityPath = "/v1/workspaces/testString/actions/testString";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the GetWorkspaceActivityOptions model
-    GetWorkspaceActivityOptions getWorkspaceActivityOptionsModel = new GetWorkspaceActivityOptions.Builder()
-      .wId("testString")
-      .activityId("testString")
-      .build();
-
-    // Invoke getWorkspaceActivity() with a valid options model and verify the result
-    Response<WorkspaceActivity> response = schematicsService.getWorkspaceActivity(getWorkspaceActivityOptionsModel).execute();
-    assertNotNull(response);
-    WorkspaceActivity responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getWorkspaceActivityPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the getWorkspaceActivity operation with and without retries enabled
-  @Test
-  public void testGetWorkspaceActivityWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testGetWorkspaceActivityWOptions();
-
-    schematicsService.disableRetries();
-    testGetWorkspaceActivityWOptions();
-  }
-
-  // Test the getWorkspaceActivity operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testGetWorkspaceActivityNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.getWorkspaceActivity(null).execute();
   }
 
   // Test the deleteWorkspaceActivity operation with a valid options model parameter
@@ -2809,6 +2870,58 @@ public class SchematicsTest {
   public void testDeleteWorkspaceActivityNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
     schematicsService.deleteWorkspaceActivity(null).execute();
+  }
+
+  // Test the getWorkspaceActivity operation with a valid options model parameter
+  @Test
+  public void testGetWorkspaceActivityWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"action_id\": \"actionId\", \"message\": [\"message\"], \"name\": \"name\", \"performed_at\": \"2019-01-01T12:00:00.000Z\", \"performed_by\": \"performedBy\", \"status\": \"status\", \"templates\": [{\"end_time\": \"2019-01-01T12:00:00.000Z\", \"log_summary\": {\"activity_status\": \"activityStatus\", \"detected_template_type\": \"detectedTemplateType\", \"discarded_files\": 0, \"error\": \"error\", \"resources_added\": 0, \"resources_destroyed\": 0, \"resources_modified\": 0, \"scanned_files\": 0, \"template_variable_count\": 0, \"time_taken\": 9}, \"log_url\": \"logUrl\", \"message\": \"message\", \"start_time\": \"2019-01-01T12:00:00.000Z\", \"status\": \"status\", \"template_id\": \"templateId\", \"template_type\": \"templateType\"}]}";
+    String getWorkspaceActivityPath = "/v1/workspaces/testString/actions/testString";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetWorkspaceActivityOptions model
+    GetWorkspaceActivityOptions getWorkspaceActivityOptionsModel = new GetWorkspaceActivityOptions.Builder()
+      .wId("testString")
+      .activityId("testString")
+      .build();
+
+    // Invoke getWorkspaceActivity() with a valid options model and verify the result
+    Response<WorkspaceActivity> response = schematicsService.getWorkspaceActivity(getWorkspaceActivityOptionsModel).execute();
+    assertNotNull(response);
+    WorkspaceActivity responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getWorkspaceActivityPath);
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the getWorkspaceActivity operation with and without retries enabled
+  @Test
+  public void testGetWorkspaceActivityWRetries() throws Throwable {
+    schematicsService.enableRetries(4, 30);
+    testGetWorkspaceActivityWOptions();
+
+    schematicsService.disableRetries();
+    testGetWorkspaceActivityWOptions();
+  }
+
+  // Test the getWorkspaceActivity operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetWorkspaceActivityNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.getWorkspaceActivity(null).execute();
   }
 
   // Test the runWorkspaceCommands operation with a valid options model parameter
@@ -2898,8 +3011,8 @@ public class SchematicsTest {
 
     // Construct an instance of the ApplyWorkspaceCommandOptions model
     ApplyWorkspaceCommandOptions applyWorkspaceCommandOptionsModel = new ApplyWorkspaceCommandOptions.Builder()
-      .wId("testString")
       .refreshToken("testString")
+      .wId("testString")
       .actionOptions(workspaceActivityOptionsTemplateModel)
       .delegatedToken("testString")
       .build();
@@ -2960,8 +3073,8 @@ public class SchematicsTest {
 
     // Construct an instance of the DestroyWorkspaceCommandOptions model
     DestroyWorkspaceCommandOptions destroyWorkspaceCommandOptionsModel = new DestroyWorkspaceCommandOptions.Builder()
-      .wId("testString")
       .refreshToken("testString")
+      .wId("testString")
       .actionOptions(workspaceActivityOptionsTemplateModel)
       .delegatedToken("testString")
       .build();
@@ -3124,7 +3237,7 @@ public class SchematicsTest {
   @Test
   public void testListJobsWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"total_count\": 10, \"limit\": 5, \"offset\": 6, \"jobs\": [{\"id\": \"id\", \"name\": \"name\", \"description\": \"description\", \"command_object\": \"workspace\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"tags\": [\"tags\"], \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"submitted_at\": \"2019-01-01T12:00:00.000Z\", \"submitted_by\": \"submittedBy\", \"duration\": \"duration\", \"start_at\": \"2019-01-01T12:00:00.000Z\", \"end_at\": \"2019-01-01T12:00:00.000Z\", \"status\": {\"position_in_queue\": 15, \"total_in_queue\": 12, \"workspace_job_status\": {\"workspace_name\": \"workspaceName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"flow_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"template_status\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 9, \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"commands\": [{\"name\": \"name\", \"outcome\": \"outcome\"}]}, \"action_job_status\": {\"action_name\": \"actionName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"bastion_status_code\": \"none\", \"bastion_status_message\": \"bastionStatusMessage\", \"targets_status_code\": \"none\", \"targets_status_message\": \"targetsStatusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"system_job_status\": {\"system_status_message\": \"systemStatusMessage\", \"system_status_code\": \"job_pending\", \"schematics_resource_status\": [{\"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"schematics_resource_id\": \"schematicsResourceId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"log_summary\": {\"job_id\": \"jobId\", \"job_type\": \"repo_download_job\", \"log_start_at\": \"2019-01-01T12:00:00.000Z\", \"log_analyzed_till\": \"2019-01-01T12:00:00.000Z\", \"elapsed_time\": 11, \"log_errors\": [{\"error_code\": \"errorCode\", \"error_msg\": \"errorMsg\", \"error_count\": 10}], \"repo_download_job\": {\"scanned_file_count\": 16, \"quarantined_file_count\": 20, \"detected_filetype\": \"detectedFiletype\", \"inputs_count\": \"inputsCount\", \"outputs_count\": \"outputsCount\"}, \"workspace_job\": {\"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16}, \"flow_job\": {\"workitems_completed\": 18, \"workitems_pending\": 16, \"workitems_failed\": 15, \"workitems\": [{\"workspace_id\": \"workspaceId\", \"job_id\": \"jobId\", \"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16, \"log_url\": \"logUrl\"}]}, \"action_job\": {\"target_count\": 11, \"task_count\": 9, \"play_count\": 9, \"recap\": {\"target\": [\"target\"], \"ok\": 2, \"changed\": 7, \"failed\": 6, \"skipped\": 7, \"unreachable\": 11}}, \"system_job\": {\"target_count\": 11, \"success\": 7, \"failed\": 6}}, \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"job_runner_id\": \"jobRunnerId\", \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}}]}";
+    String mockResponseBody = "{\"total_count\": 0, \"limit\": 0, \"offset\": 0, \"jobs\": [{\"id\": \"id\", \"name\": \"name\", \"description\": \"description\", \"command_object\": \"workspace\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"tags\": [\"tags\"], \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"submitted_at\": \"2019-01-01T12:00:00.000Z\", \"submitted_by\": \"submittedBy\", \"duration\": \"duration\", \"start_at\": \"2019-01-01T12:00:00.000Z\", \"end_at\": \"2019-01-01T12:00:00.000Z\", \"status\": {\"position_in_queue\": 15, \"total_in_queue\": 12, \"workspace_job_status\": {\"workspace_name\": \"workspaceName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"flow_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"template_status\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 0, \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"commands\": [{\"name\": \"name\", \"outcome\": \"outcome\"}]}, \"action_job_status\": {\"action_name\": \"actionName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"bastion_status_code\": \"none\", \"bastion_status_message\": \"bastionStatusMessage\", \"targets_status_code\": \"none\", \"targets_status_message\": \"targetsStatusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"system_job_status\": {\"system_status_message\": \"systemStatusMessage\", \"system_status_code\": \"job_pending\", \"schematics_resource_status\": [{\"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"schematics_resource_id\": \"schematicsResourceId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"log_summary\": {\"job_id\": \"jobId\", \"job_type\": \"repo_download_job\", \"log_start_at\": \"2019-01-01T12:00:00.000Z\", \"log_analyzed_till\": \"2019-01-01T12:00:00.000Z\", \"elapsed_time\": 11, \"log_errors\": [{\"error_code\": \"errorCode\", \"error_msg\": \"errorMsg\", \"error_count\": 10}], \"repo_download_job\": {\"scanned_file_count\": 16, \"quarantined_file_count\": 20, \"detected_filetype\": \"detectedFiletype\", \"inputs_count\": \"inputsCount\", \"outputs_count\": \"outputsCount\"}, \"workspace_job\": {\"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16}, \"flow_job\": {\"workitems_completed\": 18, \"workitems_pending\": 16, \"workitems_failed\": 15, \"workitems\": [{\"workspace_id\": \"workspaceId\", \"job_id\": \"jobId\", \"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16, \"log_url\": \"logUrl\"}]}, \"action_job\": {\"target_count\": 11, \"task_count\": 9, \"play_count\": 9, \"recap\": {\"target\": [\"target\"], \"ok\": 2, \"changed\": 7, \"failed\": 6, \"skipped\": 7, \"unreachable\": 11}}, \"system_job\": {\"target_count\": 11, \"success\": 7, \"failed\": 6}}, \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"job_runner_id\": \"jobRunnerId\", \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}}]}";
     String listJobsPath = "/v2/jobs";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -3185,7 +3298,7 @@ public class SchematicsTest {
   @Test
   public void testCreateJobWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"command_object\": \"workspace\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"command_parameter\": \"commandParameter\", \"command_options\": [\"commandOptions\"], \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"tags\": [\"tags\"], \"id\": \"id\", \"name\": \"name\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"submitted_at\": \"2019-01-01T12:00:00.000Z\", \"submitted_by\": \"submittedBy\", \"start_at\": \"2019-01-01T12:00:00.000Z\", \"end_at\": \"2019-01-01T12:00:00.000Z\", \"duration\": \"duration\", \"status\": {\"position_in_queue\": 15, \"total_in_queue\": 12, \"workspace_job_status\": {\"workspace_name\": \"workspaceName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"flow_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"template_status\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 9, \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"commands\": [{\"name\": \"name\", \"outcome\": \"outcome\"}]}, \"action_job_status\": {\"action_name\": \"actionName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"bastion_status_code\": \"none\", \"bastion_status_message\": \"bastionStatusMessage\", \"targets_status_code\": \"none\", \"targets_status_message\": \"targetsStatusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"system_job_status\": {\"system_status_message\": \"systemStatusMessage\", \"system_status_code\": \"job_pending\", \"schematics_resource_status\": [{\"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"schematics_resource_id\": \"schematicsResourceId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"cart_order_data\": [{\"name\": \"name\", \"value\": \"value\", \"type\": \"type\", \"usage_kind\": [\"servicetags\"]}], \"data\": {\"job_type\": \"repo_download_job\", \"workspace_job_data\": {\"workspace_name\": \"workspaceName\", \"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"template_data\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 9, \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"action_job_data\": {\"action_name\": \"actionName\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"inventory_record\": {\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"]}, \"materialized_inventory\": \"materializedInventory\"}, \"system_job_data\": {\"key_id\": \"keyId\", \"schematics_resource_id\": [\"schematicsResourceId\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_data\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"workitems\": [{\"command_object_id\": \"commandObjectId\", \"command_object_name\": \"commandObjectName\", \"layers\": \"layers\", \"source_type\": \"local\", \"source\": {\"source_type\": \"local\", \"git\": {\"computed_git_repo_url\": \"computedGitRepoUrl\", \"git_repo_url\": \"gitRepoUrl\", \"git_token\": \"gitToken\", \"git_repo_folder\": \"gitRepoFolder\", \"git_release\": \"gitRelease\", \"git_branch\": \"gitBranch\", \"git_commit\": \"gitCommit\", \"git_commit_timestamp\": \"gitCommitTimestamp\"}, \"catalog\": {\"catalog_name\": \"catalogName\", \"catalog_id\": \"catalogId\", \"offering_name\": \"offeringName\", \"offering_version\": \"offeringVersion\", \"offering_kind\": \"offeringKind\", \"offering_target_kind\": \"offeringTargetKind\", \"offering_id\": \"offeringId\", \"offering_version_id\": \"offeringVersionId\", \"offering_version_flavour_name\": \"offeringVersionFlavourName\", \"offering_repo_url\": \"offeringRepoUrl\", \"offering_provisioner_working_directory\": \"offeringProvisionerWorkingDirectory\", \"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\"}}, \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"last_job\": {\"command_object\": \"workspace\", \"command_object_name\": \"commandObjectName\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"job_id\": \"jobId\", \"job_status\": \"job_pending\"}, \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"log_summary\": {\"job_id\": \"jobId\", \"job_type\": \"repo_download_job\", \"log_start_at\": \"2019-01-01T12:00:00.000Z\", \"log_analyzed_till\": \"2019-01-01T12:00:00.000Z\", \"elapsed_time\": 11, \"log_errors\": [{\"error_code\": \"errorCode\", \"error_msg\": \"errorMsg\", \"error_count\": 10}], \"repo_download_job\": {\"scanned_file_count\": 16, \"quarantined_file_count\": 20, \"detected_filetype\": \"detectedFiletype\", \"inputs_count\": \"inputsCount\", \"outputs_count\": \"outputsCount\"}, \"workspace_job\": {\"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16}, \"flow_job\": {\"workitems_completed\": 18, \"workitems_pending\": 16, \"workitems_failed\": 15, \"workitems\": [{\"workspace_id\": \"workspaceId\", \"job_id\": \"jobId\", \"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16, \"log_url\": \"logUrl\"}]}, \"action_job\": {\"target_count\": 11, \"task_count\": 9, \"play_count\": 9, \"recap\": {\"target\": [\"target\"], \"ok\": 2, \"changed\": 7, \"failed\": 6, \"skipped\": 7, \"unreachable\": 11}}, \"system_job\": {\"target_count\": 11, \"success\": 7, \"failed\": 6}}, \"log_store_url\": \"logStoreUrl\", \"state_store_url\": \"stateStoreUrl\", \"results_url\": \"resultsUrl\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"job_runner_id\": \"jobRunnerId\", \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}}";
+    String mockResponseBody = "{\"command_object\": \"workspace\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"command_parameter\": \"commandParameter\", \"command_options\": [\"commandOptions\"], \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"tags\": [\"tags\"], \"id\": \"id\", \"name\": \"name\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"submitted_at\": \"2019-01-01T12:00:00.000Z\", \"submitted_by\": \"submittedBy\", \"start_at\": \"2019-01-01T12:00:00.000Z\", \"end_at\": \"2019-01-01T12:00:00.000Z\", \"duration\": \"duration\", \"status\": {\"position_in_queue\": 15, \"total_in_queue\": 12, \"workspace_job_status\": {\"workspace_name\": \"workspaceName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"flow_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"template_status\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 0, \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"commands\": [{\"name\": \"name\", \"outcome\": \"outcome\"}]}, \"action_job_status\": {\"action_name\": \"actionName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"bastion_status_code\": \"none\", \"bastion_status_message\": \"bastionStatusMessage\", \"targets_status_code\": \"none\", \"targets_status_message\": \"targetsStatusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"system_job_status\": {\"system_status_message\": \"systemStatusMessage\", \"system_status_code\": \"job_pending\", \"schematics_resource_status\": [{\"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"schematics_resource_id\": \"schematicsResourceId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"cart_order_data\": [{\"name\": \"name\", \"value\": \"value\", \"type\": \"type\", \"usage_kind\": [\"servicetags\"]}], \"data\": {\"job_type\": \"repo_download_job\", \"workspace_job_data\": {\"workspace_name\": \"workspaceName\", \"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"template_data\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 0, \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"action_job_data\": {\"action_name\": \"actionName\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"inventory_record\": {\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"], \"connection_type\": \"connectionType\", \"credentials\": [{\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"common_credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"bastion_credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"inventory_view\": {\"groups\": [{\"name\": \"name\", \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"hosts\": [{\"alias\": \"alias\", \"name\": \"name\", \"credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}]}]}]}}, \"materialized_inventory\": \"materializedInventory\"}, \"system_job_data\": {\"key_id\": \"keyId\", \"schematics_resource_id\": [\"schematicsResourceId\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_data\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"workitems\": [{\"command_object_id\": \"commandObjectId\", \"command_object_name\": \"commandObjectName\", \"layers\": \"layers\", \"source_type\": \"local\", \"source\": {\"source_type\": \"local\", \"git\": {\"computed_git_repo_url\": \"computedGitRepoUrl\", \"git_repo_url\": \"gitRepoUrl\", \"git_token\": \"gitToken\", \"git_repo_folder\": \"gitRepoFolder\", \"git_release\": \"gitRelease\", \"git_branch\": \"gitBranch\", \"git_commit\": \"gitCommit\", \"git_commit_timestamp\": \"2019-01-01T12:00:00.000Z\"}, \"catalog\": {\"catalog_name\": \"catalogName\", \"catalog_id\": \"catalogId\", \"offering_name\": \"offeringName\", \"offering_version\": \"offeringVersion\", \"offering_kind\": \"offeringKind\", \"offering_target_kind\": \"offeringTargetKind\", \"offering_id\": \"offeringId\", \"offering_version_id\": \"offeringVersionId\", \"offering_version_flavour_name\": \"offeringVersionFlavourName\", \"offering_repo_url\": \"offeringRepoUrl\", \"offering_provisioner_working_directory\": \"offeringProvisionerWorkingDirectory\", \"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\"}}, \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"last_job\": {\"command_object\": \"workspace\", \"command_object_name\": \"commandObjectName\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"job_id\": \"jobId\", \"job_status\": \"job_pending\"}, \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"log_summary\": {\"job_id\": \"jobId\", \"job_type\": \"repo_download_job\", \"log_start_at\": \"2019-01-01T12:00:00.000Z\", \"log_analyzed_till\": \"2019-01-01T12:00:00.000Z\", \"elapsed_time\": 11, \"log_errors\": [{\"error_code\": \"errorCode\", \"error_msg\": \"errorMsg\", \"error_count\": 10}], \"repo_download_job\": {\"scanned_file_count\": 16, \"quarantined_file_count\": 20, \"detected_filetype\": \"detectedFiletype\", \"inputs_count\": \"inputsCount\", \"outputs_count\": \"outputsCount\"}, \"workspace_job\": {\"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16}, \"flow_job\": {\"workitems_completed\": 18, \"workitems_pending\": 16, \"workitems_failed\": 15, \"workitems\": [{\"workspace_id\": \"workspaceId\", \"job_id\": \"jobId\", \"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16, \"log_url\": \"logUrl\"}]}, \"action_job\": {\"target_count\": 11, \"task_count\": 9, \"play_count\": 9, \"recap\": {\"target\": [\"target\"], \"ok\": 2, \"changed\": 7, \"failed\": 6, \"skipped\": 7, \"unreachable\": 11}}, \"system_job\": {\"target_count\": 11, \"success\": 7, \"failed\": 6}}, \"log_store_url\": \"logStoreUrl\", \"state_store_url\": \"stateStoreUrl\", \"results_url\": \"resultsUrl\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"job_runner_id\": \"jobRunnerId\", \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}}";
     String createJobPath = "/v2/jobs";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -3205,12 +3318,12 @@ public class SchematicsTest {
       .hidden(true)
       .required(true)
       .options(java.util.Arrays.asList("testString"))
-      .minValue(Long.valueOf("26"))
-      .maxValue(Long.valueOf("26"))
-      .minLength(Long.valueOf("26"))
-      .maxLength(Long.valueOf("26"))
+      .minValue(Long.valueOf("0"))
+      .maxValue(Long.valueOf("0"))
+      .minLength(Long.valueOf("0"))
+      .maxLength(Long.valueOf("0"))
       .matches("testString")
-      .position(Long.valueOf("26"))
+      .position(Long.valueOf("0"))
       .groupBy("testString")
       .source("testString")
       .build();
@@ -3247,7 +3360,7 @@ public class SchematicsTest {
     JobStatusTemplate jobStatusTemplateModel = new JobStatusTemplate.Builder()
       .templateId("testString")
       .templateName("testString")
-      .flowIndex(Long.valueOf("26"))
+      .flowIndex(Long.valueOf("0"))
       .statusCode("job_pending")
       .statusMessage("testString")
       .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
@@ -3313,7 +3426,7 @@ public class SchematicsTest {
     JobDataTemplate jobDataTemplateModel = new JobDataTemplate.Builder()
       .templateId("testString")
       .templateName("testString")
-      .flowIndex(Long.valueOf("26"))
+      .flowIndex(Long.valueOf("0"))
       .inputs(java.util.Arrays.asList(variableDataModel))
       .outputs(java.util.Arrays.asList(variableDataModel))
       .settings(java.util.Arrays.asList(variableDataModel))
@@ -3332,6 +3445,58 @@ public class SchematicsTest {
       .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .build();
 
+    // Construct an instance of the CredentialVariableMetadata model
+    CredentialVariableMetadata credentialVariableMetadataModel = new CredentialVariableMetadata.Builder()
+      .type("string")
+      .aliases(java.util.Arrays.asList("testString"))
+      .description("testString")
+      .cloudDataType("testString")
+      .defaultValue("testString")
+      .linkStatus("normal")
+      .immutable(true)
+      .hidden(true)
+      .required(true)
+      .position(Long.valueOf("0"))
+      .groupBy("testString")
+      .source("testString")
+      .build();
+
+    // Construct an instance of the CredentialVariableData model
+    CredentialVariableData credentialVariableDataModel = new CredentialVariableData.Builder()
+      .name("testString")
+      .value("-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n")
+      .redacted("testString")
+      .useDefault(true)
+      .metadata(credentialVariableMetadataModel)
+      .build();
+
+    // Construct an instance of the BastionResourceDefinition model
+    BastionResourceDefinition bastionResourceDefinitionModel = new BastionResourceDefinition.Builder()
+      .name("testString")
+      .host("testString")
+      .build();
+
+    // Construct an instance of the Host model
+    Host hostModel = new Host.Builder()
+      .alias("testString")
+      .name("testString")
+      .credential(credentialVariableDataModel)
+      .vars(java.util.Arrays.asList(variableDataModel))
+      .build();
+
+    // Construct an instance of the Group model
+    Group groupModel = new Group.Builder()
+      .name("testString")
+      .vars(java.util.Arrays.asList(variableDataModel))
+      .credentials(credentialVariableDataModel)
+      .hosts(java.util.Arrays.asList(hostModel))
+      .build();
+
+    // Construct an instance of the InventoryView model
+    InventoryView inventoryViewModel = new InventoryView.Builder()
+      .groups(java.util.Arrays.asList(groupModel))
+      .build();
+
     // Construct an instance of the InventoryResourceRecord model
     InventoryResourceRecord inventoryResourceRecordModel = new InventoryResourceRecord.Builder()
       .name("testString")
@@ -3340,6 +3505,12 @@ public class SchematicsTest {
       .resourceGroup("testString")
       .inventoriesIni("testString")
       .resourceQueries(java.util.Arrays.asList("testString"))
+      .connectionType("testString")
+      .credentials(java.util.Arrays.asList(credentialVariableDataModel))
+      .commonCredentials(credentialVariableDataModel)
+      .bastion(bastionResourceDefinitionModel)
+      .bastionCredential(credentialVariableDataModel)
+      .inventoryView(inventoryViewModel)
       .build();
 
     // Construct an instance of the JobDataAction model
@@ -3439,12 +3610,6 @@ public class SchematicsTest {
       .actionJobData(jobDataActionModel)
       .systemJobData(jobDataSystemModel)
       .flowJobData(jobDataFlowModel)
-      .build();
-
-    // Construct an instance of the BastionResourceDefinition model
-    BastionResourceDefinition bastionResourceDefinitionModel = new BastionResourceDefinition.Builder()
-      .name("testString")
-      .host("testString")
       .build();
 
     // Construct an instance of the JobLogSummaryRepoDownloadJob model
@@ -3508,10 +3673,10 @@ public class SchematicsTest {
     // Construct an instance of the CreateJobOptions model
     CreateJobOptions createJobOptionsModel = new CreateJobOptions.Builder()
       .refreshToken("testString")
-      .commandObject("workspace")
-      .commandObjectId("testString")
-      .commandName("workspace_plan")
-      .commandParameter("testString")
+      .commandObject("action")
+      .commandObjectId("us-east.ACTION.Example-12a1b212.3287dc42")
+      .commandName("ansible_playbook_run")
+      .commandParameter("site.yml")
       .commandOptions(java.util.Arrays.asList("testString"))
       .inputs(java.util.Arrays.asList(variableDataModel))
       .settings(java.util.Arrays.asList(variableDataModel))
@@ -3562,11 +3727,66 @@ public class SchematicsTest {
     schematicsService.createJob(null).execute();
   }
 
+  // Test the deleteJob operation with a valid options model parameter
+  @Test
+  public void testDeleteJobWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "";
+    String deleteJobPath = "/v2/jobs/testString";
+    server.enqueue(new MockResponse()
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the DeleteJobOptions model
+    DeleteJobOptions deleteJobOptionsModel = new DeleteJobOptions.Builder()
+      .jobId("testString")
+      .refreshToken("testString")
+      .force(true)
+      .propagate(true)
+      .build();
+
+    // Invoke deleteJob() with a valid options model and verify the result
+    Response<Void> response = schematicsService.deleteJob(deleteJobOptionsModel).execute();
+    assertNotNull(response);
+    Void responseObj = response.getResult();
+    assertNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "DELETE");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, deleteJobPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Refresh_token"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the deleteJob operation with and without retries enabled
+  @Test
+  public void testDeleteJobWRetries() throws Throwable {
+    schematicsService.enableRetries(4, 30);
+    testDeleteJobWOptions();
+
+    schematicsService.disableRetries();
+    testDeleteJobWOptions();
+  }
+
+  // Test the deleteJob operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testDeleteJobNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.deleteJob(null).execute();
+  }
+
   // Test the getJob operation with a valid options model parameter
   @Test
   public void testGetJobWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"command_object\": \"workspace\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"command_parameter\": \"commandParameter\", \"command_options\": [\"commandOptions\"], \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"tags\": [\"tags\"], \"id\": \"id\", \"name\": \"name\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"submitted_at\": \"2019-01-01T12:00:00.000Z\", \"submitted_by\": \"submittedBy\", \"start_at\": \"2019-01-01T12:00:00.000Z\", \"end_at\": \"2019-01-01T12:00:00.000Z\", \"duration\": \"duration\", \"status\": {\"position_in_queue\": 15, \"total_in_queue\": 12, \"workspace_job_status\": {\"workspace_name\": \"workspaceName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"flow_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"template_status\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 9, \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"commands\": [{\"name\": \"name\", \"outcome\": \"outcome\"}]}, \"action_job_status\": {\"action_name\": \"actionName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"bastion_status_code\": \"none\", \"bastion_status_message\": \"bastionStatusMessage\", \"targets_status_code\": \"none\", \"targets_status_message\": \"targetsStatusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"system_job_status\": {\"system_status_message\": \"systemStatusMessage\", \"system_status_code\": \"job_pending\", \"schematics_resource_status\": [{\"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"schematics_resource_id\": \"schematicsResourceId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"cart_order_data\": [{\"name\": \"name\", \"value\": \"value\", \"type\": \"type\", \"usage_kind\": [\"servicetags\"]}], \"data\": {\"job_type\": \"repo_download_job\", \"workspace_job_data\": {\"workspace_name\": \"workspaceName\", \"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"template_data\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 9, \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"action_job_data\": {\"action_name\": \"actionName\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"inventory_record\": {\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"]}, \"materialized_inventory\": \"materializedInventory\"}, \"system_job_data\": {\"key_id\": \"keyId\", \"schematics_resource_id\": [\"schematicsResourceId\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_data\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"workitems\": [{\"command_object_id\": \"commandObjectId\", \"command_object_name\": \"commandObjectName\", \"layers\": \"layers\", \"source_type\": \"local\", \"source\": {\"source_type\": \"local\", \"git\": {\"computed_git_repo_url\": \"computedGitRepoUrl\", \"git_repo_url\": \"gitRepoUrl\", \"git_token\": \"gitToken\", \"git_repo_folder\": \"gitRepoFolder\", \"git_release\": \"gitRelease\", \"git_branch\": \"gitBranch\", \"git_commit\": \"gitCommit\", \"git_commit_timestamp\": \"gitCommitTimestamp\"}, \"catalog\": {\"catalog_name\": \"catalogName\", \"catalog_id\": \"catalogId\", \"offering_name\": \"offeringName\", \"offering_version\": \"offeringVersion\", \"offering_kind\": \"offeringKind\", \"offering_target_kind\": \"offeringTargetKind\", \"offering_id\": \"offeringId\", \"offering_version_id\": \"offeringVersionId\", \"offering_version_flavour_name\": \"offeringVersionFlavourName\", \"offering_repo_url\": \"offeringRepoUrl\", \"offering_provisioner_working_directory\": \"offeringProvisionerWorkingDirectory\", \"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\"}}, \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"last_job\": {\"command_object\": \"workspace\", \"command_object_name\": \"commandObjectName\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"job_id\": \"jobId\", \"job_status\": \"job_pending\"}, \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"log_summary\": {\"job_id\": \"jobId\", \"job_type\": \"repo_download_job\", \"log_start_at\": \"2019-01-01T12:00:00.000Z\", \"log_analyzed_till\": \"2019-01-01T12:00:00.000Z\", \"elapsed_time\": 11, \"log_errors\": [{\"error_code\": \"errorCode\", \"error_msg\": \"errorMsg\", \"error_count\": 10}], \"repo_download_job\": {\"scanned_file_count\": 16, \"quarantined_file_count\": 20, \"detected_filetype\": \"detectedFiletype\", \"inputs_count\": \"inputsCount\", \"outputs_count\": \"outputsCount\"}, \"workspace_job\": {\"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16}, \"flow_job\": {\"workitems_completed\": 18, \"workitems_pending\": 16, \"workitems_failed\": 15, \"workitems\": [{\"workspace_id\": \"workspaceId\", \"job_id\": \"jobId\", \"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16, \"log_url\": \"logUrl\"}]}, \"action_job\": {\"target_count\": 11, \"task_count\": 9, \"play_count\": 9, \"recap\": {\"target\": [\"target\"], \"ok\": 2, \"changed\": 7, \"failed\": 6, \"skipped\": 7, \"unreachable\": 11}}, \"system_job\": {\"target_count\": 11, \"success\": 7, \"failed\": 6}}, \"log_store_url\": \"logStoreUrl\", \"state_store_url\": \"stateStoreUrl\", \"results_url\": \"resultsUrl\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"job_runner_id\": \"jobRunnerId\", \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}}";
+    String mockResponseBody = "{\"command_object\": \"workspace\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"command_parameter\": \"commandParameter\", \"command_options\": [\"commandOptions\"], \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"tags\": [\"tags\"], \"id\": \"id\", \"name\": \"name\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"submitted_at\": \"2019-01-01T12:00:00.000Z\", \"submitted_by\": \"submittedBy\", \"start_at\": \"2019-01-01T12:00:00.000Z\", \"end_at\": \"2019-01-01T12:00:00.000Z\", \"duration\": \"duration\", \"status\": {\"position_in_queue\": 15, \"total_in_queue\": 12, \"workspace_job_status\": {\"workspace_name\": \"workspaceName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"flow_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"template_status\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 0, \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"commands\": [{\"name\": \"name\", \"outcome\": \"outcome\"}]}, \"action_job_status\": {\"action_name\": \"actionName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"bastion_status_code\": \"none\", \"bastion_status_message\": \"bastionStatusMessage\", \"targets_status_code\": \"none\", \"targets_status_message\": \"targetsStatusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"system_job_status\": {\"system_status_message\": \"systemStatusMessage\", \"system_status_code\": \"job_pending\", \"schematics_resource_status\": [{\"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"schematics_resource_id\": \"schematicsResourceId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"cart_order_data\": [{\"name\": \"name\", \"value\": \"value\", \"type\": \"type\", \"usage_kind\": [\"servicetags\"]}], \"data\": {\"job_type\": \"repo_download_job\", \"workspace_job_data\": {\"workspace_name\": \"workspaceName\", \"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"template_data\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 0, \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"action_job_data\": {\"action_name\": \"actionName\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"inventory_record\": {\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"], \"connection_type\": \"connectionType\", \"credentials\": [{\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"common_credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"bastion_credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"inventory_view\": {\"groups\": [{\"name\": \"name\", \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"hosts\": [{\"alias\": \"alias\", \"name\": \"name\", \"credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}]}]}]}}, \"materialized_inventory\": \"materializedInventory\"}, \"system_job_data\": {\"key_id\": \"keyId\", \"schematics_resource_id\": [\"schematicsResourceId\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_data\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"workitems\": [{\"command_object_id\": \"commandObjectId\", \"command_object_name\": \"commandObjectName\", \"layers\": \"layers\", \"source_type\": \"local\", \"source\": {\"source_type\": \"local\", \"git\": {\"computed_git_repo_url\": \"computedGitRepoUrl\", \"git_repo_url\": \"gitRepoUrl\", \"git_token\": \"gitToken\", \"git_repo_folder\": \"gitRepoFolder\", \"git_release\": \"gitRelease\", \"git_branch\": \"gitBranch\", \"git_commit\": \"gitCommit\", \"git_commit_timestamp\": \"2019-01-01T12:00:00.000Z\"}, \"catalog\": {\"catalog_name\": \"catalogName\", \"catalog_id\": \"catalogId\", \"offering_name\": \"offeringName\", \"offering_version\": \"offeringVersion\", \"offering_kind\": \"offeringKind\", \"offering_target_kind\": \"offeringTargetKind\", \"offering_id\": \"offeringId\", \"offering_version_id\": \"offeringVersionId\", \"offering_version_flavour_name\": \"offeringVersionFlavourName\", \"offering_repo_url\": \"offeringRepoUrl\", \"offering_provisioner_working_directory\": \"offeringProvisionerWorkingDirectory\", \"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\"}}, \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"last_job\": {\"command_object\": \"workspace\", \"command_object_name\": \"commandObjectName\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"job_id\": \"jobId\", \"job_status\": \"job_pending\"}, \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"log_summary\": {\"job_id\": \"jobId\", \"job_type\": \"repo_download_job\", \"log_start_at\": \"2019-01-01T12:00:00.000Z\", \"log_analyzed_till\": \"2019-01-01T12:00:00.000Z\", \"elapsed_time\": 11, \"log_errors\": [{\"error_code\": \"errorCode\", \"error_msg\": \"errorMsg\", \"error_count\": 10}], \"repo_download_job\": {\"scanned_file_count\": 16, \"quarantined_file_count\": 20, \"detected_filetype\": \"detectedFiletype\", \"inputs_count\": \"inputsCount\", \"outputs_count\": \"outputsCount\"}, \"workspace_job\": {\"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16}, \"flow_job\": {\"workitems_completed\": 18, \"workitems_pending\": 16, \"workitems_failed\": 15, \"workitems\": [{\"workspace_id\": \"workspaceId\", \"job_id\": \"jobId\", \"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16, \"log_url\": \"logUrl\"}]}, \"action_job\": {\"target_count\": 11, \"task_count\": 9, \"play_count\": 9, \"recap\": {\"target\": [\"target\"], \"ok\": 2, \"changed\": 7, \"failed\": 6, \"skipped\": 7, \"unreachable\": 11}}, \"system_job\": {\"target_count\": 11, \"success\": 7, \"failed\": 6}}, \"log_store_url\": \"logStoreUrl\", \"state_store_url\": \"stateStoreUrl\", \"results_url\": \"resultsUrl\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"job_runner_id\": \"jobRunnerId\", \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}}";
     String getJobPath = "/v2/jobs/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -3619,7 +3839,7 @@ public class SchematicsTest {
   @Test
   public void testUpdateJobWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"command_object\": \"workspace\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"command_parameter\": \"commandParameter\", \"command_options\": [\"commandOptions\"], \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"tags\": [\"tags\"], \"id\": \"id\", \"name\": \"name\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"submitted_at\": \"2019-01-01T12:00:00.000Z\", \"submitted_by\": \"submittedBy\", \"start_at\": \"2019-01-01T12:00:00.000Z\", \"end_at\": \"2019-01-01T12:00:00.000Z\", \"duration\": \"duration\", \"status\": {\"position_in_queue\": 15, \"total_in_queue\": 12, \"workspace_job_status\": {\"workspace_name\": \"workspaceName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"flow_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"template_status\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 9, \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"commands\": [{\"name\": \"name\", \"outcome\": \"outcome\"}]}, \"action_job_status\": {\"action_name\": \"actionName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"bastion_status_code\": \"none\", \"bastion_status_message\": \"bastionStatusMessage\", \"targets_status_code\": \"none\", \"targets_status_message\": \"targetsStatusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"system_job_status\": {\"system_status_message\": \"systemStatusMessage\", \"system_status_code\": \"job_pending\", \"schematics_resource_status\": [{\"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"schematics_resource_id\": \"schematicsResourceId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"cart_order_data\": [{\"name\": \"name\", \"value\": \"value\", \"type\": \"type\", \"usage_kind\": [\"servicetags\"]}], \"data\": {\"job_type\": \"repo_download_job\", \"workspace_job_data\": {\"workspace_name\": \"workspaceName\", \"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"template_data\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 9, \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"action_job_data\": {\"action_name\": \"actionName\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"inventory_record\": {\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"]}, \"materialized_inventory\": \"materializedInventory\"}, \"system_job_data\": {\"key_id\": \"keyId\", \"schematics_resource_id\": [\"schematicsResourceId\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_data\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"workitems\": [{\"command_object_id\": \"commandObjectId\", \"command_object_name\": \"commandObjectName\", \"layers\": \"layers\", \"source_type\": \"local\", \"source\": {\"source_type\": \"local\", \"git\": {\"computed_git_repo_url\": \"computedGitRepoUrl\", \"git_repo_url\": \"gitRepoUrl\", \"git_token\": \"gitToken\", \"git_repo_folder\": \"gitRepoFolder\", \"git_release\": \"gitRelease\", \"git_branch\": \"gitBranch\", \"git_commit\": \"gitCommit\", \"git_commit_timestamp\": \"gitCommitTimestamp\"}, \"catalog\": {\"catalog_name\": \"catalogName\", \"catalog_id\": \"catalogId\", \"offering_name\": \"offeringName\", \"offering_version\": \"offeringVersion\", \"offering_kind\": \"offeringKind\", \"offering_target_kind\": \"offeringTargetKind\", \"offering_id\": \"offeringId\", \"offering_version_id\": \"offeringVersionId\", \"offering_version_flavour_name\": \"offeringVersionFlavourName\", \"offering_repo_url\": \"offeringRepoUrl\", \"offering_provisioner_working_directory\": \"offeringProvisionerWorkingDirectory\", \"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\"}}, \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"last_job\": {\"command_object\": \"workspace\", \"command_object_name\": \"commandObjectName\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"job_id\": \"jobId\", \"job_status\": \"job_pending\"}, \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"log_summary\": {\"job_id\": \"jobId\", \"job_type\": \"repo_download_job\", \"log_start_at\": \"2019-01-01T12:00:00.000Z\", \"log_analyzed_till\": \"2019-01-01T12:00:00.000Z\", \"elapsed_time\": 11, \"log_errors\": [{\"error_code\": \"errorCode\", \"error_msg\": \"errorMsg\", \"error_count\": 10}], \"repo_download_job\": {\"scanned_file_count\": 16, \"quarantined_file_count\": 20, \"detected_filetype\": \"detectedFiletype\", \"inputs_count\": \"inputsCount\", \"outputs_count\": \"outputsCount\"}, \"workspace_job\": {\"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16}, \"flow_job\": {\"workitems_completed\": 18, \"workitems_pending\": 16, \"workitems_failed\": 15, \"workitems\": [{\"workspace_id\": \"workspaceId\", \"job_id\": \"jobId\", \"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16, \"log_url\": \"logUrl\"}]}, \"action_job\": {\"target_count\": 11, \"task_count\": 9, \"play_count\": 9, \"recap\": {\"target\": [\"target\"], \"ok\": 2, \"changed\": 7, \"failed\": 6, \"skipped\": 7, \"unreachable\": 11}}, \"system_job\": {\"target_count\": 11, \"success\": 7, \"failed\": 6}}, \"log_store_url\": \"logStoreUrl\", \"state_store_url\": \"stateStoreUrl\", \"results_url\": \"resultsUrl\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"job_runner_id\": \"jobRunnerId\", \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}}";
+    String mockResponseBody = "{\"command_object\": \"workspace\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"command_parameter\": \"commandParameter\", \"command_options\": [\"commandOptions\"], \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"tags\": [\"tags\"], \"id\": \"id\", \"name\": \"name\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"submitted_at\": \"2019-01-01T12:00:00.000Z\", \"submitted_by\": \"submittedBy\", \"start_at\": \"2019-01-01T12:00:00.000Z\", \"end_at\": \"2019-01-01T12:00:00.000Z\", \"duration\": \"duration\", \"status\": {\"position_in_queue\": 15, \"total_in_queue\": 12, \"workspace_job_status\": {\"workspace_name\": \"workspaceName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"flow_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"template_status\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 0, \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"commands\": [{\"name\": \"name\", \"outcome\": \"outcome\"}]}, \"action_job_status\": {\"action_name\": \"actionName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"bastion_status_code\": \"none\", \"bastion_status_message\": \"bastionStatusMessage\", \"targets_status_code\": \"none\", \"targets_status_message\": \"targetsStatusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"system_job_status\": {\"system_status_message\": \"systemStatusMessage\", \"system_status_code\": \"job_pending\", \"schematics_resource_status\": [{\"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"schematics_resource_id\": \"schematicsResourceId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_status\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"workitems\": [{\"workspace_id\": \"workspaceId\", \"workspace_name\": \"workspaceName\", \"job_id\": \"jobId\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"cart_order_data\": [{\"name\": \"name\", \"value\": \"value\", \"type\": \"type\", \"usage_kind\": [\"servicetags\"]}], \"data\": {\"job_type\": \"repo_download_job\", \"workspace_job_data\": {\"workspace_name\": \"workspaceName\", \"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"template_data\": [{\"template_id\": \"templateId\", \"template_name\": \"templateName\", \"flow_index\": 0, \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"action_job_data\": {\"action_name\": \"actionName\", \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"inventory_record\": {\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"], \"connection_type\": \"connectionType\", \"credentials\": [{\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"common_credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"bastion_credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"inventory_view\": {\"groups\": [{\"name\": \"name\", \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"hosts\": [{\"alias\": \"alias\", \"name\": \"name\", \"credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}]}]}]}}, \"materialized_inventory\": \"materializedInventory\"}, \"system_job_data\": {\"key_id\": \"keyId\", \"schematics_resource_id\": [\"schematicsResourceId\"], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}, \"flow_job_data\": {\"flow_id\": \"flowId\", \"flow_name\": \"flowName\", \"workitems\": [{\"command_object_id\": \"commandObjectId\", \"command_object_name\": \"commandObjectName\", \"layers\": \"layers\", \"source_type\": \"local\", \"source\": {\"source_type\": \"local\", \"git\": {\"computed_git_repo_url\": \"computedGitRepoUrl\", \"git_repo_url\": \"gitRepoUrl\", \"git_token\": \"gitToken\", \"git_repo_folder\": \"gitRepoFolder\", \"git_release\": \"gitRelease\", \"git_branch\": \"gitBranch\", \"git_commit\": \"gitCommit\", \"git_commit_timestamp\": \"2019-01-01T12:00:00.000Z\"}, \"catalog\": {\"catalog_name\": \"catalogName\", \"catalog_id\": \"catalogId\", \"offering_name\": \"offeringName\", \"offering_version\": \"offeringVersion\", \"offering_kind\": \"offeringKind\", \"offering_target_kind\": \"offeringTargetKind\", \"offering_id\": \"offeringId\", \"offering_version_id\": \"offeringVersionId\", \"offering_version_flavour_name\": \"offeringVersionFlavourName\", \"offering_repo_url\": \"offeringRepoUrl\", \"offering_provisioner_working_directory\": \"offeringProvisionerWorkingDirectory\", \"dry_run\": true, \"owning_account\": \"owningAccount\", \"item_icon_url\": \"itemIconUrl\", \"item_id\": \"itemId\", \"item_name\": \"itemName\", \"item_readme_url\": \"itemReadmeUrl\", \"item_url\": \"itemUrl\", \"launch_url\": \"launchUrl\"}}, \"inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"outputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"settings\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"last_job\": {\"command_object\": \"workspace\", \"command_object_name\": \"commandObjectName\", \"command_object_id\": \"commandObjectId\", \"command_name\": \"workspace_plan\", \"job_id\": \"jobId\", \"job_status\": \"job_pending\"}, \"updated_at\": \"2019-01-01T12:00:00.000Z\"}], \"updated_at\": \"2019-01-01T12:00:00.000Z\"}}, \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"log_summary\": {\"job_id\": \"jobId\", \"job_type\": \"repo_download_job\", \"log_start_at\": \"2019-01-01T12:00:00.000Z\", \"log_analyzed_till\": \"2019-01-01T12:00:00.000Z\", \"elapsed_time\": 11, \"log_errors\": [{\"error_code\": \"errorCode\", \"error_msg\": \"errorMsg\", \"error_count\": 10}], \"repo_download_job\": {\"scanned_file_count\": 16, \"quarantined_file_count\": 20, \"detected_filetype\": \"detectedFiletype\", \"inputs_count\": \"inputsCount\", \"outputs_count\": \"outputsCount\"}, \"workspace_job\": {\"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16}, \"flow_job\": {\"workitems_completed\": 18, \"workitems_pending\": 16, \"workitems_failed\": 15, \"workitems\": [{\"workspace_id\": \"workspaceId\", \"job_id\": \"jobId\", \"resources_add\": 12, \"resources_modify\": 15, \"resources_destroy\": 16, \"log_url\": \"logUrl\"}]}, \"action_job\": {\"target_count\": 11, \"task_count\": 9, \"play_count\": 9, \"recap\": {\"target\": [\"target\"], \"ok\": 2, \"changed\": 7, \"failed\": 6, \"skipped\": 7, \"unreachable\": 11}}, \"system_job\": {\"target_count\": 11, \"success\": 7, \"failed\": 6}}, \"log_store_url\": \"logStoreUrl\", \"state_store_url\": \"stateStoreUrl\", \"results_url\": \"resultsUrl\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"job_runner_id\": \"jobRunnerId\", \"agent\": {\"id\": \"id\", \"name\": \"name\", \"assignment_policy_id\": \"assignmentPolicyId\"}}";
     String updateJobPath = "/v2/jobs/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -3639,12 +3859,12 @@ public class SchematicsTest {
       .hidden(true)
       .required(true)
       .options(java.util.Arrays.asList("testString"))
-      .minValue(Long.valueOf("26"))
-      .maxValue(Long.valueOf("26"))
-      .minLength(Long.valueOf("26"))
-      .maxLength(Long.valueOf("26"))
+      .minValue(Long.valueOf("0"))
+      .maxValue(Long.valueOf("0"))
+      .minLength(Long.valueOf("0"))
+      .maxLength(Long.valueOf("0"))
       .matches("testString")
-      .position(Long.valueOf("26"))
+      .position(Long.valueOf("0"))
       .groupBy("testString")
       .source("testString")
       .build();
@@ -3681,7 +3901,7 @@ public class SchematicsTest {
     JobStatusTemplate jobStatusTemplateModel = new JobStatusTemplate.Builder()
       .templateId("testString")
       .templateName("testString")
-      .flowIndex(Long.valueOf("26"))
+      .flowIndex(Long.valueOf("0"))
       .statusCode("job_pending")
       .statusMessage("testString")
       .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
@@ -3747,7 +3967,7 @@ public class SchematicsTest {
     JobDataTemplate jobDataTemplateModel = new JobDataTemplate.Builder()
       .templateId("testString")
       .templateName("testString")
-      .flowIndex(Long.valueOf("26"))
+      .flowIndex(Long.valueOf("0"))
       .inputs(java.util.Arrays.asList(variableDataModel))
       .outputs(java.util.Arrays.asList(variableDataModel))
       .settings(java.util.Arrays.asList(variableDataModel))
@@ -3766,6 +3986,58 @@ public class SchematicsTest {
       .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .build();
 
+    // Construct an instance of the CredentialVariableMetadata model
+    CredentialVariableMetadata credentialVariableMetadataModel = new CredentialVariableMetadata.Builder()
+      .type("string")
+      .aliases(java.util.Arrays.asList("testString"))
+      .description("testString")
+      .cloudDataType("testString")
+      .defaultValue("testString")
+      .linkStatus("normal")
+      .immutable(true)
+      .hidden(true)
+      .required(true)
+      .position(Long.valueOf("0"))
+      .groupBy("testString")
+      .source("testString")
+      .build();
+
+    // Construct an instance of the CredentialVariableData model
+    CredentialVariableData credentialVariableDataModel = new CredentialVariableData.Builder()
+      .name("testString")
+      .value("-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n")
+      .redacted("testString")
+      .useDefault(true)
+      .metadata(credentialVariableMetadataModel)
+      .build();
+
+    // Construct an instance of the BastionResourceDefinition model
+    BastionResourceDefinition bastionResourceDefinitionModel = new BastionResourceDefinition.Builder()
+      .name("testString")
+      .host("testString")
+      .build();
+
+    // Construct an instance of the Host model
+    Host hostModel = new Host.Builder()
+      .alias("testString")
+      .name("testString")
+      .credential(credentialVariableDataModel)
+      .vars(java.util.Arrays.asList(variableDataModel))
+      .build();
+
+    // Construct an instance of the Group model
+    Group groupModel = new Group.Builder()
+      .name("testString")
+      .vars(java.util.Arrays.asList(variableDataModel))
+      .credentials(credentialVariableDataModel)
+      .hosts(java.util.Arrays.asList(hostModel))
+      .build();
+
+    // Construct an instance of the InventoryView model
+    InventoryView inventoryViewModel = new InventoryView.Builder()
+      .groups(java.util.Arrays.asList(groupModel))
+      .build();
+
     // Construct an instance of the InventoryResourceRecord model
     InventoryResourceRecord inventoryResourceRecordModel = new InventoryResourceRecord.Builder()
       .name("testString")
@@ -3774,6 +4046,12 @@ public class SchematicsTest {
       .resourceGroup("testString")
       .inventoriesIni("testString")
       .resourceQueries(java.util.Arrays.asList("testString"))
+      .connectionType("testString")
+      .credentials(java.util.Arrays.asList(credentialVariableDataModel))
+      .commonCredentials(credentialVariableDataModel)
+      .bastion(bastionResourceDefinitionModel)
+      .bastionCredential(credentialVariableDataModel)
+      .inventoryView(inventoryViewModel)
       .build();
 
     // Construct an instance of the JobDataAction model
@@ -3873,12 +4151,6 @@ public class SchematicsTest {
       .actionJobData(jobDataActionModel)
       .systemJobData(jobDataSystemModel)
       .flowJobData(jobDataFlowModel)
-      .build();
-
-    // Construct an instance of the BastionResourceDefinition model
-    BastionResourceDefinition bastionResourceDefinitionModel = new BastionResourceDefinition.Builder()
-      .name("testString")
-      .host("testString")
       .build();
 
     // Construct an instance of the JobLogSummaryRepoDownloadJob model
@@ -3943,10 +4215,10 @@ public class SchematicsTest {
     UpdateJobOptions updateJobOptionsModel = new UpdateJobOptions.Builder()
       .jobId("testString")
       .refreshToken("testString")
-      .commandObject("workspace")
-      .commandObjectId("testString")
-      .commandName("workspace_plan")
-      .commandParameter("testString")
+      .commandObject("action")
+      .commandObjectId("us-east.ACTION.Example-12a1b212.3287dc42")
+      .commandName("ansible_playbook_run")
+      .commandParameter("site.yml")
       .commandOptions(java.util.Arrays.asList("testString"))
       .inputs(java.util.Arrays.asList(variableDataModel))
       .settings(java.util.Arrays.asList(variableDataModel))
@@ -3995,61 +4267,6 @@ public class SchematicsTest {
   public void testUpdateJobNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
     schematicsService.updateJob(null).execute();
-  }
-
-  // Test the deleteJob operation with a valid options model parameter
-  @Test
-  public void testDeleteJobWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "";
-    String deleteJobPath = "/v2/jobs/testString";
-    server.enqueue(new MockResponse()
-      .setResponseCode(204)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the DeleteJobOptions model
-    DeleteJobOptions deleteJobOptionsModel = new DeleteJobOptions.Builder()
-      .jobId("testString")
-      .refreshToken("testString")
-      .force(true)
-      .propagate(true)
-      .build();
-
-    // Invoke deleteJob() with a valid options model and verify the result
-    Response<Void> response = schematicsService.deleteJob(deleteJobOptionsModel).execute();
-    assertNotNull(response);
-    Void responseObj = response.getResult();
-    assertNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "DELETE");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, deleteJobPath);
-    // Verify header parameters
-    assertEquals(request.getHeader("Refresh_token"), "testString");
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the deleteJob operation with and without retries enabled
-  @Test
-  public void testDeleteJobWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testDeleteJobWOptions();
-
-    schematicsService.disableRetries();
-    testDeleteJobWOptions();
-  }
-
-  // Test the deleteJob operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testDeleteJobNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.deleteJob(null).execute();
   }
 
   // Test the listJobLogs operation with a valid options model parameter
@@ -4170,9 +4387,9 @@ public class SchematicsTest {
     // Construct an instance of the CreateWorkspaceDeletionJobOptions model
     CreateWorkspaceDeletionJobOptions createWorkspaceDeletionJobOptionsModel = new CreateWorkspaceDeletionJobOptions.Builder()
       .refreshToken("testString")
-      .job("testString")
+      .job("delete")
       .version("testString")
-      .workspaces(java.util.Arrays.asList("testString"))
+      .workspaces(java.util.Arrays.asList("us-south.workspace.testWorkspace.a6010c37", "us-south.workspace.teraformNewupdatedone.72011986", "us-south.workspace.readterraform.400b427c", "us-south.workspace.myworkspacesink.49745827", "us-south.workspace.ReadTerraformTemp.c98c9774", "us-south.workspace.SampleTest1.2a51c3a1"))
       .build();
 
     // Invoke createWorkspaceDeletionJob() with a valid options model and verify the result
@@ -4267,7 +4484,7 @@ public class SchematicsTest {
   @Test
   public void testListInventoriesWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"total_count\": 10, \"limit\": 5, \"offset\": 6, \"inventories\": [{\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"]}]}";
+    String mockResponseBody = "{\"total_count\": 0, \"limit\": 0, \"offset\": 0, \"inventories\": [{\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"], \"connection_type\": \"connectionType\", \"credentials\": [{\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"common_credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"bastion_credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"inventory_view\": {\"groups\": [{\"name\": \"name\", \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"hosts\": [{\"alias\": \"alias\", \"name\": \"name\", \"credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}]}]}]}}]}";
     String listInventoriesPath = "/v2/inventories";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -4318,21 +4535,110 @@ public class SchematicsTest {
   @Test
   public void testCreateInventoryWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"]}";
+    String mockResponseBody = "{\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"], \"connection_type\": \"connectionType\", \"credentials\": [{\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"common_credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"bastion_credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"inventory_view\": {\"groups\": [{\"name\": \"name\", \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"hosts\": [{\"alias\": \"alias\", \"name\": \"name\", \"credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}]}]}]}}";
     String createInventoryPath = "/v2/inventories";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
+      .setResponseCode(201)
       .setBody(mockResponseBody));
+
+    // Construct an instance of the CredentialVariableMetadata model
+    CredentialVariableMetadata credentialVariableMetadataModel = new CredentialVariableMetadata.Builder()
+      .type("string")
+      .aliases(java.util.Arrays.asList("testString"))
+      .description("testString")
+      .cloudDataType("testString")
+      .defaultValue("testString")
+      .linkStatus("normal")
+      .immutable(true)
+      .hidden(true)
+      .required(true)
+      .position(Long.valueOf("0"))
+      .groupBy("testString")
+      .source("testString")
+      .build();
+
+    // Construct an instance of the CredentialVariableData model
+    CredentialVariableData credentialVariableDataModel = new CredentialVariableData.Builder()
+      .name("testString")
+      .value("-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n")
+      .redacted("testString")
+      .useDefault(true)
+      .metadata(credentialVariableMetadataModel)
+      .build();
+
+    // Construct an instance of the BastionResourceDefinition model
+    BastionResourceDefinition bastionResourceDefinitionModel = new BastionResourceDefinition.Builder()
+      .name("testString")
+      .host("testString")
+      .build();
+
+    // Construct an instance of the VariableMetadata model
+    VariableMetadata variableMetadataModel = new VariableMetadata.Builder()
+      .type("boolean")
+      .aliases(java.util.Arrays.asList("testString"))
+      .description("testString")
+      .cloudDataType("testString")
+      .defaultValue("testString")
+      .linkStatus("normal")
+      .secure(true)
+      .immutable(true)
+      .hidden(true)
+      .required(true)
+      .options(java.util.Arrays.asList("testString"))
+      .minValue(Long.valueOf("0"))
+      .maxValue(Long.valueOf("0"))
+      .minLength(Long.valueOf("0"))
+      .maxLength(Long.valueOf("0"))
+      .matches("testString")
+      .position(Long.valueOf("0"))
+      .groupBy("testString")
+      .source("testString")
+      .build();
+
+    // Construct an instance of the VariableData model
+    VariableData variableDataModel = new VariableData.Builder()
+      .name("testString")
+      .value("testString")
+      .useDefault(true)
+      .metadata(variableMetadataModel)
+      .build();
+
+    // Construct an instance of the Host model
+    Host hostModel = new Host.Builder()
+      .alias("testString")
+      .name("testString")
+      .credential(credentialVariableDataModel)
+      .vars(java.util.Arrays.asList(variableDataModel))
+      .build();
+
+    // Construct an instance of the Group model
+    Group groupModel = new Group.Builder()
+      .name("testString")
+      .vars(java.util.Arrays.asList(variableDataModel))
+      .credentials(credentialVariableDataModel)
+      .hosts(java.util.Arrays.asList(hostModel))
+      .build();
+
+    // Construct an instance of the InventoryView model
+    InventoryView inventoryViewModel = new InventoryView.Builder()
+      .groups(java.util.Arrays.asList(groupModel))
+      .build();
 
     // Construct an instance of the CreateInventoryOptions model
     CreateInventoryOptions createInventoryOptionsModel = new CreateInventoryOptions.Builder()
-      .name("testString")
-      .description("testString")
-      .location("us-south")
-      .resourceGroup("testString")
-      .inventoriesIni("testString")
+      .name("dev-inventoryapidocexample")
+      .description("My cloud linux inventory")
+      .location("us-east")
+      .resourceGroup("Default")
+      .connectionType("testString")
+      .credentials(java.util.Arrays.asList(credentialVariableDataModel))
+      .commonCredentials(credentialVariableDataModel)
+      .inventoriesIni("[windows]\n158.177.7.181")
       .resourceQueries(java.util.Arrays.asList("testString"))
+      .bastion(bastionResourceDefinitionModel)
+      .bastionCredential(credentialVariableDataModel)
+      .inventoryView(inventoryViewModel)
       .build();
 
     // Invoke createInventory() with a valid options model and verify the result
@@ -4361,116 +4667,6 @@ public class SchematicsTest {
 
     schematicsService.disableRetries();
     testCreateInventoryWOptions();
-  }
-
-  // Test the getInventory operation with a valid options model parameter
-  @Test
-  public void testGetInventoryWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"]}";
-    String getInventoryPath = "/v2/inventories/testString";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the GetInventoryOptions model
-    GetInventoryOptions getInventoryOptionsModel = new GetInventoryOptions.Builder()
-      .inventoryId("testString")
-      .profile("summary")
-      .build();
-
-    // Invoke getInventory() with a valid options model and verify the result
-    Response<InventoryResourceRecord> response = schematicsService.getInventory(getInventoryOptionsModel).execute();
-    assertNotNull(response);
-    InventoryResourceRecord responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getInventoryPath);
-    // Verify query params
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    assertEquals(query.get("profile"), "summary");
-  }
-
-  // Test the getInventory operation with and without retries enabled
-  @Test
-  public void testGetInventoryWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testGetInventoryWOptions();
-
-    schematicsService.disableRetries();
-    testGetInventoryWOptions();
-  }
-
-  // Test the getInventory operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testGetInventoryNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.getInventory(null).execute();
-  }
-
-  // Test the replaceInventory operation with a valid options model parameter
-  @Test
-  public void testReplaceInventoryWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"]}";
-    String replaceInventoryPath = "/v2/inventories/testString";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the ReplaceInventoryOptions model
-    ReplaceInventoryOptions replaceInventoryOptionsModel = new ReplaceInventoryOptions.Builder()
-      .inventoryId("testString")
-      .name("testString")
-      .description("testString")
-      .location("us-south")
-      .resourceGroup("testString")
-      .inventoriesIni("testString")
-      .resourceQueries(java.util.Arrays.asList("testString"))
-      .build();
-
-    // Invoke replaceInventory() with a valid options model and verify the result
-    Response<InventoryResourceRecord> response = schematicsService.replaceInventory(replaceInventoryOptionsModel).execute();
-    assertNotNull(response);
-    InventoryResourceRecord responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "PUT");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, replaceInventoryPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the replaceInventory operation with and without retries enabled
-  @Test
-  public void testReplaceInventoryWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testReplaceInventoryWOptions();
-
-    schematicsService.disableRetries();
-    testReplaceInventoryWOptions();
-  }
-
-  // Test the replaceInventory operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testReplaceInventoryNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.replaceInventory(null).execute();
   }
 
   // Test the deleteInventory operation with a valid options model parameter
@@ -4525,11 +4721,210 @@ public class SchematicsTest {
     schematicsService.deleteInventory(null).execute();
   }
 
+  // Test the getInventory operation with a valid options model parameter
+  @Test
+  public void testGetInventoryWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"], \"connection_type\": \"connectionType\", \"credentials\": [{\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"common_credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"bastion_credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"inventory_view\": {\"groups\": [{\"name\": \"name\", \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"hosts\": [{\"alias\": \"alias\", \"name\": \"name\", \"credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}]}]}]}}";
+    String getInventoryPath = "/v2/inventories/testString";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetInventoryOptions model
+    GetInventoryOptions getInventoryOptionsModel = new GetInventoryOptions.Builder()
+      .inventoryId("testString")
+      .profile("summary")
+      .build();
+
+    // Invoke getInventory() with a valid options model and verify the result
+    Response<InventoryResourceRecord> response = schematicsService.getInventory(getInventoryOptionsModel).execute();
+    assertNotNull(response);
+    InventoryResourceRecord responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getInventoryPath);
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(query.get("profile"), "summary");
+  }
+
+  // Test the getInventory operation with and without retries enabled
+  @Test
+  public void testGetInventoryWRetries() throws Throwable {
+    schematicsService.enableRetries(4, 30);
+    testGetInventoryWOptions();
+
+    schematicsService.disableRetries();
+    testGetInventoryWOptions();
+  }
+
+  // Test the getInventory operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetInventoryNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.getInventory(null).execute();
+  }
+
+  // Test the replaceInventory operation with a valid options model parameter
+  @Test
+  public void testReplaceInventoryWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"name\": \"name\", \"id\": \"id\", \"description\": \"description\", \"location\": \"us-south\", \"resource_group\": \"resourceGroup\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"inventories_ini\": \"inventoriesIni\", \"resource_queries\": [\"resourceQueries\"], \"connection_type\": \"connectionType\", \"credentials\": [{\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"common_credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"bastion\": {\"name\": \"name\", \"host\": \"host\"}, \"bastion_credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"inventory_view\": {\"groups\": [{\"name\": \"name\", \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"credentials\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"hosts\": [{\"alias\": \"alias\", \"name\": \"name\", \"credential\": {\"name\": \"name\", \"value\": \"-----BEGIN OPENSSH PRIVATE KEY-----\nXXXXXXXXXXXXX\n-----END OPENSSH PRIVATE KEY-----\n\", \"redacted\": \"redacted\", \"use_default\": true, \"metadata\": {\"type\": \"string\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"immutable\": false, \"hidden\": true, \"required\": true, \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}, \"vars\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}]}]}]}}";
+    String replaceInventoryPath = "/v2/inventories/testString";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(201)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the CredentialVariableMetadata model
+    CredentialVariableMetadata credentialVariableMetadataModel = new CredentialVariableMetadata.Builder()
+      .type("string")
+      .aliases(java.util.Arrays.asList("testString"))
+      .description("testString")
+      .cloudDataType("testString")
+      .defaultValue("testString")
+      .linkStatus("normal")
+      .immutable(true)
+      .hidden(true)
+      .required(true)
+      .position(Long.valueOf("0"))
+      .groupBy("testString")
+      .source("testString")
+      .build();
+
+    // Construct an instance of the CredentialVariableData model
+    CredentialVariableData credentialVariableDataModel = new CredentialVariableData.Builder()
+      .name("testString")
+      .value("-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n")
+      .redacted("testString")
+      .useDefault(true)
+      .metadata(credentialVariableMetadataModel)
+      .build();
+
+    // Construct an instance of the BastionResourceDefinition model
+    BastionResourceDefinition bastionResourceDefinitionModel = new BastionResourceDefinition.Builder()
+      .name("testString")
+      .host("testString")
+      .build();
+
+    // Construct an instance of the VariableMetadata model
+    VariableMetadata variableMetadataModel = new VariableMetadata.Builder()
+      .type("boolean")
+      .aliases(java.util.Arrays.asList("testString"))
+      .description("testString")
+      .cloudDataType("testString")
+      .defaultValue("testString")
+      .linkStatus("normal")
+      .secure(true)
+      .immutable(true)
+      .hidden(true)
+      .required(true)
+      .options(java.util.Arrays.asList("testString"))
+      .minValue(Long.valueOf("0"))
+      .maxValue(Long.valueOf("0"))
+      .minLength(Long.valueOf("0"))
+      .maxLength(Long.valueOf("0"))
+      .matches("testString")
+      .position(Long.valueOf("0"))
+      .groupBy("testString")
+      .source("testString")
+      .build();
+
+    // Construct an instance of the VariableData model
+    VariableData variableDataModel = new VariableData.Builder()
+      .name("testString")
+      .value("testString")
+      .useDefault(true)
+      .metadata(variableMetadataModel)
+      .build();
+
+    // Construct an instance of the Host model
+    Host hostModel = new Host.Builder()
+      .alias("testString")
+      .name("158.177.7.182")
+      .credential(credentialVariableDataModel)
+      .vars(java.util.Arrays.asList(variableDataModel))
+      .build();
+
+    // Construct an instance of the Group model
+    Group groupModel = new Group.Builder()
+      .name("windows")
+      .vars(java.util.Arrays.asList(variableDataModel))
+      .credentials(credentialVariableDataModel)
+      .hosts(java.util.Arrays.asList(hostModel))
+      .build();
+
+    // Construct an instance of the InventoryView model
+    InventoryView inventoryViewModel = new InventoryView.Builder()
+      .groups(java.util.Arrays.asList(groupModel))
+      .build();
+
+    // Construct an instance of the ReplaceInventoryOptions model
+    ReplaceInventoryOptions replaceInventoryOptionsModel = new ReplaceInventoryOptions.Builder()
+      .inventoryId("testString")
+      .name("dev-inventoryapidocexample")
+      .description("My cloud linux inventory")
+      .location("us-east")
+      .resourceGroup("Default")
+      .connectionType("ssh")
+      .credentials(java.util.Arrays.asList(credentialVariableDataModel))
+      .commonCredentials(credentialVariableDataModel)
+      .inventoriesIni("[windows]\n158.177.7.182")
+      .resourceQueries(java.util.Arrays.asList("testString"))
+      .bastion(bastionResourceDefinitionModel)
+      .bastionCredential(credentialVariableDataModel)
+      .inventoryView(inventoryViewModel)
+      .build();
+
+    // Invoke replaceInventory() with a valid options model and verify the result
+    Response<InventoryResourceRecord> response = schematicsService.replaceInventory(replaceInventoryOptionsModel).execute();
+    assertNotNull(response);
+    InventoryResourceRecord responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "PUT");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, replaceInventoryPath);
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the replaceInventory operation with and without retries enabled
+  @Test
+  public void testReplaceInventoryWRetries() throws Throwable {
+    schematicsService.enableRetries(4, 30);
+    testReplaceInventoryWOptions();
+
+    schematicsService.disableRetries();
+    testReplaceInventoryWOptions();
+  }
+
+  // Test the replaceInventory operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testReplaceInventoryNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.replaceInventory(null).execute();
+  }
+
   // Test the listResourceQuery operation with a valid options model parameter
   @Test
   public void testListResourceQueryWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"total_count\": 10, \"limit\": 5, \"offset\": 6, \"resource_queries\": [{\"type\": \"vsi\", \"name\": \"name\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"queries\": [{\"query_type\": \"workspaces\", \"query_condition\": [{\"name\": \"name\", \"value\": \"value\", \"description\": \"description\"}], \"query_select\": [\"querySelect\"]}]}]}";
+    String mockResponseBody = "{\"total_count\": 0, \"limit\": 0, \"offset\": 0, \"resource_queries\": [{\"type\": \"vsi\", \"name\": \"name\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"queries\": [{\"query_type\": \"workspaces\", \"query_condition\": [{\"name\": \"name\", \"value\": \"value\", \"description\": \"description\"}], \"query_select\": [\"querySelect\"]}]}]}";
     String listResourceQueryPath = "/v2/resources_query";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -4589,9 +4984,9 @@ public class SchematicsTest {
 
     // Construct an instance of the ResourceQueryParam model
     ResourceQueryParam resourceQueryParamModel = new ResourceQueryParam.Builder()
-      .name("testString")
-      .value("testString")
-      .description("testString")
+      .name("workspace-id")
+      .value("us-east.ACTION.kubectlWorkshop.1010101")
+      .description("string")
       .build();
 
     // Construct an instance of the ResourceQuery model
@@ -4603,8 +4998,8 @@ public class SchematicsTest {
 
     // Construct an instance of the CreateResourceQueryOptions model
     CreateResourceQueryOptions createResourceQueryOptionsModel = new CreateResourceQueryOptions.Builder()
-      .type("vsi")
-      .name("testString")
+      .type("workspace_resource")
+      .name("hello")
       .queries(java.util.Arrays.asList(resourceQueryModel))
       .build();
 
@@ -4634,176 +5029,6 @@ public class SchematicsTest {
 
     schematicsService.disableRetries();
     testCreateResourceQueryWOptions();
-  }
-
-  // Test the getResourcesQuery operation with a valid options model parameter
-  @Test
-  public void testGetResourcesQueryWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"type\": \"vsi\", \"name\": \"name\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"queries\": [{\"query_type\": \"workspaces\", \"query_condition\": [{\"name\": \"name\", \"value\": \"value\", \"description\": \"description\"}], \"query_select\": [\"querySelect\"]}]}";
-    String getResourcesQueryPath = "/v2/resources_query/testString";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the GetResourcesQueryOptions model
-    GetResourcesQueryOptions getResourcesQueryOptionsModel = new GetResourcesQueryOptions.Builder()
-      .queryId("testString")
-      .build();
-
-    // Invoke getResourcesQuery() with a valid options model and verify the result
-    Response<ResourceQueryRecord> response = schematicsService.getResourcesQuery(getResourcesQueryOptionsModel).execute();
-    assertNotNull(response);
-    ResourceQueryRecord responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getResourcesQueryPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the getResourcesQuery operation with and without retries enabled
-  @Test
-  public void testGetResourcesQueryWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testGetResourcesQueryWOptions();
-
-    schematicsService.disableRetries();
-    testGetResourcesQueryWOptions();
-  }
-
-  // Test the getResourcesQuery operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testGetResourcesQueryNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.getResourcesQuery(null).execute();
-  }
-
-  // Test the replaceResourcesQuery operation with a valid options model parameter
-  @Test
-  public void testReplaceResourcesQueryWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"type\": \"vsi\", \"name\": \"name\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"queries\": [{\"query_type\": \"workspaces\", \"query_condition\": [{\"name\": \"name\", \"value\": \"value\", \"description\": \"description\"}], \"query_select\": [\"querySelect\"]}]}";
-    String replaceResourcesQueryPath = "/v2/resources_query/testString";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the ResourceQueryParam model
-    ResourceQueryParam resourceQueryParamModel = new ResourceQueryParam.Builder()
-      .name("testString")
-      .value("testString")
-      .description("testString")
-      .build();
-
-    // Construct an instance of the ResourceQuery model
-    ResourceQuery resourceQueryModel = new ResourceQuery.Builder()
-      .queryType("workspaces")
-      .queryCondition(java.util.Arrays.asList(resourceQueryParamModel))
-      .querySelect(java.util.Arrays.asList("testString"))
-      .build();
-
-    // Construct an instance of the ReplaceResourcesQueryOptions model
-    ReplaceResourcesQueryOptions replaceResourcesQueryOptionsModel = new ReplaceResourcesQueryOptions.Builder()
-      .queryId("testString")
-      .type("vsi")
-      .name("testString")
-      .queries(java.util.Arrays.asList(resourceQueryModel))
-      .build();
-
-    // Invoke replaceResourcesQuery() with a valid options model and verify the result
-    Response<ResourceQueryRecord> response = schematicsService.replaceResourcesQuery(replaceResourcesQueryOptionsModel).execute();
-    assertNotNull(response);
-    ResourceQueryRecord responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "PUT");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, replaceResourcesQueryPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the replaceResourcesQuery operation with and without retries enabled
-  @Test
-  public void testReplaceResourcesQueryWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testReplaceResourcesQueryWOptions();
-
-    schematicsService.disableRetries();
-    testReplaceResourcesQueryWOptions();
-  }
-
-  // Test the replaceResourcesQuery operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testReplaceResourcesQueryNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.replaceResourcesQuery(null).execute();
-  }
-
-  // Test the executeResourceQuery operation with a valid options model parameter
-  @Test
-  public void testExecuteResourceQueryWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"response\": [{\"query_type\": \"workspaces\", \"query_condition\": [{\"name\": \"name\", \"value\": \"value\", \"description\": \"description\"}], \"query_select\": [\"querySelect\"], \"query_output\": [{\"name\": \"name\", \"value\": \"value\"}]}]}";
-    String executeResourceQueryPath = "/v2/resources_query/testString";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the ExecuteResourceQueryOptions model
-    ExecuteResourceQueryOptions executeResourceQueryOptionsModel = new ExecuteResourceQueryOptions.Builder()
-      .queryId("testString")
-      .build();
-
-    // Invoke executeResourceQuery() with a valid options model and verify the result
-    Response<ResourceQueryResponseRecord> response = schematicsService.executeResourceQuery(executeResourceQueryOptionsModel).execute();
-    assertNotNull(response);
-    ResourceQueryResponseRecord responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "POST");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, executeResourceQueryPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the executeResourceQuery operation with and without retries enabled
-  @Test
-  public void testExecuteResourceQueryWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testExecuteResourceQueryWOptions();
-
-    schematicsService.disableRetries();
-    testExecuteResourceQueryWOptions();
-  }
-
-  // Test the executeResourceQuery operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testExecuteResourceQueryNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.executeResourceQuery(null).execute();
   }
 
   // Test the deleteResourcesQuery operation with a valid options model parameter
@@ -4858,29 +5083,26 @@ public class SchematicsTest {
     schematicsService.deleteResourcesQuery(null).execute();
   }
 
-  // Test the listAgent operation with a valid options model parameter
+  // Test the getResourcesQuery operation with a valid options model parameter
   @Test
-  public void testListAgentWOptions() throws Throwable {
+  public void testGetResourcesQueryWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"total_count\": 10, \"limit\": 5, \"offset\": 6, \"agents\": [{\"name\": \"MyDevAgent\", \"description\": \"Register agent\", \"resource_group\": \"resourceGroup\", \"tags\": [\"tags\"], \"agent_location\": \"us-south\", \"location\": \"us-south\", \"profile_id\": \"profileId\", \"agent_crn\": \"agentCrn\", \"id\": \"id\", \"registered_at\": \"2019-01-01T12:00:00.000Z\", \"registered_by\": \"registeredBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"user_state\": {\"state\": \"enable\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"connection_state\": {\"state\": \"Connected\", \"checked_at\": \"2019-01-01T12:00:00.000Z\"}, \"system_state\": {\"state\": \"error\", \"message\": \"message\"}}]}";
-    String listAgentPath = "/v2/settings/agents";
+    String mockResponseBody = "{\"type\": \"vsi\", \"name\": \"name\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"queries\": [{\"query_type\": \"workspaces\", \"query_condition\": [{\"name\": \"name\", \"value\": \"value\", \"description\": \"description\"}], \"query_select\": [\"querySelect\"]}]}";
+    String getResourcesQueryPath = "/v2/resources_query/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
       .setBody(mockResponseBody));
 
-    // Construct an instance of the ListAgentOptions model
-    ListAgentOptions listAgentOptionsModel = new ListAgentOptions.Builder()
-      .offset(Long.valueOf("0"))
-      .limit(Long.valueOf("100"))
-      .profile("summary")
-      .filter("all")
+    // Construct an instance of the GetResourcesQueryOptions model
+    GetResourcesQueryOptions getResourcesQueryOptionsModel = new GetResourcesQueryOptions.Builder()
+      .queryId("testString")
       .build();
 
-    // Invoke listAgent() with a valid options model and verify the result
-    Response<AgentList> response = schematicsService.listAgent(listAgentOptionsModel).execute();
+    // Invoke getResourcesQuery() with a valid options model and verify the result
+    Response<ResourceQueryRecord> response = schematicsService.getResourcesQuery(getResourcesQueryOptionsModel).execute();
     assertNotNull(response);
-    AgentList responseObj = response.getResult();
+    ResourceQueryRecord responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request sent to the mock server
@@ -4889,58 +5111,49 @@ public class SchematicsTest {
     assertEquals(request.getMethod(), "GET");
     // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, listAgentPath);
-    // Verify query params
+    assertEquals(parsedPath, getResourcesQueryPath);
+    // Verify that there is no query string
     Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
-    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("100"));
-    assertEquals(query.get("profile"), "summary");
-    assertEquals(query.get("filter"), "all");
+    assertNull(query);
   }
 
-  // Test the listAgent operation with and without retries enabled
+  // Test the getResourcesQuery operation with and without retries enabled
   @Test
-  public void testListAgentWRetries() throws Throwable {
+  public void testGetResourcesQueryWRetries() throws Throwable {
     schematicsService.enableRetries(4, 30);
-    testListAgentWOptions();
+    testGetResourcesQueryWOptions();
 
     schematicsService.disableRetries();
-    testListAgentWOptions();
+    testGetResourcesQueryWOptions();
   }
 
-  // Test the registerAgent operation with a valid options model parameter
+  // Test the getResourcesQuery operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetResourcesQueryNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.getResourcesQuery(null).execute();
+  }
+
+  // Test the executeResourceQuery operation with a valid options model parameter
   @Test
-  public void testRegisterAgentWOptions() throws Throwable {
+  public void testExecuteResourceQueryWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"name\": \"MyDevAgent\", \"description\": \"Register agent\", \"resource_group\": \"resourceGroup\", \"tags\": [\"tags\"], \"agent_location\": \"us-south\", \"location\": \"us-south\", \"profile_id\": \"profileId\", \"agent_crn\": \"agentCrn\", \"id\": \"id\", \"registered_at\": \"2019-01-01T12:00:00.000Z\", \"registered_by\": \"registeredBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"user_state\": {\"state\": \"enable\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"connection_state\": {\"state\": \"Connected\", \"checked_at\": \"2019-01-01T12:00:00.000Z\"}, \"system_state\": {\"state\": \"error\", \"message\": \"message\"}}";
-    String registerAgentPath = "/v2/settings/agents";
+    String mockResponseBody = "{\"response\": [{\"query_type\": \"workspaces\", \"query_condition\": [{\"name\": \"name\", \"value\": \"value\", \"description\": \"description\"}], \"query_select\": [\"querySelect\"], \"query_output\": [{\"name\": \"name\", \"value\": \"value\"}]}]}";
+    String executeResourceQueryPath = "/v2/resources_query/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
-      .setResponseCode(201)
+      .setResponseCode(200)
       .setBody(mockResponseBody));
 
-    // Construct an instance of the AgentUserState model
-    AgentUserState agentUserStateModel = new AgentUserState.Builder()
-      .state("enable")
+    // Construct an instance of the ExecuteResourceQueryOptions model
+    ExecuteResourceQueryOptions executeResourceQueryOptionsModel = new ExecuteResourceQueryOptions.Builder()
+      .queryId("testString")
       .build();
 
-    // Construct an instance of the RegisterAgentOptions model
-    RegisterAgentOptions registerAgentOptionsModel = new RegisterAgentOptions.Builder()
-      .name("MyDevAgent")
-      .agentLocation("us-south")
-      .location("us-south")
-      .profileId("testString")
-      .description("Register agent")
-      .resourceGroup("testString")
-      .tags(java.util.Arrays.asList("testString"))
-      .userState(agentUserStateModel)
-      .build();
-
-    // Invoke registerAgent() with a valid options model and verify the result
-    Response<Agent> response = schematicsService.registerAgent(registerAgentOptionsModel).execute();
+    // Invoke executeResourceQuery() with a valid options model and verify the result
+    Response<ResourceQueryResponseRecord> response = schematicsService.executeResourceQuery(executeResourceQueryOptionsModel).execute();
     assertNotNull(response);
-    Agent responseObj = response.getResult();
+    ResourceQueryResponseRecord responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request sent to the mock server
@@ -4949,201 +5162,102 @@ public class SchematicsTest {
     assertEquals(request.getMethod(), "POST");
     // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, registerAgentPath);
+    assertEquals(parsedPath, executeResourceQueryPath);
     // Verify that there is no query string
     Map<String, String> query = TestUtilities.parseQueryString(request);
     assertNull(query);
   }
 
-  // Test the registerAgent operation with and without retries enabled
+  // Test the executeResourceQuery operation with and without retries enabled
   @Test
-  public void testRegisterAgentWRetries() throws Throwable {
+  public void testExecuteResourceQueryWRetries() throws Throwable {
     schematicsService.enableRetries(4, 30);
-    testRegisterAgentWOptions();
+    testExecuteResourceQueryWOptions();
 
     schematicsService.disableRetries();
-    testRegisterAgentWOptions();
+    testExecuteResourceQueryWOptions();
   }
 
-  // Test the registerAgent operation with a null options model (negative test)
+  // Test the executeResourceQuery operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testRegisterAgentNoOptions() throws Throwable {
+  public void testExecuteResourceQueryNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
-    schematicsService.registerAgent(null).execute();
+    schematicsService.executeResourceQuery(null).execute();
   }
 
-  // Test the getAgent operation with a valid options model parameter
+  // Test the replaceResourcesQuery operation with a valid options model parameter
   @Test
-  public void testGetAgentWOptions() throws Throwable {
+  public void testReplaceResourcesQueryWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"name\": \"MyDevAgent\", \"description\": \"Register agent\", \"resource_group\": \"resourceGroup\", \"tags\": [\"tags\"], \"agent_location\": \"us-south\", \"location\": \"us-south\", \"profile_id\": \"profileId\", \"agent_crn\": \"agentCrn\", \"id\": \"id\", \"registered_at\": \"2019-01-01T12:00:00.000Z\", \"registered_by\": \"registeredBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"user_state\": {\"state\": \"enable\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"connection_state\": {\"state\": \"Connected\", \"checked_at\": \"2019-01-01T12:00:00.000Z\"}, \"system_state\": {\"state\": \"error\", \"message\": \"message\"}}";
-    String getAgentPath = "/v2/settings/agents/testString";
+    String mockResponseBody = "{\"type\": \"vsi\", \"name\": \"name\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"queries\": [{\"query_type\": \"workspaces\", \"query_condition\": [{\"name\": \"name\", \"value\": \"value\", \"description\": \"description\"}], \"query_select\": [\"querySelect\"]}]}";
+    String replaceResourcesQueryPath = "/v2/resources_query/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
       .setBody(mockResponseBody));
 
-    // Construct an instance of the GetAgentOptions model
-    GetAgentOptions getAgentOptionsModel = new GetAgentOptions.Builder()
-      .agentId("testString")
-      .profile("summary")
+    // Construct an instance of the ResourceQueryParam model
+    ResourceQueryParam resourceQueryParamModel = new ResourceQueryParam.Builder()
+      .name("workspace-id")
+      .value("us-east.ACTION.kubectlWorkshop.1010101")
+      .description("string")
       .build();
 
-    // Invoke getAgent() with a valid options model and verify the result
-    Response<Agent> response = schematicsService.getAgent(getAgentOptionsModel).execute();
+    // Construct an instance of the ResourceQuery model
+    ResourceQuery resourceQueryModel = new ResourceQuery.Builder()
+      .queryType("workspaces")
+      .queryCondition(java.util.Arrays.asList(resourceQueryParamModel))
+      .querySelect(java.util.Arrays.asList("testString"))
+      .build();
+
+    // Construct an instance of the ReplaceResourcesQueryOptions model
+    ReplaceResourcesQueryOptions replaceResourcesQueryOptionsModel = new ReplaceResourcesQueryOptions.Builder()
+      .queryId("testString")
+      .type("workspace_resource")
+      .name("hello my world")
+      .queries(java.util.Arrays.asList(resourceQueryModel))
+      .build();
+
+    // Invoke replaceResourcesQuery() with a valid options model and verify the result
+    Response<ResourceQueryRecord> response = schematicsService.replaceResourcesQuery(replaceResourcesQueryOptionsModel).execute();
     assertNotNull(response);
-    Agent responseObj = response.getResult();
+    ResourceQueryRecord responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
+    assertEquals(request.getMethod(), "PUT");
     // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getAgentPath);
-    // Verify query params
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    assertEquals(query.get("profile"), "summary");
-  }
-
-  // Test the getAgent operation with and without retries enabled
-  @Test
-  public void testGetAgentWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testGetAgentWOptions();
-
-    schematicsService.disableRetries();
-    testGetAgentWOptions();
-  }
-
-  // Test the getAgent operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testGetAgentNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.getAgent(null).execute();
-  }
-
-  // Test the deleteAgent operation with a valid options model parameter
-  @Test
-  public void testDeleteAgentWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "";
-    String deleteAgentPath = "/v2/settings/agents/testString";
-    server.enqueue(new MockResponse()
-      .setResponseCode(204)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the DeleteAgentOptions model
-    DeleteAgentOptions deleteAgentOptionsModel = new DeleteAgentOptions.Builder()
-      .agentId("testString")
-      .build();
-
-    // Invoke deleteAgent() with a valid options model and verify the result
-    Response<Void> response = schematicsService.deleteAgent(deleteAgentOptionsModel).execute();
-    assertNotNull(response);
-    Void responseObj = response.getResult();
-    assertNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "DELETE");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, deleteAgentPath);
+    assertEquals(parsedPath, replaceResourcesQueryPath);
     // Verify that there is no query string
     Map<String, String> query = TestUtilities.parseQueryString(request);
     assertNull(query);
   }
 
-  // Test the deleteAgent operation with and without retries enabled
+  // Test the replaceResourcesQuery operation with and without retries enabled
   @Test
-  public void testDeleteAgentWRetries() throws Throwable {
+  public void testReplaceResourcesQueryWRetries() throws Throwable {
     schematicsService.enableRetries(4, 30);
-    testDeleteAgentWOptions();
+    testReplaceResourcesQueryWOptions();
 
     schematicsService.disableRetries();
-    testDeleteAgentWOptions();
+    testReplaceResourcesQueryWOptions();
   }
 
-  // Test the deleteAgent operation with a null options model (negative test)
+  // Test the replaceResourcesQuery operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testDeleteAgentNoOptions() throws Throwable {
+  public void testReplaceResourcesQueryNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
-    schematicsService.deleteAgent(null).execute();
-  }
-
-  // Test the updateAgentRegistration operation with a valid options model parameter
-  @Test
-  public void testUpdateAgentRegistrationWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"name\": \"MyDevAgent\", \"description\": \"Register agent\", \"resource_group\": \"resourceGroup\", \"tags\": [\"tags\"], \"agent_location\": \"us-south\", \"location\": \"us-south\", \"profile_id\": \"profileId\", \"agent_crn\": \"agentCrn\", \"id\": \"id\", \"registered_at\": \"2019-01-01T12:00:00.000Z\", \"registered_by\": \"registeredBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"user_state\": {\"state\": \"enable\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"connection_state\": {\"state\": \"Connected\", \"checked_at\": \"2019-01-01T12:00:00.000Z\"}, \"system_state\": {\"state\": \"error\", \"message\": \"message\"}}";
-    String updateAgentRegistrationPath = "/v2/settings/agents/testString";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(201)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the AgentUserState model
-    AgentUserState agentUserStateModel = new AgentUserState.Builder()
-      .state("enable")
-      .build();
-
-    // Construct an instance of the UpdateAgentRegistrationOptions model
-    UpdateAgentRegistrationOptions updateAgentRegistrationOptionsModel = new UpdateAgentRegistrationOptions.Builder()
-      .agentId("testString")
-      .name("MyDevAgent")
-      .agentLocation("us-south")
-      .location("us-south")
-      .profileId("testString")
-      .description("Register agent")
-      .resourceGroup("testString")
-      .tags(java.util.Arrays.asList("testString"))
-      .userState(agentUserStateModel)
-      .build();
-
-    // Invoke updateAgentRegistration() with a valid options model and verify the result
-    Response<Agent> response = schematicsService.updateAgentRegistration(updateAgentRegistrationOptionsModel).execute();
-    assertNotNull(response);
-    Agent responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "PATCH");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, updateAgentRegistrationPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the updateAgentRegistration operation with and without retries enabled
-  @Test
-  public void testUpdateAgentRegistrationWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testUpdateAgentRegistrationWOptions();
-
-    schematicsService.disableRetries();
-    testUpdateAgentRegistrationWOptions();
-  }
-
-  // Test the updateAgentRegistration operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testUpdateAgentRegistrationNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.updateAgentRegistration(null).execute();
+    schematicsService.replaceResourcesQuery(null).execute();
   }
 
   // Test the listAgentData operation with a valid options model parameter
   @Test
   public void testListAgentDataWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"total_count\": 10, \"limit\": 5, \"offset\": 6, \"agents\": [{\"name\": \"MyDevAgent\", \"description\": \"Register agent\", \"resource_group\": \"resourceGroup\", \"tags\": [\"tags\"], \"version\": \"v1.0.0\", \"schematics_location\": \"us-south\", \"agent_location\": \"us-south\", \"agent_metadata\": [{\"name\": \"purpose\", \"value\": [\"value\"]}], \"user_state\": {\"state\": \"enable\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"agent_crn\": \"agentCrn\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"creation_by\": \"creationBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"system_state\": {\"status_code\": \"error\", \"status_message\": \"statusMessage\"}, \"agent_kpi\": {\"availability_indicator\": \"available\", \"lifecycle_indicator\": \"consistent\", \"percent_usage_indicator\": \"percentUsageIndicator\"}}]}";
+    String mockResponseBody = "{\"total_count\": 0, \"limit\": 0, \"offset\": 0, \"agents\": [{\"name\": \"MyDevAgent\", \"description\": \"Register agent\", \"resource_group\": \"resourceGroup\", \"tags\": [\"tags\"], \"version\": \"v1.0.0\", \"schematics_location\": \"us-south\", \"agent_location\": \"us-south\", \"agent_metadata\": [{\"name\": \"purpose\", \"value\": [\"value\"]}], \"user_state\": {\"state\": \"enable\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"agent_crn\": \"agentCrn\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"creation_by\": \"creationBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"system_state\": {\"status_code\": \"error\", \"status_message\": \"statusMessage\"}, \"agent_kpi\": {\"availability_indicator\": \"available\", \"lifecycle_indicator\": \"consistent\", \"percent_usage_indicator\": \"percentUsageIndicator\"}, \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}]}";
     String listAgentDataPath = "/v2/agents";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -5194,7 +5308,7 @@ public class SchematicsTest {
   @Test
   public void testCreateAgentDataWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"name\": \"MyDevAgent\", \"description\": \"Create Agent\", \"resource_group\": \"Default\", \"tags\": [\"tags\"], \"version\": \"v1.0.0\", \"schematics_location\": \"us-south\", \"agent_location\": \"us-south\", \"agent_infrastructure\": {\"infra_type\": \"ibm_kubernetes\", \"cluster_id\": \"clusterId\", \"cluster_resource_group\": \"clusterResourceGroup\", \"cos_instance_name\": \"cosInstanceName\", \"cos_bucket_name\": \"cosBucketName\", \"cos_bucket_region\": \"cosBucketRegion\"}, \"agent_metadata\": [{\"name\": \"purpose\", \"value\": [\"value\"]}], \"agent_inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"user_state\": {\"state\": \"enable\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"agent_crn\": \"agentCrn\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"creation_by\": \"creationBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"system_state\": {\"status_code\": \"error\", \"status_message\": \"statusMessage\"}, \"agent_kpi\": {\"availability_indicator\": \"available\", \"lifecycle_indicator\": \"consistent\", \"percent_usage_indicator\": \"percentUsageIndicator\", \"application_indicators\": [\"anyValue\"], \"infra_indicators\": [\"anyValue\"]}, \"recent_prs_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_deploy_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"is_redeployed\": false, \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_health_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_destroy_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
+    String mockResponseBody = "{\"name\": \"MyDevAgent\", \"description\": \"Create Agent\", \"resource_group\": \"Default\", \"tags\": [\"tags\"], \"version\": \"v1.0.0\", \"schematics_location\": \"us-south\", \"agent_location\": \"us-south\", \"agent_infrastructure\": {\"infra_type\": \"ibm_kubernetes\", \"cluster_id\": \"clusterId\", \"cluster_resource_group\": \"clusterResourceGroup\", \"cos_instance_name\": \"cosInstanceName\", \"cos_bucket_name\": \"cosBucketName\", \"cos_bucket_region\": \"cosBucketRegion\"}, \"agent_metadata\": [{\"name\": \"purpose\", \"value\": [\"value\"]}], \"agent_inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"user_state\": {\"state\": \"enable\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"agent_crn\": \"agentCrn\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"creation_by\": \"creationBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"system_state\": {\"status_code\": \"error\", \"status_message\": \"statusMessage\"}, \"agent_kpi\": {\"availability_indicator\": \"available\", \"lifecycle_indicator\": \"consistent\", \"percent_usage_indicator\": \"percentUsageIndicator\", \"application_indicators\": [\"anyValue\"], \"infra_indicators\": [\"anyValue\"]}, \"recent_prs_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_deploy_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"is_redeployed\": false, \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_health_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_destroy_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
     String createAgentDataPath = "/v2/agents";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -5204,11 +5318,11 @@ public class SchematicsTest {
     // Construct an instance of the AgentInfrastructure model
     AgentInfrastructure agentInfrastructureModel = new AgentInfrastructure.Builder()
       .infraType("ibm_kubernetes")
-      .clusterId("testString")
-      .clusterResourceGroup("testString")
-      .cosInstanceName("testString")
-      .cosBucketName("testString")
-      .cosBucketRegion("testString")
+      .clusterId("cluster_id")
+      .clusterResourceGroup("Default")
+      .cosInstanceName("blueprint_basic")
+      .cosBucketName("sample_bucket_name")
+      .cosBucketRegion("us-east")
       .build();
 
     // Construct an instance of the AgentMetadataInfo model
@@ -5230,20 +5344,20 @@ public class SchematicsTest {
       .hidden(true)
       .required(true)
       .options(java.util.Arrays.asList("testString"))
-      .minValue(Long.valueOf("26"))
-      .maxValue(Long.valueOf("26"))
-      .minLength(Long.valueOf("26"))
-      .maxLength(Long.valueOf("26"))
+      .minValue(Long.valueOf("0"))
+      .maxValue(Long.valueOf("0"))
+      .minLength(Long.valueOf("0"))
+      .maxLength(Long.valueOf("0"))
       .matches("testString")
-      .position(Long.valueOf("26"))
+      .position(Long.valueOf("0"))
       .groupBy("testString")
       .source("testString")
       .build();
 
     // Construct an instance of the VariableData model
     VariableData variableDataModel = new VariableData.Builder()
-      .name("testString")
-      .value("testString")
+      .name("ibmcloud_api_key")
+      .value("<api_key of the account where cluster and cos are present>")
       .useDefault(true)
       .metadata(variableMetadataModel)
       .build();
@@ -5264,14 +5378,14 @@ public class SchematicsTest {
 
     // Construct an instance of the CreateAgentDataOptions model
     CreateAgentDataOptions createAgentDataOptionsModel = new CreateAgentDataOptions.Builder()
-      .name("MyDevAgent")
+      .name("AgentName")
       .resourceGroup("Default")
       .version("v1.0.0")
       .schematicsLocation("us-south")
       .agentLocation("us-south")
       .agentInfrastructure(agentInfrastructureModel)
       .description("Create Agent")
-      .tags(java.util.Arrays.asList("testString"))
+      .tags(java.util.Arrays.asList("tag1", "tag2"))
       .agentMetadata(java.util.Arrays.asList(agentMetadataInfoModel))
       .agentInputs(java.util.Arrays.asList(variableDataModel))
       .userState(agentUserStateModel)
@@ -5311,184 +5425,6 @@ public class SchematicsTest {
   public void testCreateAgentDataNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
     schematicsService.createAgentData(null).execute();
-  }
-
-  // Test the getAgentData operation with a valid options model parameter
-  @Test
-  public void testGetAgentDataWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"name\": \"MyDevAgent\", \"description\": \"Create Agent\", \"resource_group\": \"Default\", \"tags\": [\"tags\"], \"version\": \"v1.0.0\", \"schematics_location\": \"us-south\", \"agent_location\": \"us-south\", \"agent_infrastructure\": {\"infra_type\": \"ibm_kubernetes\", \"cluster_id\": \"clusterId\", \"cluster_resource_group\": \"clusterResourceGroup\", \"cos_instance_name\": \"cosInstanceName\", \"cos_bucket_name\": \"cosBucketName\", \"cos_bucket_region\": \"cosBucketRegion\"}, \"agent_metadata\": [{\"name\": \"purpose\", \"value\": [\"value\"]}], \"agent_inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"user_state\": {\"state\": \"enable\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"agent_crn\": \"agentCrn\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"creation_by\": \"creationBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"system_state\": {\"status_code\": \"error\", \"status_message\": \"statusMessage\"}, \"agent_kpi\": {\"availability_indicator\": \"available\", \"lifecycle_indicator\": \"consistent\", \"percent_usage_indicator\": \"percentUsageIndicator\", \"application_indicators\": [\"anyValue\"], \"infra_indicators\": [\"anyValue\"]}, \"recent_prs_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_deploy_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"is_redeployed\": false, \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_health_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_destroy_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
-    String getAgentDataPath = "/v2/agents/testString";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the GetAgentDataOptions model
-    GetAgentDataOptions getAgentDataOptionsModel = new GetAgentDataOptions.Builder()
-      .agentId("testString")
-      .profile("summary")
-      .build();
-
-    // Invoke getAgentData() with a valid options model and verify the result
-    Response<AgentData> response = schematicsService.getAgentData(getAgentDataOptionsModel).execute();
-    assertNotNull(response);
-    AgentData responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getAgentDataPath);
-    // Verify query params
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    assertEquals(query.get("profile"), "summary");
-  }
-
-  // Test the getAgentData operation with and without retries enabled
-  @Test
-  public void testGetAgentDataWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testGetAgentDataWOptions();
-
-    schematicsService.disableRetries();
-    testGetAgentDataWOptions();
-  }
-
-  // Test the getAgentData operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testGetAgentDataNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.getAgentData(null).execute();
-  }
-
-  // Test the updateAgentData operation with a valid options model parameter
-  @Test
-  public void testUpdateAgentDataWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"name\": \"MyDevAgent\", \"description\": \"Create Agent\", \"resource_group\": \"Default\", \"tags\": [\"tags\"], \"version\": \"v1.0.0\", \"schematics_location\": \"us-south\", \"agent_location\": \"us-south\", \"agent_infrastructure\": {\"infra_type\": \"ibm_kubernetes\", \"cluster_id\": \"clusterId\", \"cluster_resource_group\": \"clusterResourceGroup\", \"cos_instance_name\": \"cosInstanceName\", \"cos_bucket_name\": \"cosBucketName\", \"cos_bucket_region\": \"cosBucketRegion\"}, \"agent_metadata\": [{\"name\": \"purpose\", \"value\": [\"value\"]}], \"agent_inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 8, \"max_value\": 8, \"min_length\": 9, \"max_length\": 9, \"matches\": \"matches\", \"position\": 8, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"user_state\": {\"state\": \"enable\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"agent_crn\": \"agentCrn\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"creation_by\": \"creationBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"system_state\": {\"status_code\": \"error\", \"status_message\": \"statusMessage\"}, \"agent_kpi\": {\"availability_indicator\": \"available\", \"lifecycle_indicator\": \"consistent\", \"percent_usage_indicator\": \"percentUsageIndicator\", \"application_indicators\": [\"anyValue\"], \"infra_indicators\": [\"anyValue\"]}, \"recent_prs_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_deploy_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"is_redeployed\": false, \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_health_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_destroy_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
-    String updateAgentDataPath = "/v2/agents/testString";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(201)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the AgentInfrastructure model
-    AgentInfrastructure agentInfrastructureModel = new AgentInfrastructure.Builder()
-      .infraType("ibm_kubernetes")
-      .clusterId("testString")
-      .clusterResourceGroup("testString")
-      .cosInstanceName("testString")
-      .cosBucketName("testString")
-      .cosBucketRegion("testString")
-      .build();
-
-    // Construct an instance of the AgentMetadataInfo model
-    AgentMetadataInfo agentMetadataInfoModel = new AgentMetadataInfo.Builder()
-      .name("purpose")
-      .value(java.util.Arrays.asList("git", "terraform", "ansible"))
-      .build();
-
-    // Construct an instance of the VariableMetadata model
-    VariableMetadata variableMetadataModel = new VariableMetadata.Builder()
-      .type("boolean")
-      .aliases(java.util.Arrays.asList("testString"))
-      .description("testString")
-      .cloudDataType("testString")
-      .defaultValue("testString")
-      .linkStatus("normal")
-      .secure(true)
-      .immutable(true)
-      .hidden(true)
-      .required(true)
-      .options(java.util.Arrays.asList("testString"))
-      .minValue(Long.valueOf("26"))
-      .maxValue(Long.valueOf("26"))
-      .minLength(Long.valueOf("26"))
-      .maxLength(Long.valueOf("26"))
-      .matches("testString")
-      .position(Long.valueOf("26"))
-      .groupBy("testString")
-      .source("testString")
-      .build();
-
-    // Construct an instance of the VariableData model
-    VariableData variableDataModel = new VariableData.Builder()
-      .name("testString")
-      .value("testString")
-      .useDefault(true)
-      .metadata(variableMetadataModel)
-      .build();
-
-    // Construct an instance of the AgentUserState model
-    AgentUserState agentUserStateModel = new AgentUserState.Builder()
-      .state("enable")
-      .build();
-
-    // Construct an instance of the AgentKPIData model
-    AgentKPIData agentKpiDataModel = new AgentKPIData.Builder()
-      .availabilityIndicator("available")
-      .lifecycleIndicator("consistent")
-      .percentUsageIndicator("testString")
-      .applicationIndicators(java.util.Arrays.asList("testString"))
-      .infraIndicators(java.util.Arrays.asList("testString"))
-      .build();
-
-    // Construct an instance of the UpdateAgentDataOptions model
-    UpdateAgentDataOptions updateAgentDataOptionsModel = new UpdateAgentDataOptions.Builder()
-      .agentId("testString")
-      .name("MyDevAgent")
-      .resourceGroup("Default")
-      .version("v1.0.0")
-      .schematicsLocation("us-south")
-      .agentLocation("us-south")
-      .agentInfrastructure(agentInfrastructureModel)
-      .description("Create Agent")
-      .tags(java.util.Arrays.asList("testString"))
-      .agentMetadata(java.util.Arrays.asList(agentMetadataInfoModel))
-      .agentInputs(java.util.Arrays.asList(variableDataModel))
-      .userState(agentUserStateModel)
-      .agentKpi(agentKpiDataModel)
-      .refreshToken("testString")
-      .build();
-
-    // Invoke updateAgentData() with a valid options model and verify the result
-    Response<AgentData> response = schematicsService.updateAgentData(updateAgentDataOptionsModel).execute();
-    assertNotNull(response);
-    AgentData responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "PUT");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, updateAgentDataPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the updateAgentData operation with and without retries enabled
-  @Test
-  public void testUpdateAgentDataWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testUpdateAgentDataWOptions();
-
-    schematicsService.disableRetries();
-    testUpdateAgentDataWOptions();
-  }
-
-  // Test the updateAgentData operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testUpdateAgentDataNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.updateAgentData(null).execute();
   }
 
   // Test the deleteAgentData operation with a valid options model parameter
@@ -5543,6 +5479,184 @@ public class SchematicsTest {
     schematicsService.deleteAgentData(null).execute();
   }
 
+  // Test the getAgentData operation with a valid options model parameter
+  @Test
+  public void testGetAgentDataWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"name\": \"MyDevAgent\", \"description\": \"Create Agent\", \"resource_group\": \"Default\", \"tags\": [\"tags\"], \"version\": \"v1.0.0\", \"schematics_location\": \"us-south\", \"agent_location\": \"us-south\", \"agent_infrastructure\": {\"infra_type\": \"ibm_kubernetes\", \"cluster_id\": \"clusterId\", \"cluster_resource_group\": \"clusterResourceGroup\", \"cos_instance_name\": \"cosInstanceName\", \"cos_bucket_name\": \"cosBucketName\", \"cos_bucket_region\": \"cosBucketRegion\"}, \"agent_metadata\": [{\"name\": \"purpose\", \"value\": [\"value\"]}], \"agent_inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"user_state\": {\"state\": \"enable\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"agent_crn\": \"agentCrn\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"creation_by\": \"creationBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"system_state\": {\"status_code\": \"error\", \"status_message\": \"statusMessage\"}, \"agent_kpi\": {\"availability_indicator\": \"available\", \"lifecycle_indicator\": \"consistent\", \"percent_usage_indicator\": \"percentUsageIndicator\", \"application_indicators\": [\"anyValue\"], \"infra_indicators\": [\"anyValue\"]}, \"recent_prs_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_deploy_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"is_redeployed\": false, \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_health_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_destroy_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
+    String getAgentDataPath = "/v2/agents/testString";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetAgentDataOptions model
+    GetAgentDataOptions getAgentDataOptionsModel = new GetAgentDataOptions.Builder()
+      .agentId("testString")
+      .profile("summary")
+      .build();
+
+    // Invoke getAgentData() with a valid options model and verify the result
+    Response<AgentData> response = schematicsService.getAgentData(getAgentDataOptionsModel).execute();
+    assertNotNull(response);
+    AgentData responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getAgentDataPath);
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(query.get("profile"), "summary");
+  }
+
+  // Test the getAgentData operation with and without retries enabled
+  @Test
+  public void testGetAgentDataWRetries() throws Throwable {
+    schematicsService.enableRetries(4, 30);
+    testGetAgentDataWOptions();
+
+    schematicsService.disableRetries();
+    testGetAgentDataWOptions();
+  }
+
+  // Test the getAgentData operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetAgentDataNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.getAgentData(null).execute();
+  }
+
+  // Test the updateAgentData operation with a valid options model parameter
+  @Test
+  public void testUpdateAgentDataWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"name\": \"MyDevAgent\", \"description\": \"Create Agent\", \"resource_group\": \"Default\", \"tags\": [\"tags\"], \"version\": \"v1.0.0\", \"schematics_location\": \"us-south\", \"agent_location\": \"us-south\", \"agent_infrastructure\": {\"infra_type\": \"ibm_kubernetes\", \"cluster_id\": \"clusterId\", \"cluster_resource_group\": \"clusterResourceGroup\", \"cos_instance_name\": \"cosInstanceName\", \"cos_bucket_name\": \"cosBucketName\", \"cos_bucket_region\": \"cosBucketRegion\"}, \"agent_metadata\": [{\"name\": \"purpose\", \"value\": [\"value\"]}], \"agent_inputs\": [{\"name\": \"name\", \"value\": \"value\", \"use_default\": true, \"metadata\": {\"type\": \"boolean\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"cloud_data_type\": \"cloudDataType\", \"default_value\": \"defaultValue\", \"link_status\": \"normal\", \"secure\": true, \"immutable\": false, \"hidden\": true, \"required\": true, \"options\": [\"options\"], \"min_value\": 0, \"max_value\": 0, \"min_length\": 0, \"max_length\": 0, \"matches\": \"matches\", \"position\": 0, \"group_by\": \"groupBy\", \"source\": \"source\"}, \"link\": \"link\"}], \"user_state\": {\"state\": \"enable\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"agent_crn\": \"agentCrn\", \"id\": \"id\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"creation_by\": \"creationBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"system_state\": {\"status_code\": \"error\", \"status_message\": \"statusMessage\"}, \"agent_kpi\": {\"availability_indicator\": \"available\", \"lifecycle_indicator\": \"consistent\", \"percent_usage_indicator\": \"percentUsageIndicator\", \"application_indicators\": [\"anyValue\"], \"infra_indicators\": [\"anyValue\"]}, \"recent_prs_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_deploy_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"is_redeployed\": false, \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_health_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"recent_destroy_job\": {\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}, \"encryption\": {\"crn\": \"crn\", \"scheme\": \"scheme\"}}";
+    String updateAgentDataPath = "/v2/agents/testString";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(201)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the AgentInfrastructure model
+    AgentInfrastructure agentInfrastructureModel = new AgentInfrastructure.Builder()
+      .infraType("ibm_kubernetes")
+      .clusterId("cluster_id")
+      .clusterResourceGroup("Default")
+      .cosInstanceName("blueprint_basic")
+      .cosBucketName("sample_bucket_name")
+      .cosBucketRegion("us-east")
+      .build();
+
+    // Construct an instance of the AgentMetadataInfo model
+    AgentMetadataInfo agentMetadataInfoModel = new AgentMetadataInfo.Builder()
+      .name("purpose")
+      .value(java.util.Arrays.asList("git", "terraform", "ansible"))
+      .build();
+
+    // Construct an instance of the VariableMetadata model
+    VariableMetadata variableMetadataModel = new VariableMetadata.Builder()
+      .type("boolean")
+      .aliases(java.util.Arrays.asList("testString"))
+      .description("testString")
+      .cloudDataType("testString")
+      .defaultValue("testString")
+      .linkStatus("normal")
+      .secure(true)
+      .immutable(true)
+      .hidden(true)
+      .required(true)
+      .options(java.util.Arrays.asList("testString"))
+      .minValue(Long.valueOf("0"))
+      .maxValue(Long.valueOf("0"))
+      .minLength(Long.valueOf("0"))
+      .maxLength(Long.valueOf("0"))
+      .matches("testString")
+      .position(Long.valueOf("0"))
+      .groupBy("testString")
+      .source("testString")
+      .build();
+
+    // Construct an instance of the VariableData model
+    VariableData variableDataModel = new VariableData.Builder()
+      .name("ibmcloud_api_key")
+      .value("<api_key of the account where cluster and cos are present>")
+      .useDefault(true)
+      .metadata(variableMetadataModel)
+      .build();
+
+    // Construct an instance of the AgentUserState model
+    AgentUserState agentUserStateModel = new AgentUserState.Builder()
+      .state("enable")
+      .build();
+
+    // Construct an instance of the AgentKPIData model
+    AgentKPIData agentKpiDataModel = new AgentKPIData.Builder()
+      .availabilityIndicator("available")
+      .lifecycleIndicator("consistent")
+      .percentUsageIndicator("testString")
+      .applicationIndicators(java.util.Arrays.asList("testString"))
+      .infraIndicators(java.util.Arrays.asList("testString"))
+      .build();
+
+    // Construct an instance of the UpdateAgentDataOptions model
+    UpdateAgentDataOptions updateAgentDataOptionsModel = new UpdateAgentDataOptions.Builder()
+      .agentId("testString")
+      .name("AgentName")
+      .resourceGroup("Default")
+      .version("v1.0.0")
+      .schematicsLocation("us-south")
+      .agentLocation("us-south")
+      .agentInfrastructure(agentInfrastructureModel)
+      .description("New Description")
+      .tags(java.util.Arrays.asList("tag1", "tag2"))
+      .agentMetadata(java.util.Arrays.asList(agentMetadataInfoModel))
+      .agentInputs(java.util.Arrays.asList(variableDataModel))
+      .userState(agentUserStateModel)
+      .agentKpi(agentKpiDataModel)
+      .refreshToken("testString")
+      .build();
+
+    // Invoke updateAgentData() with a valid options model and verify the result
+    Response<AgentData> response = schematicsService.updateAgentData(updateAgentDataOptionsModel).execute();
+    assertNotNull(response);
+    AgentData responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "PUT");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, updateAgentDataPath);
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the updateAgentData operation with and without retries enabled
+  @Test
+  public void testUpdateAgentDataWRetries() throws Throwable {
+    schematicsService.enableRetries(4, 30);
+    testUpdateAgentDataWOptions();
+
+    schematicsService.disableRetries();
+    testUpdateAgentDataWOptions();
+  }
+
+  // Test the updateAgentData operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testUpdateAgentDataNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.updateAgentData(null).execute();
+  }
+
   // Test the getAgentVersions operation with a valid options model parameter
   @Test
   public void testGetAgentVersionsWOptions() throws Throwable {
@@ -5583,57 +5697,6 @@ public class SchematicsTest {
 
     schematicsService.disableRetries();
     testGetAgentVersionsWOptions();
-  }
-
-  // Test the getPrsAgentJob operation with a valid options model parameter
-  @Test
-  public void testGetPrsAgentJobWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}";
-    String getPrsAgentJobPath = "/v2/agents/testString/prs";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(202)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the GetPrsAgentJobOptions model
-    GetPrsAgentJobOptions getPrsAgentJobOptionsModel = new GetPrsAgentJobOptions.Builder()
-      .agentId("testString")
-      .build();
-
-    // Invoke getPrsAgentJob() with a valid options model and verify the result
-    Response<AgentPRSJob> response = schematicsService.getPrsAgentJob(getPrsAgentJobOptionsModel).execute();
-    assertNotNull(response);
-    AgentPRSJob responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getPrsAgentJobPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the getPrsAgentJob operation with and without retries enabled
-  @Test
-  public void testGetPrsAgentJobWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testGetPrsAgentJobWOptions();
-
-    schematicsService.disableRetries();
-    testGetPrsAgentJobWOptions();
-  }
-
-  // Test the getPrsAgentJob operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testGetPrsAgentJobNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.getPrsAgentJob(null).execute();
   }
 
   // Test the prsAgentJob operation with a valid options model parameter
@@ -5689,57 +5752,6 @@ public class SchematicsTest {
     schematicsService.prsAgentJob(null).execute();
   }
 
-  // Test the getHealthCheckAgentJob operation with a valid options model parameter
-  @Test
-  public void testGetHealthCheckAgentJobWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}";
-    String getHealthCheckAgentJobPath = "/v2/agents/testString/health";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(202)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the GetHealthCheckAgentJobOptions model
-    GetHealthCheckAgentJobOptions getHealthCheckAgentJobOptionsModel = new GetHealthCheckAgentJobOptions.Builder()
-      .agentId("testString")
-      .build();
-
-    // Invoke getHealthCheckAgentJob() with a valid options model and verify the result
-    Response<AgentHealthJob> response = schematicsService.getHealthCheckAgentJob(getHealthCheckAgentJobOptionsModel).execute();
-    assertNotNull(response);
-    AgentHealthJob responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getHealthCheckAgentJobPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the getHealthCheckAgentJob operation with and without retries enabled
-  @Test
-  public void testGetHealthCheckAgentJobWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testGetHealthCheckAgentJobWOptions();
-
-    schematicsService.disableRetries();
-    testGetHealthCheckAgentJobWOptions();
-  }
-
-  // Test the getHealthCheckAgentJob operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testGetHealthCheckAgentJobNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.getHealthCheckAgentJob(null).execute();
-  }
-
   // Test the healthCheckAgentJob operation with a valid options model parameter
   @Test
   public void testHealthCheckAgentJobWOptions() throws Throwable {
@@ -5791,57 +5803,6 @@ public class SchematicsTest {
   public void testHealthCheckAgentJobNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
     schematicsService.healthCheckAgentJob(null).execute();
-  }
-
-  // Test the getDeployAgentJob operation with a valid options model parameter
-  @Test
-  public void testGetDeployAgentJobWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"agent_id\": \"agentId\", \"job_id\": \"jobId\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"is_redeployed\": false, \"agent_version\": \"v1.0.0\", \"status_code\": \"job_pending\", \"status_message\": \"statusMessage\", \"log_url\": \"logUrl\"}";
-    String getDeployAgentJobPath = "/v2/agents/testString/deploy";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(202)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the GetDeployAgentJobOptions model
-    GetDeployAgentJobOptions getDeployAgentJobOptionsModel = new GetDeployAgentJobOptions.Builder()
-      .agentId("testString")
-      .build();
-
-    // Invoke getDeployAgentJob() with a valid options model and verify the result
-    Response<AgentDeployJob> response = schematicsService.getDeployAgentJob(getDeployAgentJobOptionsModel).execute();
-    assertNotNull(response);
-    AgentDeployJob responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getDeployAgentJobPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the getDeployAgentJob operation with and without retries enabled
-  @Test
-  public void testGetDeployAgentJobWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testGetDeployAgentJobWOptions();
-
-    schematicsService.disableRetries();
-    testGetDeployAgentJobWOptions();
-  }
-
-  // Test the getDeployAgentJob operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testGetDeployAgentJobNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.getDeployAgentJob(null).execute();
   }
 
   // Test the deployAgentJob operation with a valid options model parameter
@@ -5901,9 +5862,10 @@ public class SchematicsTest {
   @Test
   public void testDeleteAgentResourcesWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "";
+    String mockResponseBody = "{\"message\": \"message\"}";
     String deleteAgentResourcesPath = "/v2/agents/testString/resources";
     server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
       .setResponseCode(202)
       .setBody(mockResponseBody));
 
@@ -5914,10 +5876,10 @@ public class SchematicsTest {
       .build();
 
     // Invoke deleteAgentResources() with a valid options model and verify the result
-    Response<Void> response = schematicsService.deleteAgentResources(deleteAgentResourcesOptionsModel).execute();
+    Response<DeleteAgentResources202Response> response = schematicsService.deleteAgentResources(deleteAgentResourcesOptionsModel).execute();
     assertNotNull(response);
-    Void responseObj = response.getResult();
-    assertNull(responseObj);
+    DeleteAgentResources202Response responseObj = response.getResult();
+    assertNotNull(responseObj);
 
     // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
@@ -6015,9 +5977,9 @@ public class SchematicsTest {
 
     // Construct an instance of the KMSSettingsPrimaryCrk model
     KMSSettingsPrimaryCrk kmsSettingsPrimaryCrkModel = new KMSSettingsPrimaryCrk.Builder()
-      .kmsName("testString")
-      .kmsPrivateEndpoint("testString")
-      .keyCrn("testString")
+      .kmsName("Key Protect-xxx")
+      .kmsPrivateEndpoint("https://private.us-south.kms.cloud.ibm.com")
+      .keyCrn("crn:v1:public:kms:us-south:a/010101010:key:3a14ceaf-c679-455d-10101010")
       .build();
 
     // Construct an instance of the KMSSettingsSecondaryCrk model
@@ -6029,9 +5991,9 @@ public class SchematicsTest {
 
     // Construct an instance of the UpdateKmsSettingsOptions model
     UpdateKmsSettingsOptions updateKmsSettingsOptionsModel = new UpdateKmsSettingsOptions.Builder()
-      .location("testString")
-      .encryptionScheme("testString")
-      .resourceGroup("testString")
+      .location("US")
+      .encryptionScheme("byok")
+      .resourceGroup("Default")
       .primaryCrk(kmsSettingsPrimaryCrkModel)
       .secondaryCrk(kmsSettingsSecondaryCrkModel)
       .build();
@@ -6068,7 +6030,7 @@ public class SchematicsTest {
   @Test
   public void testListKmsWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"total_count\": 10, \"limit\": 5, \"offset\": 6, \"kms_instances\": [{\"location\": \"location\", \"encryption_scheme\": \"encryptionScheme\", \"resource_group\": \"resourceGroup\", \"kms_crn\": \"kmsCrn\", \"kms_name\": \"kmsName\", \"kms_private_endpoint\": \"kmsPrivateEndpoint\", \"kms_public_endpoint\": \"kmsPublicEndpoint\", \"keys\": [{\"name\": \"name\", \"crn\": \"crn\", \"error\": \"error\"}]}]}";
+    String mockResponseBody = "{\"total_count\": 0, \"limit\": 0, \"offset\": 0, \"kms_instances\": [{\"location\": \"location\", \"encryption_scheme\": \"encryptionScheme\", \"resource_group\": \"resourceGroup\", \"kms_crn\": \"kmsCrn\", \"kms_name\": \"kmsName\", \"kms_private_endpoint\": \"kmsPrivateEndpoint\", \"kms_public_endpoint\": \"kmsPublicEndpoint\", \"keys\": [{\"name\": \"name\", \"crn\": \"crn\", \"error\": \"error\"}]}]}";
     String listKmsPath = "/v2/settings/kms_instances";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -6128,7 +6090,7 @@ public class SchematicsTest {
   @Test
   public void testListPolicyWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"total_count\": 10, \"limit\": 5, \"offset\": 6, \"policies\": [{\"name\": \"Agent1-DevWS\", \"id\": \"id\", \"crn\": \"crn\", \"account\": \"account\", \"description\": \"Policy for job execution of secured workspaces on agent1\", \"resource_group\": \"Default\", \"tags\": [\"tags\"], \"location\": \"us-south\", \"state\": {\"state\": \"draft\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"policy_kind\": \"agent_assignment_policy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\"}]}";
+    String mockResponseBody = "{\"total_count\": 0, \"limit\": 0, \"offset\": 0, \"policies\": [{\"name\": \"Agent1-DevWS\", \"id\": \"id\", \"crn\": \"crn\", \"account\": \"account\", \"description\": \"Policy for job execution of secured workspaces on agent1\", \"resource_group\": \"Default\", \"tags\": [\"tags\"], \"location\": \"us-south\", \"state\": {\"state\": \"draft\", \"set_by\": \"setBy\", \"set_at\": \"2019-01-01T12:00:00.000Z\"}, \"policy_kind\": \"agent_assignment_policy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\"}]}";
     String listPolicyPath = "/v2/settings/policies";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -6226,13 +6188,13 @@ public class SchematicsTest {
 
     // Construct an instance of the CreatePolicyOptions model
     CreatePolicyOptions createPolicyOptionsModel = new CreatePolicyOptions.Builder()
-      .name("Agent1-DevWS")
+      .kind("agent_assignment_policy")
+      .name("new-policy-dev")
       .description("Policy for job execution of secured workspaces on agent1")
       .resourceGroup("Default")
       .tags(java.util.Arrays.asList("policy:secured-job"))
       .location("us-south")
       .state(userStateModel)
-      .kind("agent_assignment_policy")
       .target(policyObjectsModel)
       .parameter(policyParameterModel)
       .scopedResources(java.util.Arrays.asList(scopedResourceModel))
@@ -6264,6 +6226,63 @@ public class SchematicsTest {
 
     schematicsService.disableRetries();
     testCreatePolicyWOptions();
+  }
+
+  // Test the createPolicy operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testCreatePolicyNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.createPolicy(null).execute();
+  }
+
+  // Test the deletePolicy operation with a valid options model parameter
+  @Test
+  public void testDeletePolicyWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "";
+    String deletePolicyPath = "/v2/settings/policies/testString";
+    server.enqueue(new MockResponse()
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the DeletePolicyOptions model
+    DeletePolicyOptions deletePolicyOptionsModel = new DeletePolicyOptions.Builder()
+      .policyId("testString")
+      .build();
+
+    // Invoke deletePolicy() with a valid options model and verify the result
+    Response<Void> response = schematicsService.deletePolicy(deletePolicyOptionsModel).execute();
+    assertNotNull(response);
+    Void responseObj = response.getResult();
+    assertNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "DELETE");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, deletePolicyPath);
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the deletePolicy operation with and without retries enabled
+  @Test
+  public void testDeletePolicyWRetries() throws Throwable {
+    schematicsService.enableRetries(4, 30);
+    testDeletePolicyWOptions();
+
+    schematicsService.disableRetries();
+    testDeletePolicyWOptions();
+  }
+
+  // Test the deletePolicy operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testDeletePolicyNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    schematicsService.deletePolicy(null).execute();
   }
 
   // Test the getPolicy operation with a valid options model parameter
@@ -6317,56 +6336,6 @@ public class SchematicsTest {
   public void testGetPolicyNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
     schematicsService.getPolicy(null).execute();
-  }
-
-  // Test the deletePolicy operation with a valid options model parameter
-  @Test
-  public void testDeletePolicyWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "";
-    String deletePolicyPath = "/v2/settings/policies/testString";
-    server.enqueue(new MockResponse()
-      .setResponseCode(204)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the DeletePolicyOptions model
-    DeletePolicyOptions deletePolicyOptionsModel = new DeletePolicyOptions.Builder()
-      .policyId("testString")
-      .build();
-
-    // Invoke deletePolicy() with a valid options model and verify the result
-    Response<Void> response = schematicsService.deletePolicy(deletePolicyOptionsModel).execute();
-    assertNotNull(response);
-    Void responseObj = response.getResult();
-    assertNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "DELETE");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, deletePolicyPath);
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the deletePolicy operation with and without retries enabled
-  @Test
-  public void testDeletePolicyWRetries() throws Throwable {
-    schematicsService.enableRetries(4, 30);
-    testDeletePolicyWOptions();
-
-    schematicsService.disableRetries();
-    testDeletePolicyWOptions();
-  }
-
-  // Test the deletePolicy operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testDeletePolicyNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    schematicsService.deletePolicy(null).execute();
   }
 
   // Test the updatePolicy operation with a valid options model parameter
@@ -6423,13 +6392,13 @@ public class SchematicsTest {
     // Construct an instance of the UpdatePolicyOptions model
     UpdatePolicyOptions updatePolicyOptionsModel = new UpdatePolicyOptions.Builder()
       .policyId("testString")
-      .name("Agent1-DevWS")
-      .description("Policy for job execution of secured workspaces on agent1")
+      .kind("agent_assignment_policy")
+      .name("new-policy-dev")
+      .description("Policy for job execution of secured workspaces on agent1 updated")
       .resourceGroup("Default")
       .tags(java.util.Arrays.asList("policy:secured-job"))
       .location("us-south")
       .state(userStateModel)
-      .kind("agent_assignment_policy")
       .target(policyObjectsModel)
       .parameter(policyParameterModel)
       .scopedResources(java.util.Arrays.asList(scopedResourceModel))

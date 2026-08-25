@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,8 +13,16 @@
 
 package com.ibm.cloud.schematics.v1.model;
 
+import com.ibm.cloud.schematics.v1.model.BastionResourceDefinition;
+import com.ibm.cloud.schematics.v1.model.CredentialVariableData;
+import com.ibm.cloud.schematics.v1.model.CredentialVariableMetadata;
+import com.ibm.cloud.schematics.v1.model.Group;
+import com.ibm.cloud.schematics.v1.model.Host;
 import com.ibm.cloud.schematics.v1.model.InventoryResourceRecord;
 import com.ibm.cloud.schematics.v1.model.InventoryResourceRecordList;
+import com.ibm.cloud.schematics.v1.model.InventoryView;
+import com.ibm.cloud.schematics.v1.model.VariableData;
+import com.ibm.cloud.schematics.v1.model.VariableMetadata;
 import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;

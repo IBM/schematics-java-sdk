@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -69,6 +69,7 @@ public class AgentDataLite extends GenericModel {
   protected AgentSystemStatus systemState;
   @SerializedName("agent_kpi")
   protected AgentKPIDataLite agentKpi;
+  protected EncryptionInfo encryption;
 
   protected AgentDataLite() { }
 
@@ -259,6 +260,17 @@ public class AgentDataLite extends GenericModel {
    */
   public AgentKPIDataLite getAgentKpi() {
     return agentKpi;
+  }
+
+  /**
+   * Gets the encryption.
+   *
+   * Encryption details about the workspace such as scheme (byok/kyok) and key CRN.
+   *
+   * @return the encryption
+   */
+  public EncryptionInfo getEncryption() {
+    return encryption;
   }
 }
 

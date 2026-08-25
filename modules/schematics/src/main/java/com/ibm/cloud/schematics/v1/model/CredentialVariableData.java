@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -23,6 +23,7 @@ public class CredentialVariableData extends GenericModel {
 
   protected String name;
   protected String value;
+  protected String redacted;
   @SerializedName("use_default")
   protected Boolean useDefault;
   protected CredentialVariableMetadata metadata;
@@ -34,6 +35,7 @@ public class CredentialVariableData extends GenericModel {
   public static class Builder {
     private String name;
     private String value;
+    private String redacted;
     private Boolean useDefault;
     private CredentialVariableMetadata metadata;
 
@@ -45,6 +47,7 @@ public class CredentialVariableData extends GenericModel {
     private Builder(CredentialVariableData credentialVariableData) {
       this.name = credentialVariableData.name;
       this.value = credentialVariableData.value;
+      this.redacted = credentialVariableData.redacted;
       this.useDefault = credentialVariableData.useDefault;
       this.metadata = credentialVariableData.metadata;
     }
@@ -87,6 +90,17 @@ public class CredentialVariableData extends GenericModel {
     }
 
     /**
+     * Set the redacted.
+     *
+     * @param redacted the redacted
+     * @return the CredentialVariableData builder
+     */
+    public Builder redacted(String redacted) {
+      this.redacted = redacted;
+      return this;
+    }
+
+    /**
      * Set the useDefault.
      *
      * @param useDefault the useDefault
@@ -114,6 +128,7 @@ public class CredentialVariableData extends GenericModel {
   protected CredentialVariableData(Builder builder) {
     name = builder.name;
     value = builder.value;
+    redacted = builder.redacted;
     useDefault = builder.useDefault;
     metadata = builder.metadata;
   }
@@ -149,6 +164,17 @@ public class CredentialVariableData extends GenericModel {
    */
   public String value() {
     return value;
+  }
+
+  /**
+   * Gets the redacted.
+   *
+   * This is used to check if the credentials are masked or not.
+   *
+   * @return the redacted
+   */
+  public String redacted() {
+    return redacted;
   }
 
   /**

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -160,8 +160,8 @@ public class PlanWorkspaceCommandOptions extends GenericModel {
    *   * Use `export IBMCLOUD_API_KEY=&lt;ibmcloud_api_key&gt;`, and execute `curl -X POST
    * "https://iam.cloud.ibm.com/identity/token" -H "Content-Type: application/x-www-form-urlencoded" -d
    * "grant_type=urn:ibm:params:oauth:grant-type:apikey&amp;apikey=$IBMCLOUD_API_KEY" -u bx:bx`.
-   *   * For more information, about creating IAM access token and API Docs, refer, [IAM access
-   * token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
+   *   * For more information, about creating IAM access token and API Docs, refer,
+   * [IAM access token](/apidocs/iam-identity-token-api#gettoken-password) and [Create API
    * key](/apidocs/iam-identity-token-api#create-api-key).
    *
    *   **Limitation**:

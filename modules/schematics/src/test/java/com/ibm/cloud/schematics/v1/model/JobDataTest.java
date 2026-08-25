@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,10 +13,16 @@
 
 package com.ibm.cloud.schematics.v1.model;
 
+import com.ibm.cloud.schematics.v1.model.BastionResourceDefinition;
 import com.ibm.cloud.schematics.v1.model.CatalogSource;
+import com.ibm.cloud.schematics.v1.model.CredentialVariableData;
+import com.ibm.cloud.schematics.v1.model.CredentialVariableMetadata;
 import com.ibm.cloud.schematics.v1.model.ExternalSource;
 import com.ibm.cloud.schematics.v1.model.GitSource;
+import com.ibm.cloud.schematics.v1.model.Group;
+import com.ibm.cloud.schematics.v1.model.Host;
 import com.ibm.cloud.schematics.v1.model.InventoryResourceRecord;
+import com.ibm.cloud.schematics.v1.model.InventoryView;
 import com.ibm.cloud.schematics.v1.model.JobData;
 import com.ibm.cloud.schematics.v1.model.JobDataAction;
 import com.ibm.cloud.schematics.v1.model.JobDataFlow;
@@ -47,188 +53,274 @@ public class JobDataTest {
   public void testJobData() throws Throwable {
     VariableMetadata variableMetadataModel = new VariableMetadata.Builder()
       .type("boolean")
-      .aliases(java.util.Arrays.asList("testString"))
-      .description("testString")
-      .cloudDataType("testString")
-      .defaultValue("testString")
+      .aliases(java.util.Arrays.asList("aliases", "aliases", "aliases", "aliases", "aliases"))
+      .description("description")
+      .cloudDataType("cloud_data_type")
+      .defaultValue("default_value")
       .linkStatus("normal")
       .secure(true)
       .immutable(true)
       .hidden(true)
       .required(true)
-      .options(java.util.Arrays.asList("testString"))
-      .minValue(Long.valueOf("26"))
-      .maxValue(Long.valueOf("26"))
-      .minLength(Long.valueOf("26"))
-      .maxLength(Long.valueOf("26"))
-      .matches("testString")
-      .position(Long.valueOf("26"))
-      .groupBy("testString")
-      .source("testString")
+      .options(java.util.Arrays.asList("options", "options", "options", "options", "options"))
+      .minValue(Long.valueOf("5962"))
+      .maxValue(Long.valueOf("5637"))
+      .minLength(Long.valueOf("2302"))
+      .maxLength(Long.valueOf("7061"))
+      .matches("matches")
+      .position(Long.valueOf("9301"))
+      .groupBy("group_by")
+      .source("source")
       .build();
     assertEquals(variableMetadataModel.type(), "boolean");
-    assertEquals(variableMetadataModel.aliases(), java.util.Arrays.asList("testString"));
-    assertEquals(variableMetadataModel.description(), "testString");
-    assertEquals(variableMetadataModel.cloudDataType(), "testString");
-    assertEquals(variableMetadataModel.defaultValue(), "testString");
+    assertEquals(variableMetadataModel.aliases(), java.util.Arrays.asList("aliases", "aliases", "aliases", "aliases", "aliases"));
+    assertEquals(variableMetadataModel.description(), "description");
+    assertEquals(variableMetadataModel.cloudDataType(), "cloud_data_type");
+    assertEquals(variableMetadataModel.defaultValue(), "default_value");
     assertEquals(variableMetadataModel.linkStatus(), "normal");
     assertEquals(variableMetadataModel.secure(), Boolean.valueOf(true));
     assertEquals(variableMetadataModel.immutable(), Boolean.valueOf(true));
     assertEquals(variableMetadataModel.hidden(), Boolean.valueOf(true));
     assertEquals(variableMetadataModel.required(), Boolean.valueOf(true));
-    assertEquals(variableMetadataModel.options(), java.util.Arrays.asList("testString"));
-    assertEquals(variableMetadataModel.minValue(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.maxValue(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.minLength(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.maxLength(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.matches(), "testString");
-    assertEquals(variableMetadataModel.position(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.groupBy(), "testString");
-    assertEquals(variableMetadataModel.source(), "testString");
+    assertEquals(variableMetadataModel.options(), java.util.Arrays.asList("options", "options", "options", "options", "options"));
+    assertEquals(variableMetadataModel.minValue(), Long.valueOf("5962"));
+    assertEquals(variableMetadataModel.maxValue(), Long.valueOf("5637"));
+    assertEquals(variableMetadataModel.minLength(), Long.valueOf("2302"));
+    assertEquals(variableMetadataModel.maxLength(), Long.valueOf("7061"));
+    assertEquals(variableMetadataModel.matches(), "matches");
+    assertEquals(variableMetadataModel.position(), Long.valueOf("9301"));
+    assertEquals(variableMetadataModel.groupBy(), "group_by");
+    assertEquals(variableMetadataModel.source(), "source");
 
     VariableData variableDataModel = new VariableData.Builder()
-      .name("testString")
-      .value("testString")
+      .name("name")
+      .value("value")
       .useDefault(true)
       .metadata(variableMetadataModel)
       .build();
-    assertEquals(variableDataModel.name(), "testString");
-    assertEquals(variableDataModel.value(), "testString");
+    assertEquals(variableDataModel.name(), "name");
+    assertEquals(variableDataModel.value(), "value");
     assertEquals(variableDataModel.useDefault(), Boolean.valueOf(true));
     assertEquals(variableDataModel.metadata(), variableMetadataModel);
 
     JobDataTemplate jobDataTemplateModel = new JobDataTemplate.Builder()
-      .templateId("testString")
-      .templateName("testString")
-      .flowIndex(Long.valueOf("26"))
+      .templateId("template_id")
+      .templateName("template_name")
+      .flowIndex(Long.valueOf("800"))
       .inputs(java.util.Arrays.asList(variableDataModel))
       .outputs(java.util.Arrays.asList(variableDataModel))
       .settings(java.util.Arrays.asList(variableDataModel))
-      .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .updatedAt(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
-    assertEquals(jobDataTemplateModel.templateId(), "testString");
-    assertEquals(jobDataTemplateModel.templateName(), "testString");
-    assertEquals(jobDataTemplateModel.flowIndex(), Long.valueOf("26"));
+    assertEquals(jobDataTemplateModel.templateId(), "template_id");
+    assertEquals(jobDataTemplateModel.templateName(), "template_name");
+    assertEquals(jobDataTemplateModel.flowIndex(), Long.valueOf("800"));
     assertEquals(jobDataTemplateModel.inputs(), java.util.Arrays.asList(variableDataModel));
     assertEquals(jobDataTemplateModel.outputs(), java.util.Arrays.asList(variableDataModel));
     assertEquals(jobDataTemplateModel.settings(), java.util.Arrays.asList(variableDataModel));
-    assertEquals(jobDataTemplateModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(jobDataTemplateModel.updatedAt(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
 
     JobDataWorkspace jobDataWorkspaceModel = new JobDataWorkspace.Builder()
-      .workspaceName("testString")
-      .flowId("testString")
-      .flowName("testString")
+      .workspaceName("workspace_name")
+      .flowId("flow_id")
+      .flowName("flow_name")
       .inputs(java.util.Arrays.asList(variableDataModel))
       .outputs(java.util.Arrays.asList(variableDataModel))
       .settings(java.util.Arrays.asList(variableDataModel))
       .templateData(java.util.Arrays.asList(jobDataTemplateModel))
-      .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .updatedAt(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
-    assertEquals(jobDataWorkspaceModel.workspaceName(), "testString");
-    assertEquals(jobDataWorkspaceModel.flowId(), "testString");
-    assertEquals(jobDataWorkspaceModel.flowName(), "testString");
+    assertEquals(jobDataWorkspaceModel.workspaceName(), "workspace_name");
+    assertEquals(jobDataWorkspaceModel.flowId(), "flow_id");
+    assertEquals(jobDataWorkspaceModel.flowName(), "flow_name");
     assertEquals(jobDataWorkspaceModel.inputs(), java.util.Arrays.asList(variableDataModel));
     assertEquals(jobDataWorkspaceModel.outputs(), java.util.Arrays.asList(variableDataModel));
     assertEquals(jobDataWorkspaceModel.settings(), java.util.Arrays.asList(variableDataModel));
     assertEquals(jobDataWorkspaceModel.templateData(), java.util.Arrays.asList(jobDataTemplateModel));
-    assertEquals(jobDataWorkspaceModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(jobDataWorkspaceModel.updatedAt(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
+
+    CredentialVariableMetadata credentialVariableMetadataModel = new CredentialVariableMetadata.Builder()
+      .type("string")
+      .aliases(java.util.Arrays.asList("aliases", "aliases", "aliases", "aliases", "aliases"))
+      .description("description")
+      .cloudDataType("cloud_data_type")
+      .defaultValue("default_value")
+      .linkStatus("normal")
+      .immutable(true)
+      .hidden(true)
+      .required(true)
+      .position(Long.valueOf("800"))
+      .groupBy("group_by")
+      .source("source")
+      .build();
+    assertEquals(credentialVariableMetadataModel.type(), "string");
+    assertEquals(credentialVariableMetadataModel.aliases(), java.util.Arrays.asList("aliases", "aliases", "aliases", "aliases", "aliases"));
+    assertEquals(credentialVariableMetadataModel.description(), "description");
+    assertEquals(credentialVariableMetadataModel.cloudDataType(), "cloud_data_type");
+    assertEquals(credentialVariableMetadataModel.defaultValue(), "default_value");
+    assertEquals(credentialVariableMetadataModel.linkStatus(), "normal");
+    assertEquals(credentialVariableMetadataModel.immutable(), Boolean.valueOf(true));
+    assertEquals(credentialVariableMetadataModel.hidden(), Boolean.valueOf(true));
+    assertEquals(credentialVariableMetadataModel.required(), Boolean.valueOf(true));
+    assertEquals(credentialVariableMetadataModel.position(), Long.valueOf("800"));
+    assertEquals(credentialVariableMetadataModel.groupBy(), "group_by");
+    assertEquals(credentialVariableMetadataModel.source(), "source");
+
+    CredentialVariableData credentialVariableDataModel = new CredentialVariableData.Builder()
+      .name("name")
+      .value("-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n")
+      .redacted("redacted")
+      .useDefault(true)
+      .metadata(credentialVariableMetadataModel)
+      .build();
+    assertEquals(credentialVariableDataModel.name(), "name");
+    assertEquals(credentialVariableDataModel.value(), "-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n");
+    assertEquals(credentialVariableDataModel.redacted(), "redacted");
+    assertEquals(credentialVariableDataModel.useDefault(), Boolean.valueOf(true));
+    assertEquals(credentialVariableDataModel.metadata(), credentialVariableMetadataModel);
+
+    BastionResourceDefinition bastionResourceDefinitionModel = new BastionResourceDefinition.Builder()
+      .name("name")
+      .host("host")
+      .build();
+    assertEquals(bastionResourceDefinitionModel.name(), "name");
+    assertEquals(bastionResourceDefinitionModel.host(), "host");
+
+    Host hostModel = new Host.Builder()
+      .alias("alias")
+      .name("name")
+      .credential(credentialVariableDataModel)
+      .vars(java.util.Arrays.asList(variableDataModel))
+      .build();
+    assertEquals(hostModel.alias(), "alias");
+    assertEquals(hostModel.name(), "name");
+    assertEquals(hostModel.credential(), credentialVariableDataModel);
+    assertEquals(hostModel.vars(), java.util.Arrays.asList(variableDataModel));
+
+    Group groupModel = new Group.Builder()
+      .name("name")
+      .vars(java.util.Arrays.asList(variableDataModel))
+      .credentials(credentialVariableDataModel)
+      .hosts(java.util.Arrays.asList(hostModel))
+      .build();
+    assertEquals(groupModel.name(), "name");
+    assertEquals(groupModel.vars(), java.util.Arrays.asList(variableDataModel));
+    assertEquals(groupModel.credentials(), credentialVariableDataModel);
+    assertEquals(groupModel.hosts(), java.util.Arrays.asList(hostModel));
+
+    InventoryView inventoryViewModel = new InventoryView.Builder()
+      .groups(java.util.Arrays.asList(groupModel))
+      .build();
+    assertEquals(inventoryViewModel.groups(), java.util.Arrays.asList(groupModel));
 
     InventoryResourceRecord inventoryResourceRecordModel = new InventoryResourceRecord.Builder()
-      .name("testString")
-      .description("testString")
-      .location("us-south")
-      .resourceGroup("testString")
-      .inventoriesIni("testString")
-      .resourceQueries(java.util.Arrays.asList("testString"))
+      .name("name")
+      .description("description")
+      .location("null")
+      .resourceGroup("resource_group")
+      .inventoriesIni("inventories_ini")
+      .resourceQueries(java.util.Arrays.asList("resource_queries", "resource_queries", "resource_queries", "resource_queries", "resource_queries"))
+      .connectionType("connection_type")
+      .credentials(java.util.Arrays.asList(credentialVariableDataModel))
+      .commonCredentials(credentialVariableDataModel)
+      .bastion(bastionResourceDefinitionModel)
+      .bastionCredential(credentialVariableDataModel)
+      .inventoryView(inventoryViewModel)
       .build();
-    assertEquals(inventoryResourceRecordModel.name(), "testString");
-    assertEquals(inventoryResourceRecordModel.description(), "testString");
-    assertEquals(inventoryResourceRecordModel.location(), "us-south");
-    assertEquals(inventoryResourceRecordModel.resourceGroup(), "testString");
-    assertEquals(inventoryResourceRecordModel.inventoriesIni(), "testString");
-    assertEquals(inventoryResourceRecordModel.resourceQueries(), java.util.Arrays.asList("testString"));
+    assertEquals(inventoryResourceRecordModel.name(), "name");
+    assertEquals(inventoryResourceRecordModel.description(), "description");
+    assertEquals(inventoryResourceRecordModel.location(), "null");
+    assertEquals(inventoryResourceRecordModel.resourceGroup(), "resource_group");
+    assertEquals(inventoryResourceRecordModel.inventoriesIni(), "inventories_ini");
+    assertEquals(inventoryResourceRecordModel.resourceQueries(), java.util.Arrays.asList("resource_queries", "resource_queries", "resource_queries", "resource_queries", "resource_queries"));
+    assertEquals(inventoryResourceRecordModel.connectionType(), "connection_type");
+    assertEquals(inventoryResourceRecordModel.credentials(), java.util.Arrays.asList(credentialVariableDataModel));
+    assertEquals(inventoryResourceRecordModel.commonCredentials(), credentialVariableDataModel);
+    assertEquals(inventoryResourceRecordModel.bastion(), bastionResourceDefinitionModel);
+    assertEquals(inventoryResourceRecordModel.bastionCredential(), credentialVariableDataModel);
+    assertEquals(inventoryResourceRecordModel.inventoryView(), inventoryViewModel);
 
     JobDataAction jobDataActionModel = new JobDataAction.Builder()
-      .actionName("testString")
+      .actionName("action_name")
       .inputs(java.util.Arrays.asList(variableDataModel))
       .outputs(java.util.Arrays.asList(variableDataModel))
       .settings(java.util.Arrays.asList(variableDataModel))
-      .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .updatedAt(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .inventoryRecord(inventoryResourceRecordModel)
-      .materializedInventory("testString")
+      .materializedInventory("materialized_inventory")
       .build();
-    assertEquals(jobDataActionModel.actionName(), "testString");
+    assertEquals(jobDataActionModel.actionName(), "action_name");
     assertEquals(jobDataActionModel.inputs(), java.util.Arrays.asList(variableDataModel));
     assertEquals(jobDataActionModel.outputs(), java.util.Arrays.asList(variableDataModel));
     assertEquals(jobDataActionModel.settings(), java.util.Arrays.asList(variableDataModel));
-    assertEquals(jobDataActionModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(jobDataActionModel.updatedAt(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
     assertEquals(jobDataActionModel.inventoryRecord(), inventoryResourceRecordModel);
-    assertEquals(jobDataActionModel.materializedInventory(), "testString");
+    assertEquals(jobDataActionModel.materializedInventory(), "materialized_inventory");
 
     JobDataSystem jobDataSystemModel = new JobDataSystem.Builder()
-      .keyId("testString")
-      .schematicsResourceId(java.util.Arrays.asList("testString"))
-      .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .keyId("key_id")
+      .schematicsResourceId(java.util.Arrays.asList("schematics_resource_id", "schematics_resource_id", "schematics_resource_id", "schematics_resource_id", "schematics_resource_id"))
+      .updatedAt(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
-    assertEquals(jobDataSystemModel.keyId(), "testString");
-    assertEquals(jobDataSystemModel.schematicsResourceId(), java.util.Arrays.asList("testString"));
-    assertEquals(jobDataSystemModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(jobDataSystemModel.keyId(), "key_id");
+    assertEquals(jobDataSystemModel.schematicsResourceId(), java.util.Arrays.asList("schematics_resource_id", "schematics_resource_id", "schematics_resource_id", "schematics_resource_id", "schematics_resource_id"));
+    assertEquals(jobDataSystemModel.updatedAt(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
 
     GitSource gitSourceModel = new GitSource.Builder()
-      .computedGitRepoUrl("testString")
-      .gitRepoUrl("testString")
-      .gitToken("testString")
-      .gitRepoFolder("testString")
-      .gitRelease("testString")
-      .gitBranch("testString")
+      .computedGitRepoUrl("computed_git_repo_url")
+      .gitRepoUrl("git_repo_url")
+      .gitToken("git_token")
+      .gitRepoFolder("git_repo_folder")
+      .gitRelease("git_release")
+      .gitBranch("git_branch")
       .build();
-    assertEquals(gitSourceModel.computedGitRepoUrl(), "testString");
-    assertEquals(gitSourceModel.gitRepoUrl(), "testString");
-    assertEquals(gitSourceModel.gitToken(), "testString");
-    assertEquals(gitSourceModel.gitRepoFolder(), "testString");
-    assertEquals(gitSourceModel.gitRelease(), "testString");
-    assertEquals(gitSourceModel.gitBranch(), "testString");
+    assertEquals(gitSourceModel.computedGitRepoUrl(), "computed_git_repo_url");
+    assertEquals(gitSourceModel.gitRepoUrl(), "git_repo_url");
+    assertEquals(gitSourceModel.gitToken(), "git_token");
+    assertEquals(gitSourceModel.gitRepoFolder(), "git_repo_folder");
+    assertEquals(gitSourceModel.gitRelease(), "git_release");
+    assertEquals(gitSourceModel.gitBranch(), "git_branch");
 
     CatalogSource catalogSourceModel = new CatalogSource.Builder()
-      .catalogName("testString")
-      .catalogId("testString")
-      .offeringName("testString")
-      .offeringVersion("testString")
-      .offeringKind("testString")
-      .offeringTargetKind("testString")
-      .offeringId("testString")
-      .offeringVersionId("testString")
-      .offeringVersionFlavourName("testString")
-      .offeringRepoUrl("testString")
-      .offeringProvisionerWorkingDirectory("testString")
+      .catalogName("catalog_name")
+      .catalogId("catalog_id")
+      .offeringName("offering_name")
+      .offeringVersion("offering_version")
+      .offeringKind("offering_kind")
+      .offeringTargetKind("offering_target_kind")
+      .offeringId("offering_id")
+      .offeringVersionId("offering_version_id")
+      .offeringVersionFlavourName("offering_version_flavour_name")
+      .offeringRepoUrl("offering_repo_url")
+      .offeringProvisionerWorkingDirectory("offering_provisioner_working_directory")
       .dryRun(true)
-      .owningAccount("testString")
-      .itemIconUrl("testString")
-      .itemId("testString")
-      .itemName("testString")
-      .itemReadmeUrl("testString")
-      .itemUrl("testString")
-      .launchUrl("testString")
+      .owningAccount("owning_account")
+      .itemIconUrl("item_icon_url")
+      .itemId("item_id")
+      .itemName("item_name")
+      .itemReadmeUrl("item_readme_url")
+      .itemUrl("item_url")
+      .launchUrl("launch_url")
       .build();
-    assertEquals(catalogSourceModel.catalogName(), "testString");
-    assertEquals(catalogSourceModel.catalogId(), "testString");
-    assertEquals(catalogSourceModel.offeringName(), "testString");
-    assertEquals(catalogSourceModel.offeringVersion(), "testString");
-    assertEquals(catalogSourceModel.offeringKind(), "testString");
-    assertEquals(catalogSourceModel.offeringTargetKind(), "testString");
-    assertEquals(catalogSourceModel.offeringId(), "testString");
-    assertEquals(catalogSourceModel.offeringVersionId(), "testString");
-    assertEquals(catalogSourceModel.offeringVersionFlavourName(), "testString");
-    assertEquals(catalogSourceModel.offeringRepoUrl(), "testString");
-    assertEquals(catalogSourceModel.offeringProvisionerWorkingDirectory(), "testString");
+    assertEquals(catalogSourceModel.catalogName(), "catalog_name");
+    assertEquals(catalogSourceModel.catalogId(), "catalog_id");
+    assertEquals(catalogSourceModel.offeringName(), "offering_name");
+    assertEquals(catalogSourceModel.offeringVersion(), "offering_version");
+    assertEquals(catalogSourceModel.offeringKind(), "offering_kind");
+    assertEquals(catalogSourceModel.offeringTargetKind(), "offering_target_kind");
+    assertEquals(catalogSourceModel.offeringId(), "offering_id");
+    assertEquals(catalogSourceModel.offeringVersionId(), "offering_version_id");
+    assertEquals(catalogSourceModel.offeringVersionFlavourName(), "offering_version_flavour_name");
+    assertEquals(catalogSourceModel.offeringRepoUrl(), "offering_repo_url");
+    assertEquals(catalogSourceModel.offeringProvisionerWorkingDirectory(), "offering_provisioner_working_directory");
     assertEquals(catalogSourceModel.dryRun(), Boolean.valueOf(true));
-    assertEquals(catalogSourceModel.owningAccount(), "testString");
-    assertEquals(catalogSourceModel.itemIconUrl(), "testString");
-    assertEquals(catalogSourceModel.itemId(), "testString");
-    assertEquals(catalogSourceModel.itemName(), "testString");
-    assertEquals(catalogSourceModel.itemReadmeUrl(), "testString");
-    assertEquals(catalogSourceModel.itemUrl(), "testString");
-    assertEquals(catalogSourceModel.launchUrl(), "testString");
+    assertEquals(catalogSourceModel.owningAccount(), "owning_account");
+    assertEquals(catalogSourceModel.itemIconUrl(), "item_icon_url");
+    assertEquals(catalogSourceModel.itemId(), "item_id");
+    assertEquals(catalogSourceModel.itemName(), "item_name");
+    assertEquals(catalogSourceModel.itemReadmeUrl(), "item_readme_url");
+    assertEquals(catalogSourceModel.itemUrl(), "item_url");
+    assertEquals(catalogSourceModel.launchUrl(), "launch_url");
 
     ExternalSource externalSourceModel = new ExternalSource.Builder()
       .sourceType("local")
@@ -240,53 +332,53 @@ public class JobDataTest {
     assertEquals(externalSourceModel.catalog(), catalogSourceModel);
 
     JobDataWorkItemLastJob jobDataWorkItemLastJobModel = new JobDataWorkItemLastJob.Builder()
-      .commandObject("workspace")
-      .commandObjectName("testString")
-      .commandObjectId("testString")
-      .commandName("workspace_plan")
-      .jobId("testString")
+      .commandObject("null")
+      .commandObjectName("command_object_name")
+      .commandObjectId("command_object_id")
+      .commandName("null")
+      .jobId("job_id")
       .jobStatus("job_pending")
       .build();
-    assertEquals(jobDataWorkItemLastJobModel.commandObject(), "workspace");
-    assertEquals(jobDataWorkItemLastJobModel.commandObjectName(), "testString");
-    assertEquals(jobDataWorkItemLastJobModel.commandObjectId(), "testString");
-    assertEquals(jobDataWorkItemLastJobModel.commandName(), "workspace_plan");
-    assertEquals(jobDataWorkItemLastJobModel.jobId(), "testString");
+    assertEquals(jobDataWorkItemLastJobModel.commandObject(), "null");
+    assertEquals(jobDataWorkItemLastJobModel.commandObjectName(), "command_object_name");
+    assertEquals(jobDataWorkItemLastJobModel.commandObjectId(), "command_object_id");
+    assertEquals(jobDataWorkItemLastJobModel.commandName(), "null");
+    assertEquals(jobDataWorkItemLastJobModel.jobId(), "job_id");
     assertEquals(jobDataWorkItemLastJobModel.jobStatus(), "job_pending");
 
     JobDataWorkItem jobDataWorkItemModel = new JobDataWorkItem.Builder()
-      .commandObjectId("testString")
-      .commandObjectName("testString")
-      .layers("testString")
+      .commandObjectId("command_object_id")
+      .commandObjectName("command_object_name")
+      .layers("layers")
       .sourceType("local")
       .source(externalSourceModel)
       .inputs(java.util.Arrays.asList(variableDataModel))
       .outputs(java.util.Arrays.asList(variableDataModel))
       .settings(java.util.Arrays.asList(variableDataModel))
       .lastJob(jobDataWorkItemLastJobModel)
-      .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .updatedAt(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
-    assertEquals(jobDataWorkItemModel.commandObjectId(), "testString");
-    assertEquals(jobDataWorkItemModel.commandObjectName(), "testString");
-    assertEquals(jobDataWorkItemModel.layers(), "testString");
+    assertEquals(jobDataWorkItemModel.commandObjectId(), "command_object_id");
+    assertEquals(jobDataWorkItemModel.commandObjectName(), "command_object_name");
+    assertEquals(jobDataWorkItemModel.layers(), "layers");
     assertEquals(jobDataWorkItemModel.sourceType(), "local");
     assertEquals(jobDataWorkItemModel.source(), externalSourceModel);
     assertEquals(jobDataWorkItemModel.inputs(), java.util.Arrays.asList(variableDataModel));
     assertEquals(jobDataWorkItemModel.outputs(), java.util.Arrays.asList(variableDataModel));
     assertEquals(jobDataWorkItemModel.settings(), java.util.Arrays.asList(variableDataModel));
     assertEquals(jobDataWorkItemModel.lastJob(), jobDataWorkItemLastJobModel);
-    assertEquals(jobDataWorkItemModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(jobDataWorkItemModel.updatedAt(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
 
     JobDataFlow jobDataFlowModel = new JobDataFlow.Builder()
-      .flowId("testString")
-      .flowName("testString")
+      .flowId("flow_id")
+      .flowName("flow_name")
       .workitems(java.util.Arrays.asList(jobDataWorkItemModel))
-      .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .updatedAt(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
-    assertEquals(jobDataFlowModel.flowId(), "testString");
-    assertEquals(jobDataFlowModel.flowName(), "testString");
+    assertEquals(jobDataFlowModel.flowId(), "flow_id");
+    assertEquals(jobDataFlowModel.flowName(), "flow_name");
     assertEquals(jobDataFlowModel.workitems(), java.util.Arrays.asList(jobDataWorkItemModel));
-    assertEquals(jobDataFlowModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(jobDataFlowModel.updatedAt(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
 
     JobData jobDataModel = new JobData.Builder()
       .jobType("repo_download_job")

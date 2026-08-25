@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -31,8 +31,18 @@ public class ActionLiteStateTest {
 
   @Test
   public void testActionLiteState() throws Throwable {
-    ActionLiteState actionLiteStateModel = new ActionLiteState();
-    assertNull(actionLiteStateModel.getStatusCode());
-    assertNull(actionLiteStateModel.getStatusMessage());
+    ActionLiteState actionLiteStateModel = new ActionLiteState.Builder()
+      .statusCode("normal")
+      .statusMessage("testString")
+      .build();
+    assertEquals(actionLiteStateModel.statusCode(), "normal");
+    assertEquals(actionLiteStateModel.statusMessage(), "testString");
+
+    String json = TestUtilities.serialize(actionLiteStateModel);
+
+    ActionLiteState actionLiteStateModelNew = TestUtilities.deserialize(json, ActionLiteState.class);
+    assertTrue(actionLiteStateModelNew instanceof ActionLiteState);
+    assertEquals(actionLiteStateModelNew.statusCode(), "normal");
+    assertEquals(actionLiteStateModelNew.statusMessage(), "testString");
   }
 }

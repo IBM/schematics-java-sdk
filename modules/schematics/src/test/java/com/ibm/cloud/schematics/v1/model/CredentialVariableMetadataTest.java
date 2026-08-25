@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -41,7 +41,7 @@ public class CredentialVariableMetadataTest {
       .immutable(true)
       .hidden(true)
       .required(true)
-      .position(Long.valueOf("26"))
+      .position(Long.valueOf("0"))
       .groupBy("testString")
       .source("testString")
       .build();
@@ -54,7 +54,7 @@ public class CredentialVariableMetadataTest {
     assertEquals(credentialVariableMetadataModel.immutable(), Boolean.valueOf(true));
     assertEquals(credentialVariableMetadataModel.hidden(), Boolean.valueOf(true));
     assertEquals(credentialVariableMetadataModel.required(), Boolean.valueOf(true));
-    assertEquals(credentialVariableMetadataModel.position(), Long.valueOf("26"));
+    assertEquals(credentialVariableMetadataModel.position(), Long.valueOf("0"));
     assertEquals(credentialVariableMetadataModel.groupBy(), "testString");
     assertEquals(credentialVariableMetadataModel.source(), "testString");
 
@@ -70,7 +70,7 @@ public class CredentialVariableMetadataTest {
     assertEquals(credentialVariableMetadataModelNew.immutable(), Boolean.valueOf(true));
     assertEquals(credentialVariableMetadataModelNew.hidden(), Boolean.valueOf(true));
     assertEquals(credentialVariableMetadataModelNew.required(), Boolean.valueOf(true));
-    assertEquals(credentialVariableMetadataModelNew.position(), Long.valueOf("26"));
+    assertEquals(credentialVariableMetadataModelNew.position(), Long.valueOf("0"));
     assertEquals(credentialVariableMetadataModelNew.groupBy(), "testString");
     assertEquals(credentialVariableMetadataModelNew.source(), "testString");
   }

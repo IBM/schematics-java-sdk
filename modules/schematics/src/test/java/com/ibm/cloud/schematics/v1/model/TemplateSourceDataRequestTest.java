@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,8 +15,8 @@ package com.ibm.cloud.schematics.v1.model;
 
 import com.ibm.cloud.schematics.v1.model.EnvironmentValuesMetadata;
 import com.ibm.cloud.schematics.v1.model.InjectTerraformTemplateInner;
-import com.ibm.cloud.schematics.v1.model.InjectTerraformTemplateInnerTftParametersItem;
 import com.ibm.cloud.schematics.v1.model.TemplateSourceDataRequest;
+import com.ibm.cloud.schematics.v1.model.TftParametersObject;
 import com.ibm.cloud.schematics.v1.model.WorkspaceVariableRequest;
 import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
@@ -37,49 +37,49 @@ public class TemplateSourceDataRequestTest {
   public void testTemplateSourceDataRequest() throws Throwable {
     EnvironmentValuesMetadata environmentValuesMetadataModel = new EnvironmentValuesMetadata.Builder()
       .hidden(true)
-      .name("testString")
+      .name("name")
       .secure(true)
       .build();
     assertEquals(environmentValuesMetadataModel.hidden(), Boolean.valueOf(true));
-    assertEquals(environmentValuesMetadataModel.name(), "testString");
+    assertEquals(environmentValuesMetadataModel.name(), "name");
     assertEquals(environmentValuesMetadataModel.secure(), Boolean.valueOf(true));
 
-    InjectTerraformTemplateInnerTftParametersItem injectTerraformTemplateInnerTftParametersItemModel = new InjectTerraformTemplateInnerTftParametersItem.Builder()
-      .name("testString")
-      .value("testString")
+    TftParametersObject tftParametersObjectModel = new TftParametersObject.Builder()
+      .name("name")
+      .value("value")
       .build();
-    assertEquals(injectTerraformTemplateInnerTftParametersItemModel.name(), "testString");
-    assertEquals(injectTerraformTemplateInnerTftParametersItemModel.value(), "testString");
+    assertEquals(tftParametersObjectModel.name(), "name");
+    assertEquals(tftParametersObjectModel.value(), "value");
 
     InjectTerraformTemplateInner injectTerraformTemplateInnerModel = new InjectTerraformTemplateInner.Builder()
-      .tftGitUrl("testString")
-      .tftGitToken("testString")
-      .tftPrefix("testString")
-      .injectionType("testString")
-      .tftName("testString")
-      .tftParameters(java.util.Arrays.asList(injectTerraformTemplateInnerTftParametersItemModel))
+      .tftGitUrl("tft_git_url")
+      .tftGitToken("tft_git_token")
+      .tftPrefix("tft_prefix")
+      .injectionType("injection_type")
+      .tftName("tft_name")
+      .tftParameters(java.util.Arrays.asList(tftParametersObjectModel))
       .build();
-    assertEquals(injectTerraformTemplateInnerModel.tftGitUrl(), "testString");
-    assertEquals(injectTerraformTemplateInnerModel.tftGitToken(), "testString");
-    assertEquals(injectTerraformTemplateInnerModel.tftPrefix(), "testString");
-    assertEquals(injectTerraformTemplateInnerModel.injectionType(), "testString");
-    assertEquals(injectTerraformTemplateInnerModel.tftName(), "testString");
-    assertEquals(injectTerraformTemplateInnerModel.tftParameters(), java.util.Arrays.asList(injectTerraformTemplateInnerTftParametersItemModel));
+    assertEquals(injectTerraformTemplateInnerModel.tftGitUrl(), "tft_git_url");
+    assertEquals(injectTerraformTemplateInnerModel.tftGitToken(), "tft_git_token");
+    assertEquals(injectTerraformTemplateInnerModel.tftPrefix(), "tft_prefix");
+    assertEquals(injectTerraformTemplateInnerModel.injectionType(), "injection_type");
+    assertEquals(injectTerraformTemplateInnerModel.tftName(), "tft_name");
+    assertEquals(injectTerraformTemplateInnerModel.tftParameters(), java.util.Arrays.asList(tftParametersObjectModel));
 
     WorkspaceVariableRequest workspaceVariableRequestModel = new WorkspaceVariableRequest.Builder()
-      .description("testString")
-      .name("testString")
+      .description("description")
+      .name("name")
       .secure(true)
-      .type("testString")
+      .type("type")
       .useDefault(true)
-      .value("testString")
+      .value("value")
       .build();
-    assertEquals(workspaceVariableRequestModel.description(), "testString");
-    assertEquals(workspaceVariableRequestModel.name(), "testString");
+    assertEquals(workspaceVariableRequestModel.description(), "description");
+    assertEquals(workspaceVariableRequestModel.name(), "name");
     assertEquals(workspaceVariableRequestModel.secure(), Boolean.valueOf(true));
-    assertEquals(workspaceVariableRequestModel.type(), "testString");
+    assertEquals(workspaceVariableRequestModel.type(), "type");
     assertEquals(workspaceVariableRequestModel.useDefault(), Boolean.valueOf(true));
-    assertEquals(workspaceVariableRequestModel.value(), "testString");
+    assertEquals(workspaceVariableRequestModel.value(), "value");
 
     TemplateSourceDataRequest templateSourceDataRequestModel = new TemplateSourceDataRequest.Builder()
       .envValues(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))

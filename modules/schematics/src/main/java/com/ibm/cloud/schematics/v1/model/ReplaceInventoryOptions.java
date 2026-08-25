@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -44,8 +44,14 @@ public class ReplaceInventoryOptions extends GenericModel {
   protected String description;
   protected String location;
   protected String resourceGroup;
+  protected String connectionType;
+  protected List<CredentialVariableData> credentials;
+  protected CredentialVariableData commonCredentials;
   protected String inventoriesIni;
   protected List<String> resourceQueries;
+  protected BastionResourceDefinition bastion;
+  protected CredentialVariableData bastionCredential;
+  protected InventoryView inventoryView;
 
   /**
    * Builder.
@@ -56,8 +62,14 @@ public class ReplaceInventoryOptions extends GenericModel {
     private String description;
     private String location;
     private String resourceGroup;
+    private String connectionType;
+    private List<CredentialVariableData> credentials;
+    private CredentialVariableData commonCredentials;
     private String inventoriesIni;
     private List<String> resourceQueries;
+    private BastionResourceDefinition bastion;
+    private CredentialVariableData bastionCredential;
+    private InventoryView inventoryView;
 
     /**
      * Instantiates a new Builder from an existing ReplaceInventoryOptions instance.
@@ -70,8 +82,14 @@ public class ReplaceInventoryOptions extends GenericModel {
       this.description = replaceInventoryOptions.description;
       this.location = replaceInventoryOptions.location;
       this.resourceGroup = replaceInventoryOptions.resourceGroup;
+      this.connectionType = replaceInventoryOptions.connectionType;
+      this.credentials = replaceInventoryOptions.credentials;
+      this.commonCredentials = replaceInventoryOptions.commonCredentials;
       this.inventoriesIni = replaceInventoryOptions.inventoriesIni;
       this.resourceQueries = replaceInventoryOptions.resourceQueries;
+      this.bastion = replaceInventoryOptions.bastion;
+      this.bastionCredential = replaceInventoryOptions.bastionCredential;
+      this.inventoryView = replaceInventoryOptions.inventoryView;
     }
 
     /**
@@ -96,6 +114,22 @@ public class ReplaceInventoryOptions extends GenericModel {
      */
     public ReplaceInventoryOptions build() {
       return new ReplaceInventoryOptions(this);
+    }
+
+    /**
+     * Adds a new element to credentials.
+     *
+     * @param credentials the new element to be added
+     * @return the ReplaceInventoryOptions builder
+     */
+    public Builder addCredentials(CredentialVariableData credentials) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(credentials,
+        "credentials cannot be null");
+      if (this.credentials == null) {
+        this.credentials = new ArrayList<CredentialVariableData>();
+      }
+      this.credentials.add(credentials);
+      return this;
     }
 
     /**
@@ -170,6 +204,40 @@ public class ReplaceInventoryOptions extends GenericModel {
     }
 
     /**
+     * Set the connectionType.
+     *
+     * @param connectionType the connectionType
+     * @return the ReplaceInventoryOptions builder
+     */
+    public Builder connectionType(String connectionType) {
+      this.connectionType = connectionType;
+      return this;
+    }
+
+    /**
+     * Set the credentials.
+     * Existing credentials will be replaced.
+     *
+     * @param credentials the credentials
+     * @return the ReplaceInventoryOptions builder
+     */
+    public Builder credentials(List<CredentialVariableData> credentials) {
+      this.credentials = credentials;
+      return this;
+    }
+
+    /**
+     * Set the commonCredentials.
+     *
+     * @param commonCredentials the commonCredentials
+     * @return the ReplaceInventoryOptions builder
+     */
+    public Builder commonCredentials(CredentialVariableData commonCredentials) {
+      this.commonCredentials = commonCredentials;
+      return this;
+    }
+
+    /**
      * Set the inventoriesIni.
      *
      * @param inventoriesIni the inventoriesIni
@@ -191,6 +259,39 @@ public class ReplaceInventoryOptions extends GenericModel {
       this.resourceQueries = resourceQueries;
       return this;
     }
+
+    /**
+     * Set the bastion.
+     *
+     * @param bastion the bastion
+     * @return the ReplaceInventoryOptions builder
+     */
+    public Builder bastion(BastionResourceDefinition bastion) {
+      this.bastion = bastion;
+      return this;
+    }
+
+    /**
+     * Set the bastionCredential.
+     *
+     * @param bastionCredential the bastionCredential
+     * @return the ReplaceInventoryOptions builder
+     */
+    public Builder bastionCredential(CredentialVariableData bastionCredential) {
+      this.bastionCredential = bastionCredential;
+      return this;
+    }
+
+    /**
+     * Set the inventoryView.
+     *
+     * @param inventoryView the inventoryView
+     * @return the ReplaceInventoryOptions builder
+     */
+    public Builder inventoryView(InventoryView inventoryView) {
+      this.inventoryView = inventoryView;
+      return this;
+    }
   }
 
   protected ReplaceInventoryOptions() { }
@@ -203,8 +304,14 @@ public class ReplaceInventoryOptions extends GenericModel {
     description = builder.description;
     location = builder.location;
     resourceGroup = builder.resourceGroup;
+    connectionType = builder.connectionType;
+    credentials = builder.credentials;
+    commonCredentials = builder.commonCredentials;
     inventoriesIni = builder.inventoriesIni;
     resourceQueries = builder.resourceQueries;
+    bastion = builder.bastion;
+    bastionCredential = builder.bastionCredential;
+    inventoryView = builder.inventoryView;
   }
 
   /**
@@ -267,13 +374,45 @@ public class ReplaceInventoryOptions extends GenericModel {
   /**
    * Gets the resourceGroup.
    *
-   * Resource-group name for the Inventory definition.   By default, Inventory definition will be created in Default
-   * Resource Group.
+   * Resource-group id for the shared dataset.
    *
    * @return the resourceGroup
    */
   public String resourceGroup() {
     return resourceGroup;
+  }
+
+  /**
+   * Gets the connectionType.
+   *
+   * connection type to be ssh or wirm.
+   *
+   * @return the connectionType
+   */
+  public String connectionType() {
+    return connectionType;
+  }
+
+  /**
+   * Gets the credentials.
+   *
+   * common credentials for the inventory.
+   *
+   * @return the credentials
+   */
+  public List<CredentialVariableData> credentials() {
+    return credentials;
+  }
+
+  /**
+   * Gets the commonCredentials.
+   *
+   * User editable credential variable data and system generated reference to the value.
+   *
+   * @return the commonCredentials
+   */
+  public CredentialVariableData commonCredentials() {
+    return commonCredentials;
   }
 
   /**
@@ -297,6 +436,39 @@ public class ReplaceInventoryOptions extends GenericModel {
    */
   public List<String> resourceQueries() {
     return resourceQueries;
+  }
+
+  /**
+   * Gets the bastion.
+   *
+   * Describes a bastion resource.
+   *
+   * @return the bastion
+   */
+  public BastionResourceDefinition bastion() {
+    return bastion;
+  }
+
+  /**
+   * Gets the bastionCredential.
+   *
+   * User editable credential variable data and system generated reference to the value.
+   *
+   * @return the bastionCredential
+   */
+  public CredentialVariableData bastionCredential() {
+    return bastionCredential;
+  }
+
+  /**
+   * Gets the inventoryView.
+   *
+   * Inventories' structured view for the provided inventory.
+   *
+   * @return the inventoryView
+   */
+  public InventoryView inventoryView() {
+    return inventoryView;
   }
 }
 

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -21,7 +21,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class ServiceExtensions extends GenericModel {
 
   protected String name;
-  protected Object value;
+  protected String value;
   protected String type;
 
   /**
@@ -29,7 +29,7 @@ public class ServiceExtensions extends GenericModel {
    */
   public static class Builder {
     private String name;
-    private Object value;
+    private String value;
     private String type;
 
     /**
@@ -75,7 +75,7 @@ public class ServiceExtensions extends GenericModel {
      * @param value the value
      * @return the ServiceExtensions builder
      */
-    public Builder value(Object value) {
+    public Builder value(String value) {
       this.value = value;
       return this;
     }
@@ -127,7 +127,7 @@ public class ServiceExtensions extends GenericModel {
    *
    * @return the value
    */
-  public Object value() {
+  public String value() {
     return value;
   }
 

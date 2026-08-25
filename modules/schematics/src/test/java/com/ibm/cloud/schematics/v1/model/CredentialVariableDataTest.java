@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -34,39 +34,41 @@ public class CredentialVariableDataTest {
   public void testCredentialVariableData() throws Throwable {
     CredentialVariableMetadata credentialVariableMetadataModel = new CredentialVariableMetadata.Builder()
       .type("string")
-      .aliases(java.util.Arrays.asList("testString"))
-      .description("testString")
-      .cloudDataType("testString")
-      .defaultValue("testString")
+      .aliases(java.util.Arrays.asList("aliases", "aliases", "aliases", "aliases", "aliases"))
+      .description("description")
+      .cloudDataType("cloud_data_type")
+      .defaultValue("default_value")
       .linkStatus("normal")
       .immutable(true)
       .hidden(true)
       .required(true)
-      .position(Long.valueOf("26"))
-      .groupBy("testString")
-      .source("testString")
+      .position(Long.valueOf("800"))
+      .groupBy("group_by")
+      .source("source")
       .build();
     assertEquals(credentialVariableMetadataModel.type(), "string");
-    assertEquals(credentialVariableMetadataModel.aliases(), java.util.Arrays.asList("testString"));
-    assertEquals(credentialVariableMetadataModel.description(), "testString");
-    assertEquals(credentialVariableMetadataModel.cloudDataType(), "testString");
-    assertEquals(credentialVariableMetadataModel.defaultValue(), "testString");
+    assertEquals(credentialVariableMetadataModel.aliases(), java.util.Arrays.asList("aliases", "aliases", "aliases", "aliases", "aliases"));
+    assertEquals(credentialVariableMetadataModel.description(), "description");
+    assertEquals(credentialVariableMetadataModel.cloudDataType(), "cloud_data_type");
+    assertEquals(credentialVariableMetadataModel.defaultValue(), "default_value");
     assertEquals(credentialVariableMetadataModel.linkStatus(), "normal");
     assertEquals(credentialVariableMetadataModel.immutable(), Boolean.valueOf(true));
     assertEquals(credentialVariableMetadataModel.hidden(), Boolean.valueOf(true));
     assertEquals(credentialVariableMetadataModel.required(), Boolean.valueOf(true));
-    assertEquals(credentialVariableMetadataModel.position(), Long.valueOf("26"));
-    assertEquals(credentialVariableMetadataModel.groupBy(), "testString");
-    assertEquals(credentialVariableMetadataModel.source(), "testString");
+    assertEquals(credentialVariableMetadataModel.position(), Long.valueOf("800"));
+    assertEquals(credentialVariableMetadataModel.groupBy(), "group_by");
+    assertEquals(credentialVariableMetadataModel.source(), "source");
 
     CredentialVariableData credentialVariableDataModel = new CredentialVariableData.Builder()
       .name("testString")
       .value("-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n")
+      .redacted("testString")
       .useDefault(true)
       .metadata(credentialVariableMetadataModel)
       .build();
     assertEquals(credentialVariableDataModel.name(), "testString");
     assertEquals(credentialVariableDataModel.value(), "-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n");
+    assertEquals(credentialVariableDataModel.redacted(), "testString");
     assertEquals(credentialVariableDataModel.useDefault(), Boolean.valueOf(true));
     assertEquals(credentialVariableDataModel.metadata(), credentialVariableMetadataModel);
 
@@ -76,6 +78,7 @@ public class CredentialVariableDataTest {
     assertTrue(credentialVariableDataModelNew instanceof CredentialVariableData);
     assertEquals(credentialVariableDataModelNew.name(), "testString");
     assertEquals(credentialVariableDataModelNew.value(), "-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n");
+    assertEquals(credentialVariableDataModelNew.redacted(), "testString");
     assertEquals(credentialVariableDataModelNew.useDefault(), Boolean.valueOf(true));
     assertEquals(credentialVariableDataModelNew.metadata().toString(), credentialVariableMetadataModel.toString());
   }

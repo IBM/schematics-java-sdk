@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -125,7 +125,7 @@ public class UpdateActionOptionsTest {
       .immutable(true)
       .hidden(true)
       .required(true)
-      .position(Long.valueOf("26"))
+      .position(Long.valueOf("0"))
       .groupBy("testString")
       .source("testString")
       .build();
@@ -138,18 +138,20 @@ public class UpdateActionOptionsTest {
     assertEquals(credentialVariableMetadataModel.immutable(), Boolean.valueOf(true));
     assertEquals(credentialVariableMetadataModel.hidden(), Boolean.valueOf(true));
     assertEquals(credentialVariableMetadataModel.required(), Boolean.valueOf(true));
-    assertEquals(credentialVariableMetadataModel.position(), Long.valueOf("26"));
+    assertEquals(credentialVariableMetadataModel.position(), Long.valueOf("0"));
     assertEquals(credentialVariableMetadataModel.groupBy(), "testString");
     assertEquals(credentialVariableMetadataModel.source(), "testString");
 
     CredentialVariableData credentialVariableDataModel = new CredentialVariableData.Builder()
       .name("testString")
       .value("-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n")
+      .redacted("testString")
       .useDefault(true)
       .metadata(credentialVariableMetadataModel)
       .build();
     assertEquals(credentialVariableDataModel.name(), "testString");
     assertEquals(credentialVariableDataModel.value(), "-----BEGIN OPENSSH PRIVATE KEY-----\\nXXXXXXXXXXXXX\\n-----END OPENSSH PRIVATE KEY-----\\n");
+    assertEquals(credentialVariableDataModel.redacted(), "testString");
     assertEquals(credentialVariableDataModel.useDefault(), Boolean.valueOf(true));
     assertEquals(credentialVariableDataModel.metadata(), credentialVariableMetadataModel);
 
@@ -172,12 +174,12 @@ public class UpdateActionOptionsTest {
       .hidden(true)
       .required(true)
       .options(java.util.Arrays.asList("testString"))
-      .minValue(Long.valueOf("26"))
-      .maxValue(Long.valueOf("26"))
-      .minLength(Long.valueOf("26"))
-      .maxLength(Long.valueOf("26"))
+      .minValue(Long.valueOf("0"))
+      .maxValue(Long.valueOf("0"))
+      .minLength(Long.valueOf("0"))
+      .maxLength(Long.valueOf("0"))
       .matches("testString")
-      .position(Long.valueOf("26"))
+      .position(Long.valueOf("0"))
       .groupBy("testString")
       .source("testString")
       .build();
@@ -192,12 +194,12 @@ public class UpdateActionOptionsTest {
     assertEquals(variableMetadataModel.hidden(), Boolean.valueOf(true));
     assertEquals(variableMetadataModel.required(), Boolean.valueOf(true));
     assertEquals(variableMetadataModel.options(), java.util.Arrays.asList("testString"));
-    assertEquals(variableMetadataModel.minValue(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.maxValue(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.minLength(), Long.valueOf("26"));
-    assertEquals(variableMetadataModel.maxLength(), Long.valueOf("26"));
+    assertEquals(variableMetadataModel.minValue(), Long.valueOf("0"));
+    assertEquals(variableMetadataModel.maxValue(), Long.valueOf("0"));
+    assertEquals(variableMetadataModel.minLength(), Long.valueOf("0"));
+    assertEquals(variableMetadataModel.maxLength(), Long.valueOf("0"));
     assertEquals(variableMetadataModel.matches(), "testString");
-    assertEquals(variableMetadataModel.position(), Long.valueOf("26"));
+    assertEquals(variableMetadataModel.position(), Long.valueOf("0"));
     assertEquals(variableMetadataModel.groupBy(), "testString");
     assertEquals(variableMetadataModel.source(), "testString");
 

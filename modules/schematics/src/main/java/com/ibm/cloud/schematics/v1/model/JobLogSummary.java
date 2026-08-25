@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -51,7 +51,7 @@ public class JobLogSummary extends GenericModel {
   @SerializedName("elapsed_time")
   protected Double elapsedTime;
   @SerializedName("log_errors")
-  protected List<JobLogSummaryLogErrors> logErrors;
+  protected List<JobLogSummaryLogErrorsInner> logErrors;
   @SerializedName("repo_download_job")
   protected JobLogSummaryRepoDownloadJob repoDownloadJob;
   @SerializedName("workspace_job")
@@ -252,7 +252,7 @@ public class JobLogSummary extends GenericModel {
    *
    * @return the logErrors
    */
-  public List<JobLogSummaryLogErrors> logErrors() {
+  public List<JobLogSummaryLogErrorsInner> logErrors() {
     return logErrors;
   }
 

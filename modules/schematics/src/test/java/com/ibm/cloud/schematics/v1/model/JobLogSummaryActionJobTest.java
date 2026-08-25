@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,19 +33,19 @@ public class JobLogSummaryActionJobTest {
   @Test
   public void testJobLogSummaryActionJob() throws Throwable {
     JobLogSummaryActionJobRecap jobLogSummaryActionJobRecapModel = new JobLogSummaryActionJobRecap.Builder()
-      .target(java.util.Arrays.asList("testString"))
-      .ok(Double.valueOf("72.5"))
-      .changed(Double.valueOf("72.5"))
-      .failed(Double.valueOf("72.5"))
-      .skipped(Double.valueOf("72.5"))
-      .unreachable(Double.valueOf("72.5"))
+      .target(java.util.Arrays.asList("target", "target", "target", "target", "target"))
+      .ok(Double.valueOf("6.683562403749608"))
+      .changed(Double.valueOf("8.762042012749001"))
+      .failed(Double.valueOf("9.018348186070783"))
+      .skipped(Double.valueOf("6.438423552598547"))
+      .unreachable(Double.valueOf("3.5571952270680973"))
       .build();
-    assertEquals(jobLogSummaryActionJobRecapModel.target(), java.util.Arrays.asList("testString"));
-    assertEquals(jobLogSummaryActionJobRecapModel.ok(), Double.valueOf("72.5"));
-    assertEquals(jobLogSummaryActionJobRecapModel.changed(), Double.valueOf("72.5"));
-    assertEquals(jobLogSummaryActionJobRecapModel.failed(), Double.valueOf("72.5"));
-    assertEquals(jobLogSummaryActionJobRecapModel.skipped(), Double.valueOf("72.5"));
-    assertEquals(jobLogSummaryActionJobRecapModel.unreachable(), Double.valueOf("72.5"));
+    assertEquals(jobLogSummaryActionJobRecapModel.target(), java.util.Arrays.asList("target", "target", "target", "target", "target"));
+    assertEquals(jobLogSummaryActionJobRecapModel.ok(), Double.valueOf("6.683562403749608"));
+    assertEquals(jobLogSummaryActionJobRecapModel.changed(), Double.valueOf("8.762042012749001"));
+    assertEquals(jobLogSummaryActionJobRecapModel.failed(), Double.valueOf("9.018348186070783"));
+    assertEquals(jobLogSummaryActionJobRecapModel.skipped(), Double.valueOf("6.438423552598547"));
+    assertEquals(jobLogSummaryActionJobRecapModel.unreachable(), Double.valueOf("3.5571952270680973"));
 
     JobLogSummaryActionJob jobLogSummaryActionJobModel = new JobLogSummaryActionJob.Builder()
       .recap(jobLogSummaryActionJobRecapModel)

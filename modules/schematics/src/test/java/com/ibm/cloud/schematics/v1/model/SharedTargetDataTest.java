@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -16,6 +16,7 @@ package com.ibm.cloud.schematics.v1.model;
 import com.ibm.cloud.schematics.v1.model.SharedTargetData;
 import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
+import com.ibm.cloud.sdk.core.util.DateUtils;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +33,7 @@ public class SharedTargetDataTest {
   @Test
   public void testSharedTargetData() throws Throwable {
     SharedTargetData sharedTargetDataModel = new SharedTargetData.Builder()
-      .clusterCreatedOn("testString")
+      .clusterCreatedOn(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
       .clusterId("testString")
       .clusterName("testString")
       .clusterType("testString")
@@ -40,10 +41,10 @@ public class SharedTargetDataTest {
       .namespace("testString")
       .region("testString")
       .resourceGroupId("testString")
-      .workerCount(Long.valueOf("26"))
+      .workerCount(Long.valueOf("0"))
       .workerMachineType("testString")
       .build();
-    assertEquals(sharedTargetDataModel.clusterCreatedOn(), "testString");
+    assertEquals(sharedTargetDataModel.clusterCreatedOn(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
     assertEquals(sharedTargetDataModel.clusterId(), "testString");
     assertEquals(sharedTargetDataModel.clusterName(), "testString");
     assertEquals(sharedTargetDataModel.clusterType(), "testString");
@@ -51,21 +52,21 @@ public class SharedTargetDataTest {
     assertEquals(sharedTargetDataModel.namespace(), "testString");
     assertEquals(sharedTargetDataModel.region(), "testString");
     assertEquals(sharedTargetDataModel.resourceGroupId(), "testString");
-    assertEquals(sharedTargetDataModel.workerCount(), Long.valueOf("26"));
+    assertEquals(sharedTargetDataModel.workerCount(), Long.valueOf("0"));
     assertEquals(sharedTargetDataModel.workerMachineType(), "testString");
 
     String json = TestUtilities.serialize(sharedTargetDataModel);
 
     SharedTargetData sharedTargetDataModelNew = TestUtilities.deserialize(json, SharedTargetData.class);
     assertTrue(sharedTargetDataModelNew instanceof SharedTargetData);
-    assertEquals(sharedTargetDataModelNew.clusterCreatedOn(), "testString");
+    assertEquals(sharedTargetDataModelNew.clusterCreatedOn(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
     assertEquals(sharedTargetDataModelNew.clusterId(), "testString");
     assertEquals(sharedTargetDataModelNew.clusterName(), "testString");
     assertEquals(sharedTargetDataModelNew.clusterType(), "testString");
     assertEquals(sharedTargetDataModelNew.namespace(), "testString");
     assertEquals(sharedTargetDataModelNew.region(), "testString");
     assertEquals(sharedTargetDataModelNew.resourceGroupId(), "testString");
-    assertEquals(sharedTargetDataModelNew.workerCount(), Long.valueOf("26"));
+    assertEquals(sharedTargetDataModelNew.workerCount(), Long.valueOf("0"));
     assertEquals(sharedTargetDataModelNew.workerMachineType(), "testString");
   }
 }

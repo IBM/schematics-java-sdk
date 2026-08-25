@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -35,7 +35,7 @@ public class InjectTerraformTemplateInner extends GenericModel {
   @SerializedName("tft_name")
   protected String tftName;
   @SerializedName("tft_parameters")
-  protected List<InjectTerraformTemplateInnerTftParametersItem> tftParameters;
+  protected List<TftParametersObject> tftParameters;
 
   /**
    * Builder.
@@ -46,7 +46,7 @@ public class InjectTerraformTemplateInner extends GenericModel {
     private String tftPrefix;
     private String injectionType;
     private String tftName;
-    private List<InjectTerraformTemplateInnerTftParametersItem> tftParameters;
+    private List<TftParametersObject> tftParameters;
 
     /**
      * Instantiates a new Builder from an existing InjectTerraformTemplateInner instance.
@@ -83,11 +83,11 @@ public class InjectTerraformTemplateInner extends GenericModel {
      * @param tftParameters the new element to be added
      * @return the InjectTerraformTemplateInner builder
      */
-    public Builder addTftParameters(InjectTerraformTemplateInnerTftParametersItem tftParameters) {
+    public Builder addTftParameters(TftParametersObject tftParameters) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(tftParameters,
         "tftParameters cannot be null");
       if (this.tftParameters == null) {
-        this.tftParameters = new ArrayList<InjectTerraformTemplateInnerTftParametersItem>();
+        this.tftParameters = new ArrayList<TftParametersObject>();
       }
       this.tftParameters.add(tftParameters);
       return this;
@@ -155,7 +155,7 @@ public class InjectTerraformTemplateInner extends GenericModel {
      * @param tftParameters the tftParameters
      * @return the InjectTerraformTemplateInner builder
      */
-    public Builder tftParameters(List<InjectTerraformTemplateInnerTftParametersItem> tftParameters) {
+    public Builder tftParameters(List<TftParametersObject> tftParameters) {
       this.tftParameters = tftParameters;
       return this;
     }
@@ -239,9 +239,11 @@ public class InjectTerraformTemplateInner extends GenericModel {
   /**
    * Gets the tftParameters.
    *
+   * List of terraform template parameters.
+   *
    * @return the tftParameters
    */
-  public List<InjectTerraformTemplateInnerTftParametersItem> tftParameters() {
+  public List<TftParametersObject> tftParameters() {
     return tftParameters;
   }
 }

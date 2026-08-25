@@ -1,38 +1,36 @@
 #!/bin/bash
 
-# Publish javadocs only for a tagged-release.
-if [[ -n "${TRAVIS_TAG}" ]]; then
+# Required environment variables:
+# GH_TOKEN
+# GH_REPO_SLUG
+# GH_TAG
 
-    printf "\n>>>>> Publishing javadoc for release build: repo=%s release=%s build_num=%s job_num=%s\n" ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG} ${TRAVIS_BUILD_NUMBER} ${TRAVIS_JOB_NUMBER} 
+printf "\n>>>>> Publishing javadoc for release build: repo=%s tag=%s\n" ${GH_REPO_SLUG} ${GH_TAG}
 
-    printf "\n>>>>> Cloning repository's gh-pages branch into directory 'gh-pages'\n"
-    rm -fr ./gh-pages
-    git clone --branch=gh-pages https://${GH_TOKEN}@github.com/IBM/schematics-java-sdk.git gh-pages
+printf "\n>>>>> Cloning repository's gh-pages branch into directory 'gh-pages'\n"
+rm -fr ./gh-pages
+git config --global user.email "devxsdk@us.ibm.com"
+git config --global user.name "ibm-devx-sdk"
+git clone --branch=gh-pages https://${GH_TOKEN}@github.com/IBM/platform-services-java-sdk.git gh-pages
 
-    printf "\n>>>>> Finished cloning...\n"
+printf "\n>>>>> Finished cloning...\n"
 
-    pushd gh-pages
-    
-    # Create a new directory for this branch/tag and copy the javadocs there.
-    printf "\n>>>>> Copying javadocs to new directory: docs/%s\n" ${TRAVIS_TAG}
-    rm -rf docs/${TRAVIS_TAG}
-    mkdir -p docs/${TRAVIS_TAG}
-    cp -rf ../target/site/apidocs/* docs/${TRAVIS_TAG}
+pushd gh-pages
 
-    printf "\n>>>>> Generating gh-pages index.html...\n"
-    ../build/generateJavadocIndex.sh > index.html
+# Create a new directory for this branch/tag and copy the javadocs there.
+printf "\n>>>>> Copying javadocs to new directory: docs/%s\n" ${GH_TAG}
+rm -rf docs/${GH_TAG}
+mkdir -p docs/${GH_TAG}
+cp -rf ../target/site/apidocs/* docs/${GH_TAG}
 
-    printf "\n>>>>> Committing new javadoc...\n"
-    git add -f .
-    git commit -m "docs: latest javadoc for ${TRAVIS_TAG} (${TRAVIS_COMMIT})"
-    git push -f origin gh-pages
+printf "\n>>>>> Generating gh-pages index.html...\n"
+../build/generateJavadocIndex.sh >index.html
 
-    popd
+printf "\n>>>>> Committing new javadoc...\n"
+git add -f .
+git commit -m "docs: latest javadoc for ${GH_TAG}"
+git push -f origin gh-pages
 
-    printf "\n>>>>> Published javadoc for release build: repo=%s release=%s build_num=%s job_num=%s\n"  ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG} ${TRAVIS_BUILD_NUMBER} ${TRAVIS_JOB_NUMBER} 
+popd
 
-else
-
-    printf "\n>>>>> Javadoc publishing bypassed for non-release build: repo=%s branch=%s build_num=%s job_num=%s\n" ${TRAVIS_REPO_SLUG} ${TRAVIS_BRANCH} ${TRAVIS_BUILD_NUMBER} ${TRAVIS_JOB_NUMBER} 
-
-fi
+printf "\n>>>>> Published javadoc for release build: repo=%s tag=%s\n" ${GH_REPO_SLUG} ${GH_TAG}

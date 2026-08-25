@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,6 +13,7 @@
 
 package com.ibm.cloud.schematics.v1.model;
 
+import java.util.Date;
 import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
@@ -23,7 +24,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class VersionResponse extends GenericModel {
 
-  protected String builddate;
+  protected Date builddate;
   protected String buildno;
   protected String commitsha;
   @SerializedName("helm_provider_version")
@@ -46,7 +47,7 @@ public class VersionResponse extends GenericModel {
    *
    * @return the builddate
    */
-  public String getBuilddate() {
+  public Date getBuilddate() {
     return builddate;
   }
 

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,13 +33,13 @@ public class ResourceQueryTest {
   @Test
   public void testResourceQuery() throws Throwable {
     ResourceQueryParam resourceQueryParamModel = new ResourceQueryParam.Builder()
-      .name("testString")
-      .value("testString")
-      .description("testString")
+      .name("name")
+      .value("value")
+      .description("description")
       .build();
-    assertEquals(resourceQueryParamModel.name(), "testString");
-    assertEquals(resourceQueryParamModel.value(), "testString");
-    assertEquals(resourceQueryParamModel.description(), "testString");
+    assertEquals(resourceQueryParamModel.name(), "name");
+    assertEquals(resourceQueryParamModel.value(), "value");
+    assertEquals(resourceQueryParamModel.description(), "description");
 
     ResourceQuery resourceQueryModel = new ResourceQuery.Builder()
       .queryType("workspaces")

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -36,6 +36,8 @@ public class TemplateStateStore extends GenericModel {
   /**
    * Gets the version.
    *
+   * The version of the state file format.
+   *
    * @return the version
    */
   public Double getVersion() {
@@ -44,6 +46,8 @@ public class TemplateStateStore extends GenericModel {
 
   /**
    * Gets the terraformVersion.
+   *
+   * The Terraform version that was used to apply your template.
    *
    * @return the terraformVersion
    */
@@ -54,6 +58,8 @@ public class TemplateStateStore extends GenericModel {
   /**
    * Gets the serial.
    *
+   * serial number.
+   *
    * @return the serial
    */
   public Double getSerial() {
@@ -63,6 +69,8 @@ public class TemplateStateStore extends GenericModel {
   /**
    * Gets the lineage.
    *
+   * lineage.
+   *
    * @return the lineage
    */
   public String getLineage() {
@@ -71,6 +79,8 @@ public class TemplateStateStore extends GenericModel {
 
   /**
    * Gets the modules.
+   *
+   * modules.
    *
    * @return the modules
    */

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -40,7 +40,76 @@ public class ActionLiteState extends GenericModel {
   @SerializedName("status_message")
   protected String statusMessage;
 
+  /**
+   * Builder.
+   */
+  public static class Builder {
+    private String statusCode;
+    private String statusMessage;
+
+    /**
+     * Instantiates a new Builder from an existing ActionLiteState instance.
+     *
+     * @param actionLiteState the instance to initialize the Builder with
+     */
+    private Builder(ActionLiteState actionLiteState) {
+      this.statusCode = actionLiteState.statusCode;
+      this.statusMessage = actionLiteState.statusMessage;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public Builder() {
+    }
+
+    /**
+     * Builds a ActionLiteState.
+     *
+     * @return the new ActionLiteState instance
+     */
+    public ActionLiteState build() {
+      return new ActionLiteState(this);
+    }
+
+    /**
+     * Set the statusCode.
+     *
+     * @param statusCode the statusCode
+     * @return the ActionLiteState builder
+     */
+    public Builder statusCode(String statusCode) {
+      this.statusCode = statusCode;
+      return this;
+    }
+
+    /**
+     * Set the statusMessage.
+     *
+     * @param statusMessage the statusMessage
+     * @return the ActionLiteState builder
+     */
+    public Builder statusMessage(String statusMessage) {
+      this.statusMessage = statusMessage;
+      return this;
+    }
+  }
+
   protected ActionLiteState() { }
+
+  protected ActionLiteState(Builder builder) {
+    statusCode = builder.statusCode;
+    statusMessage = builder.statusMessage;
+  }
+
+  /**
+   * New builder.
+   *
+   * @return a ActionLiteState builder
+   */
+  public Builder newBuilder() {
+    return new Builder(this);
+  }
 
   /**
    * Gets the statusCode.
@@ -49,7 +118,7 @@ public class ActionLiteState extends GenericModel {
    *
    * @return the statusCode
    */
-  public String getStatusCode() {
+  public String statusCode() {
     return statusCode;
   }
 
@@ -60,7 +129,7 @@ public class ActionLiteState extends GenericModel {
    *
    * @return the statusMessage
    */
-  public String getStatusMessage() {
+  public String statusMessage() {
     return statusMessage;
   }
 }

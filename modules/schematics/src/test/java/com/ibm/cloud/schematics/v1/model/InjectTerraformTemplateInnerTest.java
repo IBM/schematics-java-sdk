@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,7 +14,7 @@
 package com.ibm.cloud.schematics.v1.model;
 
 import com.ibm.cloud.schematics.v1.model.InjectTerraformTemplateInner;
-import com.ibm.cloud.schematics.v1.model.InjectTerraformTemplateInnerTftParametersItem;
+import com.ibm.cloud.schematics.v1.model.TftParametersObject;
 import com.ibm.cloud.schematics.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -32,12 +32,12 @@ public class InjectTerraformTemplateInnerTest {
 
   @Test
   public void testInjectTerraformTemplateInner() throws Throwable {
-    InjectTerraformTemplateInnerTftParametersItem injectTerraformTemplateInnerTftParametersItemModel = new InjectTerraformTemplateInnerTftParametersItem.Builder()
-      .name("testString")
-      .value("testString")
+    TftParametersObject tftParametersObjectModel = new TftParametersObject.Builder()
+      .name("name")
+      .value("value")
       .build();
-    assertEquals(injectTerraformTemplateInnerTftParametersItemModel.name(), "testString");
-    assertEquals(injectTerraformTemplateInnerTftParametersItemModel.value(), "testString");
+    assertEquals(tftParametersObjectModel.name(), "name");
+    assertEquals(tftParametersObjectModel.value(), "value");
 
     InjectTerraformTemplateInner injectTerraformTemplateInnerModel = new InjectTerraformTemplateInner.Builder()
       .tftGitUrl("testString")
@@ -45,14 +45,14 @@ public class InjectTerraformTemplateInnerTest {
       .tftPrefix("testString")
       .injectionType("testString")
       .tftName("testString")
-      .tftParameters(java.util.Arrays.asList(injectTerraformTemplateInnerTftParametersItemModel))
+      .tftParameters(java.util.Arrays.asList(tftParametersObjectModel))
       .build();
     assertEquals(injectTerraformTemplateInnerModel.tftGitUrl(), "testString");
     assertEquals(injectTerraformTemplateInnerModel.tftGitToken(), "testString");
     assertEquals(injectTerraformTemplateInnerModel.tftPrefix(), "testString");
     assertEquals(injectTerraformTemplateInnerModel.injectionType(), "testString");
     assertEquals(injectTerraformTemplateInnerModel.tftName(), "testString");
-    assertEquals(injectTerraformTemplateInnerModel.tftParameters(), java.util.Arrays.asList(injectTerraformTemplateInnerTftParametersItemModel));
+    assertEquals(injectTerraformTemplateInnerModel.tftParameters(), java.util.Arrays.asList(tftParametersObjectModel));
 
     String json = TestUtilities.serialize(injectTerraformTemplateInnerModel);
 

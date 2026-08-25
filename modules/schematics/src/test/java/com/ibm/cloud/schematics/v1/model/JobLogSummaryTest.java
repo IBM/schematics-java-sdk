@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -45,13 +45,13 @@ public class JobLogSummaryTest {
       .build();
 
     JobLogSummaryWorkitems jobLogSummaryWorkitemsModel = new JobLogSummaryWorkitems.Builder()
-      .workspaceId("testString")
-      .jobId("testString")
-      .logUrl("testString")
+      .workspaceId("workspace_id")
+      .jobId("job_id")
+      .logUrl("log_url")
       .build();
-    assertEquals(jobLogSummaryWorkitemsModel.workspaceId(), "testString");
-    assertEquals(jobLogSummaryWorkitemsModel.jobId(), "testString");
-    assertEquals(jobLogSummaryWorkitemsModel.logUrl(), "testString");
+    assertEquals(jobLogSummaryWorkitemsModel.workspaceId(), "workspace_id");
+    assertEquals(jobLogSummaryWorkitemsModel.jobId(), "job_id");
+    assertEquals(jobLogSummaryWorkitemsModel.logUrl(), "log_url");
 
     JobLogSummaryFlowJob jobLogSummaryFlowJobModel = new JobLogSummaryFlowJob.Builder()
       .workitems(java.util.Arrays.asList(jobLogSummaryWorkitemsModel))
@@ -59,19 +59,19 @@ public class JobLogSummaryTest {
     assertEquals(jobLogSummaryFlowJobModel.workitems(), java.util.Arrays.asList(jobLogSummaryWorkitemsModel));
 
     JobLogSummaryActionJobRecap jobLogSummaryActionJobRecapModel = new JobLogSummaryActionJobRecap.Builder()
-      .target(java.util.Arrays.asList("testString"))
-      .ok(Double.valueOf("72.5"))
-      .changed(Double.valueOf("72.5"))
-      .failed(Double.valueOf("72.5"))
-      .skipped(Double.valueOf("72.5"))
-      .unreachable(Double.valueOf("72.5"))
+      .target(java.util.Arrays.asList("target", "target", "target", "target", "target"))
+      .ok(Double.valueOf("6.683562403749608"))
+      .changed(Double.valueOf("8.762042012749001"))
+      .failed(Double.valueOf("9.018348186070783"))
+      .skipped(Double.valueOf("6.438423552598547"))
+      .unreachable(Double.valueOf("3.5571952270680973"))
       .build();
-    assertEquals(jobLogSummaryActionJobRecapModel.target(), java.util.Arrays.asList("testString"));
-    assertEquals(jobLogSummaryActionJobRecapModel.ok(), Double.valueOf("72.5"));
-    assertEquals(jobLogSummaryActionJobRecapModel.changed(), Double.valueOf("72.5"));
-    assertEquals(jobLogSummaryActionJobRecapModel.failed(), Double.valueOf("72.5"));
-    assertEquals(jobLogSummaryActionJobRecapModel.skipped(), Double.valueOf("72.5"));
-    assertEquals(jobLogSummaryActionJobRecapModel.unreachable(), Double.valueOf("72.5"));
+    assertEquals(jobLogSummaryActionJobRecapModel.target(), java.util.Arrays.asList("target", "target", "target", "target", "target"));
+    assertEquals(jobLogSummaryActionJobRecapModel.ok(), Double.valueOf("6.683562403749608"));
+    assertEquals(jobLogSummaryActionJobRecapModel.changed(), Double.valueOf("8.762042012749001"));
+    assertEquals(jobLogSummaryActionJobRecapModel.failed(), Double.valueOf("9.018348186070783"));
+    assertEquals(jobLogSummaryActionJobRecapModel.skipped(), Double.valueOf("6.438423552598547"));
+    assertEquals(jobLogSummaryActionJobRecapModel.unreachable(), Double.valueOf("3.5571952270680973"));
 
     JobLogSummaryActionJob jobLogSummaryActionJobModel = new JobLogSummaryActionJob.Builder()
       .recap(jobLogSummaryActionJobRecapModel)
@@ -79,11 +79,11 @@ public class JobLogSummaryTest {
     assertEquals(jobLogSummaryActionJobModel.recap(), jobLogSummaryActionJobRecapModel);
 
     JobLogSummarySystemJob jobLogSummarySystemJobModel = new JobLogSummarySystemJob.Builder()
-      .success(Double.valueOf("72.5"))
-      .failed(Double.valueOf("72.5"))
+      .success(Double.valueOf("1.284659006116532"))
+      .failed(Double.valueOf("2.8841621266687802"))
       .build();
-    assertEquals(jobLogSummarySystemJobModel.success(), Double.valueOf("72.5"));
-    assertEquals(jobLogSummarySystemJobModel.failed(), Double.valueOf("72.5"));
+    assertEquals(jobLogSummarySystemJobModel.success(), Double.valueOf("1.284659006116532"));
+    assertEquals(jobLogSummarySystemJobModel.failed(), Double.valueOf("2.8841621266687802"));
 
     JobLogSummary jobLogSummaryModel = new JobLogSummary.Builder()
       .jobType("repo_download_job")

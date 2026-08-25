@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -40,13 +40,13 @@ public class ApplyWorkspaceCommandOptionsTest {
     assertEquals(workspaceActivityOptionsTemplateModel.tfVars(), java.util.Arrays.asList("testString"));
 
     ApplyWorkspaceCommandOptions applyWorkspaceCommandOptionsModel = new ApplyWorkspaceCommandOptions.Builder()
-      .wId("testString")
       .refreshToken("testString")
+      .wId("testString")
       .actionOptions(workspaceActivityOptionsTemplateModel)
       .delegatedToken("testString")
       .build();
-    assertEquals(applyWorkspaceCommandOptionsModel.wId(), "testString");
     assertEquals(applyWorkspaceCommandOptionsModel.refreshToken(), "testString");
+    assertEquals(applyWorkspaceCommandOptionsModel.wId(), "testString");
     assertEquals(applyWorkspaceCommandOptionsModel.actionOptions(), workspaceActivityOptionsTemplateModel);
     assertEquals(applyWorkspaceCommandOptionsModel.delegatedToken(), "testString");
   }

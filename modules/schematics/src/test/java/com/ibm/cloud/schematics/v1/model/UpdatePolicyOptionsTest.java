@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -90,25 +90,25 @@ public class UpdatePolicyOptionsTest {
 
     UpdatePolicyOptions updatePolicyOptionsModel = new UpdatePolicyOptions.Builder()
       .policyId("testString")
+      .kind("agent_assignment_policy")
       .name("Agent1-DevWS")
       .description("Policy for job execution of secured workspaces on agent1")
       .resourceGroup("Default")
       .tags(java.util.Arrays.asList("policy:secured-job"))
       .location("us-south")
       .state(userStateModel)
-      .kind("agent_assignment_policy")
       .target(policyObjectsModel)
       .parameter(policyParameterModel)
       .scopedResources(java.util.Arrays.asList(scopedResourceModel))
       .build();
     assertEquals(updatePolicyOptionsModel.policyId(), "testString");
+    assertEquals(updatePolicyOptionsModel.kind(), "agent_assignment_policy");
     assertEquals(updatePolicyOptionsModel.name(), "Agent1-DevWS");
     assertEquals(updatePolicyOptionsModel.description(), "Policy for job execution of secured workspaces on agent1");
     assertEquals(updatePolicyOptionsModel.resourceGroup(), "Default");
     assertEquals(updatePolicyOptionsModel.tags(), java.util.Arrays.asList("policy:secured-job"));
     assertEquals(updatePolicyOptionsModel.location(), "us-south");
     assertEquals(updatePolicyOptionsModel.state(), userStateModel);
-    assertEquals(updatePolicyOptionsModel.kind(), "agent_assignment_policy");
     assertEquals(updatePolicyOptionsModel.target(), policyObjectsModel);
     assertEquals(updatePolicyOptionsModel.parameter(), policyParameterModel);
     assertEquals(updatePolicyOptionsModel.scopedResources(), java.util.Arrays.asList(scopedResourceModel));

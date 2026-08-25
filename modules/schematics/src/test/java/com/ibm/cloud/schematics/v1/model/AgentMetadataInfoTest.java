@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,10 +33,10 @@ public class AgentMetadataInfoTest {
   public void testAgentMetadataInfo() throws Throwable {
     AgentMetadataInfo agentMetadataInfoModel = new AgentMetadataInfo.Builder()
       .name("purpose")
-      .value(java.util.Arrays.asList("git",  "terraform",  "ansible"))
+      .value(java.util.Arrays.asList("git", "terraform", "ansible"))
       .build();
     assertEquals(agentMetadataInfoModel.name(), "purpose");
-    assertEquals(agentMetadataInfoModel.value(), java.util.Arrays.asList("git",  "terraform",  "ansible"));
+    assertEquals(agentMetadataInfoModel.value(), java.util.Arrays.asList("git", "terraform", "ansible"));
 
     String json = TestUtilities.serialize(agentMetadataInfoModel);
 

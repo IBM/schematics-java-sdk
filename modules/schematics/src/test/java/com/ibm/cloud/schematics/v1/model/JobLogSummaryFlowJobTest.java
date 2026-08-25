@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,13 +33,13 @@ public class JobLogSummaryFlowJobTest {
   @Test
   public void testJobLogSummaryFlowJob() throws Throwable {
     JobLogSummaryWorkitems jobLogSummaryWorkitemsModel = new JobLogSummaryWorkitems.Builder()
-      .workspaceId("testString")
-      .jobId("testString")
-      .logUrl("testString")
+      .workspaceId("workspace_id")
+      .jobId("job_id")
+      .logUrl("log_url")
       .build();
-    assertEquals(jobLogSummaryWorkitemsModel.workspaceId(), "testString");
-    assertEquals(jobLogSummaryWorkitemsModel.jobId(), "testString");
-    assertEquals(jobLogSummaryWorkitemsModel.logUrl(), "testString");
+    assertEquals(jobLogSummaryWorkitemsModel.workspaceId(), "workspace_id");
+    assertEquals(jobLogSummaryWorkitemsModel.jobId(), "job_id");
+    assertEquals(jobLogSummaryWorkitemsModel.logUrl(), "log_url");
 
     JobLogSummaryFlowJob jobLogSummaryFlowJobModel = new JobLogSummaryFlowJob.Builder()
       .workitems(java.util.Arrays.asList(jobLogSummaryWorkitemsModel))

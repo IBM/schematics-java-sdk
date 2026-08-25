@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -34,19 +34,19 @@ public class JobStatusFlowTest {
   @Test
   public void testJobStatusFlow() throws Throwable {
     JobStatusWorkitem jobStatusWorkitemModel = new JobStatusWorkitem.Builder()
-      .workspaceId("testString")
-      .workspaceName("testString")
-      .jobId("testString")
-      .statusCode("job_pending")
-      .statusMessage("testString")
-      .updatedAt(DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"))
+      .workspaceId("workspace_id")
+      .workspaceName("workspace_name")
+      .jobId("job_id")
+      .statusCode("null")
+      .statusMessage("status_message")
+      .updatedAt(DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"))
       .build();
-    assertEquals(jobStatusWorkitemModel.workspaceId(), "testString");
-    assertEquals(jobStatusWorkitemModel.workspaceName(), "testString");
-    assertEquals(jobStatusWorkitemModel.jobId(), "testString");
-    assertEquals(jobStatusWorkitemModel.statusCode(), "job_pending");
-    assertEquals(jobStatusWorkitemModel.statusMessage(), "testString");
-    assertEquals(jobStatusWorkitemModel.updatedAt(), DateUtils.parseAsDateTime("2019-01-01T12:00:00.000Z"));
+    assertEquals(jobStatusWorkitemModel.workspaceId(), "workspace_id");
+    assertEquals(jobStatusWorkitemModel.workspaceName(), "workspace_name");
+    assertEquals(jobStatusWorkitemModel.jobId(), "job_id");
+    assertEquals(jobStatusWorkitemModel.statusCode(), "null");
+    assertEquals(jobStatusWorkitemModel.statusMessage(), "status_message");
+    assertEquals(jobStatusWorkitemModel.updatedAt(), DateUtils.parseAsDateTime("2000-01-23T04:56:07.000+00:00"));
 
     JobStatusFlow jobStatusFlowModel = new JobStatusFlow.Builder()
       .flowId("testString")

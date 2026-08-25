@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -36,7 +36,7 @@ public class KMSInstances extends GenericModel {
   protected String kmsPrivateEndpoint;
   @SerializedName("kms_public_endpoint")
   protected String kmsPublicEndpoint;
-  protected List<KMSInstancesKeys> keys;
+  protected List<KMSInstancesKeysInner> keys;
 
   protected KMSInstances() { }
 
@@ -124,7 +124,7 @@ public class KMSInstances extends GenericModel {
    *
    * @return the keys
    */
-  public List<KMSInstancesKeys> getKeys() {
+  public List<KMSInstancesKeysInner> getKeys() {
     return keys;
   }
 }

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,6 +14,7 @@
 package com.ibm.cloud.schematics.v1.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class SharedTargetData extends GenericModel {
 
   @SerializedName("cluster_created_on")
-  protected String clusterCreatedOn;
+  protected Date clusterCreatedOn;
   @SerializedName("cluster_id")
   protected String clusterId;
   @SerializedName("cluster_name")
@@ -49,7 +50,7 @@ public class SharedTargetData extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String clusterCreatedOn;
+    private Date clusterCreatedOn;
     private String clusterId;
     private String clusterName;
     private String clusterType;
@@ -115,7 +116,7 @@ public class SharedTargetData extends GenericModel {
      * @param clusterCreatedOn the clusterCreatedOn
      * @return the SharedTargetData builder
      */
-    public Builder clusterCreatedOn(String clusterCreatedOn) {
+    public Builder clusterCreatedOn(Date clusterCreatedOn) {
       this.clusterCreatedOn = clusterCreatedOn;
       return this;
     }
@@ -252,7 +253,7 @@ public class SharedTargetData extends GenericModel {
    *
    * @return the clusterCreatedOn
    */
-  public String clusterCreatedOn() {
+  public Date clusterCreatedOn() {
     return clusterCreatedOn;
   }
 

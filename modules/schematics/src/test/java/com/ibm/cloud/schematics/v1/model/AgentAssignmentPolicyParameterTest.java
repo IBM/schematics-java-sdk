@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,15 +33,15 @@ public class AgentAssignmentPolicyParameterTest {
   @Test
   public void testAgentAssignmentPolicyParameter() throws Throwable {
     PolicyObjectSelector policyObjectSelectorModel = new PolicyObjectSelector.Builder()
-      .kind("workspace")
-      .tags(java.util.Arrays.asList("testString"))
-      .resourceGroups(java.util.Arrays.asList("testString"))
-      .locations(java.util.Arrays.asList("us-south"))
+      .kind("kind")
+      .tags(java.util.Arrays.asList("tags", "tags", "tags", "tags", "tags"))
+      .resourceGroups(java.util.Arrays.asList("resource_groups", "resource_groups", "resource_groups", "resource_groups", "resource_groups"))
+      .locations(java.util.Arrays.asList(null, null, null, null, null))
       .build();
-    assertEquals(policyObjectSelectorModel.kind(), "workspace");
-    assertEquals(policyObjectSelectorModel.tags(), java.util.Arrays.asList("testString"));
-    assertEquals(policyObjectSelectorModel.resourceGroups(), java.util.Arrays.asList("testString"));
-    assertEquals(policyObjectSelectorModel.locations(), java.util.Arrays.asList("us-south"));
+    assertEquals(policyObjectSelectorModel.kind(), "kind");
+    assertEquals(policyObjectSelectorModel.tags(), java.util.Arrays.asList("tags", "tags", "tags", "tags", "tags"));
+    assertEquals(policyObjectSelectorModel.resourceGroups(), java.util.Arrays.asList("resource_groups", "resource_groups", "resource_groups", "resource_groups", "resource_groups"));
+    assertEquals(policyObjectSelectorModel.locations(), java.util.Arrays.asList(null, null, null, null, null));
 
     AgentAssignmentPolicyParameter agentAssignmentPolicyParameterModel = new AgentAssignmentPolicyParameter.Builder()
       .selectorKind("ids")
