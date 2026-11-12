@@ -18,7 +18,7 @@
 package com.ibm.cloud.schematics.v1;
 
 import com.google.gson.JsonObject;
-import com.ibm.cloud.common.SdkCommon;
+import com.ibm.cloud.schematics.common.SdkCommon;
 import com.ibm.cloud.schematics.v1.model.Action;
 import com.ibm.cloud.schematics.v1.model.ActionList;
 import com.ibm.cloud.schematics.v1.model.AgentData;
