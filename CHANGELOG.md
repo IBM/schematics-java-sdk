@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/IBM/schematics-java-sdk/compare/1.4.0...1.4.1) (2026-11-12)
+
+
+### Bug Fixes
+
+* **api:** added workflow repo ([d31ed7e](https://github.com/IBM/schematics-java-sdk/commit/d31ed7ebbfd8da695e6a946e12412538f2bc01f8))
+
 # [1.4.0](https://github.com/IBM/[secure]-java-sdk/compare/1.3.1...1.4.0) (2025-02-13)
 
 
